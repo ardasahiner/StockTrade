@@ -12,5 +12,8 @@
   },
   "author": "Kunal Gosar & Arda Sahiner",
   "license": "MIT",
-  "homepage": "localhost"
+  "homepage": "localhost",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }

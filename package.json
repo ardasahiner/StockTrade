@@ -12,7 +12,7 @@
   },
   "author": "Kunal Gosar & Arda Sahiner",
   "license": "MIT",
-  "homepage": "localhost",
+  "homepage": "localhost:5000",
   "dependencies": {
     "express": "^4.13.4"
   }

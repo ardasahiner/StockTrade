@@ -1,10 +1,9 @@
 // Administrator Router
-// Admin Router will communicate administrative information with relevant users
-module.exports = function(app) {
-  var express = require('express');
+// Admin Router will communicate administrative information
+module.exports = function(app, express) {
   var adminRouter = express.Router();
 
-  // Log function calls to console
+  // Log function calls to console, useful for dev work and debugging
   adminRouter.use(function(req, res, next) {
     console.log(req.method, req.url);
     next();
@@ -14,9 +13,10 @@ module.exports = function(app) {
     res.send('Admin Dashboard');
   });
 
+  // Access administrative user data - priviledged data access
   adminRouter.get('/users', function(req, res) {
     res.send('User Data');
   });
 
-  return adminRouter;
+  app.use('/admin', adminRouter);
 }

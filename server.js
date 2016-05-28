@@ -2,19 +2,13 @@
 var express = require('express');
 var app = express();
 
-// Configure index.html file
+// Send index.html file to browser
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-//TODO: Move Routing operations to separate handler
-// Import AdminRouter from routers directory
-var adminRouter = require('./routes/adminRouter')(app);
-app.use('/admin', adminRouter);
+// Route Handler file handles all routing
+require('./routes/route_handler')(app, express);
 
-//Import APIRouter from routers directory
-var apiRouter = require('./routes/apiRouter')(app);
-app.use('/api', apiRouter);
-
-app.listen(3000);
-console.log('Visit page at localhost:3000');
+app.listen(5000);
+console.log('Visit page at localhost:5000!');

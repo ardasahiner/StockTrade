@@ -1,0 +1,16 @@
+{
+  "name": "stocktrade",
+  "version": "1.0.0",
+  "description": "Stock Trading Game",
+  "main": "server.js",
+  "scripts": {
+    "test": "..."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kunalgosar/StockTrade.git"
+  },
+  "author": "Kunal Gosar & Arda Sahiner",
+  "license": "MIT",
+  "homepage": "localhost"
+}

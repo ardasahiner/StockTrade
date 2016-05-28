@@ -7,23 +7,14 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-// Admin Routers
-// TODO: handle user auth and admin access
-var adminRouter = express.Router();
-
-adminRouter.get('/', function(req, res) {
-  res.send('I am the dashboard!');
-});
-
-adminRouter.get('/users', function(req, res) {
-  res.send('I show all the users!');
-});
-
-adminRouter.get('/data', function(req, res) {
-  res.send('I show all the data!');
-});
-
+//TODO: Move Routing operations to separate handler
+// Import AdminRouter from routers directory
+var adminRouter = require('./routes/adminRouter')(app);
 app.use('/admin', adminRouter);
+
+//Import APIRouter from routers directory
+var apiRouter = require('./routes/apiRouter')(app);
+app.use('/api', apiRouter);
 
 app.listen(3000);
 console.log('Visit page at localhost:3000');

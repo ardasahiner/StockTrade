@@ -4,6 +4,7 @@ module.exports = function(app, express) {
   var adminRouter = express.Router();
 
   // Log function calls to console, useful for dev work and debugging
+  // Remove for production
   adminRouter.use(function(req, res, next) {
     console.log(req.method, req.url);
     next();

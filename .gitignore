@@ -1,5 +1,5 @@
 /.idea
 node_modules/
 
-// Hide online database username/password from being published
+// Hide online database username/password
 db_connect.js

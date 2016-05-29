@@ -1,10 +1,14 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var morgan = require('morgan');
 
 // Adding methods for POST Request handling
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+// Module morgan logs all activity to console
+app.use(morgan('dev'));
 
 // Connect to online mongodb Database
 var mongoose = require('mongoose');

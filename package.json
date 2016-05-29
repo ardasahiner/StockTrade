@@ -14,8 +14,7 @@
   "license": "MIT",
   "homepage": "localhost:5000",
   "dependencies": {
-    "angular": "^1.5.6",
     "express": "^4.13.4",
-    "mongodb": "^2.1.20"
+    "mongoose": "^4.4.19"
   }
 }

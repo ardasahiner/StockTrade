@@ -11,12 +11,23 @@ Users API:
   Need to implement:
     - User Authentication
     - User Class need a lot of work (needs users stock holdings, balance, etc)
+      -What should the user class have?
+        -user_id
+        -some data structure to store what stocks they own and the number of each stock
+        -remaining liquid balance
+        -some data structure to store dates and details of transactions
     - We need to log user data so that admin can see how often the log in, how much time they spend on the website, etc (useful stats for product management)
 
 Stocks API:
   Still need to implement (Kunal is working on this right now)
   /stock/:stock_ticker GET requests will allow you to get the stock price of a specific stock
   Need to look into acquiring historic stock data
+
+  Maybe could do:
+  /stock/:stock_ticker/:mmddyyyy GET requests to get the stock price of a specific stock at a specific time, but need to see if Yahoo has stuff on this
+
+  Ideally there would also be something here that would allow you to display how a stock price has changed over time
+  (This could be just using the GET request above a bunch of times and then letting front end handle the rest)
 
 Admin API:
   This will be where we can access administrative data

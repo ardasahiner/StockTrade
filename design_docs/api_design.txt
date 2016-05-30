@@ -1,1 +1,26 @@
 // In this doc, discuss what the api should look like.
+
+Users API:
+  /user/ POST requests allow you to create a new user
+  /user/ GET requests allow you to pull database of all users
+
+  /user/:user_id GET requests allow you to pull database of specific user
+  /user/:user_id PUT requests allow you to update data of specific user
+  /user/:user_id DELETE requests delete a specific user
+
+  Need to implement:
+    - User Authentication
+    - User Class need a lot of work (needs users stock holdings, balance, etc)
+    - We need to log user data so that admin can see how often the log in, how much time they spend on the website, etc (useful stats for product management)
+
+Stocks API:
+  Still need to implement (Kunal is working on this right now)
+  /stock/:stock_ticker GET requests will allow you to get the stock price of a specific stock
+  Need to look into acquiring historic stock data
+
+Admin API:
+  This will be where we can access administrative data
+    - Users
+    - Page Hits
+    - etc
+  We need to implement data logging so that we can track all of these things

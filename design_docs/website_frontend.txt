@@ -1,0 +1,1 @@
+// In this doc, discuss ideas about frontend design (website, and eventually Android/iOS)

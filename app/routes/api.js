@@ -15,11 +15,6 @@ module.exports = function(app, express) {
     res.send('API Dashboard');
   });
 
-  // Access aggregate user data
-  apiRouter.get('/users', function(req, res) {
-    res.send('User Data');
-  });
-
   // Address special case where user is kunal or arda, useful syntax for user verification
   apiRouter.param('username', function(req, res, next, username) {
     if (username == "kunal" || username == "arda") {
@@ -28,11 +23,6 @@ module.exports = function(app, express) {
     req.username = username;
     next();
   })
-
-  // This api call will connect to database to pull user's data
-  apiRouter.get('/users/:username', function(req, res) {
-    res.send('hello ' + req.username + '!');
-  });
 
   app.use('/api', apiRouter);
 }

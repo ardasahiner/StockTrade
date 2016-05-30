@@ -14,7 +14,11 @@
   "license": "MIT",
   "homepage": "localhost:5000",
   "dependencies": {
+    "angular": "^1.5.6",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "mongoose": "^4.4.19"
+    "mongoose": "^4.4.19",
+    "morgan": "^1.7.0"
   }
 }

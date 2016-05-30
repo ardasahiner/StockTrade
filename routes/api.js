@@ -3,6 +3,7 @@ module.exports = function(app, express) {
   var apiRouter = express.Router();
 
   // Log function calls to console, useful for dev work and debugging
+  // Also called "Route Middleware"
   // Remove for production
   apiRouter.use(function(req, res, next) {
     console.log(req.method, req.url);

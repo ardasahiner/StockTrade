@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
 var port = process.env.PORT || 5000;
 
 // Adding methods for POST Request handling
@@ -20,20 +21,6 @@ mongoose.connect(connectionuri);
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
-
-var stock_value = 0;
-
-function cb(sv) {
-  stock_value = sv;
-};
-
-var mod = require ('./scrapers/stock_scraper');
-mod.stock_scraper('tsla', 'll', cb);
-console.log(mod.test);
-console.log(stock_value);
-console.log(mod.stock_value);
-console.log(mod.done);
-
 
 // Route Handler file handles all routing tasks
 require('./app/routes/route_handler')(app, express);

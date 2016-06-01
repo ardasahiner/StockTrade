@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
 var port = process.env.PORT || 5000;
 
 // Adding methods for POST Request handling

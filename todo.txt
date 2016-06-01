@@ -1,0 +1,4 @@
+Look into: http://dev.markitondemand.com/MODApis/
+They provide financial data api, ensure it is real time before using
+https://github.com/markitondemand/DataApis/blob/master/MarkitQuoteServiceSample.js
+Can use their source code directly

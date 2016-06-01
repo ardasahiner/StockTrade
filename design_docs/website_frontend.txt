@@ -2,3 +2,4 @@
 
 - Build the front end of the website using angular (maybe react?)
   - We should definitely look into React, I've heard good things
+  - We will use D3 library for data visualizations

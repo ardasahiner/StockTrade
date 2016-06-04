@@ -26,7 +26,10 @@ app.get('/', function(req, res){
 require('./app/routes/route_handler')(app, express);
 
 // Example call to the stock scraper, logs stock price for tsla
-require('./scrapers/stock_scraper')('tsla', 'll');
+require('./scrapers/stock_scraper')('tsla', 'll', function(stock_price) {
+  console.log(stock_price);
+});
+// require('./vendor/MarkitQuoteService');
 
 app.listen(port);
 console.log('Visit page at localhost:' + port);

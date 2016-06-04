@@ -3,4 +3,5 @@ module.exports = function(app, express) {
   require('./admin')(app, express);
   require('./api')(app, express);
   require('./users')(app, express);
+  require('./stock')(app, express);
 }

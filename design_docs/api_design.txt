@@ -1,5 +1,8 @@
 // In this doc, discuss what the api should look like.
 
+Okay so basically all of this goes under /api/
+//@TODO: learn wtf RESTful actually means rather than buzzwords
+
 Users API:
   /user/ POST requests allow you to create a new user
   /user/ GET requests allow you to pull database of all users

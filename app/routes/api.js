@@ -9,6 +9,7 @@ module.exports = function(app, express) {
 
   //@TODO: middleware to ensure authenticated
 
+  //@TODO: middleware to check if admin and special admin routes
 
   // Access API dashboard
   apiRouter.get('/', function(req, res) {

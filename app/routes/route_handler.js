@@ -1,5 +1,5 @@
 module.exports = function(app, express) {
-  
+
   var jwt = require('jsonwebtoken');
   var User = require('../models/user');
 
@@ -8,5 +8,5 @@ module.exports = function(app, express) {
   require('./api')(app, express, User, jwt);
   require('./authentication')(app, express, User, jwt);
   require('./users')(app, express, User, jwt);
-  require('./stock')(app, express, User, jwt);
+  require('./stocks')(app, express, User, jwt);
 }

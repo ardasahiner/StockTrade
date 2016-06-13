@@ -11,5 +11,5 @@ module.exports = function(app, express, User, jwt) {
     });
   })
 
-  app.use('/stock', stockRouter);
+  app.use('/stocks', stockRouter);
 }

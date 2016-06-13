@@ -60,5 +60,5 @@ module.exports = function(app, express) {
     });
   });
 
-  app.use('/user', userRouter);
+  app.use('/users', userRouter);
 }

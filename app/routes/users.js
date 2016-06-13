@@ -10,6 +10,7 @@ module.exports = function(app, express, User, jwt) {
     user.name = req.body.name;
     user.username = req.body.username;
     user.password = req.body.password;
+    user.email = req.body.email;
     user.admin = req.body.admin
 
     user.save(function(err) {
@@ -76,8 +77,6 @@ module.exports = function(app, express, User, jwt) {
       res.json({ success : false, message : "You do not have access to this page" });
     }
   })
-
-
   // PUT user data - change user data for specific user_id
   .put(function(req, res) {
 
@@ -117,10 +116,5 @@ module.exports = function(app, express, User, jwt) {
     }
   });
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> e9ba2e6c62c5c544d851aa3eba20d2b2713dce5e
   app.use('/users', userRouter);
 }

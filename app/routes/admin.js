@@ -1,7 +1,36 @@
 // Administrator Router
 // Admin Router will communicate administrative information
-module.exports = function(app, express) {
+// Admin authentication requires user to have admin access
+module.exports = function(app, express, User, jwt) {
   var adminRouter = express.Router();
+
+  // Verify Token and Admin Status
+  adminRouter.use(function(req, res, next) {
+
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+
+      jwt.verify(token, app.get('secretKey'), function(err, decoded) {
+        if (err) {
+          return res.json({ success : false, message: 'Failed to authenticate token.' });
+        } else {
+          req.decoded = decoded;
+
+          if (!req.decoded._doc.admin) {
+            return res.json({ success : false, message : 'You do not have admin access' });
+          }
+
+          next();
+        }
+      });
+    } else {
+      // No token given
+      return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
+      });
+    }
+  });
 
   adminRouter.get('/', function(req, res) {
     res.send('Admin Dashboard');

@@ -3,3 +3,4 @@ node_modules/
 
 // Hide online database username/password
 db_connect.js
+config.js

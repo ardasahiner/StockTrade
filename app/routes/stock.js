@@ -1,6 +1,6 @@
 // Stock Router
 // Stock Router connects to the Stock Scraper to gather stock price information
-module.exports = function(app, express) {
+module.exports = function(app, express, User, jwt) {
   var stockRouter = express.Router();
 
   var scraper = require('../../scrapers/stock_scraper');

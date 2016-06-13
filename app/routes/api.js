@@ -1,16 +1,7 @@
 // API Router will communicate user information with the front end
-module.exports = function(app, express) {
+module.exports = function(app, express, User, jwt) {
   var apiRouter = express.Router();
-
-  //@TODO: consolidate files so that all backend routes are under
-  // ./api
-
-  //@TODO: authentication (post)
-
-  //@TODO: middleware to ensure authenticated
-
-  //@TODO: middleware to check if admin and special admin routes
-
+  
   // Access API dashboard
   apiRouter.get('/', function(req, res) {
     res.send('API Dashboard');

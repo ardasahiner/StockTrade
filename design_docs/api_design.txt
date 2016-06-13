@@ -1,7 +1,6 @@
 // In this doc, discuss what the api should look like.
 
 Okay so basically all of this goes under /api/
-//@TODO: learn wtf RESTful actually means rather than buzzwords
 
 Users API:
   /user/ POST requests allow you to create a new user
@@ -22,7 +21,7 @@ Users API:
     - We need to log user data so that admin can see how often the log in, how much time they spend on the website, etc (useful stats for product management)
 
 Stocks API:
-  Still need to implement (Kunal is working on this right now)
+  Still need to implement
   /stock/:stock_ticker GET requests will allow you to get the stock price of a specific stock
   Need to look into acquiring historic stock data
 

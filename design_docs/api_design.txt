@@ -37,3 +37,5 @@ Admin API:
     - Page Hits
     - etc
   We need to implement data logging so that we can track all of these things
+
+  Add a Group model (either public or private that has a group of users and a way to sort them by earnings)

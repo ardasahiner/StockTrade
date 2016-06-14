@@ -1,0 +1,10 @@
+Ideas for further development:
+
+  - Build a skeleton node app that can connect into the backend API, allow users to form and use skeletons to build bots. Bots should have limitations on trade frequency, so that they do not trade too often.
+  - Each bot should use a built in scraper, so that no single API overloads the source API.
+  - Bots come with stock buy/sell modules, authentication and token storage. Do they need a database? Can pull directly from stockr database.
+  - Sources for additional development:
+     - Each bot comes with rss feed module, to prep for NLP processes.
+     - Other features. Arda and Kunal can work on individual bots, to publish to give inspiration.
+
+Need to finish building Stockr API before this is possible. Do not need front end completed to implement this. 

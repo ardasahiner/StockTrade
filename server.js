@@ -26,10 +26,5 @@ app.get('/', function(req, res){
 // Route Handler file handles all routing tasks
 require('./app/routes/route_handler')(app, express);
 
-// Example call to the stock scraper, logs stock price for tsla
-// require('./scrapers/stock_scraper')('tsla', 'll', function(stock_price) {
-//   console.log(stock_price);
-// });
-
 app.listen(port);
 console.log('Visit page at localhost:' + port);

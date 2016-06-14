@@ -29,9 +29,8 @@ module.exports = function(app, express, User, jwt) {
         if (err) {
           return res.json({ success : false, message: 'Failed to authenticate token.' });
         } else {
+          // Decoded token saved into request parameters
           req.decoded = decoded;
-          req.admin = decoded._doc.admin;
-
           next();
         }
       });
@@ -87,6 +86,7 @@ module.exports = function(app, express, User, jwt) {
 
         if (req.body.name) user.name = req.body.name;
         if (req.body.username) user.username = req.body.username;
+        if (req.body.email) user.email = req.body.email;
         if (req.body.password) user.password = req.body.password;
 
         user.save(function(err) {
@@ -95,7 +95,7 @@ module.exports = function(app, express, User, jwt) {
         });
       });
     } else {
-      res.json({ success : false, message : "You do not have access to this page" });
+      res.json({ success : false, message : "You cannot change this user's information" });
     }
   })
 
@@ -109,7 +109,7 @@ module.exports = function(app, express, User, jwt) {
         _id : req.params.user_id
       }, function(err, user) {
         if (err) res.send(err);
-        res.json({ message : 'Successfully deleted' });
+        res.json({ message : req.decoded._doc.username + 'User successfully deleted' });
       });
     } else {
       res.json({ success : false, message : "You do not have access to this page" });

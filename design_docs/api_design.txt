@@ -11,7 +11,6 @@ Users API:
   /user/:user_id DELETE requests delete a specific user
 
   Need to implement:
-    - User Authentication
     - User Class need a lot of work (needs users stock holdings, balance, etc)
       -What should the user class have?
         -user_id

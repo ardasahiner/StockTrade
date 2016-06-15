@@ -1,7 +1,7 @@
-module.exports = function(app, express) {
+var jwt   = require('jsonwebtoken');
+var User  = require('../models/user');
 
-  var jwt = require('jsonwebtoken');
-  var User = require('../models/user');
+module.exports = function(app, express) {
 
   // Calls to admin and api routers, adds themselves to the application
   require('./admin')(app, express, User, jwt);

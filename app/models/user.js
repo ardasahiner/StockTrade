@@ -11,7 +11,7 @@ var UserAsset = new Schema({
 
 var HistoricalValue = new Schema({
   date: {type: Date, required: true},
-  value: {type: Number, required true}  //total value of a user's assets
+  value: {type: Number, required: true}  //total value of a user's assets
 });
 
 var initialCash = 1000000;

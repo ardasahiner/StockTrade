@@ -16,7 +16,7 @@ value: Number (total value of all assets)
 
 Schema:
 
-_id: Schema.Types.ObjectId (required)
+
 firstName: String
 lastName: String
 username: String
@@ -35,7 +35,6 @@ historical_values: [HistoricalValueSchema], default[{creation_date: cash}]
 
 TRANSACTION MODEL
 
-_id: Schema.Types.ObjectId (required)
 stock_ticker: String (required)
 type: String (buy or sell) (required)
 num_shares: Number (required)
@@ -54,7 +53,6 @@ name: String
 
 GROUP MODEL
 
-_id: Schema.Types.ObjectId (required)
 name: String (required)
 group_admin: Schema.Types.ObjectId (required, id of group admin/creator)
 members: [Schema.Types.ObjectId] (required, user id's of all users)

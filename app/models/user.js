@@ -1,6 +1,20 @@
 var mongoose  = require('mongoose');
 var Schema    = mongoose.Schema;
 var bcrypt    = require('bcrypt-nodejs');
+var ObjectId = Schema.Types.ObjectId;
+
+// Subdocuments
+var UserAsset = new Schema({
+  ticker: { type: String, required: true },
+  quantity: {type: Number, required: true },
+});
+
+var HistoricalValue = new Schema({
+  date: {type: Date, required: true},
+  value: {type: Number, required true}  //total value of a user's assets
+});
+
+var initialCash = 1000000;
 
 // Basic User Schema built with mongoose
 var UserSchema = new Schema({
@@ -11,7 +25,13 @@ var UserSchema = new Schema({
   password: { type: String, required: true },
   email: { type: String, required: true, index: { unique : true } },
   admin: { type: Boolean, default: false },
-  botAccount: { type: Boolean, default: false }
+  botAccount: { type: Boolean, default: false },
+  transactions: {type: [ObjectId], default: []},
+  cash: {type: Number, default: initialCash},
+  groups: {type: [ObjectId], default: []},
+  creation_date: {type: Date, default: Date.now()},
+  portfolio: {type: [UserAsset], default: []},
+  history: {type: [HistoricalValue], default:[{date: Date.now(), value: initialCash}]}
 });
 
 // Middlewear will be called if there is a save request made.

@@ -1,1 +1,3 @@
 // In this doc, discuss who should work on what part of the project.
+Arda is working on backend routes and models
+Kunal is working on frontend

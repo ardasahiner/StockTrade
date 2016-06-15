@@ -21,6 +21,7 @@ var UserSchema = new Schema({
   // Required tags removed to facilitate testing during development. Add again before production.
   firstName: String,
   lastName: String,
+
   username: { type: String, required: true, index: { unique : true } },
   password: { type: String, required: true },
   email: { type: String, required: true, index: { unique : true } },
@@ -29,7 +30,7 @@ var UserSchema = new Schema({
   transactions: {type: [ObjectId], default: []},
   cash: {type: Number, default: initialCash},
   groups: {type: [ObjectId], default: []},
-  creation_date: {type: Date, default: Date.now()},
+  creationDate: {type: Date, default: Date.now()},
   portfolio: {type: [UserAsset], default: []},
   history: {type: [HistoricalValue], default:[{date: Date.now(), value: initialCash}]}
 });

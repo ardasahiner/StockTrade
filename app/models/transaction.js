@@ -3,12 +3,12 @@ var Schema    = mongoose.Schema;
 
 var TransactionSchema = new Schema({
 
-  stock_ticker:  {type: String, required: true },
+  stockTicker:  {type: String, required: true },
   type: {type: String, required: true },
   num_shares: {type: Number, required: true },
-  price_per_share: {type: Number, required: true },
-  total_price: {type: Number, required: true },
-  percent_profit: Number
+  pricePerShare: {type: Number, required: true },
+  totalPrice: {type: Number, required: true },
+  percentProfit: Number
 });
 
 

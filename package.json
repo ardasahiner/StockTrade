@@ -1,5 +1,5 @@
 {
-  "name": "stocktrade",
+  "name": "vStock Analytics",
   "version": "1.0.0",
   "description": "Stock Trading Game",
   "main": "server.js",

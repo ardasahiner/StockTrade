@@ -20,9 +20,9 @@ module.exports = function(app, express, User, jwt) {
 
     user.save(function(err) {
       if (err) res.send(err);
-      res.json({ message : 'User created! Welcome ' + user.name + '!' });
+      res.json({ message : 'User created! Welcome ' + user.username + '!', success: true });
     });
-  })
+  });
 
 
   // Verify Token and perform authenticated check

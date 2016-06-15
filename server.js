@@ -7,6 +7,7 @@ var jwt         = require('jsonwebtoken');
 var config      = require('./config');
 
 var port = process.env.PORT || 5000;
+app.set('port', port);
 app.set('secretKey', config.key);
 
 // Connect to online mongodb Database
@@ -28,5 +29,7 @@ app.get('/', function(req, res){
 require('./app/routes/route_handler')(app, express);
 
 app.listen(port);
+module.exports = app;
+
 console.log('Visit page at localhost:' + port);
 console.log('vStock Analytics | Copyright (C) 2016 Kunal Gosar & Arda Sahiner');

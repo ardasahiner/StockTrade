@@ -8,6 +8,7 @@ var config = require('./config');
 
 var port = process.env.PORT || 5000;
 app.set('secretKey', config.key);
+
 // Connect to online mongodb Database
 mongoose.connect(config.database);
 

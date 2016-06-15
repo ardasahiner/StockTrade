@@ -1,0 +1,63 @@
+USER MODEL
+
+Subdocs:
+
+#############################################################################
+asset subdoc
+
+ticker: String
+quantity: Number
+------------------------------------------------------------------------------
+historical_value subdoc (only store at beginning of each day before market opens)
+
+date: Date
+value: Number (total value of all assets)
+##############################################################################
+
+Schema:
+
+_id: Schema.Types.ObjectId (required)
+firstName: String
+lastName: String
+username: String
+password: String
+email: String         //@TODO: check to make sure valid email
+admin: Boolean, default: false
+botAccount: Boolean, default: false
+transactions: array of transaction id's, default: []
+cash: Number, default: 1000000
+groups: [Schema.Types.ObjectId], default: [] (groups this person is a member of)
+portfolio: [AssetSchema], default: []
+creation_date: Date (required, date acct was created (for seeing overall profits))
+historical_values: [HistoricalValueSchema], default[{creation_date: cash}]
+
+--------------------------------------------------------------------------------------------
+
+TRANSACTION MODEL
+
+_id: Schema.Types.ObjectId (required)
+stock_ticker: String (required)
+type: String (buy or sell) (required)
+num_shares: Number (required)
+price_per_share: Number (required)
+total_price: Number (required)
+percent_profit: Number (optional, percentage profit made on a stock if it is a sale)
+
+----------------------------------------------------------------------------------------------
+
+STOCK MODEL
+
+ticker: String
+name: String
+
+---------------------------------------------------------------------------------------------
+
+GROUP MODEL
+
+_id: Schema.Types.ObjectId (required)
+name: String (required)
+group_admin: Schema.Types.ObjectId (required, id of group admin/creator)
+members: [Schema.Types.ObjectId] (required, user id's of all users)
+creation_date: Date
+isPrivate: Boolean  (optional)
+password: String (optional, don't forget to hash)

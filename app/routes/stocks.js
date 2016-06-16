@@ -53,7 +53,7 @@ module.exports = function(app, express, User, jwt, stockDictionary) {
   /* Below are routes for buying and selling a symbol
      Could possibly instead just have these as POST and DELETE requests to ''/:stockname'
      Advantage of below procedure is that it allows client to GET buy and sell requests,
-     in case you want to have a "confirm" page before processing a transaction 
+     in case you want to have a "confirm" page before processing a transaction
   */
 
   stockRouter.route('/buy/:stock_symbol')
@@ -86,7 +86,7 @@ module.exports = function(app, express, User, jwt, stockDictionary) {
 
   })
 
-  //performs the act of buying a stock
+  //performs the act of selling a stock
   .post(function(req, res) {
 
     User.findOne({ username: req.decoded._doc.username }, function(err, user) {

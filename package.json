@@ -11,7 +11,7 @@
     "url": "https://github.com/kunalgosar/StockTrade.git"
   },
   "author": "Kunal Gosar & Arda Sahiner",
-  "license": "	GPL-3.0",
+  "license": "GPL-3.0",
   "homepage": "localhost:5000",
   "dependencies": {
     "angular": "^1.5.6",

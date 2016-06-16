@@ -4,9 +4,10 @@ var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
 var jwt         = require('jsonwebtoken');
+var path        = require('path');
 var config      = require('./config');
 
-var port = process.env.PORT || 5000;
+var port = config.port;
 app.set('port', port);
 app.set('secretKey', config.key);
 
@@ -17,16 +18,27 @@ mongoose.connect(config.database);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+// Configure app to handle CORS requests
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
+  next();
+});
+
 // Module morgan logs all activity to console
 app.use(morgan('dev'));
 
-// Inject index.html file as frontpage
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
+// Configure express to handle public static files
+app.use(express.static(__dirname + '/public'));
 
 // Route Handler file handles all routing tasks
 require('./app/routes/route_handler')(app, express);
+
+// Create catch all route, and pass all routes not handled in route_handler to Angular frontend
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
+});
 
 app.listen(port);
 module.exports = app;

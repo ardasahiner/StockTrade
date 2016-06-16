@@ -20,17 +20,20 @@ module.exports = function(app, express, User, jwt, Transaction) {
 
     user.save(function(err) {
       if (err) res.send(err);
-      // res.json({ message : 'User created! Welcome ' + user.username + '!', success: true });
+      res.json({ message : 'User created! Welcome ' + user.username + '!', success: true });
     });
 
     //Creates a new Transaction associated with the user
-    var transaction = new Transaction();
-    transaction.userId = user._id;
-
-    transaction.save(function(err) {
-      if (err) res.send(err);
-      res.json({ message : 'User created! Welcome ' + user.username + '!', success: true });
-    });
+    // var transaction = new Transaction();
+    // transaction.userId = user._id;
+    //
+    // transaction.save(function(err) {
+    //   if (err) {
+    //     res.send(err)
+    //   } else {
+    //     res.json({ message : 'User created! Welcome ' + req.username + '!', success: true });
+    //   }
+    // });
   });
 
 

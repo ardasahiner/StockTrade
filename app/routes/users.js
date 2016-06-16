@@ -1,5 +1,5 @@
 // User Router will handle creating, deleting and accessing user data
-module.exports = function(app, express, User, jwt) {
+module.exports = function(app, express, User, jwt, Transaction) {
   var userRouter = express.Router();
 
   // POST request to '/' route does not require authentication,
@@ -22,6 +22,10 @@ module.exports = function(app, express, User, jwt) {
       if (err) res.send(err);
       res.json({ message : 'User created! Welcome ' + user.username + '!', success: true });
     });
+
+    //Creates a new Transaction associated with the user
+    var transaction = new Transaction();
+    transaction.userId = user._id;
   });
 
 
@@ -63,7 +67,6 @@ module.exports = function(app, express, User, jwt) {
     } else {
       res.json({ success : false, message : "You do not have admin access" });
     }
-
   });
 
 
@@ -127,6 +130,56 @@ module.exports = function(app, express, User, jwt) {
       res.json({ success : false, message : "You do not have access to this page" });
     }
   });
+
+  /* Below are routes configured for buying and selling stocks
+
+  */
+
+  userRouter.route('/:query_username/buy/:stock_symbol')
+
+  //sends info on the transaction, but does not process it
+  .get(function(req, res) {
+
+
+  })
+
+  //performs the act of buying a stock
+  .post(function(req, res) {
+
+    User.findOne({ username: req.decoded._doc.username }, function(err, user) {
+      if (err) res.send(err);
+
+      //@TODO: find the number to buy requested, lookup stock price, see if user has enough cash
+      //@TODO: add a new transaction to the user associated transaction document
+      //@TODO: subtract from the user's cash and add a new stock to their portfolio
+      //@TODO: send success message if success, failure message if failure
+
+    });
+  });
+
+  userRouter.route('/:query_username/sell/:stock_symbol')
+
+  //sends info on the transaction, but does not process it
+  .get(function(req, res) {
+
+
+  })
+
+  //performs the act of buying a stock
+  .post(function(req, res) {
+
+    User.findOne({ username: req.decoded._doc.username }, function(err, user) {
+      if (err) res.send(err);
+
+      //@TODO: find the number to sell requested, ensure user's quantity >= request quantity
+      //@TODO: add a new transaction to the associated document, with % profit
+      //@TODO: add to the user's cash and modify their portfolio (remove if selling all stocks)
+      //@TODO: send success message if success, failure message if failure
+    });
+  });
+
+  //for handling requests to /users/transactions (listing transactions)
+  require('transactions')(app, exppress, User, jwt, Transaction, userRouter);
 
   app.use('/users', userRouter);
 }

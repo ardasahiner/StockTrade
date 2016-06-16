@@ -27,7 +27,6 @@ var UserSchema = new Schema({
   email: { type: String, required: true, index: { unique : true } },
   admin: { type: Boolean, default: false },
   botAccount: { type: Boolean, default: false },
-  transactions: {type: [ObjectId], default: []},
   cash: {type: Number, default: initialCash},
   groups: {type: [ObjectId], default: []},
   creationDate: {type: Date, default: Date.now()},
@@ -35,7 +34,7 @@ var UserSchema = new Schema({
   history: {type: [HistoricalValue], default:[{date: Date.now(), value: initialCash}]}
 });
 
-// Middlewear will be called if there is a save request made.
+// Middleware will be called if there is a save request made.
 // If there is a new/changed password, hash it before writing to database
 UserSchema.pre('save', function(next) {
   var user = this;

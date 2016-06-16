@@ -1,7 +1,7 @@
 var chai     = require("chai");
 var assert   = chai.assert;
 var request  = require("request");
-var app      = require("./../server.js")
+var app      = require("./../server.js");
 
 describe("User Route Testing (Post, Get, Put, Delete Requests)", function() {
   describe("Create a new user, make some changes, delete the user", function() {
@@ -12,7 +12,7 @@ describe("User Route Testing (Post, Get, Put, Delete Requests)", function() {
 
     it("Creates a new User", function(done) {
 
-      var headers = {}
+      var headers = {};
 
       var options = {
         url: domain_url + 'users',
@@ -23,7 +23,7 @@ describe("User Route Testing (Post, Get, Put, Delete Requests)", function() {
           'password': testUser,
           'email': testUser + '@vStock.io'
         }
-      }
+      };
 
       request(options, function(err, res, body) {
         // if (err) console.log(err);
@@ -35,7 +35,7 @@ describe("User Route Testing (Post, Get, Put, Delete Requests)", function() {
 
     it("Performs authentication on user", function(done) {
 
-      var headers = {}
+      var headers = {};
 
       var options = {
         url: domain_url + 'authenticate',
@@ -45,7 +45,7 @@ describe("User Route Testing (Post, Get, Put, Delete Requests)", function() {
           'username': testUser,
           'password': testUser
         }
-      }
+      };
 
       request(options, function(err, res, body) {
           // if (err) console.log(err);
@@ -60,14 +60,14 @@ describe("User Route Testing (Post, Get, Put, Delete Requests)", function() {
 
       var headers = {
         'x-access-token': token
-      }
+      };
 
       var options = {
         url: domain_url + 'users/' + testUser,
         method: 'GET',
         headers: headers,
         form: {}
-      }
+      };
 
       request(options, function(err, res, body) {
         // if (err) console.log(err);

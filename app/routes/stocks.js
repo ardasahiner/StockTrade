@@ -25,4 +25,4 @@ module.exports = function(app, express, User, jwt, stockDictionary) {
 
 
   app.use('/stocks', stockRouter);
-}
+};

@@ -39,4 +39,4 @@ module.exports = function(app, express, User, jwt) {
   });
 
   app.use('/authenticate', authRouter);
-}
+};

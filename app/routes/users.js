@@ -187,4 +187,4 @@ module.exports = function(app, express, User, jwt, Transaction) {
   require('./transactions')(app, express, User, jwt, Transaction, userRouter);
 
   app.use('/users', userRouter);
-}
+};

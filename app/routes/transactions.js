@@ -1,4 +1,4 @@
-var Transaction = require('../models/transaction')
+var Transaction = require('../models/transaction');
 
 module.exports = function(app, express, User, jwt, Transaction, userRouter) {
 
@@ -63,4 +63,4 @@ module.exports = function(app, express, User, jwt, Transaction, userRouter) {
 
 
   userRouter.use('/transactions', transactionRouter);
-}
+};

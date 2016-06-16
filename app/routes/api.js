@@ -8,4 +8,4 @@ module.exports = function(app, express, User, jwt) {
   });
 
   app.use('/api', apiRouter);
-}
+};

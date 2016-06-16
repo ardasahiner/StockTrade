@@ -43,4 +43,4 @@ module.exports = function(app, express, User, jwt) {
   });
 
   app.use('/admin', adminRouter);
-}
+};

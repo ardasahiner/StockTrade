@@ -15,8 +15,8 @@ module.exports = function(app, express, User, jwt) {
     user.username = req.body.username;
     user.password = req.body.password;
     user.email = req.body.email;
-    user.admin = req.body.admin;
-    user.botAccount = req.body.botAccount;
+
+    //@TODO: ensure password strength and email validity (might also do this in the user model)
 
     user.save(function(err) {
       if (err) res.send(err);
@@ -96,9 +96,11 @@ module.exports = function(app, express, User, jwt) {
         // if (req.body.email) user.email = req.body.email;
         if (req.body.password) user.password = req.body.password;
         if (req.body.botAccount) user.botAccount = req.body.botAccount;
-        if (req.decoded._doc.admin && req.body.admin) {
-          user.admin = req.body.admin;
-        }
+
+        // Shouldn't be able to change whether you're an admin either
+        // if (req.decoded._doc.admin && req.body.admin) {
+        //   user.admin = req.body.admin;
+        // }
 
         user.save(function(err) {
           if (err) res.send(err);

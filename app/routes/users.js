@@ -179,7 +179,7 @@ module.exports = function(app, express, User, jwt, Transaction) {
   });
 
   //for handling requests to /users/transactions (listing transactions)
-  require('transactions')(app, exppress, User, jwt, Transaction, userRouter);
+  require('./transactions')(app, express, User, jwt, Transaction, userRouter);
 
   app.use('/users', userRouter);
 }

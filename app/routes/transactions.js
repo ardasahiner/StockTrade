@@ -4,7 +4,7 @@ module.exports = function(app, express, User, jwt, Transaction, userRouter) {
 
   var transactionRouter = express.Router();
 
-  // @KUNAL: do i need to authenticate again or is this unnecessary?
+  // @KUNAL: do i need to authenticate again or is this unnecessary? It should be there :)
   transactionRouter.use(function(req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 

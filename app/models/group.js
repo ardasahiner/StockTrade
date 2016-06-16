@@ -32,7 +32,7 @@ GroupSchema.methods.comparePassword = function(password) {
   } else {
     return true;
   }
-};
+}
 
 
 module.exports = mongoose.model('Group', GroupSchema);

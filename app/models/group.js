@@ -6,7 +6,7 @@ var ObjectId = Schema.Types.ObjectId;
 var GroupSchema = new Schema({
   name: { type: String, required: true, index: { unique : true } },
   groupAdmin: {type: ObjectId, required: true},
-  members: {type: [ObjectId], default: [group_admin]}, //idk if this works
+  members: {type: [ObjectId]}, // remember to push group admin's ID before saving
   creationDate: {type: Date, default: Date.now()},
   isPrivate: Boolean, //option to be a private group (has a password)
   password: String

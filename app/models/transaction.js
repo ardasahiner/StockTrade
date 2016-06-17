@@ -2,7 +2,7 @@ var mongoose  = require('mongoose');
 var Schema    = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
-var InnerSchema = new Schema({
+var TransactionSchema = new Schema({
 
   stockTicker:  {type: String, required: true },
   type: {type: String, required: true },
@@ -12,13 +12,6 @@ var InnerSchema = new Schema({
   percentProfit: Number,
   transactionDate: {type: Date, default: Date.now()},
   username: {type: String, required: true}
-});
-
-
-var TransactionSchema = new Schema({
-
-  userId: {type: ObjectId, required: true},
-  transactionList: {type: [InnerSchema], default: []}
 });
 
 module.exports = mongoose.model('Transaction', TransactionSchema);

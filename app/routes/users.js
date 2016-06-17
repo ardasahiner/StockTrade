@@ -1,5 +1,5 @@
 // User Router will handle creating, deleting and accessing user data
-module.exports = function(app, express, User, jwt, Transaction) {
+module.exports = function(app, express, User, jwt, TransactionList, Transaction, UserAsset) {
   var userRouter = express.Router();
 
   // POST request to '/' route does not require authentication,
@@ -19,18 +19,21 @@ module.exports = function(app, express, User, jwt, Transaction) {
     //@TODO: ensure password strength and email validity (might also do this in the user model)
 
     user.save(function(err) {
-      if (err) res.send(err);
-    });
-
-    // Creates a new Transaction associated with the user
-    var transaction = new Transaction();
-    transaction.userId = user._id;
-
-    transaction.save(function(err) {
       if (err) {
-        res.send(err)
+        res.send(err);
       } else {
-        res.json({ message : 'User created! Welcome ' + req.username + '!', success: true });
+        //@TODO: fix this sort of nesting of callbacks 
+        // Creates a new Transaction associated with the user
+        var transactionList = new TransactionList();
+        transactionList.userId = user._id;
+
+        transactionList.save(function(err) {
+          if (err) {
+            res.send(err)
+          } else {
+            res.json({ message : 'User created! Welcome ' + req.username + '!', success: true });
+          }
+        });
       }
     });
   });

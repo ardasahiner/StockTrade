@@ -3,19 +3,15 @@ var Schema    = mongoose.Schema;
 var bcrypt    = require('bcrypt-nodejs');
 var ObjectId = Schema.Types.ObjectId;
 var schedule = require('node-schedule');
+var UserAsset = require('./userasset')
 
-// Subdocuments
-var UserAsset = new Schema({
-  ticker: { type: String, required: true },
-  quantity: {type: Number, required: true },
-});
-
-var initialCash = 1000000;
-
+// Subdocument (only will be added to inside this file )
 var HistoricalValue = new Schema({
   date: {type: Date, required: true},
   value: {type: Number, required: true}  //total value of a user's assets
 });
+
+var initialCash = 1000000;
 
 // Basic User Schema built with mongoose
 var UserSchema = new Schema({

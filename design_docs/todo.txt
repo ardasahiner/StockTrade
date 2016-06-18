@@ -52,4 +52,4 @@ NOTE-- 1 to 3 minute delay before updating
 
 INTERACTIVE CHART:
 
-Pretty complicated request, idk if we'll use it but it looks pretty cool 
+Pretty complicated request, idk if we'll use it but it looks pretty cool

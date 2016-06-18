@@ -1,11 +1,10 @@
-var express     = require('express');
-var app         = express();
-var bodyParser  = require('body-parser');
-var morgan      = require('morgan');
-var mongoose    = require('mongoose');
-var jwt         = require('jsonwebtoken');
-var path        = require('path');
-var config      = require('./config');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var mongoose = require('mongoose');
+var path = require('path');
+var config = require('./config');
 
 var port = config.port;
 app.set('port', port);
@@ -19,11 +18,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Configure app to handle CORS requests
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
-  next();
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
+    next();
 });
 
 // Module morgan logs all activity to console
@@ -36,8 +35,8 @@ app.use(express.static(__dirname + '/public'));
 require('./app/routes/route_handler')(app, express);
 
 // Create catch all route, and pass all routes not handled in route_handler to Angular frontend
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 
 app.listen(port);

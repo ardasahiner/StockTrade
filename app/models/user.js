@@ -1,15 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
-var ObjectId = Schema.Types.ObjectId;
-var schedule = require('node-schedule');
-var UserAsset = require('./userasset')
-
-// Subdocument (only will be added to inside this file )
-var HistoricalValue = new Schema({
-    date: {type: Date, required: true},
-    value: {type: Number, required: true}  //total value of a user's assets
-});
+//var schedule = require('node-schedule');
+var UserAsset = require('./userasset');
+var HistoricalValue = require('./historicalvalue')
 
 var initialCash = 1000000;
 
@@ -18,13 +12,14 @@ var UserSchema = new Schema({
     // Required tags removed to facilitate testing during development. Add again before production.
     firstName: String,
     lastName: String,
+    
     username: {type: String, required: true, index: {unique: true}},
     password: {type: String, required: true},
     email: {type: String, required: true, index: {unique: true}},
     admin: {type: Boolean, default: false},
     botAccount: {type: Boolean, default: false},
     cash: {type: Number, default: initialCash},
-    groups: [ObjectId],
+    groups: [String],
     creationDate: {type: Date, default: Date.now()},
     portfolio: [UserAsset],
     history: [HistoricalValue]
@@ -32,7 +27,6 @@ var UserSchema = new Schema({
 
 
 //@TODO: later
-// var HistoricalValue = mongoose.model('HistoricalValue', HistoricalValue);
 //
 // //for updating historical data before markets open each day
 // var updateHistoricalDataRule = new schedule.RecurrenceRule();

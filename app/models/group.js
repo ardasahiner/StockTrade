@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
-var ObjectId = Schema.Types.ObjectId;
 
 var GroupSchema = new Schema({
     name: {type: String, required: true, index: {unique: true}},
-    groupAdmin: {type: ObjectId, required: true},
-    members: {type: [ObjectId]}, // remember to push group admin's ID before saving
+    groupAdminName: {type: String, required: true},
+    memberNames: [String] // remember to push group admin's ID before saving
     creationDate: {type: Date, default: Date.now()},
     isPrivate: Boolean, //option to be a private group (has a password)
     password: String

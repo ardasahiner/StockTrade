@@ -58,5 +58,16 @@ Pretty complicated request, idk if we'll use it but it looks pretty cool
 ## Historical Data
 
 Source for historical data: https://www.quandl.com/data/WIKI?keyword=
+
+https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json?start_date=2015-05-24&end_date=2015-05-28&api_key=FTADN2z1K6aa_QsZ4ztq
+
 This contains 3000 stocks, not exclusive, but can find other sources to compliment.
+
+Barchart:
+
+http://marketdata.websol.barchart.com/getQuote.json?key=d3aec7bd98718c9fa45caa2d8c12eaeb&symbols=ZC*1,TSLA,AAPL,GOOG
+http://marketdata.websol.barchart.com/getHistory.json?key=f3b460304a11da7c0bdfe79b17d2b9cf&symbol=IBM&type=daily&startDate=20150619000000
+
+keys: d3aec7bd98718c9fa45caa2d8c12eaeb, f3b460304a11da7c0bdfe79b17d2b9cf
+
 Google csv API for historical data: http://www.google.com/finance/historical?q=TSLA&startdate=Nov%201,%202013&enddate=Nov%2030,%202015&output=csv

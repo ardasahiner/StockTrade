@@ -50,14 +50,13 @@ Sample result: {"Status":"SUCCESS","Name":"Apple Inc","Symbol":"AAPL",
 
 NOTE-- 1 to 3 minute delay before updating
 
+INTERACTIVE CHART:
+
+Pretty complicated request, idk if we'll use it but it looks pretty cool
+
+
 ## Historical Data
 
 Source for historical data: https://www.quandl.com/data/WIKI?keyword=
 This contains 3000 stocks, not exclusive, but can find other sources to compliment.
 Google csv API for historical data: http://www.google.com/finance/historical?q=TSLA&startdate=Nov%201,%202013&enddate=Nov%2030,%202015&output=csv
-
-
-
-INTERACTIVE CHART:
-
-Pretty complicated request, idk if we'll use it but it looks pretty cool

@@ -11,7 +11,7 @@
   <!-- Loading bootstrap from local directory -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">
-
+  <!-- style.css overrides bootstrap -->
   <link rel="stylesheet" href="assests/css/style.css">
 
 
@@ -43,10 +43,14 @@
         <a class="navbar-brand" href="/">vStock Home</a>
       </div>
 
+      <ul class="nav navbar-nav navbar-left">
+        <li><a href="/about"> About Us</a></li>
+      </ul>
+
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="/about"><i class="fa fa-shield"></i> About Us</a></li>
         <li><a href="/contact"><i class="fa fa-comment"></i> Contact Us</a></li>
+        <li><a href="/login"> Log in</a></li>
+        <li><a href="/signup"> Sign up</a></li>
       </ul>
     </nav>
   </header>

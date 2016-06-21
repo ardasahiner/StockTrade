@@ -20,4 +20,19 @@ angular.module('routerApp', ['routerRoutes'])
 .controller('contactController', function() {
   var vm = this;
   vm.titleMessage = 'Contact Us!';
+})
+
+.controller('loginController', function() {
+  var vm = this;
+  vm.titleMessage = 'Log in here!';
+})
+
+.controller('signupController', function() {
+  var vm = this;
+  vm.titleMessage = 'Sign up here!';
+})
+
+.controller('termofuseController', function() {
+  var vm = this;
+  vm.titleMessage = 'These are the terms of use';
 });

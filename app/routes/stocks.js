@@ -3,7 +3,7 @@
 module.exports = function (app, express, User, jwt, stockDictionary) {
     var stockRouter = express.Router();
 
-    var scraper = require('../../scrapers/stock_scraper');
+    // var scraper = require('../../scrapers/stock_scraper');
 
     //@TODO: this route should send all info about a stock in json format, not just price
     stockRouter.route('/:stock_symbol').get(function (req, res) {

@@ -1,7 +1,7 @@
 //Short script to see how many requests per second it takes for markitondemand to time out
 //Results tend to show about 10 requests without any waiting, 100+ if waiting 1 second per request
 var request = require('request');
-var rt = require('./realtimescraper');
+var rt = require('../scrapers/realtimescraper');
 //some sample stocks to loop through (in case markit caches if you call for the same stock a bunch)
 var stocks = ['aapl', 'goog', 'tsla', 'bac', 'pg', 'msft', 'gs', 'jpm', 'hp'];
 

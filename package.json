@@ -26,6 +26,7 @@
     "morgan": "^1.7.0",
     "node-schedule": "^1.1.0",
     "open-uri": "^0.4.3",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "sleep": "^3.0.1"
   }
 }

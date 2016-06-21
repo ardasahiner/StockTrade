@@ -18,7 +18,6 @@ function historicalStockScraper(symbol, type, startDate, fCallback, endDate, key
     var keys = ["d3aec7bd98718c9fa45caa2d8c12eaeb", "f3b460304a11da7c0bdfe79b17d2b9cf"];
 
     var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + keys[keyNumber] + "&symbol=" + symbol + "&type=" + type + "&startDate=" + startDate + "&endDate=" + endDate;
-    console.log(url);
     request(url, function(error, response, body) {
       if(!error && response.statusCode == 200){
         fCallback(JSON.parse(body)['results']);
@@ -33,6 +32,4 @@ function historicalStockScraper(symbol, type, startDate, fCallback, endDate, key
     });
 }
 
-module.exports = historicalStockScraper("tsla", "daily", 20150619000000, function(results){
-    console.log(results);
-});
+module.exports = historicalStockScraper;

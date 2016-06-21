@@ -706,7 +706,7 @@ module.exports = {
     'PTCT': 'PTC Therapeutics, Inc.',
     'BRG^A': 'Bluerock Residential Growth REIT, Inc.',
     'APT': 'Alpha Pro Tech, Ltd.',
-    'FEI           ': 'First Trust MLP and Energy Income Fund',
+    'FEI': 'First Trust MLP and Energy Income Fund',
     'GXP^E': 'Great Plains Energy Inc',
     'KATE': 'Kate Spade & Company',
     'CSV': 'Carriage Services, Inc.',

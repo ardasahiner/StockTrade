@@ -1,4 +1,4 @@
-var openUri = require('open-uri');
+var request = require('request');
 
 // Accesses historical data for a given stock symbol, type (daily, minutes, weekly, etc.), start date and
 // end date (optional), and callback
@@ -6,33 +6,33 @@ var openUri = require('open-uri');
 function historicalStockScraper(symbol, type, startDate, fCallback, endDate, keyNumber) {
 
     // optional arguments
-    if (endDate == 'undefined') {
+    if (typeof endDate === 'undefined') {
 
       endDate = "null";
     }
-    if (keyNumber == 'undefined') {
+    if (typeof keyNumber === 'undefined') {
 
-      keyNumber = 0;
+      keyNumber = 1;
     }
 
     var keys = ["d3aec7bd98718c9fa45caa2d8c12eaeb", "f3b460304a11da7c0bdfe79b17d2b9cf"];
 
-    var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + keys[keyNumber] + "&symbol=" + symbol;
-    url += "&type=" + type + "&startDate=" + startDate + "&endDate=" + endDate;
-    openUri(url, function (err, history) {
+    var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + keys[keyNumber] + "&symbol=" + symbol + "&type=" + type + "&startDate=" + startDate + "&endDate=" + endDate;
+    console.log(url);
+    request(url, function(error, response, body) {
+      if(!error && response.statusCode == 200){
+        fCallback(JSON.parse(body)['results']);
+      } else if (error) {
 
-        //if not success (aka api key fails), recall with other api key
-        //@TODO: probably change this to be cooler
-        if (history["status"]["code"] != 200) {
+        console.log(error);
+      } else {
 
-          historicalStockScraper(symbol, type, startDate, fCallback, endDate, (keyNumber + 1) % 2);
-        } else {
-
-          //leave it to the callback to process the results (give it the raw data)
-          results = history["results"];
-          fCallback(resuts);
-        }
+        //try again with other api key
+        historicalStockScraper(symbol, type, startDate, fCallback, endDate, (keyNumber + 1) % 2);
+      }
     });
 }
 
-module.exports = historicalStockScraper;
+module.exports = historicalStockScraper("tsla", "daily", 20150619000000, function(results){
+    console.log(results);
+});

@@ -1,37 +1,34 @@
-var openUri = require('open-uri');
+var request = require('request');
 
 // Accesses end of day data for a given list of stock symbols
 // Uses barchart free api
 function eodScraper(symbols, fCallback, keyNumber) {
 
     //optional args
-    if (keyNumber == 'undefined') {
+    if (typeof keyNumber === 'undefined') {
 
       keyNumber = 0;
     }
-    //callback function passed in to createString
+    // callback function passed in to createString
     function innerCallback(symbolsList, kn) {
 
-      if (kn == 'undefined') {
+      if (typeof kn === 'undefined') {
 
         kn = keyNumber;
       }
-
       var keys = ["d3aec7bd98718c9fa45caa2d8c12eaeb", "f3b460304a11da7c0bdfe79b17d2b9cf"];
       var url = "http://marketdata.websol.barchart.com/getQuote.json?key=" + keys[kn] + "&symbols=" + symbolsList;
-      openUri(url, function (err, info) {
-          console.log("url: " + url);
-          console.log(info);
-          //if not success (aka api key fails), recall with other api key
-          if (info["status"]["code"] != 200) {
+      request(url, function(error, response, body) {
+        if(!error && response.statusCode == 200){
+          fCallback(JSON.parse(body)['results'][0]);
+        } else if (error) {
 
-            innerCallback(symbolsList, (kn + 1) % 2);
-          } else {
+          console.log(error);
+        } else {
 
-            //leave it to the callback to process the results (give it the raw data)
-            results = info["results"];
-            fCallback(resuts);
-          }
+          //try again with other api key
+          innerCallback(symbolsList, (kn + 1) % 2);
+        }
       });
     }
 
@@ -43,8 +40,10 @@ function createString(symbols, index, currString, callback) {
 
   if(index >= symbols.length) {
     callback(currString);
-  }
-  else {
+  } else if (typeof symbols === 'string') {
+
+    callback(symbols);
+  } else {
     //updates curr string, then recursively calls
     createString(symbols, index + 1, currString + symbols[index] + ",", callback);
   }

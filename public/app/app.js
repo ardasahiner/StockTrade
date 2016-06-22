@@ -1,38 +1,53 @@
-// Main angular application
+var routerApp = angular.module('routerApp', ['ui.router']);
 
-angular.module('routerApp', ['routerRoutes'])
+routerApp.config(function($stateProvider, $urlRouterProvider) {
 
-.controller('mainController', function() {
-  var vm = this;
-  vm.titleMessage = 'Welcome to vStock!';
-})
+  $urlRouterProvider.otherwise('/home');
 
-.controller('homeController', function() {
-  var vm = this;
-  vm.titleMessage = 'Welcome to the home page of vStock';
-})
+  $stateProvider
 
-.controller('aboutController', function() {
-  var vm = this;
-  vm.titleMessage = 'This is the about page';
-})
+    .state('home', {
+      url: 'home',
+      templateUrl: 'app/views/pages/unauthenticated/home.html'
+    })
 
-.controller('contactController', function() {
-  var vm = this;
-  vm.titleMessage = 'Contact Us!';
-})
+    .state('about', {
+      url: '/about',
+      templateUrl: 'app/views/pages/unauthenticated/aboutus.html',
+      controller: 'aboutController',
+      controllerAs: 'about'
+    })
 
-.controller('loginController', function() {
-  var vm = this;
-  vm.titleMessage = 'Log in here!';
-})
+    .state('contact', {
+      url: '/contact',
+      templateUrl: 'app/views/pages/unauthenticated/contactus.html',
+      controller: 'contactController',
+      controllerAs: 'contact'
+    })
 
-.controller('signupController', function() {
-  var vm = this;
-  vm.titleMessage = 'Sign up here!';
-})
+    .state('login', {
+      url: '/login',
+      templateUrl: 'app/views/pages/unauthenticated/login.html',
+      controller: 'loginController',
+      controllerAs: 'login'
+    })
 
-.controller('termofuseController', function() {
-  var vm = this;
-  vm.titleMessage = 'These are the terms of use';
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'app/views/pages/unauthenticated/signup.html',
+      controller: 'signupController',
+      controllerAs: 'signup'
+    })
+
+    .state('terms', {
+      url: '/terms',
+      templateUrl: 'app/views/pages/unauthenticated/termsofuse.html',
+      controller: 'termsofuseController',
+      controllerAs: 'termsofuse'
+    });
+
 });
+
+routerApp.config(["$locationProvider", function($locationProvider) {
+  $locationProvider.html5Mode(true);
+}]);

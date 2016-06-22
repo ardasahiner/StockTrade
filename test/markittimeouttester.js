@@ -29,8 +29,6 @@ function callForever(numTimes, startTime) {
       console.log("waiting...")
     }
   });
-
-
 }
 
 module.exports = callForever;

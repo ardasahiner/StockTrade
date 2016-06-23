@@ -10,14 +10,12 @@
   <!-- Import CSS files -->
   <!-- Loading bootstrap from local directory -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">
   <!-- style.css overrides bootstrap -->
   <link rel="stylesheet" href="assests/css/style.css">
 
 
-  <!-- Temporarily adding angularJS from CDN source -->
-  <!-- TODO: add angular to local directory and import from there -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+  <!-- Import AngularJS Components -->
+  <script src="assets/js/angular.min.js"></script>
   <script src="assets/js/angular-ui-router.min.js"></script>
 
 
@@ -49,7 +47,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a ui-sref="contact"><i class="fa fa-comment"></i> Contact Us</a></li>
+        <li><a ui-sref="contact"> Contact Us</a></li>
         <li><a ui-sref="login"> Log in</a></li>
         <li><a ui-sref="signup"> Sign up</a></li>
       </ul>

@@ -18,12 +18,12 @@
   <!-- Temporarily adding angularJS from CDN source -->
   <!-- TODO: add angular to local directory and import from there -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
+  <script src="assets/js/angular-ui-router.min.js"></script>
+
 
   <!-- Import my angular app and route configurations -->
   <script src="app/app.js"></script>
-  <script src="app/routes.js"></script>
+  <script src="app/app.routes.js"></script>
 
   <!-- Temporary style for placeholder index page -->
   <style>
@@ -35,7 +35,7 @@
   </style>
 </head>
 
-<body class="container" ng-app="routerApp">
+<body class="container" ng-app="vStockApp" ng-controller="mainController as main">
 
   <!-- HEADER AND NAVBAR -->
   <header>
@@ -59,7 +59,7 @@
   <!-- Views injected into here -->
   <main>
     <div class="container">
-
+      <h2>{{ main.titleMessage }}</h2>
       <div ui-view></div>
     </div>
   </main>

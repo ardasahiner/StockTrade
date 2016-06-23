@@ -1,4 +1,9 @@
-angular.module('vStockApp', ['app.routes'])
+// Add all modules to import list
+var imports = [];
+imports.push('app.routes');
+imports.push('adminService', 'stockService', 'userService');
+
+angular.module('vStockApp', imports)
 
 .controller('mainController', function() {
   var vm = this;

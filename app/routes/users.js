@@ -22,7 +22,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 if (err) {
                     res.send(err);
                 } else {
-                    //@TODO: fix this sort of nesting of callbacks 
+                    //@TODO: fix this sort of nesting of callbacks
                     // Creates a new Transaction associated with the user
                     var transactionList = new TransactionList();
                     transactionList.userId = user._id;
@@ -138,6 +138,12 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 res.json({success: false, message: "You do not have access to this page"});
             }
         });
+
+    // Return all of current user's data
+    userRouter.route('/me')
+      .get(function(req, res) {
+        res.send(req.decoded);
+      });
 
     /* Below are routes configured for buying and selling stocks
 

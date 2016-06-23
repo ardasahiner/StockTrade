@@ -2,13 +2,9 @@
 var imports = [];
 imports.push('app.routes');
 imports.push('adminService', 'stockService', 'userService');
+imports.push('mainController');
 
 angular.module('vStockApp', imports)
-
-.controller('mainController', function() {
-  var vm = this;
-  vm.titleMessage = 'Welcome to vStock!';
-})
 
 .controller('homeController', function() {
   var vm = this;

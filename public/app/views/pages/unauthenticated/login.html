@@ -1,18 +1,26 @@
-<div class="login">
-  <h1>Login to vStock</h1>
-  <form method="post" action="index.html">
-    <p><input type="text" name="login" value="" placeholder="Username or Email"></p>
-    <p><input type="password" name="password" value="" placeholder="Password"></p>
-    <p class="remember_me">
-      <label>
-        <input type="checkbox" name="remember_me" id="remember_me">
-        Remember me on this computer
-      </label>
-    </p>
-    <p class="submit"><input type="submit" name="commit" value="Login"></p>
-  </form>
-</div>
+<div class="jumbotron">
+  <h1>Login</h1>
 
-<div class="login-help">
-  <p>Forgot your password? <a href="index.html">Click here to reset it</a>.</p>
+  <form ng-submit="login.doLogin()">
+
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control" ng-model="login.loginData.username">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" ng-model="login.loginData.password">
+    </div>
+
+    <div class="alert alert-danger" ng-if="login.error">
+      {{ login.error }}
+    </div>
+
+    <button type="submit" class="btn btn-block btn-primary">
+      <span ng-if="!login.processing">Login</span>
+      <span ng-if="login.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+    </button>
+
+  </form>
 </div>

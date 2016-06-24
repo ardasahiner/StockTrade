@@ -54,9 +54,9 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a ui-sref="contact"> Contact Us</a></li>
-        <li><a ui-sref="login"> Log in</a></li>
-        <li><a ui-sref="signup"> Sign up</a></li>
+        <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
+        <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.username }}!</li>
+        <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
       </ul>
     </nav>
   </header>

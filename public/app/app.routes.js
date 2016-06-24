@@ -28,7 +28,7 @@ angular.module('app.routes', ['ui.router'])
   .state('login', {
     url: '/login',
     templateUrl: 'app/views/pages/unauthenticated/login.html',
-    controller: 'loginController',
+    controller: 'mainController',
     controllerAs: 'login'
   })
 
@@ -49,6 +49,13 @@ angular.module('app.routes', ['ui.router'])
   .state('404', {
     url: '/404',
     templateUrl: 'app/views/pages/404.html',
+  })
+
+  .state('portfolio', {
+    url: '/portfolio',
+    templateUrl: 'app/views/pages/authenticated/portfolio.html',
+    controller: 'mainController',
+    controllerAs: 'main'
   });
 
 })

@@ -7,7 +7,7 @@ describe("User Route Testing (Post, Get, Put, Delete Requests)", function () {
     describe("Create a new user, make some changes, delete the user", function () {
 
         var domain_url = 'http://localhost:' + app.get('port') + '/';
-        var testUser = "userRouteTester4";
+        var testUser = "logintest";
         var token = "";
 
         it("Creates a new User", function (done) {

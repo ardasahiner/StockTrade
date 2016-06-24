@@ -1,6 +1,6 @@
 angular.module('adminService', [])
 
-.factory('Admin', function('$http') {
+.factory('Admin', function($http) {
 
   var adminFactory = {};
 

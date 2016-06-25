@@ -10,7 +10,7 @@ var TransactionSchema = new Schema({
     pricePerShare: {type: Number, required: true},
     totalPrice: {type: Number, required: true},
     percentProfit: Number,
-    transactionDate: {type: Date, default: Date.now()},
+    transactionDate: {type: Date, default: new Date()},
     username: {type: String, required: true}
 });
 

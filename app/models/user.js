@@ -12,7 +12,7 @@ var UserSchema = new Schema({
     // Required tags removed to facilitate testing during development. Add again before production.
     firstName: String,
     lastName: String,
-    
+
     username: {type: String, required: true, index: {unique: true}},
     password: {type: String, required: true},
     email: {type: String, required: true, index: {unique: true}},
@@ -20,7 +20,7 @@ var UserSchema = new Schema({
     botAccount: {type: Boolean, default: false},
     cash: {type: Number, default: initialCash},
     groups: [String],
-    creationDate: {type: Date, default: Date.now()},
+    creationDate: {type: Date, default: new Date()},
     portfolio: [UserAsset],
     history: [HistoricalValue]
 });

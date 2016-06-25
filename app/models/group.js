@@ -6,7 +6,7 @@ var GroupSchema = new Schema({
     name: {type: String, required: true, index: {unique: true}},
     groupAdminName: {type: String, required: true},
     memberNames: [String] // remember to push group admin's ID before saving
-    creationDate: {type: Date, default: Date.now()},
+    creationDate: {type: Date, default: new Date()},
     isPrivate: Boolean, //option to be a private group (has a password)
     password: String
 });

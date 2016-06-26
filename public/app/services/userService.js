@@ -15,8 +15,12 @@ angular.module('userService', [])
   // }
 
   // Create a new user
-  userFactory.createUser = function(userData) {
-    return $http.post('/users/', userData);
+  userFactory.createUser = function(username, password, email) {
+    return $http.post('/users/', {
+      username: username,
+      password: password,
+      email: email
+    });
   };
 
   // Update an existing user's data

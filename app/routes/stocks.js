@@ -10,6 +10,30 @@ var yearMinusOne = require('../helpers/yearminusone');
 
 module.exports = function (app, express, User, jwt) {
     var stockRouter = express.Router();
+
+    //typical middleware for auth
+    stockRouter.use(function (req, res, next) {
+        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+        if (token) {
+            jwt.verify(token, app.get('secretKey'), function (err, decoded) {
+                if (err) {
+                    return res.json({success: false, message: 'Failed to authenticate token.'});
+                } else {
+                    // Decoded token saved into request parameters
+                    req.decoded = decoded;
+                    next();
+                }
+            });
+        } else {
+            // No token given
+            return res.status(403).send({
+                success: false,
+                message: 'No token provided.'
+            });
+        }
+    });
+
     /* This route should send all info about a stock in json format:
     Name of the company
     The company's ticker symbol
@@ -59,7 +83,7 @@ module.exports = function (app, express, User, jwt) {
     });
 
     // GET the exchange corresponding to a given stock symbol
-    stockRouter.route('/exchanges/stock_symbol').get(function (req, res) {
+    stockRouter.route('/exchanges/:stock_symbol').get(function (req, res) {
       if (batslist.indexOf(req.params.stock_symbol) > -1) {
         res.send(stockDictionaryExchange[req.params.stock_symbol]);
       } else {
@@ -73,6 +97,18 @@ module.exports = function (app, express, User, jwt) {
         hScraper(req.params.stock_symbol, req.params.type, req.params.start_date, function(historyResult) {
 
           res.json(historyResult);
+        }, req.params.end_date);
+      } else {
+
+        res.json(404, {message: "stock not available"});
+      }
+    });
+
+    stockRouter.route('/current/:stock_symbol').get(function(req, res) {
+      if (batslist.indexOf(req.params.stock_symbol) > -1) {
+        mrtScraper(req.params.stock_symbol, function(result) {
+
+          res.json(result);
         }, req.params.end_date);
       } else {
 

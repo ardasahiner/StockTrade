@@ -13,7 +13,8 @@ angular.module('mainController', [])
 
     Auth.getUser()
       .then(function(data) {
-        vm.user = data.data;
+        vm.user = data;
+        console.log(data);
       });
   });
 
@@ -29,6 +30,12 @@ angular.module('mainController', [])
         if (data.success) {
           $location.path('/portfolio');
           console.log('You successfully logged in');
+
+          Auth.getUser()
+          .then(function(data) {
+            vm.user = data;
+            console.log(data);
+          })
         } else {
           vm.error = data.message;
         }

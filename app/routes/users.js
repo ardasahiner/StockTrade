@@ -142,7 +142,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
     // Return all of current user's data
     userRouter.route('/me')
       .get(function(req, res) {
-        res.send(req.decoded);
+        res.send(req.decoded._doc);
       });
 
     /* Below are routes configured for buying and selling stocks

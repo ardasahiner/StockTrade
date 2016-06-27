@@ -12,10 +12,6 @@ angular.module('mainController', [])
   $rootScope.$on('$stateChangeStart', function(toState) {
     vm.loggedIn = Auth.isLoggedIn();
 
-    if (toState.authenticated && !vm.loggedIn) {
-      $location.path('/login');
-    }
-
     Auth.getUser()
       .then(function(data) {
         vm.user = data.data;
@@ -31,6 +27,7 @@ angular.module('mainController', [])
       .success(function(data) {
         vm.processing = false;
 
+        // If successful authentication, user is redirected to their portfolio
         if (data.success) {
           $location.path('/portfolio');
         } else {

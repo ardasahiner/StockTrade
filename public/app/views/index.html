@@ -24,15 +24,11 @@
         <a class="navbar-brand" ui-sref="home">vStock Home</a>
       </div>
 
-      <ul class="nav navbar-nav navbar-left">
-        <li><a ui-sref="about"> About Us</a></li>
-      </ul>
-
       <ul class="nav navbar-nav navbar-right">
         <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
         <li ng-if="!main.loggedIn"><a href="/signup">Sign Up</a></li>
         <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.username }}!</li>
-        <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
+        <li ng-if="main.loggedIn"><a href="/" ng-click="main.doLogout()">Logout</a></li>
       </ul>
     </nav>
   </header>
@@ -65,7 +61,6 @@
   <!-- Import all controllers too -->
   <script src="app/controllers/mainController.js"></script>
   <script src="app/controllers/signupController.js"></script>
-  <script src="app/controllers/authController.js"></script>
 
 </body>
 </html>

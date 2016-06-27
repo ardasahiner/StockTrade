@@ -8,54 +8,38 @@ angular.module('app.routes', ['ui.router'])
 
   .state('home', {
     url: '/',
-    templateUrl: 'app/views/pages/unauthenticated/home.html'
+    templateUrl: 'app/views/pages/unauthenticated/home.html',
+    authenticated: false
   })
 
-  .state('about', {
-    url: '/about',
-    templateUrl: 'app/views/pages/unauthenticated/aboutus.html',
-    controller: 'aboutController',
-    controllerAs: 'about'
-  })
-
-  .state('contact', {
-    url: '/contact',
-    templateUrl: 'app/views/pages/unauthenticated/contactus.html',
-    controller: 'contactController',
-    controllerAs: 'contact'
-  })
-
-  .state('login', {
+    .state('login', {
     url: '/login',
     templateUrl: 'app/views/pages/unauthenticated/login.html',
     controller: 'mainController',
-    controllerAs: 'login'
+    controllerAs: 'login',
+    authenticated: false
   })
 
   .state('signup', {
     url: '/signup',
     templateUrl: 'app/views/pages/unauthenticated/signup.html',
     controller: 'signupController',
-    controllerAs: 'signup'
-  })
-
-  .state('terms', {
-    url: '/terms',
-    templateUrl: 'app/views/pages/unauthenticated/termsofuse.html',
-    controller: 'termsofuseController',
-    controllerAs: 'termsofuse'
+    controllerAs: 'signup',
+    authenticated: false
   })
 
   .state('404', {
     url: '/404',
     templateUrl: 'app/views/pages/404.html',
+    authenticated: false
   })
 
   .state('portfolio', {
     url: '/portfolio',
     templateUrl: 'app/views/pages/authenticated/portfolio.html',
-    controller: 'mainController',
-    controllerAs: 'main'
+    controller: 'authController',
+    controllerAs: 'auth',
+    authenticated: true
   });
 
 })

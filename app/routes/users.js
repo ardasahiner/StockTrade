@@ -78,6 +78,12 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             }
         });
 
+    // Return all of current user's data
+    userRouter.route('/me')
+    .get(function(req, res) {
+      res.send(req.decoded._doc);
+    });
+
 
     userRouter.route('/:query_username')
         // GET user data - gather user data for specific username
@@ -138,12 +144,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 res.json({success: false, message: "You do not have access to this page"});
             }
         });
-
-    // Return all of current user's data
-    userRouter.route('/me')
-      .get(function(req, res) {
-        res.send(req.decoded._doc);
-      });
 
     /* Below are routes configured for buying and selling stocks
 

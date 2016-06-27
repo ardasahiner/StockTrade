@@ -1,6 +1,6 @@
 angular.module('mainController', [])
 
-.controller('mainController', function($rootScope, $location, Auth) {
+.controller('mainController', function($rootScope, $location, $state, Auth) {
 
   var vm = this;
 
@@ -8,13 +8,17 @@ angular.module('mainController', [])
   vm.loggedIn = Auth.isLoggedIn();
 
   // Check every request to see if user is logged in
-  $rootScope.$on('$routeChangeStart', function() {
+  // This function runs everytime there is a state change
+  $rootScope.$on('$stateChangeStart', function(toState) {
     vm.loggedIn = Auth.isLoggedIn();
+
+    if (toState.authenticated && !vm.loggedIn) {
+      $location.path('/login');
+    }
 
     Auth.getUser()
       .then(function(data) {
-        vm.user = data;
-        console.log(data);
+        vm.user = data.data;
       });
   });
 
@@ -29,13 +33,6 @@ angular.module('mainController', [])
 
         if (data.success) {
           $location.path('/portfolio');
-          console.log('You successfully logged in');
-
-          Auth.getUser()
-          .then(function(data) {
-            vm.user = data;
-            console.log(data);
-          })
         } else {
           vm.error = data.message;
         }
@@ -46,6 +43,7 @@ angular.module('mainController', [])
   vm.doLogout = function() {
     Auth.logout();
     vm.user = '';
+    vm.loggedIn = false;
 
     $location.path('/');
   };

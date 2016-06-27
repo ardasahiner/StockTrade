@@ -1,6 +1,6 @@
 angular.module('signupController', [])
 
-.controller('signupController', function(User, $location) {
+.controller('signupController', function(User, Auth, $location) {
 
   var vm = this;
   vm.titleMessage = 'Signup Page';
@@ -11,11 +11,21 @@ angular.module('signupController', [])
 
     User.createUser(vm.signupData.username, vm.signupData.password, vm.signupData.email)
       .success(function(data) {
-        vm.processing = false;
 
         if (data.success) {
-          $location.path('/portfolio');
-          console.log('You successfully signed up');
+
+          Auth.login(vm.signupData.username, vm.signupData.password)
+            .success(function(data) {
+              vm.processing = false;
+
+              if (data.success) {
+                $location.path('/portfolio');
+                console.log('You successfully signed up');
+              } else {
+                vm.error = data.message;
+              }
+            });
+
         } else {
           vm.error = data.message;
         }

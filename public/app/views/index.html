@@ -13,31 +13,6 @@
   <!-- style.css overrides bootstrap -->
   <link rel="stylesheet" href="assets/css/style.css">
 
-
-  <!-- Import AngularJS Components -->
-  <script src="assets/js/angular.min.js"></script>
-  <script src="assets/js/angular-ui-router.min.js"></script>
-
-
-  <!-- Import my angular app and route configurations -->
-  <script src="app/app.js"></script>
-  <script src="app/app.routes.js"></script>
-
-  <!-- Import all services to make API calls -->
-  <script src="app/services/adminService.js"></script>
-  <script src="app/services/stockService.js"></script>
-  <script src="app/services/userService.js"></script>
-  <script src="app/services/authService.js"></script>
-
-  <!-- Import all controllers too -->
-  <script src="app/controllers/mainController.js"></script>
-  <script src="app/controllers/aboutController.js"></script>
-  <script src="app/controllers/contactController.js"></script>
-  <script src="app/controllers/homeController.js"></script>
-  <script src="app/controllers/loginController.js"></script>
-  <script src="app/controllers/signupController.js"></script>
-  <script src="app/controllers/termsofuseController.js"></script>
-
 </head>
 
 <body class="container" ng-app="vStockApp" ng-controller="mainController as main">
@@ -69,6 +44,28 @@
       <div ui-view></div>
     </div>
   </main>
+
+
+
+  <!-- Import AngularJS Components -->
+  <script src="assets/js/angular.min.js"></script>
+  <script src="assets/js/angular-ui-router.min.js"></script>
+
+
+  <!-- Import my angular app and route configurations -->
+  <script src="app/app.js"></script>
+  <script src="app/app.routes.js"></script>
+
+  <!-- Import all services to make API calls -->
+  <script src="app/services/adminService.js"></script>
+  <script src="app/services/stockService.js"></script>
+  <script src="app/services/userService.js"></script>
+  <script src="app/services/authService.js"></script>
+
+  <!-- Import all controllers too -->
+  <script src="app/controllers/mainController.js"></script>
+  <script src="app/controllers/signupController.js"></script>
+  <script src="app/controllers/authController.js"></script>
 
 </body>
 </html>

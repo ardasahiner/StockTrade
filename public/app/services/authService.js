@@ -61,7 +61,7 @@ angular.module('authService', [])
   return authTokenFactory;
 })
 
-.factory('AuthInterceptor', function($q, AuthToken) {
+.factory('AuthInterceptor', function($q, AuthToken, $location) {
   var AuthInterceptorFactory = {};
 
   // Attach the token to every request

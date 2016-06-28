@@ -1,3 +1,6 @@
+var mrtScraper = require('../../scrapers/markitrealtimescraper');
+
+
 // User Router will handle creating, deleting and accessing user data
 module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset) {
     var userRouter = express.Router();
@@ -9,34 +12,22 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
         .post(function (req, res) {
 
             var user = new User();
-
+            //@TODO: ensure password strength and email validity (might also do this in the user model)
             user.firstName = req.body.firstName;
             user.lastName = req.body.lastName;
             user.username = req.body.username;
             user.password = req.body.password;
             user.email = req.body.email;
 
-            //@TODO: ensure password strength and email validity (might also do this in the user model)
-
             user.save(function (err) {
-                if (err) {
+                  if (err) {
                     res.send(err);
-                } else {
-                    //@TODO: fix this sort of nesting of callbacks
-                    // Creates a new Transaction associated with the user
-                    var transactionList = new TransactionList();
-                    transactionList.userId = user._id;
-
-                    transactionList.save(function (err) {
-                        if (err) {
-                            res.send(err)
-                        } else {
-                            res.json({message: 'User created! Welcome ' + req.username + '!', success: true});
-                        }
-                    });
-                }
+                  } else {
+                    res.json({message: 'User created! Welcome ' + req.body.username + '!', success: true});
+                  }
             });
-        });
+
+          });
 
 
     // Verify Token and perform authenticated check
@@ -145,16 +136,41 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             }
         });
 
+    //getting a user's portfolio (profits from beginning)
+    userRouter.route('/portfolios/:query_username').get(function (req, res) {
+
+
+
+
+    });
+
     /* Below are routes configured for buying and selling stocks
 
      */
 
-    userRouter.route('/:query_username/buy/:stock_symbol')
+    userRouter.route('/buy/:query_username/:stock_symbol/:quantity')
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
-
-
+          User.findOne({username: req.decoded._doc.username}, function (err, user) {
+              if (err) res.send(err);
+              if (req.params.quantity <= 0) {
+                res.json({message: "Quantity must be greater than 0"});
+              } else {
+                mrtScraper(req.params.stock_symbol, function(info) {
+                  if(req.params.quantity * info.LastPrice > user.cash) {
+                    res.json({message: "You do not have enough money to make this purchase"});
+                  } else {
+                    res.json({
+                      message: "Success",
+                      amount: req.params.quantity,
+                      costPerShare: info.LastPrice,
+                      totalCost: info.LastPrice * req.params.quantity
+                    });
+                  }
+                });
+              }
+          });
         })
 
         //performs the act of buying a stock
@@ -162,7 +178,45 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
                 if (err) res.send(err);
+                if (req.params.quantity <= 0) {
+                  res.json({message: "Quantity must be greater than 0"});
+                } else {
+                  mrtScraper(req.params.stock_symbol, function(info) {
+                    if(req.params.quantity * info.LastPrice > user.cash) {
+                      res.json({message: "You do not have enough money to make this purchase"});
+                    } else {
+                      user.transactions.push(new Transaction({
+                        stockTicker: req.params.stock_symbol,
+                        type: "Buy",
+                        num_shares: req.params.quantity,
+                        pricePerShare: info.LastPrice,
+                        totalPrice: req.params.quantity * info.LastPrice,
+                        username: req.decoded._doc.username
+                      }));
+                      user.portfolio.push(new UserAsset({
+                        ticker: req.params.stock_symbol,
+                        quantity: req.params.quantity,
+                        buyPrice: info.LastPrice
+                      }));
+                      user.cash -= req.params.quantity * info.LastPrice;
 
+                      console.log(user.username);
+                      console.log(req.params.quantity);
+                      console.log(user.transactions);
+                      console.log(user.portfolio);
+
+                      user.save(function (err) {
+                          if (err) res.send(err);
+                          res.json({
+                            message: "Success",
+                            quantity: req.params.quantity,
+                            costPerShare: info.LastPrice,
+                            totalCost: info.LastPrice * req.params.quantity
+                          });
+                      });
+                    }
+                  });
+                }
                 //@TODO: find the number to buy requested, lookup stock price, see if user has enough cash
                 //@TODO: add a new transaction to the user associated transaction document
                 //@TODO: subtract from the user's cash and add a new stock to their portfolio
@@ -171,7 +225,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             });
         });
 
-    userRouter.route('/:query_username/sell/:stock_symbol')
+    userRouter.route('/sell/:query_username/:stock_symbol')
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {

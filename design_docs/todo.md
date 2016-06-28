@@ -1,8 +1,3 @@
-Look into: http://dev.markitondemand.com/MODApis/
-
-Make the API work: (look into jQuery and ajax requests)
-https://github.com/markitondemand/DataApis/blob/master/MarkitQuoteServiceSample.js
-
 NOTE: limit # of requests/sec or else you'll get blocked (but AWS uses multiple IPs? idk)
 
 LOOKUP:
@@ -19,7 +14,7 @@ http://dev.markitondemand.com/MODApis/Api/v2/Lookup/json?input=aapl
 NOTE--these query results will include results that have "aapl" in any part of the result
 NOTE-- probably will not use this command except to maybe see what exchange something is traded in
 
-QUOTE: 
+QUOTE:
 
 Probably what we'll use most of the time (best for realtime data)
 

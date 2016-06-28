@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>vStock</title>
 
   <!-- Base URL for angular routing to take place -->
@@ -10,9 +12,13 @@
   <!-- Import CSS files -->
   <!-- Loading bootstrap from local directory -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/landing-page.css">
   <!-- style.css overrides bootstrap -->
   <link rel="stylesheet" href="assets/css/style.css">
 
+
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 </head>
 
 <body class="container" ng-app="vStockApp" ng-controller="mainController as main">
@@ -24,9 +30,7 @@
 
   <!-- Views injected into here -->
   <main>
-    <div class="container">
       <div ui-view></div>
-    </div>
   </main>
 
 
@@ -36,6 +40,8 @@
   <script src="assets/js/angular-ui-router.min.js"></script>
 
   <script src="assets/js/jquery.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+
 
 
   <!-- Import my angular app and route configurations -->

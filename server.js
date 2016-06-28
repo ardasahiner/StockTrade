@@ -43,4 +43,4 @@ app.listen(port);
 module.exports = app;
 
 console.log('Visit page at localhost:' + port);
-console.log('vStock Analytics | Copyright (C) 2016 Kunal Gosar & Arda Sahiner');
+console.log('vStock Analytics | Copyright (C) 2016');

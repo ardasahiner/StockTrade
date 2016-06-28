@@ -19,24 +19,12 @@
 
   <!-- HEADER AND NAVBAR -->
   <header>
-    <nav class="navbar navbar-default">
-      <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="home">vStock Home</a>
-      </div>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
-        <li ng-if="!main.loggedIn"><a href="/signup">Sign Up</a></li>
-        <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.username }}!</li>
-        <li ng-if="main.loggedIn"><a href="/" ng-click="main.doLogout()">Logout</a></li>
-      </ul>
-    </nav>
+    <div ng-include src="'/app/views/pages/unauthenticated/navbar.html'"></div>
   </header>
 
   <!-- Views injected into here -->
   <main>
     <div class="container">
-      <h2>{{ main.titleMessage }}</h2>
       <div ui-view></div>
     </div>
   </main>
@@ -46,6 +34,8 @@
   <!-- Import AngularJS Components -->
   <script src="assets/js/angular.min.js"></script>
   <script src="assets/js/angular-ui-router.min.js"></script>
+
+  <script src="assets/js/jquery.js"></script>
 
 
   <!-- Import my angular app and route configurations -->

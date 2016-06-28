@@ -5,8 +5,8 @@ var Transaction = require('./transaction')
 
 var TransactionListSchema = new Schema({
 
-  userId: {type: ObjectId, required: true},
-  transactionList: {type: [Transaction]}
+  username: {type: String, required: true},
+  transactions: {type: [Transaction]}
 });
 
 module.exports = mongoose.model('TransactionList', TransactionListSchema);

@@ -48,12 +48,7 @@ module.exports = function (app, express, User, jwt, Transaction, userRouter) {
             if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
                 User.findOne({username: req.params.query_username}, function (err, user) {
                     if (err) res.send(err);
-
-                    //find list of transactions associated with this user
-                    Transaction.findOne({userId: user._id}, function (err, transaction) {
-                        if (err) res.send(err);
-                        res.json(transaction.transactionList);
-                    });
+                    res.json(user.transactions);
                 });
             } else {
                 res.json({success: false, message: "You do not have access to this page."});

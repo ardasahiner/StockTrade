@@ -9,7 +9,8 @@ angular.module('signupController', [])
     vm.processing = true;
     vm.error = '';
 
-    User.createUser(vm.signupData)
+    User.createUser(vm.signupData.username, vm.signupData.password,
+      vm.signupData.firstname, vm.signupData.lastname, vm.signupData.email, vm.signupData.bot)
       .success(function(data) {
 
         if (data.success) {
@@ -28,6 +29,7 @@ angular.module('signupController', [])
 
         } else {
           vm.error = data.message;
+          console.log(vm.error);
         }
       });
   }

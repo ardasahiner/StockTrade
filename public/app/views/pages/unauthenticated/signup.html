@@ -5,32 +5,33 @@
 
     <div class="form-group">
       <label>First Name</label>
-      <input type="text" class="form-control" ng-model="signup.signupData.firstname">
+      <input type="text" placeholder="First Name" class="form-control" ng-model="signup.signupData.firstname">
     </div>
 
     <div class="form-group">
       <label>Last Name</label>
-      <input type="text" class="form-control" ng-model="signup.signupData.lastname">
+      <input type="text" placeholder="Last Name" class="form-control" ng-model="signup.signupData.lastname">
     </div>
 
     <div class="form-group">
       <label>Email</label>
-      <input type="text" class="form-control" ng-model="signup.signupData.email">
+      <input type="text" placeholder="Email" class="form-control" ng-model="signup.signupData.email">
     </div>
 
     <div class="form-group">
       <label>Username</label>
-      <input type="text" class="form-control" ng-model="signup.signupData.username">
+      <input type="text" placeholder="Username" class="form-control" ng-model="signup.signupData.username">
     </div>
 
     <div class="form-group">
       <label>Password</label>
-      <input type="password" class="form-control" ng-model="signup.signupData.password">
+      <input type="password" placeholder="Password" class="form-control" ng-model="signup.signupData.password">
     </div>
 
-    <div class="form-group">
-      <label>Are you a bot account?</label>
-      <input type="checkbox" class="form-control" ng-model="signup.signupData.password">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="signup.signupData.bot"> Are you a bot account?
+      </label>
     </div>
 
     <div class="alert alert-danger" ng-if="signup.error">

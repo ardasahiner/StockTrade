@@ -15,11 +15,15 @@ angular.module('userService', [])
   // }
 
   // Create a new user
-  userFactory.createUser = function(signupData) {
+  userFactory.createUser = function(username, password,
+    firstname, lastname, email, bot) {
     return $http.post('/users/', {
-      username: signupData.username,
-      password: signupData.password,
-      email: signupData.email
+      username: username,
+      firstName: firstname,
+      lastName: lastname,
+      password: password,
+      email: email,
+      bot: bot
     });
   };
 

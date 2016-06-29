@@ -17,8 +17,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             user.username = req.body.username;
             user.password = req.body.password;
             user.email = req.body.email;
+            user.botAccount = req.body.bot;
 
-            // callback hell lmao
+            // callback
             user.save(function (err) {
                   if (err) {
                     res.send(err);

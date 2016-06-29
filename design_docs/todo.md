@@ -2,69 +2,61 @@ NOTE: limit # of requests/sec or else you'll get blocked (but AWS uses multiple 
 
 REFER TO FRONTEND FILE: frontend file (website_frontend.txt) contains all of the information pertaining to angular frontend
 
-LOOKUP:
+BACKEND tasks (as of 6/29):
 
-Send: stock ticker or part of it
-Receive: ticker, name, and exchange it's in
+Selling stocks (both GET and POST routes)
+Portfolio route
+Caching stock prices using node-cache module
+Optimizing MongoDB search
+Cleaning up unnecessary imports
+Finalizing models
+Commenting code for clarity
+Documentation of full API
 
-example of lookup to get in xml format
-http://dev.markitondemand.com/MODApis/Api/v2/Lookup?input=aapl
+These should be finished by 7/13
 
-example of lookup to get in json format (preferred)
-http://dev.markitondemand.com/MODApis/Api/v2/Lookup/json?input=aapl
+Later tasks:
 
-NOTE--these query results will include results that have "aapl" in any part of the result
-NOTE-- probably will not use this command except to maybe see what exchange something is traded in
+Machine learning on stock data:
 
-QUOTE:
+Both univariate and multivariate models
+1 day, 1 month, and 1 year predictions
+Whether the stock will go up or down, and whether the stock will beat the market
 
-Probably what we'll use most of the time (best for realtime data)
+Try:
+PCA->Logistic regression
+  Find optimal lambda from cross validation set, then test on test set
+SVM
+  Try both with and without PCA
+Neural Net
+  Try both with and without PCA
+  Find optimal lambda
+  Try varying amounts of hidden layers, elements in each layer
 
-Send: stock ticker (symbol)
-Receive:  Status of quote request
-          Name of the company
-          The company's ticker symbol
-          The last price of the company's stock
-          The change in price of the company's stock since the previous trading day's close
-          The change percent in price of the company's stock since the previous trading day's close
-          The last time the company's stock was traded in exchange-local timezone. Represented as ddd MMM d HH:mm:ss UTCzzzzz yyyy
-          The last time the company's stock was traded in exchange-local timezone. Represented as an OLE Automation date
-          The company's market cap
-          The trade volume of the company's stock
-          The change in price of the company's stock since the start of the year
-	        The change percent in price of the company's stock since the start of the year
-          The high price of the company's stock in the trading session
-          The low price of the company's stock in the trading session
-          The opening price of the company's stock at the start of the trading session
+Data:
+  Univariate:
+    Use only previous price from a given stock to attempt to make a prediction
+    Pull daily price data for 300 stocks from Yahoo from past 12 years
+      Need 13 years for 1 year predictions
+    Research seems to show that using 2 years of previous data is sufficient
+      for prediction
+      This means about 700 features
+    Start training on data from 10 years ago (data from 2 earlier years used as
+      features)
+    Training set: 10-4 years, cross validation 4-2 years, test 2-0 years
+  Multivariate:
+    Probably need 500 stocks for this (training set of 1,000,000 data points!)
+    Include daily price data from common indexes (S&P, DJIA, NASDAQ, FTSE, etc.)
+    Include info about trading volume and market cap
+    Currency exchange rates data
+    Look into Yahoo stock news feed--see if you can get old data and try to do
+      NLP
+    Probably about 5000+ features
 
-Sample request: http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol=aapl
-Sample result: {"Status":"SUCCESS","Name":"Apple Inc","Symbol":"AAPL",
-                "LastPrice":97.64,"Change":0.5,"ChangePercent":0.514721021206506,
-                "Timestamp":"Thu Jun 16 15:27:04 UTC-04:00 2016",
-                "MSDate":42537.6437962963,"MarketCap":534815777000,"Volume":2907805,
-                "ChangeYTD":105.26,"ChangePercentYTD":-7.2392171765153,
-                "High":97.68,"Low":96.07,"Open":96.43}
-
-NOTE-- 1 to 3 minute delay before updating
-
-INTERACTIVE CHART:
-
-Pretty complicated request, idk if we'll use it but it looks pretty cool
-
-
-## Historical Data
-
-Source for historical data: https://www.quandl.com/data/WIKI?keyword=
-
-https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json?start_date=2015-05-24&end_date=2015-05-28&api_key=FTADN2z1K6aa_QsZ4ztq
-
-This contains 3000 stocks, not exclusive, but can find other sources to compliment.
-
-Barchart:
-
-http://marketdata.websol.barchart.com/getQuote.json?key=d3aec7bd98718c9fa45caa2d8c12eaeb&symbols=ZC*1,TSLA,AAPL,GOOG
-http://marketdata.websol.barchart.com/getHistory.json?key=f3b460304a11da7c0bdfe79b17d2b9cf&symbol=IBM&type=daily&startDate=20150619000000
-
-keys: d3aec7bd98718c9fa45caa2d8c12eaeb, f3b460304a11da7c0bdfe79b17d2b9cf
-
-Google csv API for historical data: http://www.google.com/finance/historical?q=TSLA&startdate=Nov%201,%202013&enddate=Nov%2030,%202015&output=csv
+Use F1 score to evaluate quality of classifier b/c data will be skewed upwards
+Goal is to find best learning algorithm, and then when a user searches for a stock
+  there will be a "Our Recommendation" button they can press. Once they press the button,
+  we pull all necessary information (probably using Barchart) and run the classifier and
+  return our prediction, noting our overall accuracy
+Could also have a way for them to give feedback about the algorithm so it trains
+as it goes as well

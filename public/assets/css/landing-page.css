@@ -8,6 +8,7 @@ body,
 html {
     width: 100%;
     height: 100%;
+    background-color: #6DBA9B;
 }
 
 body,
@@ -23,6 +24,8 @@ h6 {
 
 .topnav {
     font-size: 14px;
+    background-color: white!important;
+
 }
 
 .lead {
@@ -94,13 +97,13 @@ h6 {
 
 .content-section-a {
     padding: 50px 0;
-    background-color: #f8f8f8;
+    background-color: ##6DBA9B;
 }
 
 .content-section-b {
     padding: 50px 0;
-    border-top: 1px solid #e7e7e7;
-    border-bottom: 1px solid #e7e7e7;
+    border-top: 1px solid #6DBA9B;
+    border-bottom: 1px solid #6DBA9B;
 }
 
 .section-heading {

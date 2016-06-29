@@ -6,6 +6,7 @@ var UserAssetSchema = new Schema({
     ticker: {type: String, required: true},
     quantity: {type: Number, required: true},
     buyPrice: {type: Number, required: true},
+    username: {type:String, required: true},
     history: [HistoricalValue] //update at end of each day after market close
 });
 

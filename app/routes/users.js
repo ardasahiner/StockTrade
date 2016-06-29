@@ -181,7 +181,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   });
                 }
             });
-          else {
+          } else {
             res.json({success: false, message: "You do not have access to this page"});
           }
         })

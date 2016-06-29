@@ -1,5 +1,5 @@
 var mrtScraper = require('../../scrapers/markitrealtimescraper');
-
+var Portfolio = require('../models/portfolio');
 
 // User Router will handle creating, deleting and accessing user data
 module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset) {
@@ -19,14 +19,32 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             user.password = req.body.password;
             user.email = req.body.email;
 
+            // callback hell lmao
             user.save(function (err) {
                   if (err) {
                     res.send(err);
                   } else {
-                    res.json({message: 'User created! Welcome ' + req.body.username + '!', success: true});
+
+                    var tl = new TransactionList();
+                    tl.username = req.body.username;
+                    tl.save(function (err) {
+                      if (err) {
+                        res.send(err);
+                      } else {
+
+                        var p = new Portfolio();
+                        p.username = req.body.username;
+                        p.save(function (err) {
+                          if (err) {
+                            res.send(err);
+                          } else {
+                            res.json({message: 'User created! Welcome ' + req.body.username + '!', success: true});
+                          }
+                        });
+                      }
+                    });
                   }
             });
-
           });
 
 
@@ -185,34 +203,49 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     if(req.params.quantity * info.LastPrice > user.cash) {
                       res.json({message: "You do not have enough money to make this purchase"});
                     } else {
-                      user.transactions.push(new Transaction({
-                        stockTicker: req.params.stock_symbol,
-                        type: "Buy",
-                        num_shares: req.params.quantity,
-                        pricePerShare: info.LastPrice,
-                        totalPrice: req.params.quantity * info.LastPrice,
-                        username: req.decoded._doc.username
-                      }));
-                      user.portfolio.push(new UserAsset({
-                        ticker: req.params.stock_symbol,
-                        quantity: req.params.quantity,
-                        buyPrice: info.LastPrice
-                      }));
-                      user.cash -= req.params.quantity * info.LastPrice;
+                      Portfolio.findOne({username: req.decoded._doc.username}, function(err, portfolio) {
+                        portfolio.userassets.push(new UserAsset({
+                          ticker: req.params.stock_symbol,
+                          quantity: req.params.quantity,
+                          buyPrice: info.LastPrice * req.params.quantity
+                        }));
+                        portfolio.save(function(err) {
+                          if (err) {
+                            res.send(err);
+                          } else {
+                            user.cash -= req.params.quantity * info.LastPrice;
+                            user.save(function (err) {
+                                if (err) {
+                                  res.send(err);
+                                } else {
 
-                      console.log(user.username);
-                      console.log(req.params.quantity);
-                      console.log(user.transactions);
-                      console.log(user.portfolio);
+                                  TransactionList.findOne({username: req.decoded._doc.username}, function(err, list) {
+                                    list.transactions.push(new Transaction({
+                                      stockTicker: req.params.stock_symbol,
+                                      type: "Buy",
+                                      num_shares: req.params.quantity,
+                                      pricePerShare: info.LastPrice,
+                                      totalPrice: req.params.quantity * info.LastPrice,
+                                      username: req.decoded._doc.username
+                                    }));
 
-                      user.save(function (err) {
-                          if (err) res.send(err);
-                          res.json({
-                            message: "Success",
-                            quantity: req.params.quantity,
-                            costPerShare: info.LastPrice,
-                            totalCost: info.LastPrice * req.params.quantity
-                          });
+                                    list.save(function (err) {
+                                      if (err) {
+                                        res.send(err);
+                                      } else {
+                                        res.json({
+                                          message: "Success",
+                                          quantity: req.params.quantity,
+                                          costPerShare: info.LastPrice,
+                                          totalCost: info.LastPrice * req.params.quantity
+                                        });
+                                      }
+                                    });
+                                  });
+                                }
+                            });
+                          }
+                        });
                       });
                     }
                   });
@@ -221,7 +254,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 //@TODO: add a new transaction to the user associated transaction document
                 //@TODO: subtract from the user's cash and add a new stock to their portfolio
                 //@TODO: send success message if success, failure message if failure
-
             });
         });
 

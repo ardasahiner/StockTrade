@@ -1,4 +1,4 @@
-var Transaction = require('../models/transaction');
+var TransactionList = require('../models/transactionlist');
 
 module.exports = function (app, express, User, jwt, Transaction, userRouter) {
 
@@ -46,9 +46,9 @@ module.exports = function (app, express, User, jwt, Transaction, userRouter) {
         .get(function (req, res) {
             // Verify that user is either admin or user to be requested
             if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
-                User.findOne({username: req.params.query_username}, function (err, user) {
+                TransactionList.findOne({username: req.params.query_username}, function (err, transactionlist) {
                     if (err) res.send(err);
-                    res.json(user.transactions);
+                    res.json(transactionlist.transactions);
                 });
             } else {
                 res.json({success: false, message: "You do not have access to this page."});

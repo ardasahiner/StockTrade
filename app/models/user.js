@@ -4,7 +4,6 @@ var bcrypt = require('bcrypt-nodejs');
 //var schedule = require('node-schedule');
 var UserAsset = require('./userasset').schema;
 var HistoricalValue = require('./historicalvalue').schema;
-var Transaction = require('./transaction').schema;
 
 var initialCash = 1000000;
 
@@ -22,9 +21,7 @@ var UserSchema = new Schema({
     cash: {type: Number, default: initialCash},
     groups: [String],
     creationDate: {type: Date, default: new Date()},
-    portfolio: [UserAsset],
     history: [HistoricalValue],
-    transactions: [Transaction]
 });
 
 

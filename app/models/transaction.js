@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = Schema.Types.ObjectId;
 
 var TransactionSchema = new Schema({
 
@@ -11,7 +10,6 @@ var TransactionSchema = new Schema({
     totalPrice: {type: Number, required: true},
     percentProfit: Number,
     transactionDate: {type: Date, default: new Date()},
-    username: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Transaction', TransactionSchema);

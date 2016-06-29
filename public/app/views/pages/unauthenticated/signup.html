@@ -4,6 +4,16 @@
   <form ng-submit="signup.doSignUp()">
 
     <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" ng-model="signup.signupData.firstname">
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" ng-model="signup.signupData.lastname">
+    </div>
+
+    <div class="form-group">
       <label>Email</label>
       <input type="text" class="form-control" ng-model="signup.signupData.email">
     </div>
@@ -16,6 +26,11 @@
     <div class="form-group">
       <label>Password</label>
       <input type="password" class="form-control" ng-model="signup.signupData.password">
+    </div>
+
+    <div class="form-group">
+      <label>Are you a bot account?</label>
+      <input type="checkbox" class="form-control" ng-model="signup.signupData.password">
     </div>
 
     <div class="alert alert-danger" ng-if="signup.error">

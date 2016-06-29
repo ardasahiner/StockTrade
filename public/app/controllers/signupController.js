@@ -9,7 +9,7 @@ angular.module('signupController', [])
     vm.processing = true;
     vm.error = '';
 
-    User.createUser(vm.signupData.username, vm.signupData.password, vm.signupData.email)
+    User.createUser(vm.signupData)
       .success(function(data) {
 
         if (data.success) {

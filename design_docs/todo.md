@@ -1,5 +1,7 @@
 NOTE: limit # of requests/sec or else you'll get blocked (but AWS uses multiple IPs? idk)
 
+REFER TO FRONTEND FILE: frontend file (website_frontend.txt) contains all of the information pertaining to angular frontend
+
 LOOKUP:
 
 Send: stock ticker or part of it

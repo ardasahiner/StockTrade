@@ -286,7 +286,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     mrtScraper(req.params.stock_symbol, function(info) {
                       res.json({
                         message: "Success",
-                        amount: req.params.quantity,
+                        quantity: req.params.quantity,
                         revenuePerShare: info.LastPrice,
                         totalRevenue: info.LastPrice * req.params.quantity
                       });
@@ -302,19 +302,91 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
         //performs the act of buying a stock
         .post(function (req, res) {
-
+          if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
-                if (err) res.send(err);
+              if (err) {
+                res.send(err);
+              } else if (req.params.quantity <= 0) {
+                  res.json({message: "Quantity must be greater than 0"});
+              } else {
+                UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol}, function(err, asset) {
+                  if (err) {res.send(err);}
+                  else if (asset === null) {
+                    res.json({message: "You do not own this stock, so you cannot sell it"});
+                  } else if (asset.quantity < req.params.quantity) {
+                    res.json({message: "You do not own as many of this stock as you are attempting to sell"});
+                  } else {
+                    mrtScraper(req.params.stock_symbol, function(info) {
+                      var prevQuantity = asset.quantity;
+                      var prevPrice = asset.buyPrice;
+                      if (asset.quantity === parseInt(req.params.quantity)) {
+                        asset.remove(function(err) {
+                          sellHelper(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction);
+                        });
+
+                      } else {
+                        asset.quantity -= parseInt(req.params.quantity);
+                        asset.buyPrice -= parseInt(info.LastPrice * req.params.quantity);
+                        asset.save(function (err) {
+                          sellHelper(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction);
+                        });
+                      }
+                    });
+                  }
+                });
+              }
 
                 //@TODO: find the number to sell requested, ensure user's quantity >= request quantity
                 //@TODO: add a new transaction to the associated document, with % profit
                 //@TODO: add to the user's cash and modify their portfolio (remove if selling all stocks)
                 //@TODO: send success message if success, failure message if failure
             });
+          } else {
+            res.json({success: false, message: "You do not have access to this page"});
+          }
         });
 
     //for handling requests to /users/transactions (listing transactions)
     require('./transactions')(app, express, User, jwt, Transaction, userRouter);
 
     app.use('/users', userRouter);
+};
+
+// helper for sell POST route (so I don't have to copy paste the same thing)
+var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction) {
+  if (err) {
+    res.send(err);
+  } else {
+    user.cash += info.LastPrice * req.params.quantity;
+    user.save(function(err) {
+      if (err) {
+        res.send(err);
+      } else {
+        TransactionList.findOne({username: req.decoded._doc.username}, function(err, list) {
+          list.transactions.push(new Transaction({
+            stockTicker: req.params.stock_symbol,
+            type: "Sell",
+            num_shares: req.params.quantity,
+            pricePerShare: info.LastPrice,
+            totalPrice: req.params.quantity * info.LastPrice,
+            username: req.decoded._doc.username,
+            percentProfit: (info.LastPrice / (prevPrice / prevQuantity) - 1) * 100
+          }));
+
+          list.save(function (err) {
+            if (err) {
+              res.send(err);
+            } else {
+              res.json({
+                message: "Success",
+                quantity: req.params.quantity,
+                revenuePerShare: info.LastPrice,
+                totalRevenue: info.LastPrice * req.params.quantity
+              });
+            }
+          });
+        });
+      }
+    });
+  }
 };

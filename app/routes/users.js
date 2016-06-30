@@ -17,8 +17,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             user.username = req.body.username;
             user.password = req.body.password;
             user.email = req.body.email;
+            user.botAccount = req.body.bot;
 
-            // callback hell lmao
+            // callback
             user.save(function (err) {
                   if (err) {
                     res.send(err);
@@ -160,30 +161,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
-          User.findOne({username: req.decoded._doc.username}, function (err, user) {
-              if (err) res.send(err);
-              if (req.params.quantity <= 0) {
-                res.json({message: "Quantity must be greater than 0"});
-              } else {
-                mrtScraper(req.params.stock_symbol, function(info) {
-                  if(req.params.quantity * info.LastPrice > user.cash) {
-                    res.json({message: "You do not have enough money to make this purchase"});
-                  } else {
-                    res.json({
-                      message: "Success",
-                      amount: req.params.quantity,
-                      costPerShare: info.LastPrice,
-                      totalCost: info.LastPrice * req.params.quantity
-                    });
-                  }
-                });
-              }
-          });
-        })
-
-        //performs the act of buying a stock
-        .post(function (req, res) {
-
+          // Break if user is not admin or user under question
+          if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
                 if (err) res.send(err);
                 if (req.params.quantity <= 0) {
@@ -193,72 +172,132 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     if(req.params.quantity * info.LastPrice > user.cash) {
                       res.json({message: "You do not have enough money to make this purchase"});
                     } else {
-                      UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol}, function(err, asset) {
-                        //doesn't exist yet
-                        if (err) {
-                          res.send(err);
-                        } else {
-                          console.log(asset === null);
-                          if (asset === null) {
-                            var asset = new UserAsset();
-                            asset.ticker = req.params.stock_symbol;
-                            asset.quantity = req.params.quantity;
-                            asset.buyPrice = info.LastPrice * req.params.quantity;
-                            asset.username = req.decoded._doc.username;
-                          } else {
-                            asset.quantity += parseInt(req.params.quantity);
-                            asset.buyPrice += info.LastPrice * req.params.quantity;
-                          }
-                        }
-                        asset.save(function(err) {
-                          if (err) {
-                            res.send(err);
-                          } else {
-                            user.cash -= req.params.quantity * info.LastPrice;
-                            user.save(function (err) {
-                                if (err) {
-                                  res.send(err);
-                                } else {
-                                  TransactionList.findOne({username: req.decoded._doc.username}, function(err, list) {
-                                    list.transactions.push(new Transaction({
-                                      stockTicker: req.params.stock_symbol,
-                                      type: "Buy",
-                                      num_shares: req.params.quantity,
-                                      pricePerShare: info.LastPrice,
-                                      totalPrice: req.params.quantity * info.LastPrice,
-                                      username: req.decoded._doc.username
-                                    }));
-
-                                    list.save(function (err) {
-                                      if (err) {
-                                        res.send(err);
-                                      } else {
-                                        res.json({
-                                          message: "Success",
-                                          quantity: req.params.quantity,
-                                          costPerShare: info.LastPrice,
-                                          totalCost: info.LastPrice * req.params.quantity
-                                        });
-                                      }
-                                    });
-                                  });
-                                }
-                            });
-                          }
-                        });
+                      res.json({
+                        message: "Success",
+                        amount: req.params.quantity,
+                        costPerShare: info.LastPrice,
+                        totalCost: info.LastPrice * req.params.quantity
                       });
                     }
                   });
                 }
             });
+          } else {
+            res.json({success: false, message: "You do not have access to this page"});
+          }
+        })
+
+        //performs the act of buying a stock
+        .post(function (req, res) {
+
+            // Arda's most disgusting block of code ever :)
+            // Break if user is not admin or user under question
+            if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
+              User.findOne({username: req.decoded._doc.username}, function (err, user) {
+                  if (err) res.send(err);
+                  if (req.params.quantity <= 0) {
+                    res.json({message: "Quantity must be greater than 0"});
+                  } else {
+                    mrtScraper(req.params.stock_symbol, function(info) {
+                      if(req.params.quantity * info.LastPrice > user.cash) {
+                        res.json({message: "You do not have enough money to make this purchase"});
+                      } else {
+                        UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol}, function(err, asset) {
+                          //doesn't exist yet
+                          if (err) {
+                            res.send(err);
+                          } else {
+                            console.log(asset === null);
+                            if (asset === null) {
+                              var asset = new UserAsset();
+                              asset.ticker = req.params.stock_symbol;
+                              asset.quantity = req.params.quantity;
+                              asset.buyPrice = info.LastPrice * req.params.quantity;
+                              asset.username = req.decoded._doc.username;
+                            } else {
+                              asset.quantity += parseInt(req.params.quantity);
+                              asset.buyPrice += info.LastPrice * req.params.quantity;
+                            }
+                          }
+                          asset.save(function(err) {
+                            if (err) {
+                              res.send(err);
+                            } else {
+                              user.cash -= req.params.quantity * info.LastPrice;
+                              user.save(function (err) {
+                                  if (err) {
+                                    res.send(err);
+                                  } else {
+                                    TransactionList.findOne({username: req.decoded._doc.username}, function(err, list) {
+                                      list.transactions.push(new Transaction({
+                                        stockTicker: req.params.stock_symbol,
+                                        type: "Buy",
+                                        num_shares: req.params.quantity,
+                                        pricePerShare: info.LastPrice,
+                                        totalPrice: req.params.quantity * info.LastPrice,
+                                        username: req.decoded._doc.username
+                                      }));
+
+                                      list.save(function (err) {
+                                        if (err) {
+                                          res.send(err);
+                                        } else {
+                                          res.json({
+                                            message: "Success",
+                                            quantity: req.params.quantity,
+                                            costPerShare: info.LastPrice,
+                                            totalCost: info.LastPrice * req.params.quantity
+                                          });
+                                        }
+                                      });
+                                    });
+                                  }
+                              });
+                            }
+                          });
+                        });
+                      }
+                    });
+                  }
+              });
+            } else {
+              res.json({success: false, message: "You do not have access to this page"});
+            }
         });
 
-    userRouter.route('/sell/:query_username/:stock_symbol')
+    userRouter.route('/sell/:query_username/:stock_symbol/:quantity')
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
-
-
+          if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
+            User.findOne({username: req.decoded._doc.username}, function(err, user) {
+              if (err) {
+                res.send(err);
+              } else if (req.params.quantity <= 0) {
+                  res.json({message: "Quantity must be greater than 0"});
+              } else {
+                UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol}, function(err, asset) {
+                  if (err) {res.send(err);}
+                  else if (asset === null) {
+                    res.json({message: "You do not own this stock, so you cannot sell it"});
+                  } else if (asset.quantity < req.params.quantity) {
+                    res.json({message: "You do not own as many of this stock as you are attempting to sell"});
+                  } else {
+                    mrtScraper(req.params.stock_symbol, function(info) {
+                      res.json({
+                        message: "Success",
+                        amount: req.params.quantity,
+                        revenuePerShare: info.LastPrice,
+                        totalRevenue: info.LastPrice * req.params.quantity
+                      });
+                    });
+                  }
+                });
+              }
+            });
+          } else {
+            res.json({success: false, message: "You do not have access to this page"});
+          }
         })
 
         //performs the act of buying a stock

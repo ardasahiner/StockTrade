@@ -9,13 +9,18 @@ angular.module('signupController', [])
     vm.processing = true;
     vm.error = '';
 
-    User.createUser(vm.signupData.username, vm.signupData.password,
-      vm.signupData.firstname, vm.signupData.lastname, vm.signupData.email, vm.signupData.bot)
-      .success(function(data) {
+    if (vm.signupData.password != vm.signupData.confirmpassword) {
+      vm.error = "Passwords don't match!";
+    } else {
 
-        if (data.success) {
+      User.createUser(vm.signupData.username, vm.signupData.password,
+        vm.signupData.firstname, vm.signupData.lastname, vm.signupData.email, vm.signupData.bot)
 
-          Auth.login(vm.signupData.username, vm.signupData.password)
+        .success(function(data) {
+
+          if (data.success) {
+
+            Auth.login(vm.signupData.username, vm.signupData.password)
             .success(function(data) {
               vm.processing = false;
 
@@ -27,11 +32,12 @@ angular.module('signupController', [])
               }
             });
 
-        } else {
-          vm.error = data.message;
-          console.log(vm.error);
-        }
-      });
-  }
+          } else {
+            vm.error = data.message;
+            console.log(vm.error);
+          }
+        });
+      }
+    }
 
-});
+  });

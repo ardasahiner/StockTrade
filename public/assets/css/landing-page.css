@@ -8,7 +8,7 @@ body,
 html {
     width: 100%;
     height: 100%;
-    background-color: #6DBA9B;
+    background-color: inherit;
 }
 
 body,
@@ -20,11 +20,12 @@ h5,
 h6 {
     font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
+    color: white;
 }
 
 .topnav {
     font-size: 14px;
-    background-color: white!important;
+    background-color: white;
 
 }
 
@@ -97,13 +98,14 @@ h6 {
 
 .content-section-a {
     padding: 50px 0;
-    background-color: ##6DBA9B;
+    background-color: #295646;
 }
 
 .content-section-b {
     padding: 50px 0;
-    border-top: 1px solid #6DBA9B;
-    border-bottom: 1px solid #6DBA9B;
+    background-color: #326755;
+    border-top: 1px solid inherit;
+    border-bottom: 1px solid inherit;
 }
 
 .section-heading {

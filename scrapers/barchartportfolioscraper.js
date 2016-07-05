@@ -27,7 +27,11 @@ function eodScraper(symbols, fCallback, keyNumber) {
         } else {
 
           //try again with other api key
-          innerCallback(symbolsList, (kn + 1) % 2);
+          if (kn < keys.length - 1) {
+            innerCallback(symbolsList, kn + 1);
+          } else{
+            fCallback({message: "Error"});
+          }
         }
       });
     }

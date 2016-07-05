@@ -1,4 +1,6 @@
 var mrtScraper = require('../../scrapers/markitrealtimescraper');
+var async = require('async');
+var bScraper = require('../../scrapers/barchartportfolioscraper');
 
 // User Router will handle creating, deleting and accessing user data
 module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset) {
@@ -24,7 +26,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   if (err) {
                     res.send(err);
                   } else {
-
                     var tl = new TransactionList();
                     tl.username = req.body.username;
                     tl.save(function (err) {
@@ -84,6 +85,19 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
       res.send(req.decoded._doc);
     });
 
+    //getting a user's portfolio (profits from beginning)
+    userRouter.route('/portfolios').get(function (req, res) {
+      UserAsset.find({username: req.decoded._doc.username}, function(err, assets) {
+        var tickerList = [];
+        async.forEach(assets, function(asset, callback) {
+
+          tickerList.push(asset.ticker);
+          callback();
+        }, function(err) {
+
+        });
+      });
+    });
 
     userRouter.route('/:query_username')
         // GET user data - gather user data for specific username
@@ -144,19 +158,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 res.json({success: false, message: "You do not have access to this page"});
             }
         });
-
-    //getting a user's portfolio (profits from beginning)
-    userRouter.route('/portfolios/').get(function (req, res) {
-      if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
-
-
-      }  else {
-          res.json({success: false, message: "You do not have access to this page"});
-      }
-
-
-    });
-
 
     /* Below are routes configured for buying and selling stocks
      */

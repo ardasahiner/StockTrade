@@ -1,11 +1,16 @@
 body,
 html {
     background-color: #19342b;
+    position: relative;
+}
+
+.ui-view {
+  align-content: center;
 }
 
 /* Set color of the navbar */
 .topnav {
-  background: black;
+  background: #262626;
 }
 /* Links in the navbar, set text color using color tag */
 .navbar-default .navbar-nav>li>a{
@@ -15,6 +20,16 @@ html {
 /* Title in the navbar, set text color using color tag */
 .navbar-default .navbar-brand {
   color: white;
+}
+
+.navbar-custom .navbar-nav>.active>a {
+    border-radius: 2px;
+    border-color: white;
+}
+
+.navbar-custom .navbar-nav>.active>a {
+    color: #fff;
+    background-color: #fed136;
 }
 
 .navbar-default {
@@ -34,4 +49,45 @@ body.container {
 
 body h1 {
   text-align: center;
+}
+
+
+.aboutus {
+  padding-top: 5%;
+  padding-bottom: 2%;
+}
+
+.description {
+  text-align: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 3%;
+  font-size: 14pt;
+}
+
+.features {
+  background: inherit;
+  background: -webkit-linear-gradient(#19342b, #53ac8e);
+  background: -o-linear-gradient(#19342b, #53ac8e);
+  background: -moz-linear-gradient(#19342b, #53ac8e);
+  background: linear-gradient(#19342b, #53ac8e);
+}
+
+.signupform {
+  width: 40%;
+  position: relative;
+  left: 30%;
+}
+
+.banner {
+  background-color: #53ac8e;
+}
+
+footer {
+  padding: 0;
+  background-color: #19342b;
+}
+
+body.footer {
+  vertical-align: bottom;
 }

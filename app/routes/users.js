@@ -94,7 +94,10 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
           tickerList.push(asset.ticker);
           callback();
         }, function(err) {
+          bScraper(tickerList, function(priceList) {
+            
 
+          });
         });
       });
     });

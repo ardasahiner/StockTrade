@@ -12,6 +12,7 @@ function eodScraper(symbols, fCallback, keyNumber) {
     // callback function passed in to createString
     function innerCallback(symbolsList, kn) {
 
+      console.log(symbolsList);
       if (typeof kn === 'undefined') {
 
         kn = keyNumber;
@@ -20,7 +21,7 @@ function eodScraper(symbols, fCallback, keyNumber) {
       var url = "http://marketdata.websol.barchart.com/getQuote.json?key=" + keys[kn] + "&symbols=" + symbolsList;
       request(url, function(error, response, body) {
         if(!error && response.statusCode == 200){
-          fCallback(JSON.parse(body)['results'][0]);
+          fCallback(JSON.parse(body)['results']);
         } else if (error) {
 
           console.log(error);

@@ -1,3 +1,6 @@
 .signupform {
   padding-top: 100px;
+  width: 40%;
+  position: relative;
+  left: 30%;
 }

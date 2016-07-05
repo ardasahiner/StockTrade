@@ -146,17 +146,20 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
         });
 
     //getting a user's portfolio (profits from beginning)
-    userRouter.route('/portfolios/:query_username').get(function (req, res) {
+    userRouter.route('/portfolios/').get(function (req, res) {
+      if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
 
 
+      }  else {
+          res.json({success: false, message: "You do not have access to this page"});
+      }
 
 
     });
 
+
     /* Below are routes configured for buying and selling stocks
-
      */
-
     userRouter.route('/buy/:query_username/:stock_symbol/:quantity')
 
         //sends info on the transaction, but does not process it

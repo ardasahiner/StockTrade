@@ -1,18 +1,15 @@
 <link rel="stylesheet" href="assets/css/forms.css">
 
 <div class="signupform jumbotron">
-  <h1>Login</h1>
   <br>
   
   <form ng-submit="login.doLogin()">
 
     <div class="form-group">
-      <label>Username</label>
       <input type="text" placeholder="Username" class="form-control" ng-model="login.loginData.username" required="required">
     </div>
 
     <div class="form-group">
-      <label>Password</label>
       <input type="password" placeholder="Password" class="form-control" ng-model="login.loginData.password" required="required">
     </div>
 

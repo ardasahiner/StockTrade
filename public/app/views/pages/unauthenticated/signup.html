@@ -1,37 +1,30 @@
 <link rel="stylesheet" href="assets/css/forms.css">
 
 <div class="signupform jumbotron">
-  <h1>Sign Up</h1>
   <br>
   <form ng-submit="signup.doSignUp()">
 
     <div class="form-group">
-      <label>First Name</label>
       <input type="text" placeholder="First Name" class="form-control" ng-model="signup.signupData.firstname" required="required">
     </div>
 
     <div class="form-group">
-      <label>Last Name</label>
       <input type="text" placeholder="Last Name" class="form-control" ng-model="signup.signupData.lastname" required="required">
     </div>
 
     <div class="form-group">
-      <label>Email</label>
       <input type="text" placeholder="Email" class="form-control" ng-model="signup.signupData.email" required="required">
     </div>
 
     <div class="form-group">
-      <label>Username</label>
       <input type="text" placeholder="Username" class="form-control" ng-model="signup.signupData.username" required="required">
     </div>
 
     <div class="form-group">
-      <label>Password</label>
       <input id="password" type="password" placeholder="Password" class="form-control" ng-model="signup.signupData.password" required="required">
     </div>
 
     <div class="form-group">
-      <label>Confirm Password</label>
       <input id="confirm_password" type="password" placeholder="Confirm Password" class="form-control" ng-model="signup.signupData.confirmpassword" required="required">
     </div>
 

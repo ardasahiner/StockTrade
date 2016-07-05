@@ -4,3 +4,12 @@
   position: relative;
   left: 30%;
 }
+
+footer {
+  position: absolute;
+  vertical-align: bottom;
+  bottom: 0;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+}

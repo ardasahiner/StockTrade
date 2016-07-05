@@ -42,8 +42,8 @@ html {
     background: inherit;
 }
 
-.intro-header {
-    height: 100%;
+header {
+    height: 100vh;
 }
 
 body.container {

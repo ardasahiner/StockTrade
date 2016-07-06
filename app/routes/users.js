@@ -308,7 +308,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   } else {
                     mrtScraper(req.params.stock_symbol, function(info) {
                       res.json({
-                        message: "Success",
+                        message: "GET Success",
                         quantity: req.params.quantity,
                         revenuePerShare: info.LastPrice.toFixed(2),
                         totalRevenue: (info.LastPrice * req.params.quantity).toFixed(2)
@@ -389,7 +389,7 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
               res.send(err);
             } else {
               res.json({
-                message: "Success",
+                message: "POST Success",
                 quantity: req.params.quantity,
                 revenuePerShare: info.LastPrice.toFixed(2),
                 totalRevenue: (info.LastPrice * req.params.quantity).toFixed(2)

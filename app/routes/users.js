@@ -1,4 +1,6 @@
 var mrtScraper = require('../../scrapers/markitrealtimescraper');
+var async = require('async');
+var bScraper = require('../../scrapers/barchartportfolioscraper');
 
 // User Router will handle creating, deleting and accessing user data
 module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset) {
@@ -24,7 +26,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   if (err) {
                     res.send(err);
                   } else {
-
                     var tl = new TransactionList();
                     tl.username = req.body.username;
                     tl.save(function (err) {
@@ -84,6 +85,22 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
       res.send(req.decoded._doc);
     });
 
+    //getting a user's portfolio (profits from beginning)
+    userRouter.route('/portfolios').get(function (req, res) {
+      UserAsset.find({username: req.decoded._doc.username}, function(err, assets) {
+        var tickerList = [];
+        async.forEach(assets, function(asset, callback) {
+
+          tickerList.push(asset.ticker);
+          callback();
+        }, function(err) {
+          bScraper(tickerList, function(priceList) {
+            
+
+          });
+        });
+      });
+    });
 
     userRouter.route('/:query_username')
         // GET user data - gather user data for specific username
@@ -145,19 +162,14 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             }
         });
 
-    //getting a user's portfolio (profits from beginning)
-    userRouter.route('/portfolios/:query_username').get(function (req, res) {
-
-
-
-
-    });
-
     /* Below are routes configured for buying and selling stocks
-
      */
+<<<<<<< HEAD
 
     userRouter.route('/buy/:stock_symbol/:quantity')
+=======
+    userRouter.route('/buy/:query_username/:stock_symbol/:quantity')
+>>>>>>> 6ddb2f8bd6ad3b15e1e5d17fe3bb82357b9707a3
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {

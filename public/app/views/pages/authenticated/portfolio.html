@@ -41,29 +41,53 @@
       </form>
     </div>
   </div>
-</div>
 
-<div class="row">
+  <br><br><br><br><br>
 
-  <div class="col-lg-4 col-md-4"></div>
+  <div class="row">
 
-  <div class="confirmbuy col-lg-4 col-md-4" ng-if="stocks.currentBuy">
-    <center>
-    <h5>Your Purchase Details:</h5>
-    <p>Stock to Purchase: {{ stocks.buydata.ticker }}</p>
-    <p>Cost per Share: {{ stocks.buydata.costPerShare }}</p>
-    <p>Number of Shares: {{ stocks.buydata.amount }}</p>
-    <p>Total Cost: {{ stocks.buydata.totalCost }}</p>
-    </center>
+    <div class="col-lg-1 col-md-1"></div>
 
-    <button ng-click="stocks.cancelBuy()" class="btn btn-block btn-primary">
-      <span>Cancel Stock Purchase</span>
-    </button>
 
-    <button ng-click="stocks.confirmBuy()" class="btn btn-block btn-primary">
-      <span>Confirm Stock Purchase</span>
-    </button>
-    <br><br><br><br><br>
+    <div class="confirmbuy col-lg-4 col-md-4" ng-if="stocks.currentBuy">
+      <center>
+      <h5>Your Purchase Details:</h5>
+      <p>Stock to Purchase: {{ stocks.buydata.ticker }}</p>
+      <p>Cost per Share: {{ stocks.buydata.costPerShare }}</p>
+      <p>Number of Shares: {{ stocks.buydata.amount }}</p>
+      <p>Total Cost: {{ stocks.buydata.totalCost }}</p>
+      </center>
 
+      <button ng-click="stocks.cancelBuy()" class="btn btn-block btn-primary">
+        <span>Cancel Stock Purchase</span>
+      </button>
+
+      <button ng-click="stocks.confirmBuy()" class="btn btn-block btn-primary">
+        <span>Confirm Stock Purchase</span>
+      </button>
+
+    </div>
+
+    <div class="col-lg-2 col-md-2"></div>
+
+    <div class="confirmsell col-lg-4 col-md-4" ng-if="stocks.currentSell">
+      <center>
+      <h5>Your Sell Details:</h5>
+      <p>Stock to Sell: {{ stocks.selldata.ticker }}</p>
+      <p>Revenue per Share: {{ stocks.selldata.revenuePerShare }}</p>
+      <p>Number of Shares: {{ stocks.selldata.quantity }}</p>
+      <p>Total Revenue: {{ stocks.selldata.totalRevenue }}</p>
+      </center>
+
+      <button ng-click="stocks.cancelSell()" class="btn btn-block btn-primary">
+        <span>Cancel Stock Sell</span>
+      </button>
+
+      <button ng-click="stocks.confirmSell()" class="btn btn-block btn-primary">
+        <span>Confirm Stock Sell</span>
+      </button>
+
+    </div>
   </div>
+
 </div>

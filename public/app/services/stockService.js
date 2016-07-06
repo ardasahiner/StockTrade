@@ -22,6 +22,10 @@ angular.module('stockService', [])
     return $http.get('/users/sell/' + stock_symbol + '/' + quantity)
   }
 
+  stockFactory.confirmSellStock = function(stock_symbol, quantity) {
+    return $http.post('/users/sell/' + stock_symbol + '/' + quantity, {});
+  }
+
   return stockFactory;
 
 });

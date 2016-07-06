@@ -157,34 +157,31 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
      */
 
-    userRouter.route('/buy/:query_username/:stock_symbol/:quantity')
+    userRouter.route('/buy/:stock_symbol/:quantity')
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
           // Break if user is not admin or user under question
-          if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
                 if (err) res.send(err);
                 if (req.params.quantity <= 0) {
-                  res.json({message: "Quantity must be greater than 0"});
+                  res.json({success: false, message: "Quantity must be greater than 0"});
                 } else {
                   mrtScraper(req.params.stock_symbol, function(info) {
                     if(req.params.quantity * info.LastPrice > user.cash) {
-                      res.json({message: "You do not have enough money to make this purchase"});
+                      res.json({success: false, message: "You do not have enough money to make this purchase"});
                     } else {
                       res.json({
                         message: "Success",
                         amount: req.params.quantity,
                         costPerShare: info.LastPrice,
-                        totalCost: info.LastPrice * req.params.quantity
+                        totalCost: info.LastPrice * req.params.quantity,
+                        success: true
                       });
                     }
                   });
                 }
             });
-          } else {
-            res.json({success: false, message: "You do not have access to this page"});
-          }
         })
 
         //performs the act of buying a stock
@@ -192,7 +189,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
             // Arda's most disgusting block of code ever :)
             // Break if user is not admin or user under question
-            if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
               User.findOne({username: req.decoded._doc.username}, function (err, user) {
                   if (err) res.send(err);
                   if (req.params.quantity <= 0) {
@@ -260,16 +256,12 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     });
                   }
               });
-            } else {
-              res.json({success: false, message: "You do not have access to this page"});
-            }
         });
 
-    userRouter.route('/sell/:query_username/:stock_symbol/:quantity')
+    userRouter.route('/sell/:stock_symbol/:quantity')
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
-          if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
             User.findOne({username: req.decoded._doc.username}, function(err, user) {
               if (err) {
                 res.send(err);
@@ -295,14 +287,10 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 });
               }
             });
-          } else {
-            res.json({success: false, message: "You do not have access to this page"});
-          }
         })
 
         //performs the act of buying a stock
         .post(function (req, res) {
-          if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
               if (err) {
                 res.send(err);
@@ -341,9 +329,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 //@TODO: add to the user's cash and modify their portfolio (remove if selling all stocks)
                 //@TODO: send success message if success, failure message if failure
             });
-          } else {
-            res.json({success: false, message: "You do not have access to this page"});
-          }
         });
 
     //for handling requests to /users/transactions (listing transactions)

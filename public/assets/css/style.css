@@ -4,6 +4,10 @@ html {
     position: relative;
 }
 
+main {
+  padding-top: 50px;
+}
+
 .ui-view {
     align-content: center;
 }

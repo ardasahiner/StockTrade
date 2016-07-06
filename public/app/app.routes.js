@@ -37,6 +37,8 @@ angular.module('app.routes', ['ui.router'])
   .state('portfolio', {
     url: '/portfolio',
     templateUrl: 'app/views/pages/authenticated/portfolio.html',
+    controller: 'stockController',
+    controllerAs: 'stocks',
     authenticated: true
   });
 

@@ -14,6 +14,12 @@
       <input type="password" placeholder="Password" class="form-control" ng-model="login.loginData.password" required="required">
     </div>
 
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="signup.signupData.bot"> Remember Me
+      </label>
+    </div>
+
     <div class="alert alert-danger" ng-if="login.error">
       {{ login.error }}
     </div>

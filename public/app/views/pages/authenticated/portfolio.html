@@ -1,1 +1,15 @@
-You logged in, welcome to your portfolio
+<form ng-submit="stocks.buyStock()">
+
+  <div class="form-group">
+    <input type="text" placeholder="Stock Ticker" class="form-control" ng-model="stocks.buy.ticker" required="required">
+  </div>
+
+  <div class="form-group">
+    <input type="number" placeholder="Quantity" class="form-control" ng-model="stocks.buy.quantity" required="required">
+  </div>
+
+  <button type="submit" class="btn btn-block btn-primary">
+    <span>Buy</span>
+  </button>
+
+</form>

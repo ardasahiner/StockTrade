@@ -10,6 +10,14 @@ angular.module('stockService', [])
     return $http.get('/stocks/' + stock_symbol);
   };
 
+  stockFactory.buyStock = function(stock_symbol, quantity) {
+    return $http.get('/users/buy/' + stock_symbol + '/' + quantity);
+  }
+
+  stockFactory.sellStock = function(stock_symbol, quantity) {
+    return $http.get('/users/sell/' + stock_symbol + '/' + quantity)
+  }
+
   return stockFactory;
 
 });

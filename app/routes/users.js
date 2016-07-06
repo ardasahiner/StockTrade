@@ -117,6 +117,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 });
               }, function(err){
                 response.portfolioValue = portfolioValue.toFixed(2);
+                response.grossProfit = (portfolioValue - 1000000).toFixed(2);
+                response.percentProfit = ((portfolioValue / 1000000 - 1) * 100).toFixed(2);
                 res.send(response);
               });
             });

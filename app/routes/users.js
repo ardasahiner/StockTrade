@@ -99,20 +99,25 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
           bScraper(tickerList, function(infoList) {
             User.findOne({username: req.decoded._doc.username}, function(err, user) {
-              var response = {username: user.username, cash: user.cash, assets: []};
-              var portfolioValue = user.cash;
-              console.log(portfolioValue);
+              var response = {username: user.username, cash: user.cash.toFixed(2), assets: []};
+              var portfolioValue = parseFloat(user.cash.toFixed(2));
               async.forEach(infoList, function(currentInfo, callback) {
                 UserAsset.find({username: user.username, ticker: currentInfo.symbol}, function(err, asset) {
-                  portfolioValue += asset[0].quantity * currentInfo.lastPrice;
-                  
-
-
+                  portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
+                  response.assets.push({ticker: currentInfo.symbol,
+                                        name: currentInfo.name,
+                                        exchange: currentInfo.exchange,
+                                        quantity: asset[0].quantity.toFixed(0),
+                                        pricePerShare: currentInfo.lastPrice.toFixed(2),
+                                        amountSpent: asset[0].buyPrice.toFixed(2),
+                                        currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
+                                        amountProfit: (asset[0].quantity * currentInfo.lastPrice - asset[0].buyPrice).toFixed(2),
+                                        percentProfit: (((asset[0].quantity * currentInfo.lastPrice) / asset[0].buyPrice - 1) * 100).toFixed(2)});
                   callback();
                 });
               }, function(err){
-                console.log(portfolioValue);
-
+                response.portfolioValue = portfolioValue.toFixed(2);
+                res.send(response);
               });
             });
           });
@@ -182,12 +187,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
     /* Below are routes configured for buying and selling stocks
      */
-<<<<<<< HEAD
-
     userRouter.route('/buy/:stock_symbol/:quantity')
-=======
-    userRouter.route('/buy/:query_username/:stock_symbol/:quantity')
->>>>>>> 6ddb2f8bd6ad3b15e1e5d17fe3bb82357b9707a3
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
@@ -198,14 +198,14 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   res.json({success: false, message: "Quantity must be greater than 0"});
                 } else {
                   mrtScraper(req.params.stock_symbol, function(info) {
-                    if(req.params.quantity * info.LastPrice > user.cash) {
+                    if(parseFloat((req.params.quantity * info.LastPrice).toFixed(2)) > user.cash) {
                       res.json({success: false, message: "You do not have enough money to make this purchase"});
                     } else {
                       res.json({
                         message: "Success",
-                        amount: req.params.quantity,
-                        costPerShare: info.LastPrice,
-                        totalCost: info.LastPrice * req.params.quantity,
+                        amount: req.params.quantity.toFixed(0),
+                        costPerShare: info.LastPrice.toFixed(2),
+                        totalCost: (info.LastPrice * req.params.quantity).toFixed(2),
                         success: true
                       });
                     }
@@ -225,7 +225,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     res.json({message: "Quantity must be greater than 0"});
                   } else {
                     mrtScraper(req.params.stock_symbol, function(info) {
-                      if(req.params.quantity * info.LastPrice > user.cash) {
+                      if(parseFloat((req.params.quantity * info.LastPrice).toFixed(2)) > user.cash) {
                         res.json({message: "You do not have enough money to make this purchase"});
                       } else {
                         UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol}, function(err, asset) {
@@ -238,18 +238,18 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                               var asset = new UserAsset();
                               asset.ticker = req.params.stock_symbol;
                               asset.quantity = req.params.quantity;
-                              asset.buyPrice = info.LastPrice * req.params.quantity;
+                              asset.buyPrice = parseFloat((info.LastPrice * req.params.quantity).toFixed(2));
                               asset.username = req.decoded._doc.username;
                             } else {
                               asset.quantity += parseInt(req.params.quantity);
-                              asset.buyPrice += info.LastPrice * req.params.quantity;
+                              asset.buyPrice += parseFloat((info.LastPrice * req.params.quantity).toFixed(2));
                             }
                           }
                           asset.save(function(err) {
                             if (err) {
                               res.send(err);
                             } else {
-                              user.cash -= req.params.quantity * info.LastPrice;
+                              user.cash -= parseFloat((req.params.quantity * info.LastPrice).toFixed(2));
                               user.save(function (err) {
                                   if (err) {
                                     res.send(err);
@@ -260,7 +260,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                         type: "Buy",
                                         num_shares: req.params.quantity,
                                         pricePerShare: info.LastPrice,
-                                        totalPrice: req.params.quantity * info.LastPrice,
+                                        totalPrice: (req.params.quantity * info.LastPrice),
                                         username: req.decoded._doc.username
                                       }));
 
@@ -270,9 +270,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                         } else {
                                           res.json({
                                             message: "Success",
-                                            quantity: req.params.quantity,
-                                            costPerShare: info.LastPrice,
-                                            totalCost: info.LastPrice * req.params.quantity
+                                            quantity: req.params.quantity.toFixed(0),
+                                            costPerShare: info.LastPrice.toFixed(2),
+                                            totalCost: (info.LastPrice * req.params.quantity).toFixed(2)
                                           });
                                         }
                                       });
@@ -308,9 +308,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     mrtScraper(req.params.stock_symbol, function(info) {
                       res.json({
                         message: "Success",
-                        quantity: req.params.quantity,
-                        revenuePerShare: info.LastPrice,
-                        totalRevenue: info.LastPrice * req.params.quantity
+                        quantity: req.params.quantity,toFixed(0),
+                        revenuePerShare: info.LastPrice.toFixed(2),
+                        totalRevenue: (info.LastPrice * req.params.quantity).toFixed(2)
                       });
                     });
                   }
@@ -344,7 +344,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
                       } else {
                         asset.quantity -= parseInt(req.params.quantity);
-                        asset.buyPrice -= parseInt(info.LastPrice * req.params.quantity);
+                        asset.buyPrice -= parseFloat((info.LastPrice * req.params.quantity).toFixed(2));
                         asset.save(function (err) {
                           sellHelper(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction);
                         });
@@ -353,11 +353,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   }
                 });
               }
-
-                //@TODO: find the number to sell requested, ensure user's quantity >= request quantity
-                //@TODO: add a new transaction to the associated document, with % profit
-                //@TODO: add to the user's cash and modify their portfolio (remove if selling all stocks)
-                //@TODO: send success message if success, failure message if failure
             });
         });
 
@@ -372,7 +367,7 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
   if (err) {
     res.send(err);
   } else {
-    user.cash += info.LastPrice * req.params.quantity;
+    user.cash += parseFloat((info.LastPrice * req.params.quantity).toFixed(2));
     user.save(function(err) {
       if (err) {
         res.send(err);
@@ -394,9 +389,9 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
             } else {
               res.json({
                 message: "Success",
-                quantity: req.params.quantity,
-                revenuePerShare: info.LastPrice,
-                totalRevenue: info.LastPrice * req.params.quantity
+                quantity: req.params.quantity.toFixed(0),
+                revenuePerShare: info.LastPrice.toFixed(2),
+                totalRevenue: (info.LastPrice * req.params.quantity).toFixed(2)
               });
             }
           });

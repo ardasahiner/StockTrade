@@ -102,9 +102,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
               var response = {username: user.username, cash: user.cash.toFixed(2), assets: []};
               var portfolioValue = parseFloat(user.cash.toFixed(2));
               async.forEach(infoList, function(currentInfo, callback) {
-                UserAsset.find({username: user.username, ticker: currentInfo.symbol}, function(err, asset) {
+                UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
                   portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
-                  response.assets.push({ticker: currentInfo.symbol,
+                  response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
                                         name: currentInfo.name,
                                         exchange: currentInfo.exchange,
                                         quantity: asset[0].quantity.toFixed(0),
@@ -229,7 +229,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                       if(parseFloat((req.params.quantity * info.LastPrice).toFixed(2)) > user.cash) {
                         res.json({message: "You do not have enough money to make this purchase"});
                       } else {
-                        UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol}, function(err, asset) {
+                        UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
                           //doesn't exist yet
                           if (err) {
                             res.send(err);
@@ -237,7 +237,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                             console.log(asset === null);
                             if (asset === null) {
                               var asset = new UserAsset();
-                              asset.ticker = req.params.stock_symbol;
+                              asset.ticker = req.params.stock_symbol.toUpperCase();
                               asset.quantity = req.params.quantity;
                               asset.buyPrice = parseFloat((info.LastPrice * req.params.quantity).toFixed(2));
                               asset.username = req.decoded._doc.username;
@@ -257,7 +257,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                   } else {
                                     TransactionList.findOne({username: req.decoded._doc.username}, function(err, list) {
                                       list.transactions.push(new Transaction({
-                                        stockTicker: req.params.stock_symbol,
+                                        stockTicker: req.params.stock_symbol.toUpperCase(),
                                         type: "Buy",
                                         num_shares: req.params.quantity,
                                         pricePerShare: info.LastPrice,
@@ -299,7 +299,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
               } else if (req.params.quantity <= 0) {
                   res.json({message: "Quantity must be greater than 0"});
               } else {
-                UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol}, function(err, asset) {
+                UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
                   if (err) {res.send(err);}
                   else if (asset === null) {
                     res.json({message: "You do not own this stock, so you cannot sell it"});
@@ -328,7 +328,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
               } else if (req.params.quantity <= 0) {
                   res.json({message: "Quantity must be greater than 0"});
               } else {
-                UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol}, function(err, asset) {
+                UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
                   if (err) {res.send(err);}
                   else if (asset === null) {
                     res.json({message: "You do not own this stock, so you cannot sell it"});
@@ -375,7 +375,7 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
       } else {
         TransactionList.findOne({username: req.decoded._doc.username}, function(err, list) {
           list.transactions.push(new Transaction({
-            stockTicker: req.params.stock_symbol,
+            stockTicker: req.params.stock_symbol.toUpperCase(),
             type: "Sell",
             num_shares: req.params.quantity,
             pricePerShare: info.LastPrice,

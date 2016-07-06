@@ -87,16 +87,34 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
     //getting a user's portfolio (profits from beginning)
     userRouter.route('/portfolios').get(function (req, res) {
+
       UserAsset.find({username: req.decoded._doc.username}, function(err, assets) {
         var tickerList = [];
+
         async.forEach(assets, function(asset, callback) {
 
           tickerList.push(asset.ticker);
           callback();
         }, function(err) {
-          bScraper(tickerList, function(priceList) {
-            
 
+          bScraper(tickerList, function(infoList) {
+            User.findOne({username: req.decoded._doc.username}, function(err, user) {
+              var response = {username: user.username, cash: user.cash, assets: []};
+              var portfolioValue = user.cash;
+              console.log(portfolioValue);
+              async.forEach(infoList, function(currentInfo, callback) {
+                UserAsset.find({username: user.username, ticker: currentInfo.symbol}, function(err, asset) {
+                  portfolioValue += asset[0].quantity * currentInfo.lastPrice;
+                  
+
+
+                  callback();
+                });
+              }, function(err){
+                console.log(portfolioValue);
+
+              });
+            });
           });
         });
       });

@@ -24,13 +24,53 @@
 
       <ul class="nav navbar-nav navbar-right">
         <!-- Content links all go here -->
-        <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
+        <li ng-if="!main.loggedIn"><a href="/login" data-toggle="modal" data-target="#myModal">Login</a></li>
         <li ng-if="!main.loggedIn"><a href="/signup">Sign Up</a></li>
-        <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.username }}!</li>
+              <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.username }}!</li>
         <li ng-if="main.loggedIn"><a href="/" ng-click="main.doLogout()">Logout</a></li>
       </ul>
-
     </div>
-
   </div>
 </nav>
+
+
+<!-- modal that pops out for login -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Log In</h4>
+      </div>
+      <div class="modal-body">
+        <form ng-submit="login.doLogin()">
+
+          <div class="form-group">
+            <input type="text" placeholder="Username" class="form-control" ng-model="login.loginData.username" required="required">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" class="form-control" ng-model="login.loginData.password" required="required">
+          </div>
+          <div class="checkbox">
+            <label style="color:black;">
+              <input type="checkbox" ng-model="signup.signupData.bot" >Remember Me
+            </label>
+          </div>
+          <div class="alert alert-danger" ng-if="login.error">
+            {{ login.error }}
+          </div>
+
+          <button type="submit" class="btn btn-block btn-primary">
+            <span ng-if="!login.processing">Login</span>
+            <span ng-if="login.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+          </button>
+
+        </form>
+      </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+  </div>
+</div> 
+
+

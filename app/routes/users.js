@@ -204,7 +204,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     } else {
                       res.json({
                         message: "GET Success",
-                        amount: req.params.quantity.toFixed(0),
+                        amount: req.params.quantity,
                         costPerShare: info.LastPrice.toFixed(2),
                         totalCost: (info.LastPrice * req.params.quantity).toFixed(2),
                         success: true
@@ -271,7 +271,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                         } else {
                                           res.json({
                                             message: "POST Success",
-                                            quantity: req.params.quantity.toFixed(0),
+                                            quantity: req.params.quantity,
                                             costPerShare: info.LastPrice.toFixed(2),
                                             totalCost: (info.LastPrice * req.params.quantity).toFixed(2)
                                           });
@@ -309,7 +309,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     mrtScraper(req.params.stock_symbol, function(info) {
                       res.json({
                         message: "Success",
-                        quantity: req.params.quantity.toFixed(0),
+                        quantity: req.params.quantity,
                         revenuePerShare: info.LastPrice.toFixed(2),
                         totalRevenue: (info.LastPrice * req.params.quantity).toFixed(2)
                       });
@@ -390,7 +390,7 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
             } else {
               res.json({
                 message: "Success",
-                quantity: req.params.quantity.toFixed(0),
+                quantity: req.params.quantity,
                 revenuePerShare: info.LastPrice.toFixed(2),
                 totalRevenue: (info.LastPrice * req.params.quantity).toFixed(2)
               });

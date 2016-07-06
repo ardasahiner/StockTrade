@@ -56,6 +56,10 @@
     <p>Total Cost: {{ stocks.buydata.totalCost }}</p>
     </center>
 
+    <button ng-click="stocks.cancelBuy()" class="btn btn-block btn-primary">
+      <span>Cancel Stock Purchase</span>
+    </button>
+
     <button ng-click="stocks.confirmBuy()" class="btn btn-block btn-primary">
       <span>Confirm Stock Purchase</span>
     </button>

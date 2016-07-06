@@ -25,6 +25,10 @@ angular.module('stockController', [])
       });
   };
 
+  vm.cancelBuy = function() {
+    vm.currentBuy = false;
+  };
+
   vm.sellStock = function() {
 
     Stocks.sellStock(vm.sell.ticker, vm.sell.quantity)

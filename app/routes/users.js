@@ -309,7 +309,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     mrtScraper(req.params.stock_symbol, function(info) {
                       res.json({
                         message: "Success",
-                        quantity: req.params.quantity,toFixed(0),
+                        quantity: req.params.quantity.toFixed(0),
                         revenuePerShare: info.LastPrice.toFixed(2),
                         totalRevenue: (info.LastPrice * req.params.quantity).toFixed(2)
                       });

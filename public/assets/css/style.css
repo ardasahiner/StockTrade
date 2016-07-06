@@ -85,6 +85,11 @@ body h1 {
     background-color: #53ac8e;
 }
 
+.buysell {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
 footer {
     padding: 0;
     background-color: #19342b;

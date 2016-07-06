@@ -95,7 +95,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
           callback();
         }, function(err) {
           bScraper(tickerList, function(priceList) {
-            
+
 
           });
         });
@@ -164,12 +164,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
     /* Below are routes configured for buying and selling stocks
      */
-<<<<<<< HEAD
 
     userRouter.route('/buy/:stock_symbol/:quantity')
-=======
-    userRouter.route('/buy/:query_username/:stock_symbol/:quantity')
->>>>>>> 6ddb2f8bd6ad3b15e1e5d17fe3bb82357b9707a3
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
@@ -184,7 +180,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                       res.json({success: false, message: "You do not have enough money to make this purchase"});
                     } else {
                       res.json({
-                        message: "Success",
+                        message: "GET Success",
                         amount: req.params.quantity,
                         costPerShare: info.LastPrice,
                         totalCost: info.LastPrice * req.params.quantity,
@@ -251,7 +247,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                           res.send(err);
                                         } else {
                                           res.json({
-                                            message: "Success",
+                                            message: "POST Success",
                                             quantity: req.params.quantity,
                                             costPerShare: info.LastPrice,
                                             totalCost: info.LastPrice * req.params.quantity

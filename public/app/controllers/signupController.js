@@ -12,7 +12,7 @@ angular.module('signupController', [])
     if (vm.signupData.password != vm.signupData.confirmpassword) {
       vm.error = "Passwords don't match!";
     } else {
-
+      
       User.createUser(vm.signupData.username, vm.signupData.password,
         vm.signupData.firstname, vm.signupData.lastname, vm.signupData.email, vm.signupData.bot)
 

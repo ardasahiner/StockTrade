@@ -14,6 +14,10 @@
           <input type="number" placeholder="Quantity" class="form-control" ng-model="stocks.buy.quantity" required="required">
         </div>
 
+        <div class="alert alert-danger" ng-if="stocks.buydata.success == false">
+          {{ stocks.buydata.message }}
+        </div>
+
         <button type="submit" class="btn btn-block btn-primary">
           <span>Buy</span>
         </button>
@@ -34,6 +38,10 @@
           <input type="number" placeholder="Quantity" class="form-control" ng-model="stocks.sell.quantity" required="required">
         </div>
 
+        <div class="alert alert-danger" ng-if="stocks.selldata.success == false">
+          {{ stocks.selldata.message }}
+        </div>
+
         <button type="submit" class="btn btn-block btn-primary">
           <span>Sell</span>
         </button>
@@ -51,11 +59,11 @@
 
     <div class="confirmbuy col-lg-4 col-md-4" ng-if="stocks.currentBuy">
       <center>
-      <h5>Your Purchase Details:</h5>
-      <p>Stock to Purchase: {{ stocks.buydata.ticker }}</p>
-      <p>Cost per Share: {{ stocks.buydata.costPerShare }}</p>
-      <p>Number of Shares: {{ stocks.buydata.amount }}</p>
-      <p>Total Cost: {{ stocks.buydata.totalCost }}</p>
+        <h5>Your Purchase Details:</h5>
+        <p>Stock to Purchase: {{ stocks.buydata.ticker }}</p>
+        <p>Cost per Share: {{ stocks.buydata.costPerShare }}</p>
+        <p>Number of Shares: {{ stocks.buydata.amount }}</p>
+        <p>Total Cost: {{ stocks.buydata.totalCost }}</p>
       </center>
 
       <button ng-click="stocks.cancelBuy()" class="btn btn-block btn-primary">
@@ -72,11 +80,11 @@
 
     <div class="confirmsell col-lg-4 col-md-4" ng-if="stocks.currentSell">
       <center>
-      <h5>Your Sell Details:</h5>
-      <p>Stock to Sell: {{ stocks.selldata.ticker }}</p>
-      <p>Revenue per Share: {{ stocks.selldata.revenuePerShare }}</p>
-      <p>Number of Shares: {{ stocks.selldata.quantity }}</p>
-      <p>Total Revenue: {{ stocks.selldata.totalRevenue }}</p>
+        <h5>Your Sell Details:</h5>
+        <p>Stock to Sell: {{ stocks.selldata.ticker }}</p>
+        <p>Revenue per Share: {{ stocks.selldata.revenuePerShare }}</p>
+        <p>Number of Shares: {{ stocks.selldata.quantity }}</p>
+        <p>Total Revenue: {{ stocks.selldata.totalRevenue }}</p>
       </center>
 
       <button ng-click="stocks.cancelSell()" class="btn btn-block btn-primary">

@@ -22,7 +22,15 @@
 
   </div>
 
-  {{ stocks.portfolio }}
+  Cash Remaining: {{ stocks.portfolio.cash }}
+  Portfolio Value: {{ stocks.portfolio.portfolioValue }}
+  Your Profit: {{ stocks.portfolio.grossProfit }}
+  <br><br>
+
+  <!-- Iterate through all assets in the portfolio and render template for each -->
+  <div class="stock" ng-repeat="asset in assets">
+    <stock-asset info="asset">
+  </div>
 
   <!-- Import Buy/Sell Modals -->
   <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>

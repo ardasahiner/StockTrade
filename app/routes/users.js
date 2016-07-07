@@ -318,6 +318,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   } else {
                     mrtScraper(req.params.stock_symbol, function(info) {
                       res.json({
+                        success: true,
                         message: "GET Success",
                         quantity: req.params.quantity,
                         revenuePerShare: info.LastPrice.toFixed(2),

@@ -59,8 +59,8 @@
             {{ main.error }}
           </div>
 
-          <button type="submit" class="btn btn-block btn-primary">
-            <span ng-if="!login.processing" data-dismiss="modal">Login</span>
+          <button type="submit" class="btn btn-block btn-primary" data-dismiss="modal">
+            <span ng-if="!login.processing" >Login</span>
             <span ng-if="login.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
           </button>
 

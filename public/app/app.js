@@ -20,7 +20,7 @@ angular.module('vStockApp', imports)
         $rootScope.$on('$stateChangeStart', function (event, toState, fromState) {
 
           if (toState.authenticated && !Auth.isLoggedIn()) {
-            $location.path('/login');
+            $location.path('/');
           }
 
         });

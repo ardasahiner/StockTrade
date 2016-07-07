@@ -5,3 +5,11 @@
   left: 30%;
   padding-bottom: 70px;
 }
+
+.modal-content {
+    background-color: #19342b;
+}
+
+.checkbox label {
+  color: white;
+}

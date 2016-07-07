@@ -1,6 +1,6 @@
 angular.module('stockController', [])
 
-.controller('stockController', function($rootScope, $location, Stocks) {
+.controller('stockController', function($rootScope, $scope, $location, Stocks) {
 
   var vm = this;
   vm.processing = false;
@@ -9,6 +9,8 @@ angular.module('stockController', [])
     Stocks.getPortfolio()
     .then(function(data) {
       vm.portfolio = data.data;
+      console.log(vm.portfolio);
+      $scope.assets = vm.portfolio.assets;
     })
   }
 
@@ -92,4 +94,14 @@ angular.module('stockController', [])
     $("#confirmSellModal").modal('hide');
   };
 
+})
+
+.directive('stockAsset', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      info: '='
+    },
+    templateUrl: 'app/views/pages/authenticated/portfolioAsset.html'
+  };
 });

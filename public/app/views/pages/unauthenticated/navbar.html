@@ -26,7 +26,7 @@
         <!-- Content links all go here -->
         <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#loginModal">Login</a></li>
         <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#signupModal">Sign Up</a></li>
-        <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.username }}!</li>
+        <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.firstName }}!</li>
         <li ng-if="main.loggedIn"><a href="/" ng-click="main.doLogout()">Logout</a></li>
       </ul>
     </div>

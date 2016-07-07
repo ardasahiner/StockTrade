@@ -60,13 +60,13 @@ module.exports = function (app, express, User, jwt) {
           mrtScraper(req.params.stock_symbol, function (markitResult) {
             yearMinusOne(function(date) {
               hScraper(req.params.stock_symbol, 'daily', date, function(historyResult) {
-                  res.json(200, {message: "success", current: markitResult, past: historyResult});
+                  res.status(200).json({message: "success", current: markitResult, past: historyResult});
               });
             });
           });
         } else {
 
-          res.json(404, {message: "stock not available", current: "", past: ""});
+          res.status(400).json({message: "stock not available", current: "", past: ""});
         }
     });
 

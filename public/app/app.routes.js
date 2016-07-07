@@ -12,14 +12,14 @@ angular.module('app.routes', ['ui.router'])
     authenticated: false
   })
 
-    .state('login', {
+  .state('login', {
     url: '/login',
     templateUrl: 'app/views/pages/unauthenticated/login.html',
     controller: 'mainController',
     controllerAs: 'login',
     authenticated: false
   })
-
+  
   .state('signup', {
     url: '/signup',
     templateUrl: 'app/views/pages/unauthenticated/signup.html',

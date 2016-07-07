@@ -60,8 +60,8 @@
           </div>
 
           <button type="submit" class="btn btn-block btn-primary">
-            <span ng-if="!main.processing">Login</span>
-            <span ng-if="main.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+            <span ng-if="!login.processing" data-dismiss="modal">Login</span>
+            <span ng-if="login.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
           </button>
 
         </form>

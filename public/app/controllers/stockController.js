@@ -3,8 +3,6 @@ angular.module('stockController', [])
 .controller('stockController', function($rootScope, $location, Stocks) {
 
   var vm = this;
-  vm.currentBuy = false;
-  vm.currentSell = false;
 
   vm.buyStock = function() {
 
@@ -12,23 +10,23 @@ angular.module('stockController', [])
     .then(function(data) {
       vm.buydata = data.data;
       vm.buydata.ticker = vm.buy.ticker;
-      vm.currentBuy = true;
       delete vm.buy;
-      console.log(vm.buydata);
+      $("#confirmBuyModal").modal('show');
     });
+
   };
 
   vm.confirmBuy = function() {
 
     Stocks.confirmBuyStock(vm.buydata.ticker, vm.buydata.amount)
     .success(function(data) {
-      console.log(data);
-      vm.currentBuy = false;
+      $("#confirmBuyModal").modal('hide');
     });
+
   };
 
   vm.cancelBuy = function() {
-    vm.currentBuy = false;
+    $("#confirmBuyModal").modal('hide');
   };
 
   vm.sellStock = function() {
@@ -37,23 +35,23 @@ angular.module('stockController', [])
     .then(function(data) {
       vm.selldata = data.data;
       vm.selldata.ticker = vm.sell.ticker;
-      vm.currentSell = true;
       delete vm.sell;
-      console.log(data);
+      $("#confirmSellModal").modal('show');
     });
+
   };
 
   vm.confirmSell = function() {
 
     Stocks.confirmSellStock(vm.selldata.ticker, vm.selldata.quantity)
     .success(function(data) {
-      console.log(data.data);
-      vm.currentSell = false;
+      $("#confirmSellModal").modal('hide');
     });
+
   };
 
   vm.cancelBuy = function() {
-    vm.currentSell = false;
+    $("#confirmSellModal").modal('hide');
   };
 
 });

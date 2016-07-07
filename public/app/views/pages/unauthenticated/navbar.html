@@ -14,7 +14,7 @@
 
       <a class="navbar-brand topnav" ui-sref="home">vStock Home</a>
     </div>
-    
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-left">
@@ -25,7 +25,7 @@
       <ul class="nav navbar-nav navbar-right">
         <!-- Content links all go here -->
         <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#loginModal">Login</a></li>
-        <li ng-if="!main.loggedIn"><a href="/signup">Sign Up</a></li>
+        <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#signupModal">Sign Up</a></li>
         <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.username }}!</li>
         <li ng-if="main.loggedIn"><a href="/" ng-click="main.doLogout()">Logout</a></li>
       </ul>

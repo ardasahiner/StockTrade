@@ -36,7 +36,6 @@ main {
 
 .navbar-custom .navbar-nav > .active > a {
     color: #fff;
-    background-color: #fed136;
 }
 
 .navbar-default {
@@ -88,8 +87,12 @@ body h1 {
 }
 
 .buysell {
-  padding-top: 100px;
+  padding-top: 0px;
   padding-bottom: 100px;
+}
+
+.buysell img {
+  padding-bottom: 50px;
 }
 
 .alert-danger {

@@ -1,0 +1,149 @@
+<div class="modal fade" id="buyModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Buy a Stock</h4>
+      </div>
+      <div class="modal-body">
+
+        <form ng-submit="stocks.buyStock()">
+
+          <div class="form-group">
+            <input type="text" placeholder="Stock Ticker" class="form-control" ng-model="stocks.buy.ticker" required="required">
+          </div>
+
+          <div class="form-group">
+            <input type="number" placeholder="Quantity" class="form-control" ng-model="stocks.buy.quantity" required="required">
+          </div>
+
+          <div class="alert alert-danger" ng-if="stocks.buydata.success == false">
+            {{ stocks.buydata.message }}
+          </div>
+
+          <button type="submit" class="btn btn-block btn-primary">
+            <span ng-if="!stocks.processing">Buy Stock</span>
+            <span ng-if="stocks.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+          </button>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+
+        <button class="btn btn-block btn-primary" ng-click="stocks.cancelBuy()">
+          <span>Cancel Buy</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmBuyModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Confirm Buy</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="confirmbuy">
+          <center>
+            <h5>Your Purchase Details:</h5>
+            <p>Stock to Purchase: {{ stocks.buydata.ticker }}</p>
+            <p>Cost per Share: {{ stocks.buydata.costPerShare }}</p>
+            <p>Number of Shares: {{ stocks.buydata.amount }}</p>
+            <p>Total Cost: {{ stocks.buydata.totalCost }}</p>
+          </center>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button ng-click="stocks.cancelBuy()" class="btn btn-block btn-primary">
+          <span>Cancel Stock Purchase</span>
+        </button>
+        <button ng-click="stocks.confirmBuy()" class="btn btn-block btn-primary">
+          <span ng-if="!stocks.processing">Confirm Stock Purchase</span>
+          <span ng-if="stocks.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="sellModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Sell a Stock</h4>
+      </div>
+      <div class="modal-body">
+
+        <form ng-submit="stocks.sellStock()">
+
+          <div class="form-group">
+            <input type="text" placeholder="Stock Ticker" class="form-control" ng-model="stocks.sell.ticker" required="required">
+          </div>
+
+          <div class="form-group">
+            <input type="number" placeholder="Quantity" class="form-control" ng-model="stocks.sell.quantity" required="required">
+          </div>
+
+          <div class="alert alert-danger" ng-if="stocks.selldata.success == false">
+            {{ stocks.selldata.message }}
+          </div>
+
+          <button type="submit" class="btn btn-block btn-primary">
+            <span ng-if="!stocks.processing">Sell Stock</span>
+            <span ng-if="stocks.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+          </button>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+
+        <button class="btn btn-block btn-primary" ng-click="stocks.cancelSell()">
+          <span>Cancel Sell</span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmSellModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Confirm Sell</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="confirmsell">
+          <center>
+            <h5>Your Sell Details:</h5>
+            <p>Stock to Sell: {{ stocks.selldata.ticker }}</p>
+            <p>Revenue per Share: {{ stocks.selldata.revenuePerShare }}</p>
+            <p>Number of Shares: {{ stocks.selldata.quantity }}</p>
+            <p>Total Revenue: {{ stocks.selldata.totalRevenue }}</p>
+          </center>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button ng-click="stocks.cancelSell()" class="btn btn-block btn-primary">
+          <span>Cancel Stock Sell</span>
+        </button>
+        <button ng-click="stocks.confirmSell()" class="btn btn-block btn-primary">
+          <span ng-if="!stocks.processing">Cofirm Stock Sell</span>
+          <span ng-if="stocks.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>

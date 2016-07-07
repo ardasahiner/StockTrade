@@ -1,118 +1,28 @@
 <div class="container buysell">
+
+  <center><img src="assets/img/vstock logo/vstock-white-transparent.png"></center>
+
   <div class="row">
 
     <div class="col-lg-1 col-md-1"></div>
 
     <div class="col-lg-4 col-md-4">
-      <form ng-submit="stocks.buyStock()">
-
-        <div class="form-group">
-          <input type="text" placeholder="Stock Ticker" class="form-control" ng-model="stocks.buy.ticker" required="required">
-        </div>
-
-        <div class="form-group">
-          <input type="number" placeholder="Quantity" class="form-control" ng-model="stocks.buy.quantity" required="required">
-        </div>
-
-        <div class="alert alert-danger" ng-if="stocks.buydata.success == false">
-          {{ stocks.buydata.message }}
-        </div>
-
-        <button type="submit" class="btn btn-block btn-primary">
-          <span>Buy</span>
-        </button>
-
-      </form>
-    </div>
-
-    <div class="modal fade" id="confirmBuyModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Confirm Buy</h4>
-          </div>
-          <div class="modal-body">
-
-            <div class="confirmbuy">
-              <center>
-                <h5>Your Purchase Details:</h5>
-                <p>Stock to Purchase: {{ stocks.buydata.ticker }}</p>
-                <p>Cost per Share: {{ stocks.buydata.costPerShare }}</p>
-                <p>Number of Shares: {{ stocks.buydata.amount }}</p>
-                <p>Total Cost: {{ stocks.buydata.totalCost }}</p>
-              </center>
-            </div>
-
-          </div>
-          <div class="modal-footer">
-
-            <button ng-click="stocks.cancelBuy()" class="btn btn-block btn-primary">
-              <span>Cancel Stock Purchase</span>
-            </button>
-            <button ng-click="stocks.confirmBuy()" class="btn btn-block btn-primary">
-              <span>Confirm Stock Purchase</span>
-            </button>
-
-          </div>
-        </div>
-      </div>
+      <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#buyModal">
+        <span>Buy a Stock</span>
+      </button>
     </div>
 
     <div class="col-lg-2 col-md-2"></div>
 
     <div class="col-lg-4 col-md-4">
-      <form ng-submit="stocks.sellStock()">
-
-        <div class="form-group">
-          <input type="text" placeholder="Stock Ticker" class="form-control" ng-model="stocks.sell.ticker" required="required">
-        </div>
-
-        <div class="form-group">
-          <input type="number" placeholder="Quantity" class="form-control" ng-model="stocks.sell.quantity" required="required">
-        </div>
-
-        <div class="alert alert-danger" ng-if="stocks.selldata.success == false">
-          {{ stocks.selldata.message }}
-        </div>
-
-        <button type="submit" class="btn btn-block btn-primary">
-          <span>Sell</span>
-        </button>
-
-      </form>
-    </div>
-
-    <div class="modal fade" id="confirmSellModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Confirm Sell</h4>
-          </div>
-          <div class="modal-body">
-
-            <div class="confirmsell">
-              <center>
-                <h5>Your Sell Details:</h5>
-                <p>Stock to Sell: {{ stocks.selldata.ticker }}</p>
-                <p>Revenue per Share: {{ stocks.selldata.revenuePerShare }}</p>
-                <p>Number of Shares: {{ stocks.selldata.quantity }}</p>
-                <p>Total Revenue: {{ stocks.selldata.totalRevenue }}</p>
-              </center>
-            </div>
-
-          </div>
-          <div class="modal-footer">
-
-            <button ng-click="stocks.cancelSell()" class="btn btn-block btn-primary">
-              <span>Cancel Stock Sell</span>
-            </button>
-            <button ng-click="stocks.confirmSell()" class="btn btn-block btn-primary">
-              <span>Confirm Stock Sell</span>
-            </button>
-
-          </div>
-        </div>
-      </div>
+      <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#sellModal">
+        <span>Sell a Stock</span>
+      </button>
     </div>
 
   </div>
+
+  <!-- Import Buy/Sell Modals -->
+  <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
+  
+</div>

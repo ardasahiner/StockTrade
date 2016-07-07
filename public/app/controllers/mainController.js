@@ -13,9 +13,9 @@ angular.module('mainController', [])
     vm.loggedIn = Auth.isLoggedIn();
 
     Auth.getUser()
-      .then(function(data) {
-        vm.user = data.data;
-      });
+    .then(function(data) {
+      vm.user = data.data;
+    });
   });
 
   // Function to handle login requests
@@ -24,16 +24,16 @@ angular.module('mainController', [])
     vm.error = '';
 
     Auth.login(vm.loginData.username, vm.loginData.password)
-      .success(function(data) {
-        vm.processing = false;
+    .success(function(data) {
+      vm.processing = false;
 
-        // If successful authentication, user is redirected to their portfolio
-        if (data.success) {
-          $location.path('/portfolio');
-        } else {
-          vm.error = data.message;
-        }
-      });
+      // If successful authentication, user is redirected to their portfolio
+      if (data.success) {
+        $location.path('/portfolio');
+      } else {
+        vm.error = data.message;
+      }
+    });
   };
 
   // Function to handle logout requests

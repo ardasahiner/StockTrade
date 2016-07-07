@@ -24,13 +24,15 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             // callback
             user.save(function (err) {
                   if (err) {
-                    res.send(err);
+                    res.json({success: false, message : err});
                   } else {
                     var tl = new TransactionList();
                     tl.username = req.body.username;
                     tl.save(function (err) {
                       if (err) {
-                        res.send(err);
+                        // TODO: Add custom error messages that can be displayed to the user, the current ones make no sense
+                        // TODO: This kind of a thing is done in the Authentication Route for example
+                        res.json({success: false, message : err});
                       } else {
                           res.json({message: 'User created! Welcome ' + req.body.username + '!', success: true});
                       }

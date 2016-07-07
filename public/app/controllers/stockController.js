@@ -5,6 +5,15 @@ angular.module('stockController', [])
   var vm = this;
   vm.processing = false;
 
+  vm.getPortfolio = function() {
+    Stocks.getPortfolio()
+    .then(function(data) {
+      vm.portfolio = data.data;
+    })
+  }
+
+  vm.getPortfolio();
+
   vm.buyStock = function() {
 
     vm.processing = true;
@@ -15,8 +24,11 @@ angular.module('stockController', [])
       vm.buydata.ticker = vm.buy.ticker;
       delete vm.buy;
       vm.processing = false;
-      $("#buyModal").modal('hide');
-      $("#confirmBuyModal").modal('show');
+      console.log(vm.buydata);
+      if (vm.buydata.success) {
+        $("#buyModal").modal('hide');
+        $("#confirmBuyModal").modal('show');
+      }
     });
 
   };
@@ -28,6 +40,7 @@ angular.module('stockController', [])
     Stocks.confirmBuyStock(vm.buydata.ticker, vm.buydata.amount)
     .success(function(data) {
       vm.processing = false;
+      vm.getPortfolio();
       $("#confirmBuyModal").modal('hide');
     });
 
@@ -35,6 +48,7 @@ angular.module('stockController', [])
 
   vm.cancelBuy = function() {
     vm.processing = false;
+    delete vm.buydata;
     $("#buyModal").modal('hide');
     $("#confirmBuyModal").modal('hide');
   };
@@ -49,8 +63,11 @@ angular.module('stockController', [])
       vm.selldata.ticker = vm.sell.ticker;
       delete vm.sell;
       vm.processing = false;
-      $("#sellModal").modal('hide');
-      $("#confirmSellModal").modal('show');
+      console.log(vm.selldata);
+      if (vm.selldata.success) {
+        $("#sellModal").modal('hide');
+        $("#confirmSellModal").modal('show');
+      }
     });
 
   };
@@ -62,6 +79,7 @@ angular.module('stockController', [])
     Stocks.confirmSellStock(vm.selldata.ticker, vm.selldata.quantity)
     .success(function(data) {
       vm.processing = false;
+      vm.getPortfolio();
       $("#confirmSellModal").modal('hide');
     });
 
@@ -69,6 +87,7 @@ angular.module('stockController', [])
 
   vm.cancelSell = function() {
     vm.processing = false;
+    delete vm.selldata;
     $("#sellModal").modal('hide');
     $("#confirmSellModal").modal('hide');
   };

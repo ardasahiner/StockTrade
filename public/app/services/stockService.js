@@ -8,7 +8,7 @@ angular.module('stockService', [])
   // TODO: Implement get stock price for given stock name
   stockFactory.getPrice = function(stock_symbol) {
     return $http.get('/stocks/' + stock_symbol);
-  };
+  }
 
   stockFactory.buyStock = function(stock_symbol, quantity) {
     return $http.get('/users/buy/' + stock_symbol + '/' + quantity);
@@ -24,6 +24,10 @@ angular.module('stockService', [])
 
   stockFactory.confirmSellStock = function(stock_symbol, quantity) {
     return $http.post('/users/sell/' + stock_symbol + '/' + quantity, {});
+  }
+
+  stockFactory.getPortfolio = function() {
+    return $http.get('/users/portfolio');
   }
 
   return stockFactory;

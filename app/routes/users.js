@@ -89,7 +89,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
     });
 
     //getting a user's portfolio (profits from beginning)
-    userRouter.route('/portfolios').get(function (req, res) {
+    userRouter.route('/portfolio').get(function (req, res) {
 
       UserAsset.find({username: req.decoded._doc.username}, function(err, assets) {
         var tickerList = [];
@@ -199,7 +199,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
         .get(function (req, res) {
           //stock does not exist
           if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
-            res.json({sucess: false, message: "The stock you attempted to buy does not exist"});
+            res.json({success: false, message: "The stock you attempted to buy does not exist"});
           } else {
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
                 if (err) res.send(err);
@@ -307,14 +307,14 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
               if (err) {
                 res.send(err);
               } else if (req.params.quantity <= 0) {
-                  res.json({message: "Quantity must be greater than 0"});
+                  res.json({success: false, message: "Quantity must be greater than 0"});
               } else {
                 UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
                   if (err) {res.send(err);}
                   else if (asset === null) {
-                    res.json({message: "You do not own this stock, so you cannot sell it"});
+                    res.json({success: false, message: "You do not own this stock, so you cannot sell it"});
                   } else if (asset.quantity < req.params.quantity) {
-                    res.json({message: "You do not own as many of this stock as you are attempting to sell"});
+                    res.json({success: false, message: "You do not own as many of this stock as you are attempting to sell"});
                   } else {
                     mrtScraper(req.params.stock_symbol, function(info) {
                       res.json({

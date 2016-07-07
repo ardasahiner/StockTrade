@@ -18,8 +18,8 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     color: white;
 }
 
@@ -27,6 +27,20 @@ h6 {
     font-size: 14px;
     background-color: white;
 
+}
+
+.titledescription {
+  font-weight: bold;
+  text-shadow:
+   -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+     1px 1px 0 black;
+}
+
+.headings {
+  font-size: 22px;
+  font-weight: 400;
 }
 
 .lead {

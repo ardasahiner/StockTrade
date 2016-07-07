@@ -1,4 +1,3 @@
-<!-- modal that pops out for login -->
 <div class="modal fade" id="loginModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -15,7 +14,7 @@
             <input type="password" placeholder="Password" class="form-control" ng-model="main.loginData.password" required="required">
           </div>
           <div class="checkbox">
-            <label>
+            <label style="color:black;">
               <input type="checkbox">Remember Me
             </label>
           </div>
@@ -23,9 +22,15 @@
             {{ main.error }}
           </div>
 
+<<<<<<< HEAD
+          <button type="submit" class="btn btn-block btn-primary" data-dismiss="modal">
+            <span ng-if="!login.processing" >Login</span>
+            <span ng-if="login.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+=======
           <button type="submit" class="btn btn-block btn-primary">
             <span ng-if="!main.processing" data-dismiss="modal">Login</span>
             <span ng-if="main.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+>>>>>>> 541b302c48e5a530d7fe581ae3481cf8567a4036
           </button>
 
         </form>

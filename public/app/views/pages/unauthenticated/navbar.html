@@ -32,46 +32,6 @@
     </div>
   </div>
 </nav>
-<<<<<<< HEAD
 
 
-<!-- modal that pops out for login -->
-<div class="modal fade" id="loginModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Log In</h4>
-      </div>
-      <div class="modal-body">
-        <form ng-submit="main.doLogin()">
 
-          <div class="form-group">
-            <input type="text" placeholder="Username" class="form-control" ng-model="main.loginData.username" required="required">
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Password" class="form-control" ng-model="main.loginData.password" required="required">
-          </div>
-          <div class="checkbox">
-            <label style="color:black;">
-              <input type="checkbox">Remember Me
-            </label>
-          </div>
-          <div class="alert alert-danger" ng-if="main.error">
-            {{ main.error }}
-          </div>
-
-          <button type="submit" class="btn btn-block btn-primary" data-dismiss="modal">
-            <span ng-if="!login.processing" >Login</span>
-            <span ng-if="login.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
-          </button>
-
-        </form>
-      </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    </div>
-    </div>
-  </div>
-</div>
-=======
->>>>>>> b54953072aeec7552b576a2e718e7132e68b61ab

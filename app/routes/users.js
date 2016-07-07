@@ -1,6 +1,7 @@
 var mrtScraper = require('../../scrapers/markitrealtimescraper');
 var async = require('async');
 var bScraper = require('../../scrapers/barchartportfolioscraper');
+var batslist = require('../../vendor/batslist');
 
 // User Router will handle creating, deleting and accessing user data
 module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset) {
@@ -196,7 +197,11 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
-          // Break if user is not admin or user under question
+          //stock does not exist
+          if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
+
+            res.json({sucess: false, message: "The stock you attempted to buy does not exist"});
+          } else {
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
                 if (err) res.send(err);
                 if (req.params.quantity <= 0) {
@@ -217,13 +222,15 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   });
                 }
             });
+          }
         })
 
         //performs the act of buying a stock
         .post(function (req, res) {
-
+          if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
+            res.json({sucess: false, message: "The stock you attempted to buy does not exist"});
+          } else {
             // Arda's most disgusting block of code ever :)
-            // Break if user is not admin or user under question
               User.findOne({username: req.decoded._doc.username}, function (err, user) {
                   if (err) res.send(err);
                   if (req.params.quantity <= 0) {
@@ -291,6 +298,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     });
                   }
               });
+            }
         });
 
     userRouter.route('/sell/:stock_symbol/:quantity')

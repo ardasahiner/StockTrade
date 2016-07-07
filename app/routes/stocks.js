@@ -56,7 +56,7 @@ module.exports = function (app, express, User, jwt) {
     stockRouter.route('/:stock_symbol').get(function (req, res) {
 
         // Check to ensure valid stock symbol
-        if (batslist.indexOf(req.params.stock_symbol) > -1) {
+        if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
           mrtScraper(req.params.stock_symbol, function (markitResult) {
             yearMinusOne(function(date) {
               hScraper(req.params.stock_symbol, 'daily', date, function(historyResult) {
@@ -74,8 +74,8 @@ module.exports = function (app, express, User, jwt) {
 
     // GET the full name corresponding to a given stock symbol
     stockRouter.route('/names/:stock_symbol').get(function (req, res) {
-      if (batslist.indexOf(req.params.stock_symbol) > -1) {
-        res.send(stockDictionary[req.params.stock_symbol]);
+      if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
+        res.send(stockDictionary[req.params.stock_symbol.toUpperCase()]);
       } else {
 
         res.json(404, {message: "stock not available"});
@@ -84,8 +84,8 @@ module.exports = function (app, express, User, jwt) {
 
     // GET the exchange corresponding to a given stock symbol
     stockRouter.route('/exchanges/:stock_symbol').get(function (req, res) {
-      if (batslist.indexOf(req.params.stock_symbol) > -1) {
-        res.send(stockDictionaryExchange[req.params.stock_symbol]);
+      if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
+        res.send(stockDictionaryExchange[req.params.stock_symbol.toUpperCase()]);
       } else {
 
         res.json(404, {message: "stock not available"});
@@ -93,7 +93,7 @@ module.exports = function (app, express, User, jwt) {
     });
 
     stockRouter.route('/history/:stock_symbol/:type/:start_date/:end_date').get(function (req, res) {
-      if (batslist.indexOf(req.params.stock_symbol) > -1) {
+      if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
         hScraper(req.params.stock_symbol, req.params.type, req.params.start_date, function(historyResult) {
 
           res.json(historyResult);
@@ -105,9 +105,8 @@ module.exports = function (app, express, User, jwt) {
     });
 
     stockRouter.route('/current/:stock_symbol').get(function(req, res) {
-      if (batslist.indexOf(req.params.stock_symbol) > -1) {
+      if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
         mrtScraper(req.params.stock_symbol, function(result) {
-
           res.json(result);
         }, req.params.end_date);
       } else {

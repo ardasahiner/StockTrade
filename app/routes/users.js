@@ -33,7 +33,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                       if (err) {
                         // TODO: Add custom error messages that can be displayed to the user, the current ones make no sense
                         // TODO: This kind of a thing is done in the Authentication Route for example
-                        res.json({success: false, message : err});
+                        res.json({success: false, message : "Username or email not unique"});
                       } else {
                           res.json({message: 'User created! Welcome ' + req.body.username + '!', success: true});
                       }
@@ -199,7 +199,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
         .get(function (req, res) {
           //stock does not exist
           if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
-
             res.json({sucess: false, message: "The stock you attempted to buy does not exist"});
           } else {
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
@@ -245,7 +244,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                           if (err) {
                             res.send(err);
                           } else {
-                            console.log(asset === null);
                             if (asset === null) {
                               var asset = new UserAsset();
                               asset.ticker = req.params.stock_symbol.toUpperCase();

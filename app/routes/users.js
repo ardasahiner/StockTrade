@@ -106,7 +106,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
               var portfolioValue = parseFloat(user.cash.toFixed(2));
               async.forEach(infoList, function(currentInfo, callback) {
                 if (currentInfo !== "Error") {
-                  UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
+                  UserAsset.findOne({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
                     portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
                     response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
                                           name: currentInfo.name,
@@ -124,6 +124,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 response.portfolioValue = portfolioValue.toFixed(2);
                 response.grossProfit = (portfolioValue - 1000000).toFixed(2);
                 response.percentProfit = ((portfolioValue / 1000000 - 1) * 100).toFixed(2);
+                response.sort();
                 res.send(response);
               });
             });

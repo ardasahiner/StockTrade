@@ -6,7 +6,7 @@ angular.module('mainController', [])
 
   // Get info about whether user is logged in
   vm.loggedIn = Auth.isLoggedIn();
-
+  vm.hideModals = false;
   // Check every request to see if user is logged in
   // This function runs everytime there is a state change
   $rootScope.$on('$stateChangeStart', function(toState) {
@@ -30,6 +30,7 @@ angular.module('mainController', [])
       // If successful authentication, user is redirected to their portfolio
       if (data.success) {
         $location.path('/portfolio');
+        $("#loginModal").modal('hide');
       } else {
         vm.error = data.message;
       }

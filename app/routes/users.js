@@ -99,14 +99,13 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
           tickerList.push(asset.ticker);
           callback();
         }, function(err) {
-
           bScraper(tickerList, function(infoList) {
             User.findOne({username: req.decoded._doc.username}, function(err, user) {
               var response = {username: user.username, cash: user.cash.toFixed(2), assets: []};
               var portfolioValue = parseFloat(user.cash.toFixed(2));
               async.forEach(infoList, function(currentInfo, callback) {
                 if (currentInfo !== "Error") {
-                  UserAsset.findOne({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
+                  UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
                     portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
                     response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
                                           name: currentInfo.name,
@@ -117,9 +116,11 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                           currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
                                           amountProfit: (asset[0].quantity * currentInfo.lastPrice - asset[0].buyPrice).toFixed(2),
                                           percentProfit: (((asset[0].quantity * currentInfo.lastPrice) / asset[0].buyPrice - 1) * 100).toFixed(2)});
+                  callback();
                   });
+                } else {
+                  callback();
                 }
-                callback();
               }, function(err){
                 response.portfolioValue = portfolioValue.toFixed(2);
                 response.grossProfit = (portfolioValue - 1000000).toFixed(2);

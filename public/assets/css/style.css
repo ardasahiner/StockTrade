@@ -19,6 +19,11 @@ main {
     background: #262626;
 }
 
+.topnav img {
+  height: inherit;
+  margin-top: -16.5px;
+}
+
 /* Links in the navbar, set text color using color tag */
 .navbar-default .navbar-nav > li > a {
     color: white;
@@ -99,6 +104,10 @@ body h1 {
     color: #BA2828;
     background-color: black;
     border-color: white;
+}
+
+.footer img {
+  height: 140px;
 }
 
 footer {

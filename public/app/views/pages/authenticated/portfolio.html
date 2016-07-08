@@ -21,18 +21,74 @@
     </div>
 
   </div>
-
-  Cash Remaining: {{ stocks.portfolio.cash }}
-  Portfolio Value: {{ stocks.portfolio.portfolioValue }}
-  Your Profit: {{ stocks.portfolio.grossProfit }}
   <br><br>
 
-  <!-- Iterate through all assets in the portfolio and render template for each -->
-  <div class="stock" ng-repeat="stock in portfolioAssets">
-    <stock-asset info="stock">
-  </div>
+  <div class="container-fluid" id="portfolio-container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Stock Portfolio</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4">
+        Account Value: ${{ stocks.portfolio.portfolioValue }}
+      </div>
 
+      <div class="col-xs-4">
+        Cash Remaining: ${{ stocks.portfolio.cash }}
+      </div>
+
+      <div class="col-xs-4">
+        Your Profit: ${{ stocks.portfolio.grossProfit }}
+      </div>
+    </div>
+
+  <br><br>
+
+    <div class="row table-header">
+
+      <div class="col-sm-1">
+        Symbol
+      </div>
+
+      <div class="col-sm-2">
+        Company Name
+      </div>
+
+      <div class="col-sm-1">
+        Price
+      </div>
+
+      <div class="col-sm-1">
+        QTY
+      </div>
+
+      <div class="col-sm-1">
+        Profit
+      </div>
+
+      <div class="col-sm-2">
+        Purchase Price
+      </div>
+
+      <div class="col-sm-2">
+        Value
+      </div>
+
+      <div class="col-sm-1">
+        Exchange
+      </div>
+
+      <div class="col-sm-1">
+        Margin
+      </div>
+
+
+    </div>
+      <div class="stock" ng-repeat="stock in portfolioAssets">
+        <stock-asset info="stock">
+      </div>
+  </div>
   <!-- Import Buy/Sell Modals -->
   <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
-
 </div>

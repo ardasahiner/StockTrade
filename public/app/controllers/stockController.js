@@ -10,7 +10,7 @@ angular.module('stockController', [])
     .then(function(data) {
       vm.portfolio = data.data;
       console.log(vm.portfolio);
-      $scope.assets = vm.portfolio.assets;
+      $scope.portfolioAssets = vm.portfolio.assets;
     })
   }
 

@@ -6,3 +6,4 @@ design_workflow/
 // Hide online database username/password
 db_connect.js
 config.js
+scrapers/barchartkeys.js

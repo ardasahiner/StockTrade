@@ -1,4 +1,5 @@
 var request = require('request');
+var keys = require('./barchartkeys');
 
 // Accesses end of day data for a given list of stock symbols
 // Uses barchart free api
@@ -15,21 +16,25 @@ function eodScraper(symbols, fCallback, keyNumber) {
         kn = keyNumber;
       }
 
-      var keys = ["d3aec7bd98718c9fa45caa2d8c12eaeb", "f3b460304a11da7c0bdfe79b17d2b9cf"];
       var url = "http://marketdata.websol.barchart.com/getQuote.json?key=" + keys[kn] + "&symbols=" + symbolsList;
       request(url, function(error, response, body) {
 
         if(!error && response.statusCode == 200){
-          fCallback(JSON.parse(body)['results']);
+          try{
+            fCallback(JSON.parse(body)['results']);
+          } catch(err) {
+            //try again with other api key
+            console.log("Key " + kn +  " ran out");
+            if (kn < keys.length - 1) {
+              innerCallback(symbolsList, kn + 1);
+            } else{
+              fCallback({message: "Error"});
+            }
+          }
         } else if (error) {
           console.log(error);
         } else {
-          //try again with other api key
-          if (kn < keys.length - 1) {
-            innerCallback(symbolsList, kn + 1);
-          } else{
-            fCallback({message: "Error"});
-          }
+          fCallback({message: "Error"});
         }
       });
     }

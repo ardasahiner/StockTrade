@@ -31,7 +31,7 @@ module.exports = function (app, express, User, jwt) {
           // return the information including token as JSON
           res.json({
             success: true,
-            message: "You've been authenticated!"
+            message: "You've been authenticated!",
             token: token
           });
         }

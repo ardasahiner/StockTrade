@@ -60,13 +60,13 @@ module.exports = function (app, express, User, jwt) {
           mrtScraper(req.params.stock_symbol, function (markitResult) {
             yearMinusOne(function(date) {
               hScraper(req.params.stock_symbol, 'daily', date, function(historyResult) {
-                  res.status(200).json({message: "success", current: markitResult, past: historyResult});
+                  res.status(200).json({success: true, message: "success", current: markitResult, past: historyResult});
               });
             });
           });
         } else {
 
-          res.status(400).json({message: "stock not available", current: "", past: ""});
+          res.status(404).json({success: false, message: "stock not available", current: "", past: ""});
         }
     });
 
@@ -75,43 +75,41 @@ module.exports = function (app, express, User, jwt) {
     // GET the full name corresponding to a given stock symbol
     stockRouter.route('/names/:stock_symbol').get(function (req, res) {
       if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
-        res.send(stockDictionary[req.params.stock_symbol.toUpperCase()]);
+        res.status(200).json({success: true, result: stockDictionary[req.params.stock_symbol.toUpperCase()]});
       } else {
 
-        res.json(404, {message: "stock not available"});
+        res.status(404).json({success: false, result: "stock not available"});
       }
     });
 
     // GET the exchange corresponding to a given stock symbol
     stockRouter.route('/exchanges/:stock_symbol').get(function (req, res) {
       if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
-        res.send(stockDictionaryExchange[req.params.stock_symbol.toUpperCase()]);
+        res.status(200).json({success: true, result: stockDictionaryExchange[req.params.stock_symbol.toUpperCase()]});
       } else {
 
-        res.json(404, {message: "stock not available"});
+        res.status(404).json({success: false, message: "stock not available"});
       }
     });
 
     stockRouter.route('/history/:stock_symbol/:type/:start_date/:end_date').get(function (req, res) {
       if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
         hScraper(req.params.stock_symbol, req.params.type, req.params.start_date, function(historyResult) {
-
-          res.json(historyResult);
+          res.status(200).json({success: true, message: "success", past: historyResult});
         }, req.params.end_date);
       } else {
-
-        res.json(404, {message: "stock not available"});
+        res.status(404).json({success: false, message: "stock not available", past: ""});
       }
     });
 
     stockRouter.route('/current/:stock_symbol').get(function(req, res) {
       if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
         mrtScraper(req.params.stock_symbol, function(result) {
-          res.json(result);
+          res.status(200).json({success: true, message: "success", current: result});
         }, req.params.end_date);
       } else {
 
-        res.json(404, {message: "stock not available"});
+        res.status(404).json({success: false, message: "stock not available", current: ""});
       }
     });
 

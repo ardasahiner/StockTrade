@@ -2,12 +2,141 @@ API DOCUMENTATION
 
 AUTHENTICATION
 
-GET
-
-
+  POST http://vstock.io/authenticate
+    Summary:
+      A client POST's to this route in order to obtain a token to be used for protected routes.
+    Headers:
+      None
+    Body:
+      username -- String -- The user's username
+      password -- String -- The user's password
+    Params:
+      None
+    Response:
+      success -- boolean -- true if authentication successful, false otherwise
+      message -- String  -- relevant message regarding success or failure of request
+      token -- JSON Web Token (JWT) --  required for all protected routes. Expires in 24 hours.
 
 STOCKS
 
+  GET http://vstock.io/stocks/:stock_symbol
+    Summary:
+      Given a stock symbol, returns a JSON object with current price of the stock and its daily closing price history for one year. Uses Markit on Demand for current price and Barchart on Demand for historical prices. Note that current prices may be within a dollar of actual prices, and this route should not be used for class C Google stock (GOOG).
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      None
+    Params:
+      stock_symbol -- String -- The company's ticker symbol
+    Response:
+      success -- boolean -- true if successful, false otherwise
+      message -- String  -- relevant message regarding success or failure of request
+      current -- JSON Object:
+              -- Status	-- String -- Status of quote request
+              -- Name	-- String -- Name of the company
+              -- Symbol	-- String	-- The company's ticker symbol
+              -- LastPrice -- Double -- The last price of the company's stock
+              -- Change -- Double	-- The change in price of the company's stock since the previous trading day's close
+              -- ChangePercent -- Double --The change percent in price of the company's stock since the previous trading day's close
+              -- Timestamp -- String -- The last time the company's stock was traded in exchange-local timezone. Represented as ddd MMM d HH:mm:ss UTCzzzzz yyyy
+              -- MSDate -- Double -- The last time the company's stock was traded in exchange-local timezone. Represented as an OLE Automation date
+              -- MarketCap -- Double -- The company's market cap
+              -- Volume -- Int -- The trade volume of the company's stock
+              -- ChangeYTD -- Double -- The change in price of the company's stock since the start of the year
+              -- ChangePercentYTD -- Double -- The change percent in price of the company's stock since the start of the year
+              -- High -- Double -- The high price of the company's stock in the trading session
+              -- Low -- Double -- The low price of the company's stock in the trading session
+              -- Open -- Double -- The opening price of the company's stock at the start of the trading session
+      history -- Array, each element is a JSON Object, representing one trading session, with the following attributes:
+              -- symbol -- String -- The company's ticker symbol
+              -- timestamp -- String -- Date and time of market close of the trading session
+              -- open -- Double -- Opening price in the trading session
+              -- high -- Double -- The high price of the company's stock in the trading session
+              -- low -- Double -- The low price of the company's stock in the trading session
+              -- close -- Double -- Closing price in the trading session
+              -- volume -- Int -- The trade volume of the company's stock in the trading session
+              -- openInterest -- who knows -- always null for some reason
+
+
+    GET http://vstock.io/stocks/names/:stock_symbol
+      Summary:
+        Returns full company name corresponding to a given stock symbol
+      Headers:
+        x-access-token -- JWT -- acquired from the authentication route
+      Body:
+        None
+      Params:
+        stock_symbol -- String -- The company's ticker symbol
+      Response:
+        success -- boolean -- true if successful, false otherwise
+        result -- String -- Full company name, equals "stock not available" if stock is not in BATS
+
+    GET http://vstock.io/stocks/exchanges/:stock_symbol
+      Summary:
+        Returns primary exchange in which the given stock is traded
+      Headers:
+        x-access-token -- JWT -- acquired from the authentication route
+      Body:
+        None
+      Params:
+        stock_symbol -- String -- The company's ticker symbol
+      Response:
+        success -- boolean -- true if successful, false otherwise
+        result -- String -- Exchange name, equals "stock not available" if stock is not in BATS
+
+    GET http://vstock.io/stocks/history/:stock_symbol/:type/:start_date/:end_date
+      Summary:
+        Returns historical for a given stock of a given type and start and end dates. Uses Barchart on Demand for historical prices.
+      Headers:
+        x-access-token -- JWT -- acquired from the authentication route
+      Body:
+        None
+      Params:
+        stock_symbol -- String -- The company's ticker symbol
+        type -- String -- Describes interval between data points (possible values are 'minutes','nearbyMinutes','formTMinutes','daily','dailyNearest','dailyContinue','weekly','weeklyNearest','weeklyContinue','monthly','monthlyNearest','monthlyContinue','quarterly','quarterlyNearest','quarterlyContinue','yearly','yearlyNearest', and 'yearlyContinue').
+        start_date -- String -- Beginning date of request, formatted as "yyyymmddhhmmss"
+        end_date -- String -- Ending date of request, formatted as "yyyymmddhhmmss", "null" if end date is the present
+      Response:
+        success -- boolean -- true if successful, false otherwise
+        message -- String  -- relevant message regarding success or failure of request
+        past -- Array of JSON objects at the interval given by type:
+             -- symbol -- String -- The company's ticker symbol
+             -- timestamp -- String -- Date and time of market close of the trading session
+             -- open -- Double -- Opening price in the trading session
+             -- high -- Double -- The high price of the company's stock in the trading session
+             -- low -- Double -- The low price of the company's stock in the trading session
+             -- close -- Double -- Closing price in the trading session
+             -- volume -- Int -- The trade volume of the company's stock in the trading session
+             -- openInterest -- who knows -- always null for some reason
+
+    GET http://vstock.io/stocks/current/:stock_symbol
+      Summary:
+        Returns real time information about the given stock. Uses Markit on Demand for current prices. Note that current prices may be within a dollar of actual prices, and this route should not be used for class C Google stock (GOOG).
+      Headers:
+        x-access-token -- JWT -- acquired from the authentication route
+      Body:
+        None
+      Params:
+        stock_symbol -- String -- The company's ticker symbol
+      Response:
+        success -- boolean -- true if successful, false otherwise
+        message -- String  -- relevant message regarding success or failure of request
+        current -- JSON Object:
+                -- Status	-- String -- Status of quote request
+                -- Name	-- String -- Name of the company
+                -- Symbol	-- String	-- The company's ticker symbol
+                -- LastPrice -- Double -- The last price of the company's stock
+                -- Change -- Double	-- The change in price of the company's stock since the previous trading day's close
+                -- ChangePercent -- Double --The change percent in price of the company's stock since the previous trading day's close
+                -- Timestamp -- String -- The last time the company's stock was traded in exchange-local timezone. Represented as ddd MMM d HH:mm:ss UTCzzzzz yyyy
+                -- MSDate -- Double -- The last time the company's stock was traded in exchange-local timezone. Represented as an OLE Automation date
+                -- MarketCap -- Double -- The company's market cap
+                -- Volume -- Int -- The trade volume of the company's stock
+                -- ChangeYTD -- Double -- The change in price of the company's stock since the start of the year
+                -- ChangePercentYTD -- Double -- The change percent in price of the company's stock since the start of the year
+                -- High -- Double -- The high price of the company's stock in the trading session
+                -- Low -- Double -- The low price of the company's stock in the trading session
+                -- Open -- Double -- The opening price of the company's stock at the start of the trading session
 
 USERS
 

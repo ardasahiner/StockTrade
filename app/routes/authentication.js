@@ -12,7 +12,7 @@ module.exports = function (app, express, User, jwt) {
     }, function (err, user) {
 
       if (err) throw err;
-      
+
       // User does not exist case
       if (!user) {
         res.json({success: false, message: 'Authentication failed. User not found.'});
@@ -31,6 +31,7 @@ module.exports = function (app, express, User, jwt) {
           // return the information including token as JSON
           res.json({
             success: true,
+            message: "You've been authenticated!"
             token: token
           });
         }

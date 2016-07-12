@@ -1,19 +1,24 @@
 var request = require('request');
+var parse = require('csv-parse');
 
-//uses markitondemand to get the most recent price of a given stock
-function realTimeScraper(symbol, fCallback) {
+// uses yahoo for most recent price, change, change in percent, open, close, high, low and volume
+// in that order
+// Calls callback on array, with indices in order of the request
+function yahooScraper(symbol, fCallback) {
 
-  var url = "http://finance.yahoo.com/webservice/v1/symbols/" + symbol + "/quote?format=json";
+  var url = "http://download.finance.yahoo.com/d/quotes.csv?s=" + symbol + "&f=l1c1p2ophgv"
   request(url, function(error, response, body) {
     if(!error && response.statusCode == 200){
-      fCallback(JSON.parse(body)["list"]["resources"][0]["resource"]["fields"]);
-    } else if (error) {
-      console.log(error);
+      parse(body, function(err, output) {
+        if (err) fCallback(err);
+        else {
+          fCallback(output);
+        }
+      });
     } else {
-      //sent too many requests per second
-      fCallback("error, too many requests");
+      fCallback({message: "something went wrong!"});
     }
   });
 }
 
-module.exports = realTimeScraper;
+module.exports = yahooScraper;

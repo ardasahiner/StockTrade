@@ -1,7 +1,7 @@
-var mrtScraper = require('../../scrapers/markitrealtimescraper');
 var async = require('async');
 var bScraper = require('../../scrapers/barchartportfolioscraper');
 var batslist = require('../../vendor/batslist');
+var yrtScraper = require('../../scrapers/yahoorealtimescraper');
 
 // User Router will handle creating, deleting and accessing user data
 module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset) {
@@ -31,8 +31,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     tl.username = req.body.username;
                     tl.save(function (err) {
                       if (err) {
-                        // TODO: Add custom error messages that can be displayed to the user, the current ones make no sense
-                        // TODO: This kind of a thing is done in the Authentication Route for example
                         res.json({success: false, message : "Username or email not unique"});
                       } else {
                           res.json({message: 'User created! Welcome ' + req.body.username + '!', success: true});
@@ -111,11 +109,15 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                           name: currentInfo.name,
                                           exchange: currentInfo.exchange,
                                           quantity: asset[0].quantity.toFixed(0),
-                                          pricePerShare: currentInfo.lastPrice.toFixed(2),
+                                          currentPricePerShare: currentInfo.lastPrice.toFixed(2),
+                                          purchasePricePerShare: (asset[0].buyPrice / asset[0].quantity).toFixed(2),
                                           amountSpent: asset[0].buyPrice.toFixed(2),
                                           currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
-                                          amountProfit: (asset[0].quantity * currentInfo.lastPrice - asset[0].buyPrice).toFixed(2),
-                                          percentProfit: (((asset[0].quantity * currentInfo.lastPrice) / asset[0].buyPrice - 1) * 100).toFixed(2)});
+                                          todayChangeNet: asset[0].netChange,
+                                          todayChangePercent: asset[0].percentChange,
+                                          totalAmountProfit: (asset[0].quantity * currentInfo.lastPrice - asset[0].buyPrice).toFixed(2),
+                                          totalPercentProfit: (((asset[0].quantity * currentInfo.lastPrice) / asset[0].buyPrice - 1) * 100).toFixed(2)});
+
                   callback();
                   });
                 } else {
@@ -209,15 +211,15 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 if (req.params.quantity <= 0) {
                   res.json({success: false, message: "Quantity must be greater than 0"});
                 } else {
-                  mrtScraper(req.params.stock_symbol, function(info) {
-                    if(parseFloat((req.params.quantity * info.LastPrice).toFixed(2)) > user.cash) {
+                  yrtScraper(req.params.stock_symbol, function(info) {
+                    if(parseFloat((req.params.quantity * info[0][0]).toFixed(2)) > user.cash) {
                       res.json({success: false, message: "You do not have enough money to make this purchase"});
                     } else {
                       res.json({
                         message: "GET Success",
                         amount: req.params.quantity,
-                        costPerShare: info.LastPrice.toFixed(2),
-                        totalCost: (info.LastPrice * req.params.quantity).toFixed(2),
+                        costPerShare: info[0][0],
+                        totalCost: (info[0][0] * req.params.quantity).toFixed(2),
                         success: true
                       });
                     }
@@ -238,8 +240,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   if (req.params.quantity <= 0) {
                     res.json({message: "Quantity must be greater than 0"});
                   } else {
-                    mrtScraper(req.params.stock_symbol, function(info) {
-                      if(parseFloat((req.params.quantity * info.LastPrice).toFixed(2)) > user.cash) {
+                    yrtScraper(req.params.stock_symbol, function(info) {
+                      if(parseFloat((req.params.quantity * info[0][0]).toFixed(2)) > user.cash) {
                         res.json({message: "You do not have enough money to make this purchase"});
                       } else {
                         UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
@@ -251,18 +253,18 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                               var asset = new UserAsset();
                               asset.ticker = req.params.stock_symbol.toUpperCase();
                               asset.quantity = req.params.quantity;
-                              asset.buyPrice = parseFloat((info.LastPrice * req.params.quantity).toFixed(2));
+                              asset.buyPrice = parseFloat((info[0][0] * req.params.quantity).toFixed(2));
                               asset.username = req.decoded._doc.username;
                             } else {
                               asset.quantity += parseInt(req.params.quantity);
-                              asset.buyPrice += parseFloat((info.LastPrice * req.params.quantity).toFixed(2));
+                              asset.buyPrice += parseFloat((info[0][0] * req.params.quantity).toFixed(2));
                             }
                           }
                           asset.save(function(err) {
                             if (err) {
                               res.send(err);
                             } else {
-                              user.cash -= parseFloat((req.params.quantity * info.LastPrice).toFixed(2));
+                              user.cash -= parseFloat((req.params.quantity * info[0][0]).toFixed(2));
                               user.save(function (err) {
                                   if (err) {
                                     res.send(err);
@@ -272,8 +274,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                         stockTicker: req.params.stock_symbol.toUpperCase(),
                                         type: "Buy",
                                         num_shares: req.params.quantity,
-                                        pricePerShare: info.LastPrice,
-                                        totalPrice: (req.params.quantity * info.LastPrice),
+                                        pricePerShare: info[0][0],
+                                        totalPrice: (req.params.quantity * info[0][0]),
                                         username: req.decoded._doc.username
                                       }));
 
@@ -284,8 +286,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                           res.json({
                                             message: "POST Success",
                                             quantity: req.params.quantity,
-                                            costPerShare: info.LastPrice.toFixed(2),
-                                            totalCost: (info.LastPrice * req.params.quantity).toFixed(2)
+                                            costPerShare: info[0][0],
+                                            totalCost: (info[0][0] * req.params.quantity).toFixed(2)
                                           });
                                         }
                                       });
@@ -319,13 +321,13 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   } else if (asset.quantity < req.params.quantity) {
                     res.json({success: false, message: "You do not own as many of this stock as you are attempting to sell"});
                   } else {
-                    mrtScraper(req.params.stock_symbol, function(info) {
+                    yrtScraper(req.params.stock_symbol, function(info) {
                       res.json({
                         success: true,
                         message: "GET Success",
                         quantity: req.params.quantity,
-                        revenuePerShare: info.LastPrice.toFixed(2),
-                        totalRevenue: (info.LastPrice * req.params.quantity).toFixed(2)
+                        revenuePerShare: (info[0][0]),
+                        totalRevenue: (info[0][0] * req.params.quantity).toFixed(2)
                       });
                     });
                   }
@@ -349,17 +351,16 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   } else if (asset.quantity < req.params.quantity) {
                     res.json({message: "You do not own as many of this stock as you are attempting to sell"});
                   } else {
-                    mrtScraper(req.params.stock_symbol, function(info) {
+                    yrtScraper(req.params.stock_symbol, function(info) {
                       var prevQuantity = asset.quantity;
                       var prevPrice = asset.buyPrice;
                       if (asset.quantity === parseInt(req.params.quantity)) {
                         asset.remove(function(err) {
                           sellHelper(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction);
                         });
-
                       } else {
                         asset.quantity -= parseInt(req.params.quantity);
-                        asset.buyPrice -= parseFloat((info.LastPrice * req.params.quantity).toFixed(2));
+                        asset.buyPrice -= parseFloat((info[0][0] * req.params.quantity).toFixed(2));
                         asset.save(function (err) {
                           sellHelper(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction);
                         });
@@ -382,7 +383,7 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
   if (err) {
     res.send(err);
   } else {
-    user.cash += parseFloat((info.LastPrice * req.params.quantity).toFixed(2));
+    user.cash += parseFloat((info[0][0] * req.params.quantity).toFixed(2));
     user.save(function(err) {
       if (err) {
         res.send(err);
@@ -392,10 +393,10 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
             stockTicker: req.params.stock_symbol.toUpperCase(),
             type: "Sell",
             num_shares: req.params.quantity,
-            pricePerShare: info.LastPrice,
-            totalPrice: req.params.quantity * info.LastPrice,
+            pricePerShare: info[0][0],
+            totalPrice: req.params.quantity * info[0][0],
             username: req.decoded._doc.username,
-            percentProfit: (info.LastPrice / (prevPrice / prevQuantity) - 1) * 100
+            percentProfit: (info[0][0] / (prevPrice / prevQuantity) - 1) * 100
           }));
 
           list.save(function (err) {
@@ -405,8 +406,8 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
               res.json({
                 message: "POST Success",
                 quantity: req.params.quantity,
-                revenuePerShare: info.LastPrice.toFixed(2),
-                totalRevenue: (info.LastPrice * req.params.quantity).toFixed(2)
+                revenuePerShare: info[0][0],
+                totalRevenue: (info[0][0] * req.params.quantity).toFixed(2)
               });
             }
           });

@@ -17,7 +17,7 @@ AUTHENTICATION
     Response:
       success -- boolean -- true if authentication successful, false otherwise
       message -- String  -- relevant message regarding success or failure of request
-      token -- JSON Web Token (JWT) --  required for all protected routes. Expires in 24 hours.
+      token -- JSON Web Token (JWT) --  required for all protected routes. Expires in one year.
 
 STOCKS
 

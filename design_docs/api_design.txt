@@ -1,5 +1,7 @@
 API DOCUMENTATION
 
+--------------------------------------------------------------------------------
+
 AUTHENTICATION
 
   POST http://vstock.io/authenticate
@@ -140,4 +142,188 @@ STOCKS
 
 USERS
 
-TRANSACTIONS
+  POST http://vstock.io/users/
+    Summary:
+      Creates a new user, with $1,000,000 in starting cash.
+    Headers:
+      None
+    Body:
+      firstName -- String -- first name of user (required)
+      lastName -- String -- last name of user (required)
+      username -- String -- username of user (required, must be unique)
+      password -- String -- password of user (required)
+      email -- String -- email of user (required, must be unique)
+      botAccount -- boolean -- whether or not this user will be using bots for his/her trading
+    Params:
+      None
+    Response:
+      success -- boolean -- True if request successful, false if otherwise. Possible reasons for failure include non-unique username or email.
+      message -- String -- Message pertaining to success or failure of request
+
+  GET http://vstock.io/users/me
+    Summary:
+      Gets basic info about a user.
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      None
+    Params:
+      None
+    Response:
+      admin -- boolean -- whether or not user is an admin
+      botAccount -- boolean -- whether or not the user is a bot account
+      cash -- Double -- user's cash
+      groups -- Array -- list of names of groups of user (not yet implemented)
+      creationDate -- String -- date of user creation
+      history -- Array -- array of historical values of user (not yet implemented)
+      username -- String -- username of user
+      password -- String -- encrypted password of user
+      email -- String -- email of user
+
+  GET http://vstock.io/users/:query_username
+    The same as http://vstock.io/users/me, except an additional param of query_username with the given user's username.
+
+  PUT http://vstock.io/users/:query_username
+    Summary:
+      Modifies a user's password or whether or not they are a bot account.
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      password -- String -- new password (optional)
+      botAccount -- boolean -- new botAccount value (optional)
+    Params:
+      query_username -- String -- user's username
+    Response:
+      success -- boolean -- True if request successful, false if otherwise
+      message -- String -- Message pertaining to success or failure of request
+
+  DELETE http://vstock.io/users/:query_username
+    Summary:
+      Deletes a given user.
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      None
+    Params:
+      query_username -- String -- user's username
+    Response:
+      success -- boolean -- True if request successful, false if otherwise
+      message -- String -- Message pertaining to success or failure of request
+
+  GET http://vstock.io/users/portfolio
+    Summary:
+      Returns the portfolio of a given user.
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      None
+    Params:
+      None
+    Response:
+      username -- String -- user's username
+      portfolioValue -- String -- total value of user's portfolio, rounded to the nearest cent
+      cash -- String -- user's available cash, rounded to the nearest cent
+      grossProfit -- String -- gross profit for this user since account creation, rounded to the nearest cent
+      percentProfit -- String -- percent profit for this user since account creation
+      assets -- Array of JSON objects, each representing a given asset:
+             -- name -- String -- full company name of the given stock
+             -- exchange -- String -- exchange in which the stock is primarily traded in
+             -- quantity -- String -- number of this stock the user owns
+             -- currentPricePerShare -- String -- current price of a single share of the given stock, rounded to the nearest cent
+             -- purchasePricePerShare -- String -- average price per share that the user has bought this stock for, rounded to the nearest cent
+             -- amountSpent -- String -- total amount spent on all of this user's shares of this stock
+             -- currentValue -- String -- total value of all of this user's shares of this stock, as calculated from the current price per share of the stock
+             -- todayChangeNet -- String -- net change per share of the price of the given stock since trading session opening
+             -- todayTotalChangeNet -- String -- net gross change over all shares this user owns since trading session opening
+             -- todayChangePercent -- String -- percentage change of the price of the given stock since trading session opening
+             -- totalNetProfit -- String -- total profit the user has made off of their shares of this given stock
+             -- totalPercentProfit -- String -- percent profit the user has made off of their shares of this given stock
+
+  GET http://vstock.io/users/buy/:stock_symbol/:quantity
+    Summary:
+      Returns info about a potential buy transaction.
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      None
+    Params:
+      stock_symbol -- String -- The company's ticker symbol
+      quantity -- Int -- How many of this stock to buy
+    Response:
+      success -- boolean -- true if request successful, false if otherwise
+      message -- String -- message pertaining to success or failure of request
+      amount -- Int -- quantity to buy requested
+      costPerShare -- String -- cost per share to buy the given stock
+      totalCost -- String -- total cost to buy the given quantity of the given stock
+
+  POST http://vstock.io/users/buy/:stock_symbol/:quantity
+    Summary:
+      Completes the given buy transaction and returns details about the transaction.
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      None
+    Params:
+      stock_symbol -- String -- The company's ticker symbol
+      quantity -- Int -- How many of this stock to buy
+    Response:
+      success -- boolean -- true if request successful, false if otherwise
+      message -- String -- message pertaining to success or failure of request
+      amount -- Int -- quantity to buy requested
+      costPerShare -- String -- cost per share to buy the given stock
+      totalCost -- String -- total cost to buy the given quantity of the given stock
+
+  GET http://vstock.io/users/sell/:stock_symbol/:quantity
+    Summary:
+      Returns info about a potential sell transaction.
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      None
+    Params:
+      stock_symbol -- String -- The company's ticker symbol
+      quantity -- Int -- How many of this stock to sell
+    Response:
+      success -- boolean -- true if request successful, false if otherwise
+      message -- String -- message pertaining to success or failure of request
+      amount -- Int -- quantity to sell requested
+      revenuePerShare -- String -- revenue per share earned from selling the given stock
+      revenueCost -- String -- total revenue to be earned from selling the given quantity of the given stock
+
+  POST http://vstock.io/users/sell/:stock_symbol/:quantity
+    Summary:
+      Completes the given sell transaction and returns details about the transaction.
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      None
+    Params:
+      stock_symbol -- String -- The company's ticker symbol
+      quantity -- Int -- How many of this stock to buy
+    Response:
+      success -- boolean -- true if request successful, false if otherwise
+      message -- String -- message pertaining to success or failure of request
+      amount -- Int -- quantity to sell requested
+      revenuePerShare -- String -- revenue per share earned from selling the given stock
+      revenueCost -- String -- total revenue to be earned from selling the given quantity of the given stock
+
+  GET http://vstock.io/users/transactions/:query_username
+    Summary:
+      Gives a list of a user's transactions
+    Headers:
+      x-access-token -- JWT -- acquired from the authentication route
+    Body:
+      None
+    Params:
+      query_username -- String -- user's username
+    Response:
+      success -- boolean -- true if request successful, false if otherwise
+      message -- String -- message pertaining to success or failure of request
+      list -- JSON Array of transactions:
+           -- totalPrice -- Double -- total price spent or earned from the transaction
+           -- pricePerShare -- Double -- price per share spent or earned from the transaction
+           -- num_shares -- Int -- number of shares exchanged in the transaction
+           -- type -- String -- Type of transaction; either "Buy" or "Sell"
+           -- stockTicker -- String -- Ticker of stock exchanged
+           -- transactionDate -- String -- Date and time of transaction
+           -- percentProfit -- Double -- percent profit made from the transaction (only for sell)

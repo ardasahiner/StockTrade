@@ -31,9 +31,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     tl.username = req.body.username;
                     tl.save(function (err) {
                       if (err) {
-                        res.json({success: false, message : "Username or email not unique"});
+                        res.status(400).json({success: false, message : "Username or email not unique"});
                       } else {
-                          res.json({message: 'User created! Welcome ' + req.body.username + '!', success: true});
+                          res.status(200).json({message: 'User created! Welcome ' + req.body.username + '!', success: true});
                       }
                     });
                   }
@@ -58,7 +58,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             });
         } else {
             // No token given
-            return res.status(403).send({
+            return res.status(403).json({
                 success: false,
                 message: 'No token provided.'
             });
@@ -99,6 +99,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
         }, function(err) {
           bScraper(tickerList, function(infoList) {
             User.findOne({username: req.decoded._doc.username}, function(err, user) {
+              if (err) res.send(err);
               var response = {username: user.username, cash: user.cash.toFixed(2), assets: []};
               var portfolioValue = parseFloat(user.cash.toFixed(2));
               async.forEach(infoList, function(currentInfo, callback) {
@@ -113,9 +114,10 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                           purchasePricePerShare: (asset[0].buyPrice / asset[0].quantity).toFixed(2),
                                           amountSpent: asset[0].buyPrice.toFixed(2),
                                           currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
-                                          todayChangeNet: asset[0].netChange,
-                                          todayChangePercent: asset[0].percentChange,
-                                          totalAmountProfit: (asset[0].quantity * currentInfo.lastPrice - asset[0].buyPrice).toFixed(2),
+                                          todayChangeNet: currentInfo.netChange.toFixed(2),
+                                          todayTotalChangeNet: (currentInfo.netChange * asset[0].quantity).toFixed(2),
+                                          todayChangePercent: currentInfo.percentChange.toFixed(2),
+                                          totalNetProfit: (asset[0].quantity * currentInfo.lastPrice - asset[0].buyPrice).toFixed(2),
                                           totalPercentProfit: (((asset[0].quantity * currentInfo.lastPrice) / asset[0].buyPrice - 1) * 100).toFixed(2)});
 
                   callback();
@@ -127,7 +129,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 response.portfolioValue = portfolioValue.toFixed(2);
                 response.grossProfit = (portfolioValue - 1000000).toFixed(2);
                 response.percentProfit = ((portfolioValue / 1000000 - 1) * 100).toFixed(2);
-                res.send(response);
+                res.status(200).send(response);
               });
             });
           });
@@ -142,10 +144,10 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
                 User.findOne({username: req.params.query_username}, function (err, user) {
                     if (err) res.send(err);
-                    res.json(user);
+                    res.status(200).json({success: false, message: "success", result: user});
                 });
             } else {
-                res.json({success: false, message: "You do not have access to this page."});
+                res.status(404).json({success: false, message: "You do not have access to this page."});
             }
         })
 
@@ -157,26 +159,17 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 User.findOne({username: req.params.query_username}, function (err, user) {
                     if (err) res.send(err);
 
-                    // Commented these fields out becuase you should not be allowed to change these fields.
-                    // if (req.body.name) user.name = req.body.name;
-                    // if (req.body.username) user.username = req.body.username;
-                    // if (req.body.email) user.email = req.body.email;
                     if (req.body.password) user.password = req.body.password;
                     if (req.body.botAccount) user.botAccount = req.body.botAccount;
 
-                    // Shouldn't be able to change whether you're an admin either
-                    // if (req.decoded._doc.admin && req.body.admin) {
-                    //   user.admin = req.body.admin;
-                    // }
-
                     user.save(function (err) {
                         if (err) res.send(err);
-                        res.json({message: 'User updated!'});
+                        res.status(200).json({success: true, message: 'User updated!'});
                     });
 
                 });
             } else {
-                res.json({success: false, message: "You cannot change this user's information"});
+                res.status(404).json({success: false, message: "You cannot change this user's information"});
             }
         })
 
@@ -188,10 +181,10 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
                 User.remove({username: req.params.query_username}, function (err, user) {
                     if (err) res.send(err);
-                    res.json({message: 'User ' + req.params.query_username + ' successfully deleted'});
+                    res.status(200).json({success: true, message: 'User ' + req.params.query_username + ' successfully deleted'});
                 });
             } else {
-                res.json({success: false, message: "You do not have access to this page"});
+                res.status(404).json({success: false, message: "You do not have access to this page"});
             }
         });
 
@@ -215,7 +208,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     if(parseFloat((req.params.quantity * info[0][0]).toFixed(2)) > user.cash) {
                       res.json({success: false, message: "You do not have enough money to make this purchase"});
                     } else {
-                      res.json({
+                      res.status(200).json({
                         message: "GET Success",
                         amount: req.params.quantity,
                         costPerShare: info[0][0],
@@ -230,11 +223,11 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
         })
 
         //performs the act of buying a stock
+        // Arda's most disgusting block of code ever :)
         .post(function (req, res) {
           if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
             res.json({sucess: false, message: "The stock you attempted to buy does not exist"});
           } else {
-            // Arda's most disgusting block of code ever :)
               User.findOne({username: req.decoded._doc.username}, function (err, user) {
                   if (err) res.send(err);
                   if (req.params.quantity <= 0) {
@@ -284,6 +277,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                           res.send(err);
                                         } else {
                                           res.json({
+                                            success: true,
                                             message: "POST Success",
                                             quantity: req.params.quantity,
                                             costPerShare: info[0][0],
@@ -347,9 +341,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
                   if (err) {res.send(err);}
                   else if (asset === null) {
-                    res.json({message: "You do not own this stock, so you cannot sell it"});
+                    res.json({success: false, message: "You do not own this stock, so you cannot sell it"});
                   } else if (asset.quantity < req.params.quantity) {
-                    res.json({message: "You do not own as many of this stock as you are attempting to sell"});
+                    res.json({success: false, message: "You do not own as many of this stock as you are attempting to sell"});
                   } else {
                     yrtScraper(req.params.stock_symbol, function(info) {
                       var prevQuantity = asset.quantity;
@@ -404,6 +398,7 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
               res.send(err);
             } else {
               res.json({
+                success: true,
                 message: "POST Success",
                 quantity: req.params.quantity,
                 revenuePerShare: info[0][0],

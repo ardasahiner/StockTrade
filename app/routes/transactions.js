@@ -33,10 +33,10 @@ module.exports = function (app, express, User, jwt, Transaction, userRouter) {
     if (req.decoded._doc.admin) {
       Transaction.find(function (err, transactions) {
         if (err) res.send(err);
-        res.json(transactions);
+        res.status(200).json({success: true, message: "success!", list: transactions});
       });
     } else {
-      res.json({success: false, message: "You do not have admin access"});
+      res.status(404).json({success: false, message: "You do not have admin access"});
     }
   });
 
@@ -48,10 +48,10 @@ module.exports = function (app, express, User, jwt, Transaction, userRouter) {
     if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
       TransactionList.findOne({username: req.params.query_username}, function (err, transactionlist) {
         if (err) res.send(err);
-        res.json(transactionlist.transactions);
+        res.status(200).json({success: true, message: "success!", list: transactionlist.transactions});
       });
     } else {
-      res.json({success: false, message: "You do not have access to this page."});
+      res.status(404).json({success: false, message: "You do not have access to this page."});
     }
   });
 

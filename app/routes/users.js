@@ -50,7 +50,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
         if (token) {
             jwt.verify(token, app.get('secretKey'), function (err, decoded) {
                 if (err) {
-                    return res.json({success: false, message: 'Failed to authenticate token.'});
+                    return res.status(403).json({success: false, message: 'Failed to authenticate token.'});
                 } else {
                     // Decoded token saved into request parameters
                     req.decoded = decoded;

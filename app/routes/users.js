@@ -2,6 +2,7 @@ var async = require('async');
 var bScraper = require('../../scrapers/barchartportfolioscraper');
 var batslist = require('../../vendor/batslist');
 var yrtScraper = require('../../scrapers/yahoorealtimescraper');
+var stockDictionaryExchange = require('../../vendor/stockdictionaryexchange');
 
 // User Router will handle creating, deleting and accessing user data
 module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset) {
@@ -108,7 +109,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
                     response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
                                           name: currentInfo.name,
-                                          exchange: currentInfo.exchange,
+                                          exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
                                           quantity: asset[0].quantity.toFixed(0),
                                           currentPricePerShare: currentInfo.lastPrice.toFixed(2),
                                           purchasePricePerShare: (asset[0].buyPrice / asset[0].quantity).toFixed(2),

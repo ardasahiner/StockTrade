@@ -34,21 +34,16 @@ STOCKS
       success -- boolean -- true if successful, false otherwise
       message -- String  -- relevant message regarding success or failure of request
       current -- JSON Object:
-              -- Status	-- String -- Status of quote request
-              -- Name	-- String -- Name of the company
-              -- Symbol	-- String	-- The company's ticker symbol
-              -- LastPrice -- Double -- The last price of the company's stock
-              -- Change -- Double	-- The change in price of the company's stock since the previous trading day's close
-              -- ChangePercent -- Double --The change percent in price of the company's stock since the previous trading day's close
-              -- Timestamp -- String -- The last time the company's stock was traded in exchange-local timezone. Represented as ddd MMM d HH:mm:ss UTCzzzzz yyyy
-              -- MSDate -- Double -- The last time the company's stock was traded in exchange-local timezone. Represented as an OLE Automation date
-              -- MarketCap -- Double -- The company's market cap
-              -- Volume -- Int -- The trade volume of the company's stock
-              -- ChangeYTD -- Double -- The change in price of the company's stock since the start of the year
-              -- ChangePercentYTD -- Double -- The change percent in price of the company's stock since the start of the year
-              -- High -- Double -- The high price of the company's stock in the trading session
-              -- Low -- Double -- The low price of the company's stock in the trading session
-              -- Open -- Double -- The opening price of the company's stock at the start of the trading session
+              -- symbol -- String -- symbol of stock
+              -- name -- String -- name of stock
+              -- exchange -- String -- exchange in which stock is traded
+              -- lastPrice -- Double -- last price of stock
+              -- netChange -- Double -- net change of stock price since session opened
+              -- percentChange -- String -- percent change of stock price since session opened
+              -- volume -- Int -- volume of trading
+              -- high -- Double -- high price during trading session
+              -- low -- Double -- low price during trading session
+              -- open -- Double -- price of stock when trading session opened
       history -- Array, each element is a JSON Object, representing one trading session, with the following attributes:
               -- symbol -- String -- The company's ticker symbol
               -- timestamp -- String -- Date and time of market close of the trading session
@@ -124,21 +119,16 @@ STOCKS
         success -- boolean -- true if successful, false otherwise
         message -- String  -- relevant message regarding success or failure of request
         current -- JSON Object:
-                -- Status	-- String -- Status of quote request
-                -- Name	-- String -- Name of the company
-                -- Symbol	-- String	-- The company's ticker symbol
-                -- LastPrice -- Double -- The last price of the company's stock
-                -- Change -- Double	-- The change in price of the company's stock since the previous trading day's close
-                -- ChangePercent -- Double --The change percent in price of the company's stock since the previous trading day's close
-                -- Timestamp -- String -- The last time the company's stock was traded in exchange-local timezone. Represented as ddd MMM d HH:mm:ss UTCzzzzz yyyy
-                -- MSDate -- Double -- The last time the company's stock was traded in exchange-local timezone. Represented as an OLE Automation date
-                -- MarketCap -- Double -- The company's market cap
-                -- Volume -- Int -- The trade volume of the company's stock
-                -- ChangeYTD -- Double -- The change in price of the company's stock since the start of the year
-                -- ChangePercentYTD -- Double -- The change percent in price of the company's stock since the start of the year
-                -- High -- Double -- The high price of the company's stock in the trading session
-                -- Low -- Double -- The low price of the company's stock in the trading session
-                -- Open -- Double -- The opening price of the company's stock at the start of the trading session
+                -- symbol -- String -- symbol of stock
+                -- name -- String -- name of stock
+                -- exchange -- String -- exchange in which stock is traded
+                -- lastPrice -- Double -- last price of stock
+                -- netChange -- Double -- net change of stock price since session opened
+                -- percentChange -- String -- percent change of stock price since session opened
+                -- volume -- Int -- volume of trading
+                -- high -- Double -- high price during trading session
+                -- low -- Double -- low price during trading session
+                -- open -- Double -- price of stock when trading session opened
 
 USERS
 

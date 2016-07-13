@@ -8,7 +8,7 @@ var hScraper = require('../../scrapers/historyscraper');
 var batslist = require('../../vendor/batslist');
 var yearMinusOne = require('../helpers/yearminusone');
 
-module.exports = function (app, express, User, jwt) {
+module.exports = function (app, express, User, jwt, currentStockCacheAccurate, currentStockCacheInaccurate) {
     var stockRouter = express.Router();
 
     //typical middleware for auth
@@ -34,33 +34,43 @@ module.exports = function (app, express, User, jwt) {
         }
     });
 
-    /* This route should send all info about a stock in json format:
-    Name of the company
-    The company's ticker symbol
-    The last price of the company's stock
-    The change in price of the company's stock since the previous trading day's close
-    The change percent in price of the company's stock since the previous trading day's close
-    The last time the company's stock was traded in exchange-local timezone. Represented as ddd MMM d HH:mm:ss UTCzzzzz yyyy
-    The last time the company's stock was traded in exchange-local timezone. Represented as an OLE Automation date
-    The company's market cap
-    The trade volume of the company's stock
-    The change in price of the company's stock since the start of the year
-    The change percent in price of the company's stock since the start of the year
-    The high price of the company's stock in the trading session
-    The low price of the company's stock in the trading session
-    The opening price of the company's stock at the start of the trading session
-    Daily history regarding stock (for one year) */
-
-    //NOTE: This uses Markit on Demand for current data and barchart for historical
+    //This uses Markit on Demand for current data and barchart for historical
     // defaults to daily info for one year
     stockRouter.route('/:stock_symbol').get(function (req, res) {
 
         // Check to ensure valid stock symbol
         if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
-          mrtScraper(req.params.stock_symbol, function (markitResult) {
             yearMinusOne(function(date) {
               hScraper(req.params.stock_symbol, 'daily', date, function(historyResult) {
-                  res.status(200).json({success: true, message: "success", current: markitResult, past: historyResult});
+                currentStockCacheAccurate.get(req.params.stock_symbol.toUpperCase(), function(err, value) {
+                  //if not in accurate cache (see design docs for a description of caching mechanism)
+                  if (err) {
+                    currentStockCacheInaccurate.get(req.params.stock_symbol.toUpperCase(), function(err, value) {
+                      //if not in inaccurate cache
+                      if (err) {
+                        mrtScraper(req.params.stock_symbol, function(info) {
+                          value = {
+                            symbol: info.Symbol.toUpperCase(),
+                            name: stockDictionary[info.Symbol.toUpperCase()],
+                            exchange: stockDictionaryExchange[info.Symbol.toUpperCase()],
+                            lastPrice: info.LastPrice,
+                            netChange: info.Change,
+                            percentChange: info.ChangePercent.toFixed(2),
+                            volume: info.Volume,
+                            high: info.High,
+                            low: info.Low,
+                            open: info.Open
+                          };
+                          currentStockCacheInaccurate.set(info.Symbol.toUpperCase(), value);
+                          res.status(200).json({success: true, message: "success", current: value, past: historyResult});
+                        });
+                      } else {
+                        res.status(200).json({success: true, message: "success", current: value, past: historyResult});
+                      }
+                    });
+                  } else {
+                    res.status(200).json({success: true, message: "success", current: value, past: historyResult});
+                  }
               });
             });
           });
@@ -103,10 +113,40 @@ module.exports = function (app, express, User, jwt) {
     });
 
     stockRouter.route('/current/:stock_symbol').get(function(req, res) {
+
       if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
-        mrtScraper(req.params.stock_symbol, function(result) {
-          res.status(200).json({success: true, message: "success", current: result});
-        }, req.params.end_date);
+        currentStockCacheAccurate.get(req.params.stock_symbol.toUpperCase(), function(err, value) {
+
+          //if not in accurate cache (see design docs for a description of caching mechanism)
+          if (err) {
+            currentStockCacheInaccurate.get(req.params.stock_symbol.toUpperCase(), function(err, value) {
+
+              //if not in inaccurate cache
+              if (err) {
+                mrtScraper(req.params.stock_symbol, function(info) {
+                  value = {
+                    symbol: info.Symbol.toUpperCase(),
+                    name: stockDictionary[info.Symbol.toUpperCase()],
+                    exchange: stockDictionaryExchange[info.Symbol.toUpperCase()],
+                    lastPrice: info.LastPrice,
+                    netChange: info.Change,
+                    percentChange: info.ChangePercent.toFixed(2),
+                    volume: info.Volume,
+                    high: info.High,
+                    low: info.Low,
+                    open: info.Open
+                  };
+                  currentStockCacheInaccurate.set(info.Symbol.toUpperCase(), value);
+                  res.status(200).json({success: true, message: "success", current: value});
+                });
+              } else {
+                res.status(200).json({success: true, message: "success", current: value});
+              }
+            });
+          } else {
+            res.status(200).json({success: true, message: "success", current: value});
+          }
+        });
       } else {
 
         res.status(404).json({success: false, message: "stock not available", current: ""});

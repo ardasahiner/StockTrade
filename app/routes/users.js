@@ -5,7 +5,7 @@ var yrtScraper = require('../../scrapers/yahoorealtimescraper');
 var stockDictionaryExchange = require('../../vendor/stockdictionaryexchange');
 
 // User Router will handle creating, deleting and accessing user data
-module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset) {
+module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset, currentStockCache) {
     var userRouter = express.Router();
 
     // POST request to '/' route does not require authentication,

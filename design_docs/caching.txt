@@ -45,7 +45,31 @@ Challenges (anotha one):
 Possible solutions:
   1. Just don't use the cache for markit at all (meh)
   2. Call markit just as many times as before, but if there is a value in cache only
-  replace the relevant fields (do we really care if MSDate, MarketCap, ChangeYTD,
+  replace the relevant fields (do we really care if TimeStamp, MSDate, MarketCap, ChangeYTD,
   and ChangePercentYTD are slightly off?)
   3. Don't even send those other fields, process JSON received from markit and
   remove them (would have to change API, though probably will need to either way)
+
+
+Going to go with option #3
+  Objects in the cache will have the following structure:
+    symbol -- String -- symbol of stock
+    name -- String -- name of stock
+    exchange -- String -- exchange in which stock is traded
+    lastPrice -- Double -- last price of stock
+    netChange -- Double -- net change of stock price since session opened
+    percentChange -- Double -- percent change of stock price since session opened
+    volume -- Int -- volume of trading
+    high -- Double -- high price during trading session
+    low -- Double -- low price during trading session
+    open -- Double -- price of stock when trading session opened
+  All keys will be uppercase stock tickers
+  Save in cache immediately after making a successful scraper call
+  Check cache before using scraper
+  Expiration time for each stock will be 4 minutes (can be changed very easily)
+
+But doesn't this leave open the possibility of a yahoo or barchart call actually
+getting the values from markit? How do we protect against that?
+  Have two caches, one accurate and one inaccurate. Have markit add to the inaccurate cache
+  and get from both, and yahoo and barchart add to the accurate one and only get
+  from the accurate one.

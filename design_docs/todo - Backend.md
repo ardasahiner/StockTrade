@@ -2,18 +2,9 @@ NOTE: limit # of requests/sec or else you'll get blocked (but AWS uses multiple 
 
 REFER TO FRONTEND FILE: frontend file (website_frontend.txt) contains all of the information pertaining to angular frontend
 
-BACKEND tasks (as of 6/29):
+BACKEND tasks (as of 7/13):
 
-Selling stocks (both GET and POST routes)
-Portfolio route
 Caching stock prices using node-cache module
-Optimizing MongoDB search
-Cleaning up unnecessary imports
-Finalizing models
-Commenting code for clarity
-Documentation of full API
-
-These should be finished by 7/13
 
 Later tasks:
 

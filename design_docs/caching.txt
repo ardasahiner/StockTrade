@@ -1,0 +1,51 @@
+This document is designated for deciding how best to design the caches for stock prices
+
+Objective: Try to minimize amount of HTTP requests to barchart, yahoo, markit, etc. as much as possible
+  Sub-goals:
+    Minimize yahoo requests especially; this is probably the most important
+    Substitute markit data with cached yahoo or barchart data wherever possible so that it's more accurate
+
+
+Challenges:
+  Data returned by each scraper is slightly different
+    E.g. portfolio route uses "symbol", "name", "netChange", "percentChange", "lastPrice" attributes of JSON
+    These are given by a barchart request. If you attempted to use markit or yahoo data the names would be different and things would break
+  Troubles with historical data
+    Need a separate cache for historical data for sure
+    Trouble optimizing with overlapping data -- for instance, if the daily history
+    of a stock for the past year is already stored in the cache, if the daily history
+    for that same stock for the past year is requested, should not need to make
+    an additional request (unless another day has passed, in which case you need a new request)
+  Having multiple (3+) caches will create unwieldy callback hell
+
+
+Possible solution:
+  Use node-cache module
+  Create two caches that are shared across users and stocks routes, one for current data and one for historical data.
+    Historical data is not as important; postpone for now
+  Each of these has a standard structure so that necessary info can be extracted for any route
+  In other words, each cache will have structure of {symbol : JSON that has all necessary attributes}
+
+
+With this tentative solution in mind, what stock info is necessary for all current stock routes?
+  portfolio:
+    symbol, netChange, percentChange, lastPrice (can get name and exchange from dictionary)
+  buy/sell:
+    lastPrice
+  stocks routes (markit):
+    (Status), (Name), (Symbol), LastPrice, Change, ChangePercent, Timestamp, MSDate,
+    MarketCap, Volume, ChangeYTD, ChangePercentYTD, High, Low, Open
+
+
+Challenges (anotha one):
+  Info we're sending back from stocks routes is more than we receive from Barchart or Yahoo
+    From Barchart we don't get MSDate, MarketCap, ChangeYTD, and ChangePercentYTD
+    From Yahoo we don't get TimeStamp, MSDate, MarketCap, ChangeYTD, and ChangePercentYTD
+
+Possible solutions:
+  1. Just don't use the cache for markit at all (meh)
+  2. Call markit just as many times as before, but if there is a value in cache only
+  replace the relevant fields (do we really care if MSDate, MarketCap, ChangeYTD,
+  and ChangePercentYTD are slightly off?)
+  3. Don't even send those other fields, process JSON received from markit and
+  remove them (would have to change API, though probably will need to either way)

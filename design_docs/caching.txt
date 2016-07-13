@@ -58,7 +58,7 @@ Going to go with option #3
     exchange -- String -- exchange in which stock is traded
     lastPrice -- Double -- last price of stock
     netChange -- Double -- net change of stock price since session opened
-    percentChange -- Double -- percent change of stock price since session opened
+    percentChange -- String -- percent change of stock price since session opened
     volume -- Int -- volume of trading
     high -- Double -- high price during trading session
     low -- Double -- low price during trading session

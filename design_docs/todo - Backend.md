@@ -4,7 +4,9 @@ REFER TO FRONTEND FILE: frontend file (website_frontend.txt) contains all of the
 
 BACKEND tasks (as of 7/13):
 
-Caching stock prices using node-cache module
+Caching current stock prices in the users routes
+Use Yahoo for GOOG in stocks routes (special case)
+(Maybe) Caching historical prices in the stocks routes  
 
 Later tasks:
 

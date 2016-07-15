@@ -2,7 +2,7 @@
 var imports = [];
 imports.push('app.routes');
 imports.push('userService', 'stockService', 'adminService', 'authService');
-imports.push('mainController', 'signupController', 'stockController');
+imports.push('mainController', 'signupController', 'stockController', "searchController");
 
 angular.module('vStockApp', imports)
 
@@ -22,7 +22,7 @@ function ($rootScope, $location, Auth) {
     if (toState.authenticated && !Auth.isLoggedIn()) {
       $location.path('/');
     }
-    
+
   });
 
 }]);

@@ -10,7 +10,8 @@
   <br><br>
   <center>
     <div class="search" ng-controller="searchController as search">
-      <input class="awesomplete" list="searchTerms" style="color:black" />
+      <label>Search Companies: </label>
+      <input class="awesomplete" list="searchTerms" name="company" style="color:black" />
       <datalist id="searchTerms">
         <option ng-repeat="term in search.searchTerms">{{ term }}</option>
       </datalist>

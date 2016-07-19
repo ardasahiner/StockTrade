@@ -118,3 +118,29 @@ footer {
 body.footer {
     vertical-align: bottom;
 }
+
+#portfolio-container {
+    background-color: #326755;
+    font-size: 14px;
+}
+.table-header {
+    padding-bottom:20px;
+    font-size:17px;
+    border-bottom-width: 3px;
+}
+
+
+.button-style {
+  border-radius: 0px!important;
+  background-color:gray;
+}
+
+.information-header {
+  font-style:italic;
+  font-size:14px;
+}
+
+.portfolio-row {
+    border-bottom-width: 1px!important;
+    border-color: white!important;
+}

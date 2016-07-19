@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="assets/vendor/awesomplete/awesomplete.css">
+<script src="assets/vendor/awesomplete/awesomplete.js" async></script>
+
+
 <div class="container buysell">
 
   <h1>{{ main.user.firstName }}'s Portfolio</h1>
@@ -23,9 +27,11 @@
   </div>
   <br><br>
   <center>
-    <div class="ui-widget" ng-controller="searchController as search">
-      <label for="search">Search Companies: </label>
-      <input id="tags">
+    <div class="search" ng-controller="searchController as search">
+      <input id="searchInput" list="searchTerms" />
+      <datalist id="searchTerms">
+        <option ng-repeat="term in search.searchTerms">{{ term }}</option>
+      </datalist>
     </div>
   </center>
 

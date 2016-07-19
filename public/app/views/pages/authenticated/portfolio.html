@@ -2,32 +2,14 @@
 
   <h1>{{ main.user.firstName }}'s Portfolio</h1>
 
-  <div class="row">
-
-    <div class="col-lg-1 col-md-1 col-sm-1"></div>
-
-    <div class="col-lg-4 col-md-4 col-sm-4">
-      <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#buyModal">
-        <span>Buy a Stock</span>
-      </button>
-    </div>
-
-    <div class="col-lg-2 col-md-2 col-sm-2"></div>
-
-    <div class="col-lg-4 col-md-4 col-sm-4">
-      <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#sellModal">
-        <span>Sell a Stock</span>
-      </button>
-    </div>
-
-  </div>
+  
   <br><br>
-  <center>
+  
     <div class="ui-widget" ng-controller="searchController as search">
-      <label for="search">Search Companies: </label>
-      <input id="tags">
+<!--       <label for="search">Search Companies: </label> -->
+      <input id="tags" placeholder="Search Ticker">
     </div>
-  </center>
+  <br>
 
   <div class="container-fluid" id="portfolio-container">
     <div class="row">
@@ -35,13 +17,14 @@
         <h3>Stock Portfolio</h3>
       </div>
     </div>
-    <div class="row">
+    <br>
+    <div class="row information-header">
       <div class="col-xs-4">
         Account Value: ${{ stocks.portfolio.portfolioValue }}
       </div>
 
       <div class="col-xs-4">
-        Cash Remaining: ${{ stocks.portfolio.cash }}
+        Cash Remaining: ${{ main.user.cash }}
       </div>
 
       <div class="col-xs-4">
@@ -85,9 +68,6 @@
         Exchange
       </div>
 
-      <div class="col-sm-1">
-        Margin
-      </div>
 
 
     </div>
@@ -98,3 +78,22 @@
   <!-- Import Buy/Sell Modals -->
   <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
 </div>
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <button class="btn btn-block button-style" data-toggle="modal" data-target="#buyModal">
+        <span>Buy a Stock</span>
+      </button>
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <button class="btn btn-block button-style" data-toggle="modal" data-target="#sellModal">
+        <span>Sell a Stock</span>
+      </button>
+    </div>
+</div>
+<br>
+<br>

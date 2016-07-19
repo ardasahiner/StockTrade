@@ -16,9 +16,20 @@
 
 #portfolio-container {
 	background-color: #326755;
-	font-size: 15px;
+	font-size: 14px;
 }
 .table-header {
 	padding-bottom:20px;
-	font-size:18px;
+	font-size:17px;
+}
+
+
+.button-style {
+  border-radius: 0px!important;
+  background-color:gray;
+}
+
+.information-header {
+  font-style:italic;
+  font-size:14px;
 }

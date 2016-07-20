@@ -123,58 +123,73 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             }
           });
         }, function(err) {
-          bScraper(tickerList, function(infoList) {
-            console.log("called scraper");
+          if (tickerList.length == 0) {
             User.findOne({username: req.decoded._doc.username}, function(err, user) {
               console.log("found user");
               if (err) res.send(err);
               response.username = user.username;
               response.cash = user.cash.toFixed(2);
               portfolioValue += parseFloat(user.cash.toFixed(2));
-              async.forEach(infoList, function(currentInfo, callback) {
-                if (currentInfo !== "Error") {
-                  UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
-                    portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
-                    response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
-                                          name: currentInfo.name,
-                                          exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
-                                          quantity: asset[0].quantity.toFixed(0),
-                                          currentPricePerShare: currentInfo.lastPrice.toFixed(2),
-                                          purchasePricePerShare: (asset[0].buyPrice / asset[0].quantity).toFixed(2),
-                                          amountSpent: asset[0].buyPrice.toFixed(2),
-                                          currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
-                                          todayChangeNet: currentInfo.netChange.toFixed(2),
-                                          todayTotalChangeNet: (currentInfo.netChange * asset[0].quantity).toFixed(2),
-                                          todayChangePercent: currentInfo.percentChange.toFixed(2),
-                                          totalNetProfit: (asset[0].quantity * currentInfo.lastPrice - asset[0].buyPrice).toFixed(2),
-                                          totalPercentProfit: (((asset[0].quantity * currentInfo.lastPrice) / asset[0].buyPrice - 1) * 100).toFixed(2)});
-                  value = {
-                    symbol: currentInfo.symbol.toUpperCase(),
-                    name: stockDictionary[currentInfo.symbol.toUpperCase()],
-                    exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
-                    lastPrice: currentInfo.lastPrice.toFixed(2),
-                    netChange: currentInfo.netChange.toFixed(2),
-                    percentChange: currentInfo.percentChange.toFixed(2),
-                    volume: currentInfo.volume,
-                    high: currentInfo.high,
-                    low: currentInfo.low,
-                    open: currentInfo.open
-                  };
-                  currentStockCache.set(currentInfo.symbol.toUpperCase(), value);
-                  console.log("saved asset");
-                  callback();
-                  });
-                } else {
-                  callback();
-                }
-              }, function(err){
-                response.portfolioValue = portfolioValue.toFixed(2);
-                response.grossProfit = (portfolioValue - 1000000).toFixed(2);
-                response.percentProfit = ((portfolioValue / 1000000 - 1) * 100).toFixed(2);
-                res.status(200).send(response);
+              response.portfolioValue = portfolioValue.toFixed(2);
+              response.grossProfit = (portfolioValue - 1000000).toFixed(2);
+              response.percentProfit = ((portfolioValue / 1000000 - 1) * 100).toFixed(2);
+              res.status(200).send(response);
+            });
+          }
+          else {
+            bScraper(tickerList, function(infoList) {
+              console.log("called scraper");
+              User.findOne({username: req.decoded._doc.username}, function(err, user) {
+                console.log("found user");
+                if (err) res.send(err);
+                response.username = user.username;
+                response.cash = user.cash.toFixed(2);
+                portfolioValue += parseFloat(user.cash.toFixed(2));
+                async.forEach(infoList, function(currentInfo, callback) {
+                  if (currentInfo !== "Error") {
+                    UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
+                      portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
+                      response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
+                                            name: currentInfo.name,
+                                            exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
+                                            quantity: asset[0].quantity.toFixed(0),
+                                            currentPricePerShare: currentInfo.lastPrice.toFixed(2),
+                                            purchasePricePerShare: (asset[0].buyPrice / asset[0].quantity).toFixed(2),
+                                            amountSpent: asset[0].buyPrice.toFixed(2),
+                                            currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
+                                            todayChangeNet: currentInfo.netChange.toFixed(2),
+                                            todayTotalChangeNet: (currentInfo.netChange * asset[0].quantity).toFixed(2),
+                                            todayChangePercent: currentInfo.percentChange.toFixed(2),
+                                            totalNetProfit: (asset[0].quantity * currentInfo.lastPrice - asset[0].buyPrice).toFixed(2),
+                                            totalPercentProfit: (((asset[0].quantity * currentInfo.lastPrice) / asset[0].buyPrice - 1) * 100).toFixed(2)});
+                    value = {
+                      symbol: currentInfo.symbol.toUpperCase(),
+                      name: stockDictionary[currentInfo.symbol.toUpperCase()],
+                      exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
+                      lastPrice: currentInfo.lastPrice.toFixed(2),
+                      netChange: currentInfo.netChange.toFixed(2),
+                      percentChange: currentInfo.percentChange.toFixed(2),
+                      volume: currentInfo.volume,
+                      high: currentInfo.high,
+                      low: currentInfo.low,
+                      open: currentInfo.open
+                    };
+                    currentStockCache.set(currentInfo.symbol.toUpperCase(), value);
+                    console.log("saved asset");
+                    callback();
+                    });
+                  } else {
+                    callback();
+                  }
+                }, function(err){
+                  response.portfolioValue = portfolioValue.toFixed(2);
+                  response.grossProfit = (portfolioValue - 1000000).toFixed(2);
+                  response.percentProfit = ((portfolioValue / 1000000 - 1) * 100).toFixed(2);
+                  res.status(200).send(response);
+                });
               });
             });
-          });
+          }
         });
       });
     });

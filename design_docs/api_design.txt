@@ -37,8 +37,8 @@ STOCKS
               -- symbol -- String -- symbol of stock
               -- name -- String -- name of stock
               -- exchange -- String -- exchange in which stock is traded
-              -- lastPrice -- Double -- last price of stock
-              -- netChange -- Double -- net change of stock price since session opened
+              -- lastPrice -- String -- last price of stock
+              -- netChange -- String -- net change of stock price since session opened
               -- percentChange -- String -- percent change of stock price since session opened
               -- volume -- Int -- volume of trading
               -- high -- Double -- high price during trading session
@@ -122,8 +122,8 @@ STOCKS
                 -- symbol -- String -- symbol of stock
                 -- name -- String -- name of stock
                 -- exchange -- String -- exchange in which stock is traded
-                -- lastPrice -- Double -- last price of stock
-                -- netChange -- Double -- net change of stock price since session opened
+                -- lastPrice -- String -- last price of stock
+                -- netChange -- String -- net change of stock price since session opened
                 -- percentChange -- String -- percent change of stock price since session opened
                 -- volume -- Int -- volume of trading
                 -- high -- Double -- high price during trading session

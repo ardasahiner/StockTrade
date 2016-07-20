@@ -53,8 +53,8 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
                             symbol: info.Symbol.toUpperCase(),
                             name: stockDictionary[info.Symbol.toUpperCase()],
                             exchange: stockDictionaryExchange[info.Symbol.toUpperCase()],
-                            lastPrice: info.LastPrice,
-                            netChange: info.Change,
+                            lastPrice: info.LastPrice.toFixed(2),
+                            netChange: info.Change.toFixed(2),
                             percentChange: info.ChangePercent.toFixed(2),
                             volume: info.Volume,
                             high: info.High,
@@ -128,8 +128,8 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
                     symbol: info.Symbol.toUpperCase(),
                     name: stockDictionary[info.Symbol.toUpperCase()],
                     exchange: stockDictionaryExchange[info.Symbol.toUpperCase()],
-                    lastPrice: info.LastPrice,
-                    netChange: info.Change,
+                    lastPrice: info.LastPrice.toFixed(2),
+                    netChange: info.Change.toFixed(2),
                     percentChange: info.ChangePercent.toFixed(2),
                     volume: info.Volume,
                     high: info.High,
@@ -148,7 +148,6 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
           }
         });
       } else {
-
         res.status(404).json({success: false, message: "stock not available", current: ""});
       }
     });

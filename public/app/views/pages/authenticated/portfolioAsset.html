@@ -1,42 +1,30 @@
 <!-- This is the template for an asset in portfolio -->
 <!-- Angular loops through all of the assets and renders the template for each -->
 <div class="row portfolio-row">
-	<div class="col-sm-1">
-	  {{ info.ticker }}
+
+	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+		{{ info.ticker }}
 	</div>
 
-	<div class="col-sm-2">
-	  {{ info.name }}
+	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+		{{ info.name }}
 	</div>
 
-	<div class="col-sm-1">
-	  ${{ info.currentPricePerShare }}
+	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+		${{ info.currentPricePerShare | number : 2 }}
 	</div>
 
-	<div class="col-sm-1">
-	  {{ info.quantity }}
+	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+		{{ info.quantity | number : 0 }}
 	</div>
 
-	<div class="col-sm-1">
-	  ${{ info.totalNetProfit  }}
+	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+		${{ info.totalNetProfit | number : 2 }} ({{ info.totalPercentProfit | number : 2 }}%)
 	</div>
 
-	<div class="col-sm-2">
-	  ${{ info.amountSpent }}
+	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+		${{ info.todayChangeNet | number : 2 }} ({{ info.todayChangePercent | number : 2 }}%)
 	</div>
-
-	<div class="col-sm-2">
-	  ${{ info.currentValue }}
-	</div>
-
-	<div class="col-sm-1">
-	  {{ info.exchange }}
-	</div>
-
-	<div class="col-sm-1">
-	  {{ info.percentProfit }}
-	</div>
-
 
 </div>
 <br>

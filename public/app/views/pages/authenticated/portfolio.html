@@ -5,10 +5,31 @@
 
   <br><br>
 
-    <div class="search" ng-controller="searchController as search">
-      <label>Search Companies: </label>
-      <input name="company" style="color:black" ng-model="search.value" uib-typeahead="term for term in search.searchTerms | filter:$viewValue | limitTo:8"/>
+  <div class="search" ng-controller="searchController as search">
+    <label>Search Companies: </label>
+    <input name="company" style="color:black" ng-model="search.value" uib-typeahead="term for term in search.searchTerms | filter:$viewValue | limitTo:8"/>
+  </div>
+  
+  <br>
+
+  <div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <button class="btn btn-block button-style" data-toggle="modal" data-target="#buyModal">
+        <span>Buy a Stock</span>
+      </button>
     </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <button class="btn btn-block button-style" data-toggle="modal" data-target="#sellModal">
+        <span>Sell a Stock</span>
+      </button>
+    </div>
+  </div>
+
   <br>
 
   <div class="container-fluid" id="portfolio-container">
@@ -32,68 +53,51 @@
       </div>
     </div>
 
-  <br><br>
-  <center>
-    <div class="row table-header portfolio-row">
+    <br><br>
+    <center>
+      <div class="row table-header portfolio-row">
 
-      <div class="col-sm-1">
-        Symbol
+        <div class="col-sm-1">
+          Symbol
+        </div>
+
+        <div class="col-sm-2">
+          Company Name
+        </div>
+
+        <div class="col-sm-1">
+          Price
+        </div>
+
+        <div class="col-sm-1">
+          QTY
+        </div>
+
+        <div class="col-sm-1">
+          Profit
+        </div>
+
+        <div class="col-sm-2">
+          Purchase Price
+        </div>
+
+        <div class="col-sm-2">
+          Value
+        </div>
+
+        <div class="col-sm-1">
+          Exchange
+        </div>
+
+
+
       </div>
-
-      <div class="col-sm-2">
-        Company Name
-      </div>
-
-      <div class="col-sm-1">
-        Price
-      </div>
-
-      <div class="col-sm-1">
-        QTY
-      </div>
-
-      <div class="col-sm-1">
-        Profit
-      </div>
-
-      <div class="col-sm-2">
-        Purchase Price
-      </div>
-
-      <div class="col-sm-2">
-        Value
-      </div>
-
-      <div class="col-sm-1">
-        Exchange
-      </div>
-
-
-
-    </div>
       <div class="stock" ng-repeat="stock in portfolioAssets">
         <stock-asset info="stock">
+        </div>
       </div>
-  </div>
-  <!-- Import Buy/Sell Modals -->
-  <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
-</div>
-<div class="row">
-    <div class="col-lg-1 col-md-1 col-sm-1"></div>
-
-    <div class="col-lg-4 col-md-4 col-sm-4">
-      <button class="btn btn-block button-style" data-toggle="modal" data-target="#buyModal">
-        <span>Buy a Stock</span>
-      </button>
+      <!-- Import Buy/Sell Modals -->
+      <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
     </div>
-
-    <div class="col-lg-2 col-md-2 col-sm-2"></div>
-
-    <div class="col-lg-4 col-md-4 col-sm-4">
-      <button class="btn btn-block button-style" data-toggle="modal" data-target="#sellModal">
-        <span>Sell a Stock</span>
-      </button>
-    </div>
-</div>
-<br>
-<br>
+    <br>
+    <br>

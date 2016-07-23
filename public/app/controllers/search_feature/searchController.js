@@ -1,5 +1,5 @@
 // Make a controller here to search trie and return all relevant terms
-angular.module('searchController', [])
+angular.module('searchController', ['ui.bootstrap'])
 
 .controller('searchController', function() {
 

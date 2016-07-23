@@ -1,7 +1,3 @@
-<link rel="stylesheet" href="assets/vendor/awesomplete/awesomplete.css">
-<script src="assets/vendor/awesomplete/awesomplete.js" async></script>
-
-
 <div class="container buysell">
 
   <h1>{{ main.user.firstName }}'s Portfolio</h1>
@@ -11,10 +7,7 @@
 
     <div class="search" ng-controller="searchController as search">
       <label>Search Companies: </label>
-      <input class="awesomplete" list="searchTerms" name="company" style="color:black" />
-      <datalist id="searchTerms">
-        <option ng-repeat="term in search.searchTerms">{{ term }}</option>
-      </datalist>
+      <input name="company" style="color:black" ng-model="search.value" uib-typeahead="term for term in search.searchTerms | filter:$viewValue | limitTo:8"/>
     </div>
   <br>
 

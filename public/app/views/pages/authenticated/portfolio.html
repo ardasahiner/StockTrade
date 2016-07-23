@@ -1,7 +1,3 @@
-<link rel="stylesheet" href="assets/vendor/awesomplete/awesomplete.css">
-<script src="assets/vendor/awesomplete/awesomplete.js" async></script>
-
-
 <div class="container buysell">
 
   <h1>{{ main.user.firstName }}'s Portfolio</h1>
@@ -9,82 +5,14 @@
 
   <br><br>
 
-    <div class="search" ng-controller="searchController as search">
-      <input class="awesomplete" list="searchTerms" style="color:black" />
-      <datalist id="searchTerms">
-        <option ng-repeat="term in search.searchTerms">{{ term }}</option>
-      </datalist>
-    </div>
+  <div class="search" ng-controller="searchController as search">
+    <label>Search Companies: </label>
+    <input name="company" style="color:black" ng-model="search.value" uib-typeahead="term for term in search.searchTerms | filter:$viewValue | limitTo:8"/>
+  </div>
+
   <br>
 
-  <div class="container-fluid" id="portfolio-container">
-    <div class="row">
-      <div class="col-xs-12">
-        <h3>Stock Portfolio</h3>
-      </div>
-    </div>
-    <br>
-    <div class="row information-header">
-      <div class="col-xs-4">
-        Account Value: ${{ stocks.portfolio.portfolioValue }}
-      </div>
-
-      <div class="col-xs-4">
-        Cash Remaining: ${{ main.user.cash }}
-      </div>
-
-      <div class="col-xs-4">
-        Your Profit: ${{ stocks.portfolio.grossProfit }}
-      </div>
-    </div>
-
-  <br><br>
-  <center>
-    <div class="row table-header portfolio-row">
-
-      <div class="col-xs-1">
-        Symbol
-      </div>
-
-      <div class="col-xs-2">
-        Company Name
-      </div>
-
-      <div class="col-xs-1">
-        Price
-      </div>
-
-      <div class="col-xs-1">
-        QTY
-      </div>
-
-      <div class="col-xs-1">
-        Profit
-      </div>
-
-      <div class="col-xs-2">
-        Purchase Price
-      </div>
-
-      <div class="col-xs-2">
-        Value
-      </div>
-
-      <div class="col-xs-1">
-        Exchange
-      </div>
-
-
-
-    </div>
-      <div class="stock" ng-repeat="stock in portfolioAssets">
-        <stock-asset info="stock">
-      </div>
-  </div>
-  <!-- Import Buy/Sell Modals -->
-  <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
-</div>
-<div class="row">
+  <div class="row">
     <div class="col-lg-1 col-md-1 col-sm-1"></div>
 
     <div class="col-lg-4 col-md-4 col-sm-4">
@@ -100,6 +28,74 @@
         <span>Sell a Stock</span>
       </button>
     </div>
-</div>
-<br>
-<br>
+  </div>
+
+  <br>
+
+  <div class="container-fluid" id="portfolio-container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Stock Portfolio</h3>
+      </div>
+    </div>
+    <br>
+    <div class="row information-header">
+      <div class="col-xs-4">
+        Account Value: ${{ stocks.portfolio.portfolioValue }}
+      </div>
+
+      <div class="col-xs-4">
+        Cash Remaining: ${{ stocks.portfolio.cash }}
+      </div>
+
+      <div class="col-xs-4">
+        Your Profit: ${{ stocks.portfolio.grossProfit }}
+      </div>
+    </div>
+
+    <br><br>
+    <center>
+      <div class="row table-header portfolio-row">
+
+        <div class="col-sm-1">
+          Symbol
+        </div>
+
+        <div class="col-sm-2">
+          Company Name
+        </div>
+
+        <div class="col-sm-1">
+          Price
+        </div>
+
+        <div class="col-sm-1">
+          QTY
+        </div>
+
+        <div class="col-sm-1">
+          Profit
+        </div>
+
+        <div class="col-sm-2">
+          Purchase Price
+        </div>
+
+        <div class="col-sm-2">
+          Value
+        </div>
+
+        <div class="col-sm-1">
+          Exchange
+        </div>
+
+      </div>
+      <div class="stock" ng-repeat="stock in portfolioAssets">
+        <stock-asset info="stock">
+        </div>
+      </div>
+      <!-- Import Buy/Sell Modals -->
+      <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
+    </div>
+    <br>
+    <br>

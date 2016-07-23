@@ -1,44 +1,42 @@
 <!-- This is the template for an asset in portfolio -->
 <!-- Angular loops through all of the assets and renders the template for each -->
 <div class="row portfolio-row">
-	<div class="col-xs-1">
+	<div class="col-sm-1">
 	  {{ info.ticker }}
 	</div>
 
-	<div class="col-xs-2">
+	<div class="col-sm-2">
 	  {{ info.name }}
 	</div>
 
-	<div class="col-xs-1">
-	  ${{ info.pricePerShare }}
+	<div class="col-sm-1">
+	  ${{ info.currentPricePerShare }}
 	</div>
 
-	<div class="col-xs-1">
+	<div class="col-sm-1">
 	  {{ info.quantity }}
 	</div>
 
-	<div class="col-xs-1">
-	  ${{ info.amountProfit }}
+	<div class="col-sm-1">
+	  ${{ info.totalNetProfit  }}
 	</div>
 
-	<div class="col-xs-2">
+	<div class="col-sm-2">
 	  ${{ info.amountSpent }}
 	</div>
 
-	<div class="col-xs-2">
+	<div class="col-sm-2">
 	  ${{ info.currentValue }}
 	</div>
 
-	<div class="col-xs-1">
+	<div class="col-sm-1">
 	  {{ info.exchange }}
 	</div>
 
-	<div class="col-xs-1">
+	<div class="col-sm-1">
 	  {{ info.percentProfit }}
 	</div>
 
 
 </div>
 <br>
-
-

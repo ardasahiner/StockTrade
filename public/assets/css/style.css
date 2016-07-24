@@ -144,3 +144,16 @@ body.footer {
     border-bottom-width: 1px!important;
     border-color: white!important;
 }
+
+.stockModal .modal-dialog {
+  width: 90%;
+  height: 90%;
+}
+
+.stockModal .modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+  /* TODO: Change background color for the stock modal here */
+  background-color: #193434;
+}

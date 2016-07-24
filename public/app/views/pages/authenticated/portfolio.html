@@ -1,13 +1,16 @@
-<div class="container buysell">
+<div class="container buysell" ng-controller="searchController as search">
 
   <h1>{{ main.user.firstName }}'s Portfolio</h1>
 
 
   <br><br>
 
-  <div class="search" ng-controller="searchController as search">
-    <label>Search Companies: </label>
-    <input name="company" style="color:black" ng-model="search.value" uib-typeahead="term for term in search.searchTerms | filter:$viewValue | limitTo:8"/>
+  <div class="search">
+    <form ng-submit="search.goToStock()">
+      <label>Search Companies: </label>
+      <input name="company" type="form-control" style="color:black" ng-model="search.value" uib-typeahead="term for term in search.searchTerms | filter:$viewValue | limitTo:8"/>
+      <button class="btn btn-default" type="buttons submit">Go!</button>
+    </form>
   </div>
 
   <br>
@@ -58,11 +61,11 @@
       <div class="row table-header portfolio-row">
 
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-          Symbol
+          Ticker
         </div>
 
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          Company Name
+          Equity Name
         </div>
 
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -88,6 +91,10 @@
       </div>
       <!-- Import Buy/Sell Modals -->
       <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
+
+      <!-- Import Individual Stock Page Modal -->
+      <div ng-include src="'/app/views/pages/authenticated/stockModal.html'"></div>
+
     </div>
     <br>
     <br>

@@ -2,11 +2,19 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Stock Page</h4>
+        <h4 class="modal-title" id="myModalLabel">{{ search.stock.data.current.name }} ({{ search.stock.data.current.symbol}})</h4>
       </div>
       <div class="modal-body">
-        {{ search.stock.name }}
-        {{ search.stock.data.current }}
+        <p>Stock: {{ search.stock.data.current.name }}<p>
+        <p>Stock Ticker: {{ search.stock.data.current.symbol }}<p>
+        <p>Stock Price: {{ search.stock.data.current.lastPrice }}<p>
+        <p>Percent Change: {{ search.stock.data.current.symbol }}<p>
+        <p>Net Change: {{ search.stock.data.current.netChange }}<p>
+        <p>High: {{ search.stock.data.current.high }}<p>
+        <p>Low: {{ search.stock.data.current.low }}<p>
+        <p>Volume: {{ search.stock.data.current.volume }}<p>
+        <p>Exchange: {{ search.stock.data.current.exchange }}<p>
+
         <br><br><br>
         Make cool graph using historical data here, gonna be hard :(
       </div>

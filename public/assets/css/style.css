@@ -157,3 +157,7 @@ body.footer {
   /* TODO: Change background color for the stock modal here */
   background-color: #193434;
 }
+
+.stockAssetRow a {
+  color: white;
+}

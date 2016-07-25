@@ -65,7 +65,6 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
                           low: parseFloat(info[0][6]),
                           open: parseFloat(info[0][3])
                         };
-                        console.log(value);
                         currentStockCacheAccurate.set(req.params.stock_symbol.toUpperCase(), value);
                         res.status(200).json({success: true, message: "success", current: value, past: historyResult});
                       });

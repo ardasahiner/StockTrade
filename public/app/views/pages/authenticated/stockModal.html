@@ -2,13 +2,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">{{ search.stock.data.current.name }} ({{ search.stock.data.current.symbol}})</h4>
+        <h4 class="modal-title" id="myModalLabel" ng-if="search.stock.data.success">{{ search.stock.data.current.name }} ({{ search.stock.data.current.symbol}})</h4>
+        <h4 class="modal-title" id="myModalLabel" ng-if="!search.stock.data.success">Stock Not Available</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" ng-if="search.stock.data.success">
         <p>Stock: {{ search.stock.data.current.name }}<p>
         <p>Stock Ticker: {{ search.stock.data.current.symbol }}<p>
         <p>Stock Price: {{ search.stock.data.current.lastPrice }}<p>
-        <p>Percent Change: {{ search.stock.data.current.symbol }}<p>
+        <p>Percent Change: {{ search.stock.data.current.percentChange }}<p>
         <p>Net Change: {{ search.stock.data.current.netChange }}<p>
         <p>High: {{ search.stock.data.current.high }}<p>
         <p>Low: {{ search.stock.data.current.low }}<p>
@@ -16,8 +17,13 @@
         <p>Exchange: {{ search.stock.data.current.exchange }}<p>
 
         <br><br><br>
-        Make cool graph using historical data here, gonna be hard :(
+        Make cool graph using historical data here
       </div>
+
+      <div class="modal-body" ng-if="!search.stock.data.success">
+        Stock Not Available
+      </div>
+
       <div class="modal-footer">
         <button class="btn btn-block btn-primary" ng-click="search.closeStockModal()">
           <span>Close</span>

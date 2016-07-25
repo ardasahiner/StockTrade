@@ -7,6 +7,8 @@ var mrtScraper = require('../../scrapers/markitrealtimescraper');
 var hScraper = require('../../scrapers/historyscraper');
 var batslist = require('../../vendor/batslist');
 var yearMinusOne = require('../helpers/yearminusone');
+var yrtScraper = require('../../scrapers/yahoorealtimescraper');
+
 
 module.exports = function (app, express, User, jwt, currentStockCacheAccurate, currentStockCacheInaccurate) {
   var stockRouter = express.Router();
@@ -50,7 +52,23 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
                 if (err) {
                   mrtScraper(req.params.stock_symbol, function(info) {
                     if (info.Status != 'SUCCESS') {
-                      res.status(404).json({success: false, message: "stock not available", current: "", past: ""});
+                      yrtScraper(req.params.stock_symbol, function(info) {
+                        value = {
+                          symbol: req.params.stock_symbol.toUpperCase(),
+                          name: stockDictionary[req.params.stock_symbol.toUpperCase()],
+                          exchange: stockDictionaryExchange[req.params.stock_symbol.toUpperCase()],
+                          lastPrice: info[0][0],
+                          netChange: info[0][1],
+                          percentChange: info[0][2].substring(0, info[0][2].length - 1), // strips % sign
+                          volume: parseInt(info[0][7]),
+                          high: parseFloat(info[0][5]),
+                          low: parseFloat(info[0][6]),
+                          open: parseFloat(info[0][3])
+                        };
+                        console.log(value);
+                        currentStockCacheAccurate.set(req.params.stock_symbol.toUpperCase(), value);
+                        res.status(200).json({success: true, message: "success", current: value, past: historyResult});
+                      });
                     } else {
                       value = {
                         symbol: info.Symbol.toUpperCase(),

@@ -478,7 +478,6 @@ var getYahooPrice = function(symbol, stockCache, callback) {
       if (err) {
         console.log("not in cache");
         yrtScraper(symbol, function(info) {
-
           //create object to put in cache
           //price, change, change in percent, open, close, high, low and volume
           value = {

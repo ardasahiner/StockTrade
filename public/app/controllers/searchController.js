@@ -12,7 +12,9 @@ angular.module('searchController', ['ui.bootstrap'])
   vm.goToStock = function() {
     if (vm.searchTerms.indexOf(vm.value) > -1) {
       vm.stock = {};
+      vm.stock.loading = true;
       vm.stock.ticker = vm.value;
+      $("#stockModal").modal('show');
       if (vm.stock.ticker in vm.nameToTicker) {
         vm.stock.ticker = vm.nameToTicker[vm.stock.ticker];
       }
@@ -22,20 +24,21 @@ angular.module('searchController', ['ui.bootstrap'])
           console.log(data);
           vm.stock.data = data.data;
           vm.stock.data.success = true;
-          $("#stockModal").modal('show');
+          vm.stock.loading = false;
         })
         .catch(function(err) {
           console.log(err);
           vm.stock.data = {};
           vm.stock.data.success = false;
           vm.stock.data.name = "Stock Not Available";
-          $("#stockModal").modal('show');
+          vm.stock.loading = false;
         });
     }
   };
 
   vm.linkToStock = function(stock) {
     vm.stock = {};
+    vm.stock.loading = true;
     vm.stock.ticker = stock;
     $("#stockModal").modal('show');
     console.log(vm.stock.ticker);
@@ -44,14 +47,14 @@ angular.module('searchController', ['ui.bootstrap'])
         console.log(data);
         vm.stock.data = data.data;
         vm.stock.data.success = true;
-        $("#stockModal").modal('show');
+        vm.stock.loading = false;
       })
       .catch(function(err) {
         console.log(err);
         vm.stock.data = {};
         vm.stock.data.success = false;
         vm.stock.data.name = "Stock Not Available";
-        $("#stockModal").modal('show');
+        vm.stock.loading = false;
       });
   };
 

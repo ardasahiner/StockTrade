@@ -51,7 +51,7 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
                 //if not in inaccurate cache
                 if (err) {
                   mrtScraper(req.params.stock_symbol, function(info) {
-                    if (info.Status != 'SUCCESS') {
+                    if (info.Status != 'SUCCESS' || req.params.stock_symbol.toUpperCase() == "GOOG") {
                       yrtScraper(req.params.stock_symbol, function(info) {
                         value = {
                           symbol: req.params.stock_symbol.toUpperCase(),

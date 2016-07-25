@@ -23,7 +23,7 @@ STOCKS
 
   GET http://vstock.io/stocks/:stock_symbol
     Summary:
-      Given a stock symbol, returns a JSON object with current price of the stock and its daily closing price history for one year. Uses Markit on Demand for current price and Barchart on Demand for historical prices. Note that current prices may be within a dollar of actual prices, and this route should not be used for class C Google stock (GOOG).
+      Given a stock symbol, returns a JSON object with current price of the stock and its daily closing price history for one year. Uses Markit on Demand for current price and Barchart on Demand for historical prices. Note that current prices may be within a dollar of actual prices.
     Headers:
       x-access-token -- JWT -- acquired from the authentication route
     Body:

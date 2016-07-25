@@ -9,11 +9,11 @@
         <p>Stock: {{ search.stock.data.current.name }}<p>
         <p>Stock Ticker: {{ search.stock.data.current.symbol }}<p>
         <p>Stock Price: {{ search.stock.data.current.lastPrice }}<p>
-        <p>Percent Change: {{ search.stock.data.current.percentChange }}<p>
-        <p>Net Change: {{ search.stock.data.current.netChange }}<p>
-        <p>High: {{ search.stock.data.current.high }}<p>
-        <p>Low: {{ search.stock.data.current.low }}<p>
-        <p>Volume: {{ search.stock.data.current.volume }}<p>
+        <p ng-if="search.stock.data.current.volume != 0" >Percent Change: {{ search.stock.data.current.percentChange }}<p>
+        <p ng-if="search.stock.data.current.volume != 0" >Net Change: {{ search.stock.data.current.netChange }}<p>
+        <p ng-if="search.stock.data.current.volume != 0" >High: {{ search.stock.data.current.high }}<p>
+        <p ng-if="search.stock.data.current.volume != 0" >Low: {{ search.stock.data.current.low }}<p>
+        <p ng-if="search.stock.data.current.volume != 0" >Volume: {{ search.stock.data.current.volume }}<p>
         <p>Exchange: {{ search.stock.data.current.exchange }}<p>
 
         <br><br><br>

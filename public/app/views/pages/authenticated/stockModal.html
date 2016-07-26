@@ -17,8 +17,16 @@
         <p ng-if="search.stock.data.current.volume != 0" >Volume: {{ search.stock.data.current.volume }}<p>
         <p>Exchange: {{ search.stock.data.current.exchange }}<p>
 
+        <br>
+
+        <p>You can buy: {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} Shares</p>
+        <p ng-if="stocks.canBuy(search.stock.data.current.symbol)">
+          You can sell: {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} Shares
+        </p>
+
         <br><br><br>
         Make cool graph using historical data here
+
       </div>
 
       <div class="modal-body" ng-if="!search.stock.data.success && !search.stock.loading">

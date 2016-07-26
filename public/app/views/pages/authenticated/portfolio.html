@@ -6,11 +6,9 @@
   <br><br>
 
   <div class="search">
-    <form ng-submit="search.goToStock()">
       <label>Search Companies: </label>
-      <input name="company" type="form-control" style="color:black" ng-model="search.value" uib-typeahead="term for term in search.searchTerms | filter:$viewValue | limitTo:8" autocomplete="off"/>
-      <button class="btn btn-default" type="buttons submit">Go!</button>
-    </form>
+      <input name="company" type="form-control" style="color:black" ng-model="search.value" autocomplete="off"
+      uib-typeahead="term for term in search.searchTerms | filter:$viewValue:startsWith | limitTo:8" typeahead-editable="false" typeahead-on-select="search.goToStock()"/>
   </div>
 
   <br>

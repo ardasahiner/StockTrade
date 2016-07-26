@@ -1,7 +1,7 @@
-// Make a controller here to search trie and return all relevant terms
+// Make a controller here to handle search and deal with individual stock pages
 angular.module('searchController', ['ui.bootstrap'])
 
-.controller('searchController', function(Stocks) {
+.controller('searchController', function(Stocks, $scope) {
 
   var vm = this;
 
@@ -62,6 +62,16 @@ angular.module('searchController', ['ui.bootstrap'])
     vm.stock = {};
     vm.value = '';
     $("#stockModal").modal('hide');
+  };
+
+  $scope.startsWith = function (actual, expected) {
+    var lowerStr = (actual + "").toLowerCase();
+    var words = lowerStr.split(" ");
+    indices = [];
+    for (word of words) {
+      indices.push(word.indexOf(expected.toLowerCase()))
+    };
+    return indices.includes(0);
   };
 
 });

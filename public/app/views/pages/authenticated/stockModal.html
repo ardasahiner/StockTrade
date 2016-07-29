@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading">{{ search.stock.data.current.name }} ({{ search.stock.data.current.symbol }})</h4>
+        <h4 class="modal-title" style="color: #737373" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading">{{ search.stock.data.current.name }} ({{ search.stock.data.current.symbol }})</h4>
         <h4 class="modal-title" id="myModalLabel" ng-if="!search.stock.data.success && !search.stock.loading">Stock Not Available</h4>
         <h4 class="modal-title" id="myModalLabel" ng-if="search.stock.loading">Fetching Stock Information...</h4>
       </div>
@@ -34,7 +34,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-block btn-primary" ng-click="search.closeStockModal()">
+        <button class="btn btn-block button-style1" ng-click="search.closeStockModal()">
           <span>Close</span>
         </button>
       </div>

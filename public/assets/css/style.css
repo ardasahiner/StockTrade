@@ -94,6 +94,8 @@ body h1 {
 .buysell {
   padding-top: 0px;
   padding-bottom: 100px;
+  background-color:white;
+  color:#737373;
 }
 
 .buysell img {
@@ -120,33 +122,47 @@ body.footer {
 }
 
 #portfolio-container {
-    background-color: #326755;
+    background-color:white;
     font-size: 14px;
+    color:#737373;
+    border: #737373 solid;
+    height: 80vh;
 }
 .table-header {
-    padding-bottom:20px;
-    font-size:17px;
-    border-bottom-width: 3px;
+    padding-bottom:11px;
+    padding-top:11px;
+    font-size:19px;
+    border-bottom: #737373 1px solid;
+/*    border-top: #737373 1px solid;*/
+
 }
 
 
-.button-style {
+.button-style1 {
   border-radius: 0px!important;
-  background-color:gray;
+  background-color:#33cccc;
+  color:white;
 }
 
+
+.table-column {
+    border-width: 3px;
+    border: #737373 medium solid;  
+}
+.table-row {
+    border-bottom: #737373 1px solid;
+    padding-top: 9px!important;
+    padding-bottom:9px!important;
+}
 .information-header {
   font-style:italic;
   font-size:14px;
 }
 
-.portfolio-row {
-    border-bottom-width: 1px!important;
-    border-color: white!important;
-}
 
 .stockModal .modal-dialog {
   width: 90%;
+  color: #737373;
 }
 
 .stockModal .modal-content {
@@ -154,9 +170,10 @@ body.footer {
   min-height: 100%;
   border-radius: 0;
   /* TODO: Change background color for the stock modal here */
-  background-color: #193434;
+  background-color: white;
+  color: #737373;
 }
 
 .stockAssetRow a {
-  color: white;
+  color: #737373;
 }

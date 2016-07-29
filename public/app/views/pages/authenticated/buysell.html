@@ -9,7 +9,8 @@
         <form ng-submit="stocks.buyStock()">
 
           <div class="form-group search">
-            <input type="text" placeholder="Stock Ticker" class="form-control" ng-model="stocks.buy.ticker" required="required" style="color:black" uib-typeahead="ticker for ticker in stocks.stockTickers | filter:$viewValue | limitTo:5">
+            <input type="text" placeholder="Stock Ticker" class="form-control" ng-model="stocks.buy.ticker" required="required" style="color:black"
+            uib-typeahead="ticker for ticker in stocks.stockTickers | filter:$viewValue:startsWith | limitTo:5" autocomplete="off">
           </div>
 
           <div class="form-group">
@@ -84,7 +85,8 @@
         <form ng-submit="stocks.sellStock()">
 
           <div class="form-group search">
-            <input type="text" placeholder="Stock Ticker" class="form-control" ng-model="stocks.sell.ticker" required="required" style="color:black" uib-typeahead="ticker for ticker in stocks.stockTickers | filter:$viewValue | limitTo:5"/>
+            <input type="text" placeholder="Stock Ticker" class="form-control" ng-model="stocks.sell.ticker" required="required"
+            style="color:black" uib-typeahead="ticker for ticker in stocks.ownedTickers | filter:$viewValue:startsWith | limitTo:5" autocomplete="off"/>
           </div>
 
           <div class="form-group">

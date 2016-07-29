@@ -1,13 +1,14 @@
-<div class="container buysell">
+<div class="container buysell" ng-controller="searchController as search">
 
   <h1 style="color:#737373">{{ main.user.firstName }}'s Portfolio</h1>
 
 
   <br><br>
 
-  <div class="search" ng-controller="searchController as search">
-    <label>Search Companies: </label>
-    <input name="company" style="color:black" ng-model="search.value" uib-typeahead="term for term in search.searchTerms | filter:$viewValue | limitTo:8"/>
+  <div class="search">
+      <label>Search Companies: </label>
+      <input name="company" type="form-control" style="color:black" ng-model="search.value" autocomplete="off"
+      uib-typeahead="term for term in search.searchTerms | filter:$viewValue:startsWith | limitTo:8" typeahead-editable="false" typeahead-on-select="search.goToStock()"/>
   </div>
 
   <br>
@@ -24,7 +25,7 @@
     <div class="col-lg-2 col-md-2 col-sm-2"></div>
 
     <div class="col-lg-4 col-md-4 col-sm-4">
-      <button class="btn btn-block button-style2" data-toggle="modal" data-target="#sellModal">
+      <button class="btn btn-block button-style1" data-toggle="modal" data-target="#sellModal">
         <span>Sell a Stock</span>
       </button>
     </div>
@@ -58,11 +59,11 @@
       <div class="row table-header">
 
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-            Symbol
+          Ticker
         </div>
 
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            Company Name
+          Equity Name
         </div>
 
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -83,11 +84,15 @@
 
       </div>
       <div class="stock" ng-repeat="stock in portfolioAssets">
-        <stock-asset info="stock">
+        <stock-asset info="stock" ng-click="search.linkToStock(stock.ticker)">
         </div>
       </div>
       <!-- Import Buy/Sell Modals -->
       <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
+
+      <!-- Import Individual Stock Page Modal -->
+      <div ng-include src="'/app/views/pages/authenticated/stockModal.html'"></div>
+
     </div>
     <br>
     <br>

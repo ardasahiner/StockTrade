@@ -94,6 +94,8 @@ body h1 {
 .buysell {
   padding-top: 0px;
   padding-bottom: 100px;
+  background-color:white;
+  color:#737373;
 }
 
 .buysell img {
@@ -120,8 +122,11 @@ body.footer {
 }
 
 #portfolio-container {
-    background-color: #326755;
+    background-color:white;
     font-size: 14px;
+    color:#737373;
+    border: #737373 solid;
+    height: 80vh;
 }
 .table-header {
     padding-bottom:20px;
@@ -130,17 +135,31 @@ body.footer {
 }
 
 
-.button-style {
+.button-style1 {
   border-radius: 0px!important;
-  background-color:gray;
+  background-color:#00cc7a;
+  color:white;
 }
 
+.button-style2 {
+  border-radius: 0px!important;
+  background-color:#00cc7a;
+  color:white;
+}
+
+.table-column {
+    border-width: 3px;
+    border: #737373 medium solid;  
+}
+.table-row {
+    border-top: #737373 1px solid;
+    border-bottom: #737373 1px solid;
+    padding-top: 0px!important;
+    padding-bottom:0px!important;
+
+}
 .information-header {
   font-style:italic;
   font-size:14px;
 }
 
-.portfolio-row {
-    border-bottom-width: 1px!important;
-    border-color: white!important;
-}

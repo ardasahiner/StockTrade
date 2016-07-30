@@ -157,9 +157,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                             purchasePricePerShare: (asset[0].buyPrice / asset[0].quantity).toFixed(2),
                                             amountSpent: asset[0].buyPrice.toFixed(2),
                                             currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
-                                            todayChangeNet: currentInfo.netChange.toFixed(2),
+                                            todayChangeNet: parseFloat(currentInfo.netChange).toFixed(2),
                                             todayTotalChangeNet: (currentInfo.netChange * asset[0].quantity).toFixed(2),
-                                            todayChangePercent: currentInfo.percentChange.toFixed(2),
+                                            todayChangePercent: parseFloat(currentInfo.percentChange).toFixed(2),
                                             totalNetProfit: (asset[0].quantity * currentInfo.lastPrice - asset[0].buyPrice).toFixed(2),
                                             totalPercentProfit: (((asset[0].quantity * currentInfo.lastPrice) / asset[0].buyPrice - 1) * 100).toFixed(2)});
                     value = {
@@ -167,8 +167,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                       name: stockDictionary[currentInfo.symbol.toUpperCase()],
                       exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
                       lastPrice: currentInfo.lastPrice.toFixed(2),
-                      netChange: currentInfo.netChange.toFixed(2),
-                      percentChange: currentInfo.percentChange.toFixed(2),
+                      netChange: parseFloat(currentInfo.netChange).toFixed(2),
+                      percentChange: parseFloat(currentInfo.percentChange).toFixed(2),
                       volume: currentInfo.volume,
                       high: currentInfo.high,
                       low: currentInfo.low,

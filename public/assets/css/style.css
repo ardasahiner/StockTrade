@@ -94,8 +94,14 @@ body h1 {
 .buysell {
   padding-top: 0px;
   padding-bottom: 100px;
-  background-color:white;
+  /*background-color:white;*/
+  width: 100%;
   color:#737373;
+  background: inherit;
+  background: -webkit-linear-gradient(white, #19342b);
+  background: -o-linear-gradient(white, #19342b);
+  background: -moz-linear-gradient(white, #19342b);
+  background: linear-gradient(white, #19342b);
 }
 
 .buysell img {
@@ -126,7 +132,8 @@ body.footer {
     font-size: 14px;
     color:#737373;
     border: #737373 solid;
-    height: 80vh;
+    padding-bottom: 20px;
+    height: inherit;
 }
 .table-header {
     padding-bottom:11px;
@@ -140,6 +147,7 @@ body.footer {
 
 .button-style1 {
   border-radius: 0px!important;
+
   background-color:#00cca3;
   color:white;
 }
@@ -147,7 +155,7 @@ body.footer {
 
 .table-column {
     border-width: 3px;
-    border: #737373 medium solid;  
+    border: #737373 medium solid;
 }
 .table-row {
     border-bottom: #737373 1px solid;

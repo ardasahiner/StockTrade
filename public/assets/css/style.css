@@ -147,7 +147,8 @@ body.footer {
 
 .button-style1 {
   border-radius: 0px!important;
-  background-color:grey;
+
+  background-color:gray;
   color:white;
 }
 

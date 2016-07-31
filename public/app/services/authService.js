@@ -78,10 +78,9 @@ angular.module('authService', [])
   // Redirect if a token doesnt authenticate or no token
   AuthInterceptorFactory.responseError = function(res) {
     if (res.status == 403) {
-      $window.localStorage.removeItem('token');
+      AuthToken.setToken();
       $location.path('/');
     }
-
     return $q.reject(res);
   };
 

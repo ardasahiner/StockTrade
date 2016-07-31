@@ -70,7 +70,7 @@ angular.module('searchController', ['ui.bootstrap'])
     indices = [];
     for (word of words) {
       indices.push(word.indexOf(expected.toLowerCase()))
-    };
+    }
     return indices.includes(0);
   };
 

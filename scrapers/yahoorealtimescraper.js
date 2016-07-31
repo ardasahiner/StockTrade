@@ -6,7 +6,7 @@ var parse = require('csv-parse');
 // Calls callback on array, with indices in order of the request
 function yahooScraper(symbol, fCallback) {
 
-  var url = "http://download.finance.yahoo.com/d/quotes.csv?s=" + symbol + "&f=l1c1p2ophgv"
+  var url = "http://download.finance.yahoo.com/d/quotes.csv?s=" + symbol + "&f=l1c1p2ophgv";
   request(url, function(error, response, body) {
     if(!error && response.statusCode == 200){
       parse(body, function(err, output) {

@@ -1,6 +1,6 @@
 angular.module('stockController', ['ui.bootstrap'])
 
-.controller('stockController', function($rootScope, $scope, $location, Stocks) {
+.controller('stockController', function($rootScope, $scope, $location, Stocks, Auth) {
 
   var vm = this;
 
@@ -15,7 +15,7 @@ angular.module('stockController', ['ui.bootstrap'])
     .then(function(data) {
       vm.portfolio = data.data;
       console.log(vm.portfolio);
-      $scope.portfolioAssets = vm.portfolio.assets
+      $scope.portfolioAssets = vm.portfolio.assets;
       for (stock of $scope.portfolioAssets) {
         if (parseFloat(stock.totalNetProfit) > 0) {
           stock.change = "change-positive";
@@ -31,13 +31,18 @@ angular.module('stockController', ['ui.bootstrap'])
         vm.ownedTickers.push(stock.ticker);
       }
     })
+    .catch(function(err) {
+      Auth.logout();
+      $location.path('/');
+      console.log("logged out");
+    })
   };
 
   vm.getPortfolio();
 
   vm.canBuy = function(ticker) {
     return (ticker in vm.ownedStocks);
-  }
+  };
 
   vm.buyStock = function() {
 

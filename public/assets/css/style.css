@@ -7,11 +7,11 @@ html {
 }
 
 main {
-  padding-top: 50px;
+    padding-top: 50px;
 }
 
 p.titledescription, p.lead, p.description, h2.section-heading {
-  color: white;
+    color: white;
 }
 
 .ui-view {
@@ -24,8 +24,8 @@ p.titledescription, p.lead, p.description, h2.section-heading {
 }
 
 .topnav img {
-  height: inherit;
-  margin-top: -16.5px;
+    height: inherit;
+    margin-top: -16.5px;
 }
 
 /* Links in the navbar, set text color using color tag */
@@ -96,25 +96,25 @@ body h1, h2 {
 }
 
 .buysell {
-  padding-top: 0px;
-  padding-bottom: 100px;
-  /*background-color:white;*/
-  width: 100%;
-  color: black;
-  /*background: inherit;
-  background: -webkit-linear-gradient(white, #19342b);
-  background: -o-linear-gradient(white, #19342b);
-  background: -moz-linear-gradient(white, #19342b);
-  background: linear-gradient(white, #19342b);*/
-  background-color: #8aa8a0;
+    padding-top: 0px;
+    padding-bottom: 100px;
+    /*background-color:white;*/
+    width: 100%;
+    color: black;
+    /*background: inherit;
+    background: -webkit-linear-gradient(white, #19342b);
+    background: -o-linear-gradient(white, #19342b);
+    background: -moz-linear-gradient(white, #19342b);
+    background: linear-gradient(white, #19342b);*/
+    background-color: #8aa8a0;
 }
 
 .buysell h1, h2 {
-  color: black;
+    color: black;
 }
 
 .buysell img {
-  padding-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 .alert-danger {
@@ -124,24 +124,24 @@ body h1, h2 {
 }
 
 .footer img {
-  height: 140px;
+    height: 140px;
 }
 
 .footer-container {
-  height: 100%;
-  background-color: #8aa8a0;
+    height: 100%;
+    background-color: #8aa8a0;
 }
 
 footer {
     padding: 0;
 }
 
-footer h5{
-  color: black;
+footer h5 {
+    color: black;
 }
 
 p.text-muted {
-  color: black;
+    color: black;
 }
 
 body.footer {
@@ -149,66 +149,67 @@ body.footer {
 }
 
 #portfolio-container {
-    background-color:white;
+    background-color: white;
     font-size: 14px;
-    color:#737373;
+    color: #737373;
     border: #737373 solid;
     padding-bottom: 20px;
     height: inherit;
 }
+
 .table-header {
-    padding-bottom:11px;
-    padding-top:11px;
-    font-size:19px;
+    padding-bottom: 11px;
+    padding-top: 11px;
+    font-size: 19px;
     border-bottom: #737373 1px solid;
-/*    border-top: #737373 1px solid;*/
+    /*    border-top: #737373 1px solid;*/
 
 }
 
 .button-style1 {
-  border-radius: 0px!important;
-  background-color: #595959;
-  color:white;
+    border-radius: 0px !important;
+    background-color: #595959;
+    color: white;
 }
-
 
 .table-column {
     border-width: 3px;
     border: #737373 medium solid;
 }
+
 .table-row {
     border-bottom: #737373 1px solid;
-    padding-top: 9px!important;
-    padding-bottom:9px!important;
-}
-.information-header {
-  font-style:italic;
-  font-size:18px;
-  text-align: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+    padding-top: 9px !important;
+    padding-bottom: 9px !important;
 }
 
+.information-header {
+    font-style: italic;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 
 .stockModal .modal-dialog {
-  width: 90%;
-  color: #737373;
+    width: 90%;
+    color: #737373;
 }
 
 .stockModal .modal-content {
-  height: auto;
-  min-height: 100%;
-  border-radius: 0;
-  /* TODO: Change background color for the stock modal here */
-  background-color: white;
+    height: auto;
+    min-height: 100%;
+    border-radius: 0;
+    /* TODO: Change background color for the stock modal here */
+    background-color: white;
 }
 
 .stockModal h1, h2, h3, h4, h5, h6, p {
-  color: #737373;
+    color: #737373;
 }
 
 .stockAssetRow a {
-  color: #737373;
+    color: #737373;
 }
 
 .fa-github {
@@ -216,50 +217,51 @@ body.footer {
 }
 
 .portfolio-header h2 {
-  color: black;
+    color: black;
 }
 
 .portfolio-header {
-  border: 2px solid black;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 80%;
-  padding-bottom: 10px;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 20px;
+    border: 2px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 80%;
+    padding-bottom: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20px;
 }
 
 hr.footer-border {
-  height: 10px;
-	border: 0;
-	box-shadow: 0 20px 20px -20px white inset;
+    height: 10px;
+    border: 0;
+    box-shadow: 0 20px 20px -20px white inset;
 }
 
 .stock:hover {
-  text-shadow: 0 0 8px #8aa8a0;
+    text-shadow: 0 0 8px #8aa8a0;
+    background-color: #d2d2d2;
 }
 
 .row {
-  width: 100%;
+    width: 100%;
 }
 
 .asset-list {
-  padding-left: 0px;
-  padding-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .stock {
-  width: 100%;
+    width: 100%;
 }
 
 .change-positive {
-  background-color: #79d2a6;
+    background-color: #79d2a6;
 }
 
 .change-negative {
-  background-color:  #e6b3b3;
+    background-color: #e6b3b3;
 }
 
 .change-neutral {
-  background-color:  #cccccc;
+    background-color: #cccccc;
 }

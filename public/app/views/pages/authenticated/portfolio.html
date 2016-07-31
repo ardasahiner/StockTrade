@@ -1,7 +1,9 @@
 <div class="container buysell" ng-controller="searchController as search">
 
-  <h1>{{ main.user.firstName }}'s Portfolio</h1>
-
+  <div class="portfolio-header">
+    <h1>{{ main.user.firstName }}'s Stock Portfolio</h1>
+    <h2>Portfolio Value: ${{ stocks.portfolio.portfolioValue | number : 2 }}</h2>
+  </div>
 
   <br><br>
 

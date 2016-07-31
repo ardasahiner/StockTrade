@@ -5,14 +5,14 @@ var bcrypt = require('bcrypt-nodejs');
 var UserAsset = require('./userasset').schema;
 var HistoricalValue = require('./historicalvalue').schema;
 
-var initialCash = 1000000;
+var initialCash = 100000;
 
 // Basic User Schema built with mongoose
 var UserSchema = new Schema({
   // Required tags removed to facilitate testing during development. Add again before production.
   firstName: String,
   lastName: String,
-  
+
   username: {type: String, required: true, index: {unique: true}},
   password: {type: String, required: true},
   email: {type: String, required: true, index: {unique: true}},

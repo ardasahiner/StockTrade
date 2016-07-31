@@ -34,7 +34,12 @@ angular.module('signupController', [])
 
           } else {
             vm.error = data.message;
-            console.log(vm.error);
+            if (data.message.errmsg.includes("duplicate key error") && data.message.errmsg.includes("$username")) {
+              vm.error = "Username: " + data.message.op.username + " is taken!";
+            }
+            if (data.message.errmsg.includes("duplicate key error") && data.message.errmsg.includes("$email")) {
+              vm.error = "Email: " + data.message.op.email + " is taken!";
+            }
           }
         });
       }

@@ -68,7 +68,7 @@ body h1 {
 
 .aboutus {
     padding-top: 5%;
-    padding-bottom: 2%;
+    padding-bottom: 0%;
 }
 
 .description {
@@ -81,14 +81,14 @@ body h1 {
 
 .features {
     background: inherit;
-    background: -webkit-linear-gradient(#19342b, #53ac8e);
-    background: -o-linear-gradient(#19342b, #53ac8e);
-    background: -moz-linear-gradient(#19342b, #53ac8e);
-    background: linear-gradient(#19342b, #53ac8e);
+    background: -webkit-linear-gradient(#19342b, #8aa8a0);
+    background: -o-linear-gradient(#19342b, #8aa8a0);
+    background: -moz-linear-gradient(#19342b, #8aa8a0);
+    background: linear-gradient(#19342b, #8aa8a0);
 }
 
 .banner {
-    background-color: #53ac8e;
+    background-color: #8aa8a0;
 }
 
 .buysell {
@@ -96,12 +96,17 @@ body h1 {
   padding-bottom: 100px;
   /*background-color:white;*/
   width: 100%;
-  color:#737373;
-  background: inherit;
+  color: black;
+  /*background: inherit;
   background: -webkit-linear-gradient(white, #19342b);
   background: -o-linear-gradient(white, #19342b);
   background: -moz-linear-gradient(white, #19342b);
-  background: linear-gradient(white, #19342b);
+  background: linear-gradient(white, #19342b);*/
+  background-color: #8aa8a0;
+}
+
+.buysell h1 {
+  color: black;
 }
 
 .buysell img {
@@ -118,9 +123,21 @@ body h1 {
   height: 140px;
 }
 
+.footer-container {
+  height: 100%;
+  background-color: #8aa8a0;
+}
+
 footer {
     padding: 0;
-    background-color: #19342b;
+}
+
+footer h5{
+  color: black;
+}
+
+p.text-muted {
+  color: black;
 }
 
 body.footer {
@@ -147,8 +164,7 @@ body.footer {
 
 .button-style1 {
   border-radius: 0px!important;
-
-  background-color:gray;
+  background-color: #595959;
   color:white;
 }
 
@@ -184,4 +200,14 @@ body.footer {
 
 .stockAssetRow a {
   color: #737373;
+}
+
+.fa-github {
+    color: black;
+}
+
+hr.footer-border {
+  height: 10px;
+	border: 0;
+	box-shadow: 0 20px 20px -20px white inset;
 }

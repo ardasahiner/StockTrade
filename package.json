@@ -14,8 +14,6 @@
   "license": "GPL-3.0",
   "homepage": "localhost:5000",
   "dependencies": {
-    "angular": "^1.5.7",
-    "angular-ui-router": "^0.3.1",
     "async": "^2.0.0-rc.6",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.1",

@@ -161,7 +161,6 @@ body.footer {
 
 }
 
-
 .button-style1 {
   border-radius: 0px!important;
   background-color: #595959;
@@ -180,7 +179,10 @@ body.footer {
 }
 .information-header {
   font-style:italic;
-  font-size:14px;
+  font-size:18px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 
@@ -195,6 +197,9 @@ body.footer {
   border-radius: 0;
   /* TODO: Change background color for the stock modal here */
   background-color: white;
+}
+
+.stockModal h1, h2, h3, h4, h5, h6, p {
   color: #737373;
 }
 
@@ -210,4 +215,33 @@ hr.footer-border {
   height: 10px;
 	border: 0;
 	box-shadow: 0 20px 20px -20px white inset;
+}
+
+.stock:hover {
+  text-shadow: 0 0 8px #8aa8a0;
+}
+
+.row {
+  width: 100%;
+}
+
+.asset-list {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.stock {
+  width: 100%;
+}
+
+.change-positive {
+  background-color: #79d2a6;
+}
+
+.change-negative {
+  background-color:  #e6b3b3;
+}
+
+.change-neutral {
+  background-color:  #cccccc;
 }

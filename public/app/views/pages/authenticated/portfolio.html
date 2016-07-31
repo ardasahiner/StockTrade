@@ -6,9 +6,9 @@
   <br><br>
 
   <div class="search">
-      <label>Search Companies: </label>
-      <input name="company" type="form-control" style="color:black" ng-model="search.value" autocomplete="off"
-      uib-typeahead="term for term in search.searchTerms | filter:$viewValue:startsWith | limitTo:8" typeahead-editable="false" typeahead-on-select="search.goToStock()"/>
+    <label>Search Companies: </label>
+    <input name="company" type="form-control" style="color:black" ng-model="search.value" autocomplete="off"
+    uib-typeahead="term for term in search.searchTerms | filter:$viewValue:startsWith | limitTo:8" typeahead-editable="false" typeahead-on-select="search.goToStock()"/>
   </div>
 
   <br>
@@ -33,64 +33,63 @@
 
   <br>
 
-  <div class="container-fluid" id="portfolio-container">
+  <div class="container-fluid asset-list" id="portfolio-container">
     <div class="row">
-      <div class="col-xs-12">
-        <h3 style="color:#737373">Stock Portfolio</h3>
-      </div>
-    </div>
-    <br>
-    <div class="row information-header">
-      <div class="col-xs-4">
-        Account Value: ${{ stocks.portfolio.portfolioValue | number : 2 }}
-      </div>
-
-      <div class="col-xs-4">
-        Cash Remaining: ${{ stocks.portfolio.cash | number : 2 }}
-      </div>
-
-      <div class="col-xs-4">
-        Your Profit: ${{ stocks.portfolio.grossProfit | number : 2 }} ({{ stocks.portfolio.percentProfit | number : 2 }}%)
-      </div>
+      <!-- <div class="col-xs-12">
+      <h3 style="color:#737373">Stock Portfolio</h3>
+    </div> -->
+  </div>
+  <br>
+  <div class="row information-header">
+    <div class="col-xs-4">
+      Account Value: ${{ stocks.portfolio.portfolioValue | number : 2 }}
     </div>
 
-    <br><br>
-    <center>
-      <div class="row table-header">
+    <div class="col-xs-4">
+      Cash Remaining: ${{ stocks.portfolio.cash | number : 2 }}
+    </div>
 
-        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-          Ticker
-        </div>
+    <div class="col-xs-4">
+      Your Profit: ${{ stocks.portfolio.grossProfit | number : 2 }} ({{ stocks.portfolio.percentProfit | number : 2 }}%)
+    </div>
+  </div>
 
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          Equity Name
-        </div>
+  <center>
+    <div class="row table-header">
 
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            Price
-        </div>
-
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            Quantity
-        </div>
-
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-          Profit Per Stock
-        </div>
-
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-           Change Today
-        </div>
-
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        Ticker
       </div>
-      <div class="stock" ng-repeat="stock in portfolioAssets">
-        <stock-asset info="stock" ng-click="search.linkToStock(stock.ticker)">
-        </div>
-      </div>
-      <!-- Import Buy/Sell Modals -->
-      <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
 
-      <!-- Import Individual Stock Page Modal -->
-      <div ng-include src="'/app/views/pages/authenticated/stockModal.html'"></div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        Equity Name
+      </div>
+
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        Price
+      </div>
+
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        Quantity
+      </div>
+
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        Profit Per Stock
+      </div>
+
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        Change Today
+      </div>
 
     </div>
+    <div class="stock {{stock.change}}" ng-repeat="stock in portfolioAssets">
+      <stock-asset class="{{stock.change}}" info="stock" ng-click="search.linkToStock(stock.ticker)"></stock-asset>
+    </div>
+  </div>
+        <!-- Import Buy/Sell Modals -->
+        <div ng-include src="'/app/views/pages/authenticated/buysell.html'"></div>
+
+        <!-- Import Individual Stock Page Modal -->
+        <div ng-include src="'/app/views/pages/authenticated/stockModal.html'"></div>
+
+      </div>

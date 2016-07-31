@@ -15,7 +15,16 @@ angular.module('stockController', ['ui.bootstrap'])
     .then(function(data) {
       vm.portfolio = data.data;
       console.log(vm.portfolio);
-      $scope.portfolioAssets = vm.portfolio.assets;
+      $scope.portfolioAssets = vm.portfolio.assets
+      for (stock of $scope.portfolioAssets) {
+        if (parseFloat(stock.totalNetProfit) > 0) {
+          stock.change = "change-positive";
+        } else if (parseFloat(stock.totalNetProfit) < 0) {
+          stock.change = "change-negative";
+        } else {
+          stock.change = "change-neutral";
+        }
+      }
       vm.ownedStocks = {};
       for (stock of vm.portfolio.assets) {
         vm.ownedStocks[stock.ticker] = stock.quantity;

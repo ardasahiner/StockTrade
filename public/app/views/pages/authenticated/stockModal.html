@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" style="color: #737373" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading">{{ search.stock.data.current.name }} ({{ search.stock.data.current.symbol }})</h4>
+        <h4 class="modal-title" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading">{{ search.stock.data.current.name }} ({{ search.stock.data.current.symbol }})</h4>
         <h4 class="modal-title" id="myModalLabel" ng-if="!search.stock.data.success && !search.stock.loading">Stock Not Available</h4>
         <h4 class="modal-title" id="myModalLabel" ng-if="search.stock.loading">Fetching Stock Information...</h4>
       </div>
@@ -10,11 +10,11 @@
         <p>Stock: {{ search.stock.data.current.name }}<p>
         <p>Stock Ticker: {{ search.stock.data.current.symbol }}<p>
         <p>Stock Price: ${{ search.stock.data.current.lastPrice }}<p>
-        <p ng-if="search.stock.data.current.volume != 0" >Percent Change: {{ search.stock.data.current.percentChange }}%<p>
-        <p ng-if="search.stock.data.current.volume != 0" >Net Change: ${{ search.stock.data.current.netChange }}<p>
-        <p ng-if="search.stock.data.current.volume != 0" >High: ${{ search.stock.data.current.high }}<p>
-        <p ng-if="search.stock.data.current.volume != 0" >Low: ${{ search.stock.data.current.low }}<p>
-        <p ng-if="search.stock.data.current.volume != 0" >Volume: {{ search.stock.data.current.volume }}<p>
+        <p ng-if="search.stock.data.current.volume != 0">Percent Change: {{ search.stock.data.current.percentChange }}%<p>
+        <p ng-if="search.stock.data.current.volume != 0">Net Change: ${{ search.stock.data.current.netChange }}<p>
+        <p ng-if="search.stock.data.current.volume != 0">High: ${{ search.stock.data.current.high }}<p>
+        <p ng-if="search.stock.data.current.volume != 0">Low: ${{ search.stock.data.current.low }}<p>
+        <p ng-if="search.stock.data.current.volume != 0">Volume: {{ search.stock.data.current.volume }}<p>
         <p>Exchange: {{ search.stock.data.current.exchange }}<p>
 
         <br>
@@ -23,9 +23,6 @@
         <p ng-if="stocks.canBuy(search.stock.data.current.symbol)">
           You can sell: {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} Shares
         </p>
-
-        <br><br><br>
-        Make cool graph using historical data here
 
       </div>
 

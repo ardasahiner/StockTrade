@@ -146,7 +146,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   response.cash = user.cash.toFixed(2);
                   portfolioValue += parseFloat(user.cash.toFixed(2));
                   async.forEach(infoList, function(currentInfo, callback) {
-                    if (currentInfo !== "Error" && currentInfo.lastPrice != null) {
+                    if (currentInfo !== "Error"  && currentInfo.lastPrice != null) {
                       UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
                         if (currentInfo.netChange == null) {
                           currentInfo.netChange = 0;
@@ -492,7 +492,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
     //for handling requests to /users/transactions (listing transactions)
     require('./transactions')(app, express, User, jwt, Transaction, userRouter);
-
     app.use('/users', userRouter);
 };
 

@@ -191,6 +191,10 @@ body.footer {
     padding-bottom: 15px;
 }
 
+.modal-title {
+  color: white;
+}
+
 .stockModal .modal-dialog {
     width: 90%;
     color: #737373;
@@ -205,7 +209,7 @@ body.footer {
 }
 
 .stockModal h1, h2, h3, h4, h5, h6, p {
-    color: #737373;
+    color: white;
 }
 
 .stockAssetRow a {

@@ -132,7 +132,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
               portfolioValue += parseFloat(user.cash.toFixed(2));
               response.portfolioValue = portfolioValue.toFixed(2);
               response.grossProfit = (portfolioValue - 100000).toFixed(2);
-              response.percentProfit = ((portfolioValue / 100000 - 1) * 100).toFixed(2);
+              response.percentProfit = (((portfolioValue / 100000) - 1) * 100).toFixed(2);
               res.status(200).send(response);
             });
           }

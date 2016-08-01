@@ -1,6 +1,6 @@
 angular.module('mainController', [])
 
-.controller('mainController', function($rootScope, $location, $state, Auth) {
+.controller('mainController', function($rootScope, $location, $state, Auth, $anchorScroll) {
 
   var vm = this;
 
@@ -16,6 +16,7 @@ angular.module('mainController', [])
     .then(function(data) {
       vm.user = data.data;
     });
+    $anchorScroll();
   });
 
   // Function to handle login requests

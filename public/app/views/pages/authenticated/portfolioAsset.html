@@ -19,14 +19,6 @@
 			{{ info.quantity | number : 0 }}
 		</div>
 
-		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-			${{ info.totalNetProfit / info.quantity | number : 2 }} ({{ info.totalPercentProfit | number : 2 }}%)
-		</div>
-
-		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-			${{ info.totalNetProfit }} ({{ info.totalPercentProfit | number : 2 }}%)
-		</div>
-
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-if="info.todayChangePercent != 0">
 			${{ info.todayChangeNet | number : 2 }} ({{ info.todayChangePercent | number : 2 }}%)
 		</div>
@@ -34,6 +26,13 @@
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-if="info.todayChangePercent == 0">
 			${{ 0.00 | number : 2 }} ({{ 0.00 | number : 2 }}%)
 		</div>
+		
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			${{ info.totalNetProfit / info.quantity | number : 2 }} ({{ info.totalPercentProfit | number : 2 }}%)
+		</div>
 
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			${{ info.totalNetProfit }}
+		</div>
 	</div>
 </div>

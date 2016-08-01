@@ -148,6 +148,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 async.forEach(infoList, function(currentInfo, callback) {
                   if (currentInfo !== "Error") {
                     UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
+                      console.log(asset);
                       portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
                       response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
                         name: currentInfo.name,
@@ -155,7 +156,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                         quantity: asset[0].quantity,
                         currentPricePerShare: currentInfo.lastPrice,
                         purchasePricePerShare: (asset[0].buyPrice).toFixed(2),
-                        amountSpent: (asset.buyPrice * asset[0].quantity).toFixed(2),
+                        amountSpent: (asset[0].buyPrice * asset[0].quantity).toFixed(2),
                         currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
                         todayChangeNet: currentInfo.netChange,
                         todayTotalChangeNet: (currentInfo.netChange * asset[0].quantity).toFixed(2),
@@ -182,6 +183,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     callback();
                   }
                 }, function(err){
+                  console.log(response);
                   response.portfolioValue = portfolioValue.toFixed(2);
                   response.grossProfit = (portfolioValue - 100000).toFixed(2);
                   response.percentProfit = ((portfolioValue / 100000 - 1) * 100).toFixed(2);
@@ -308,8 +310,13 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                               asset.buyPrice = info.lastPrice;
                               asset.username = req.decoded._doc.username;
                             } else {
+                              console.log(info.lastPrice * req.params.quantity);
+                              console.log(asset.buyPrice * parseInt(asset.quantity));
+                              console.log(asset.quantity + parseInt(req.params.quantity));
+                              console.log(info.lastPrice * parseInt(req.params.quantity) + asset.buyPrice * asset.quantity);
+                              asset.buyPrice = parseFloat(((info.lastPrice * parseInt(req.params.quantity) + asset.buyPrice * asset.quantity) / (asset.quantity + parseInt(req.params.quantity))).toFixed(2));
                               asset.quantity += parseInt(req.params.quantity);
-                              asset.buyPrice += parseFloat(((info.lastPrice * req.params.quantity + asset.buyPrice * asset.quantity) / (asset.quantity + req.params.quantity)).toFixed(2));
+                              console.log(asset.buyPrice);
                             }
                           }
                           asset.save(function(err) {

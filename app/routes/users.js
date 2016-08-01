@@ -90,108 +90,131 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
     //getting a user's portfolio (profits from beginning)
     userRouter.route('/portfolio').get(function (req, res) {
+      try {
+        UserAsset.find({username: req.decoded._doc.username}, function(err, assets) {
+          var tickerList = [];
+          var response = {assets: []};
+          var portfolioValue = 0;
 
-      UserAsset.find({username: req.decoded._doc.username}, function(err, assets) {
-        var tickerList = [];
-        var response = {assets: []};
-        var portfolioValue = 0;
+          async.forEach(assets, function(asset, callback) {
 
-        async.forEach(assets, function(asset, callback) {
-
-          currentStockCache.get(asset.ticker.toUpperCase(), function(err, currentInfo) {
-            if (err) {
-              console.log(asset.ticker + " is not in the cache :(");
-              tickerList.push(asset.ticker);
-              callback();
-            } else {
-              console.log(asset.ticker + " is in the cache!");
-              portfolioValue += parseFloat((asset.quantity * currentInfo.lastPrice).toFixed(2));
-              response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
-                                    name: currentInfo.name,
-                                    exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
-                                    quantity: asset.quantity.toFixed(0),
-                                    currentPricePerShare: currentInfo.lastPrice,
-                                    purchasePricePerShare: (asset.buyPrice).toFixed(2),
-                                    amountSpent: (asset.buyPrice * asset.quantity).toFixed(2),
-                                    currentValue: (asset.quantity * currentInfo.lastPrice).toFixed(2),
-                                    todayChangeNet: currentInfo.netChange,
-                                    todayTotalChangeNet: (currentInfo.netChange * asset.quantity).toFixed(2),
-                                    todayChangePercent: currentInfo.percentChange,
-                                    totalNetProfit: (asset.quantity * (currentInfo.lastPrice - asset.buyPrice)).toFixed(2),
-                                    totalPercentProfit: ((currentInfo.lastPrice / asset.buyPrice - 1) * 100).toFixed(2)});
-              callback();
-            }
-          });
-        }, function(err) {
-          if (tickerList.length == 0) {
-            User.findOne({username: req.decoded._doc.username}, function(err, user) {
-              console.log("found user");
-              if (err) res.send(err);
-              response.username = user.username;
-              response.cash = user.cash.toFixed(2);
-              portfolioValue += parseFloat(user.cash.toFixed(2));
-              response.portfolioValue = portfolioValue.toFixed(2);
-              response.grossProfit = (portfolioValue - 100000).toFixed(2);
-              response.percentProfit = (((portfolioValue / 100000) - 1) * 100).toFixed(2);
-              res.status(200).send(response);
+            currentStockCache.get(asset.ticker.toUpperCase(), function(err, currentInfo) {
+              if (err) {
+                console.log(asset.ticker + " is not in the cache :(");
+                tickerList.push(asset.ticker);
+                callback();
+              } else {
+                console.log(asset.ticker + " is in the cache!");
+                portfolioValue += parseFloat((asset.quantity * currentInfo.lastPrice).toFixed(2));
+                response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
+                                      name: currentInfo.name,
+                                      exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
+                                      quantity: asset.quantity.toFixed(0),
+                                      currentPricePerShare: currentInfo.lastPrice,
+                                      purchasePricePerShare: (asset.buyPrice).toFixed(2),
+                                      amountSpent: (asset.buyPrice * asset.quantity).toFixed(2),
+                                      currentValue: (asset.quantity * currentInfo.lastPrice).toFixed(2),
+                                      todayChangeNet: currentInfo.netChange,
+                                      todayTotalChangeNet: (currentInfo.netChange * asset.quantity).toFixed(2),
+                                      todayChangePercent: currentInfo.percentChange,
+                                      totalNetProfit: (asset.quantity * (currentInfo.lastPrice - asset.buyPrice)).toFixed(2),
+                                      totalPercentProfit: ((currentInfo.lastPrice / asset.buyPrice - 1) * 100).toFixed(2)});
+                callback();
+              }
             });
-          }
-          else {
-            bScraper(tickerList, function(infoList) {
-              console.log("called scraper");
+          }, function(err) {
+            if (tickerList.length == 0) {
               User.findOne({username: req.decoded._doc.username}, function(err, user) {
                 console.log("found user");
                 if (err) res.send(err);
                 response.username = user.username;
                 response.cash = user.cash.toFixed(2);
                 portfolioValue += parseFloat(user.cash.toFixed(2));
-                async.forEach(infoList, function(currentInfo, callback) {
-                  if (currentInfo !== "Error") {
-                    UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
-                      portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
-                      response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
-                        name: currentInfo.name,
+                response.portfolioValue = portfolioValue.toFixed(2);
+                response.grossProfit = (portfolioValue - 100000).toFixed(2);
+                response.percentProfit = (((portfolioValue / 100000) - 1) * 100).toFixed(2);
+                res.status(200).send(response);
+              });
+            }
+            else {
+              bScraper(tickerList, function(infoList) {
+                console.log("called scraper");
+                User.findOne({username: req.decoded._doc.username}, function(err, user) {
+                  console.log("found user");
+                  if (err) res.send(err);
+                  response.username = user.username;
+                  response.cash = user.cash.toFixed(2);
+                  portfolioValue += parseFloat(user.cash.toFixed(2));
+                  async.forEach(infoList, function(currentInfo, callback) {
+                    if (currentInfo !== "Error" && currentInfo.lastPrice != null) {
+                      UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
+                        portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
+                        response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
+                          name: currentInfo.name,
+                          exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
+                          quantity: asset[0].quantity,
+                          currentPricePerShare: currentInfo.lastPrice,
+                          purchasePricePerShare: (asset[0].buyPrice).toFixed(2),
+                          amountSpent: (asset[0].buyPrice * asset[0].quantity).toFixed(2),
+                          currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
+                          todayChangeNet: currentInfo.netChange,
+                          todayTotalChangeNet: (currentInfo.netChange * asset[0].quantity).toFixed(2),
+                          todayChangePercent: currentInfo.percentChange,
+                          totalNetProfit: (asset[0].quantity * (currentInfo.lastPrice - asset[0].buyPrice)).toFixed(2),
+                          totalPercentProfit: ((currentInfo.lastPrice / asset[0].buyPrice - 1) * 100).toFixed(2)});
+                      value = {
+                        symbol: currentInfo.symbol.toUpperCase(),
+                        name: stockDictionary[currentInfo.symbol.toUpperCase()],
                         exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
-                        quantity: asset[0].quantity,
-                        currentPricePerShare: currentInfo.lastPrice,
-                        purchasePricePerShare: (asset[0].buyPrice).toFixed(2),
-                        amountSpent: (asset[0].buyPrice * asset[0].quantity).toFixed(2),
-                        currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
-                        todayChangeNet: currentInfo.netChange,
-                        todayTotalChangeNet: (currentInfo.netChange * asset[0].quantity).toFixed(2),
-                        todayChangePercent: currentInfo.percentChange,
-                        totalNetProfit: (asset[0].quantity * (currentInfo.lastPrice - asset[0].buyPrice)).toFixed(2),
-                        totalPercentProfit: ((currentInfo.lastPrice / asset[0].buyPrice - 1) * 100).toFixed(2)});
-                    value = {
-                      symbol: currentInfo.symbol.toUpperCase(),
-                      name: stockDictionary[currentInfo.symbol.toUpperCase()],
-                      exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
-                      lastPrice: currentInfo.lastPrice.toFixed(2),
-                      netChange: parseFloat(currentInfo.netChange).toFixed(2),
-                      percentChange: parseFloat(currentInfo.percentChange).toFixed(2),
-                      volume: currentInfo.volume,
-                      high: currentInfo.high,
-                      low: currentInfo.low,
-                      open: currentInfo.open
-                    };
-                    currentStockCache.set(currentInfo.symbol.toUpperCase(), value);
-                    console.log("saved asset");
-                    callback();
-                    });
-                  } else {
-                    callback();
-                  }
-                }, function(err){
-                  response.portfolioValue = portfolioValue.toFixed(2);
-                  response.grossProfit = (portfolioValue - 100000).toFixed(2);
-                  response.percentProfit = ((portfolioValue / 100000 - 1) * 100).toFixed(2);
-                  res.status(200).send(response);
+                        lastPrice: currentInfo.lastPrice.toFixed(2),
+                        netChange: parseFloat(currentInfo.netChange).toFixed(2),
+                        percentChange: parseFloat(currentInfo.percentChange).toFixed(2),
+                        volume: currentInfo.volume,
+                        high: currentInfo.high,
+                        low: currentInfo.low,
+                        open: currentInfo.open
+                      };
+                      currentStockCache.set(currentInfo.symbol.toUpperCase(), value);
+                      console.log("saved asset");
+                      callback();
+                      });
+                    } else {
+                      console.log("barchart can't handle " + currentInfo.symbol + " rn; using yahoo");
+                      UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
+                        getYahooPrice(currentInfo.symbol, currentStockCache, function(yahooResponse) {
+                          portfolioValue += parseFloat((asset[0].quantity * yahooResponse.lastPrice).toFixed(2));
+                          response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
+                            name: currentInfo.name,
+                            exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
+                            quantity: asset[0].quantity,
+                            currentPricePerShare: yahooResponse.lastPrice,
+                            purchasePricePerShare: (asset[0].buyPrice).toFixed(2),
+                            amountSpent: (asset[0].buyPrice * asset[0].quantity).toFixed(2),
+                            currentValue: (asset[0].quantity * yahooResponse.lastPrice).toFixed(2),
+                            todayChangeNet: yahooResponse.netChange,
+                            todayTotalChangeNet: (yahooResponse.netChange * asset[0].quantity).toFixed(2),
+                            todayChangePercent: yahooResponse.percentChange,
+                            totalNetProfit: (asset[0].quantity * (yahooResponse.lastPrice - asset[0].buyPrice)).toFixed(2),
+                            totalPercentProfit: ((yahooResponse.lastPrice / asset[0].buyPrice - 1) * 100).toFixed(2)});
+                            callback();
+                        });
+                      });
+                    }
+                  }, function(err){
+                    response.portfolioValue = portfolioValue.toFixed(2);
+                    response.grossProfit = (portfolioValue - 100000).toFixed(2);
+                    response.percentProfit = ((portfolioValue / 100000 - 1) * 100).toFixed(2);
+                    res.status(200).send(response);
+                  });
                 });
               });
-            });
-          }
+            }
+          });
         });
-      });
+      } catch (err) {
+
+        res.status(403).json({success: false, message: "Oops! An error occurred"});
+      }
     });
 
     userRouter.route('/:query_username')
@@ -252,119 +275,129 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
+          try {
           //stock does not exist
-          if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
-            res.status(404).json({success: false, message: "The stock you attempted to buy does not exist"});
-          } else if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
-            res.status(404).json({success: false, message: "You cannot buy at a non-whole number quantity"});
-          } else {
-            User.findOne({username: req.decoded._doc.username}, function (err, user) {
-                if (err) res.send(err);
-                if (req.params.quantity <= 0) {
-                  res.json({success: false, message: "Quantity must be greater than 0"});
-                } else {
-                  getYahooPrice(req.params.stock_symbol, currentStockCache, function(info) {
-                    if(parseFloat((req.params.quantity * info.lastPrice).toFixed(2)) > user.cash) {
-                      res.json({success: false, message: "You do not have enough money to make this purchase"});
-                    } else {
-                      res.status(200).json({
-                        message: "GET Success",
-                        amount: req.params.quantity,
-                        costPerShare: info.lastPrice,
-                        totalCost: (info.lastPrice * req.params.quantity).toFixed(2),
-                        success: true
-                      });
-                    }
-                  });
-                }
-            });
-          }
-        })
-
-        //performs the act of buying a stock
-        // Arda's most disgusting block of code ever :)
-        .post(function (req, res) {
-          if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
-            res.json({sucess: false, message: "The stock you attempted to buy does not exist"});
-          } else if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
-            res.status(404).json({success: false, message: "You cannot buy at a non-whole number quantity"});
-          } else {
+            if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
+              res.status(404).json({success: false, message: "The stock you attempted to buy does not exist"});
+            } else if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
+              res.status(404).json({success: false, message: "You cannot buy at a non-whole number quantity"});
+            } else {
               User.findOne({username: req.decoded._doc.username}, function (err, user) {
                   if (err) res.send(err);
                   if (req.params.quantity <= 0) {
-                    res.json({message: "Quantity must be greater than 0"});
+                    res.json({success: false, message: "Quantity must be greater than 0"});
                   } else {
-                    console.log("found user");
                     getYahooPrice(req.params.stock_symbol, currentStockCache, function(info) {
-                      console.log("found price");
                       if(parseFloat((req.params.quantity * info.lastPrice).toFixed(2)) > user.cash) {
-                        res.json({message: "You do not have enough money to make this purchase"});
+                        res.json({success: false, message: "You do not have enough money to make this purchase"});
                       } else {
-                        UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
-                          //doesn't exist yet
-                          if (err) {
-                            res.send(err);
-                          } else {
-                            if (asset === null) {
-                              var asset = new UserAsset();
-                              asset.ticker = req.params.stock_symbol.toUpperCase();
-                              asset.quantity = req.params.quantity;
-                              asset.buyPrice = info.lastPrice;
-                              asset.username = req.decoded._doc.username;
-                            } else {
-                              console.log(info.lastPrice * req.params.quantity);
-                              console.log(asset.buyPrice * parseInt(asset.quantity));
-                              console.log(asset.quantity + parseInt(req.params.quantity));
-                              console.log(info.lastPrice * parseInt(req.params.quantity) + asset.buyPrice * asset.quantity);
-                              asset.buyPrice = parseFloat(((info.lastPrice * parseInt(req.params.quantity) + asset.buyPrice * asset.quantity) / (asset.quantity + parseInt(req.params.quantity))).toFixed(2));
-                              asset.quantity += parseInt(req.params.quantity);
-                              console.log(asset.buyPrice);
-                            }
-                          }
-                          asset.save(function(err) {
-                            if (err) {
-                              res.send(err);
-                            } else {
-                              console.log("saved asset");
-                              user.cash -= parseFloat((req.params.quantity * info.lastPrice).toFixed(2));
-                              user.save(function (err) {
-                                  if (err) {
-                                    res.send(err);
-                                  } else {
-                                    TransactionList.findOne({username: req.decoded._doc.username}, function(err, list) {
-                                      list.transactions.push(new Transaction({
-                                        stockTicker: req.params.stock_symbol.toUpperCase(),
-                                        type: "Buy",
-                                        num_shares: req.params.quantity,
-                                        pricePerShare: info.lastPrice,
-                                        totalPrice: (req.params.quantity * info.lastPrice),
-                                        username: req.decoded._doc.username
-                                      }));
-
-                                      list.save(function (err) {
-                                        if (err) {
-                                          res.send(err);
-                                        } else {
-                                          console.log("saved transaction");
-                                          res.json({
-                                            success: true,
-                                            message: "POST Success",
-                                            quantity: req.params.quantity,
-                                            costPerShare: info.lastPrice,
-                                            totalCost: (info.lastPrice * req.params.quantity).toFixed(2)
-                                          });
-                                        }
-                                      });
-                                    });
-                                  }
-                              });
-                            }
-                          });
+                        res.status(200).json({
+                          message: "GET Success",
+                          amount: req.params.quantity,
+                          costPerShare: info.lastPrice,
+                          totalCost: (info.lastPrice * req.params.quantity).toFixed(2),
+                          success: true
                         });
                       }
                     });
                   }
               });
+            }
+          } catch (err) {
+
+            res.status(403).json({success: false, message: "Oops! An error occurred"});
+          }
+        })
+
+        //performs the act of buying a stock
+        // Arda's most disgusting block of code ever :) (jk now it's portfolio)
+        .post(function (req, res) {
+          try {
+            if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
+              res.json({sucess: false, message: "The stock you attempted to buy does not exist"});
+            } else if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
+              res.status(404).json({success: false, message: "You cannot buy at a non-whole number quantity"});
+            } else {
+                User.findOne({username: req.decoded._doc.username}, function (err, user) {
+                    if (err) res.send(err);
+                    if (req.params.quantity <= 0) {
+                      res.json({message: "Quantity must be greater than 0"});
+                    } else {
+                      console.log("found user");
+                      getYahooPrice(req.params.stock_symbol, currentStockCache, function(info) {
+                        console.log("found price");
+                        if(parseFloat((req.params.quantity * info.lastPrice).toFixed(2)) > user.cash) {
+                          res.json({message: "You do not have enough money to make this purchase"});
+                        } else {
+                          UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
+                            //doesn't exist yet
+                            if (err) {
+                              res.send(err);
+                            } else {
+                              if (asset === null) {
+                                var asset = new UserAsset();
+                                asset.ticker = req.params.stock_symbol.toUpperCase();
+                                asset.quantity = req.params.quantity;
+                                asset.buyPrice = info.lastPrice;
+                                asset.username = req.decoded._doc.username;
+                              } else {
+                                console.log(info.lastPrice * req.params.quantity);
+                                console.log(asset.buyPrice * parseInt(asset.quantity));
+                                console.log(asset.quantity + parseInt(req.params.quantity));
+                                console.log(info.lastPrice * parseInt(req.params.quantity) + asset.buyPrice * asset.quantity);
+                                asset.buyPrice = parseFloat(((info.lastPrice * parseInt(req.params.quantity) + asset.buyPrice * asset.quantity) / (asset.quantity + parseInt(req.params.quantity))).toFixed(2));
+                                asset.quantity += parseInt(req.params.quantity);
+                                console.log(asset.buyPrice);
+                              }
+                            }
+                            asset.save(function(err) {
+                              if (err) {
+                                res.send(err);
+                              } else {
+                                console.log("saved asset");
+                                user.cash -= parseFloat((req.params.quantity * info.lastPrice).toFixed(2));
+                                user.save(function (err) {
+                                    if (err) {
+                                      res.send(err);
+                                    } else {
+                                      TransactionList.findOne({username: req.decoded._doc.username}, function(err, list) {
+                                        list.transactions.push(new Transaction({
+                                          stockTicker: req.params.stock_symbol.toUpperCase(),
+                                          type: "Buy",
+                                          num_shares: req.params.quantity,
+                                          pricePerShare: info.lastPrice,
+                                          totalPrice: (req.params.quantity * info.lastPrice),
+                                          username: req.decoded._doc.username
+                                        }));
+
+                                        list.save(function (err) {
+                                          if (err) {
+                                            res.send(err);
+                                          } else {
+                                            console.log("saved transaction");
+                                            res.json({
+                                              success: true,
+                                              message: "POST Success",
+                                              quantity: req.params.quantity,
+                                              costPerShare: info.lastPrice,
+                                              totalCost: (info.lastPrice * req.params.quantity).toFixed(2)
+                                            });
+                                          }
+                                        });
+                                      });
+                                    }
+                                });
+                              }
+                            });
+                          });
+                        }
+                      });
+                    }
+                });
+              }
+            } catch (err) {
+
+              res.status(403).json({success: false, message: "Oops! An error occurred"});
             }
         });
 
@@ -372,74 +405,84 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
-          if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
-            res.status(404).json({success: false, message: "You cannot sell at a non-whole number quantity"});
-          } else {
-            User.findOne({username: req.decoded._doc.username}, function(err, user) {
-              if (err) {
-                res.send(err);
-              } else if (req.params.quantity <= 0) {
-                  res.json({success: false, message: "Quantity must be greater than 0"});
-              } else {
-                UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
-                  if (err) {res.send(err);}
-                  else if (asset === null) {
-                    res.json({success: false, message: "You do not own this stock, so you cannot sell it"});
-                  } else if (asset.quantity < req.params.quantity) {
-                    res.json({success: false, message: "You do not own as many of this stock as you are attempting to sell"});
-                  } else {
-                    getYahooPrice(req.params.stock_symbol, currentStockCache, function(info) {
-                      res.json({
-                        success: true,
-                        message: "GET Success",
-                        quantity: req.params.quantity,
-                        revenuePerShare: info.lastPrice,
-                        totalRevenue: (info.lastPrice * req.params.quantity).toFixed(2)
+          try {
+            if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
+              res.status(404).json({success: false, message: "You cannot sell at a non-whole number quantity"});
+            } else {
+              User.findOne({username: req.decoded._doc.username}, function(err, user) {
+                if (err) {
+                  res.send(err);
+                } else if (req.params.quantity <= 0) {
+                    res.json({success: false, message: "Quantity must be greater than 0"});
+                } else {
+                  UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
+                    if (err) {res.send(err);}
+                    else if (asset === null) {
+                      res.json({success: false, message: "You do not own this stock, so you cannot sell it"});
+                    } else if (asset.quantity < req.params.quantity) {
+                      res.json({success: false, message: "You do not own as many of this stock as you are attempting to sell"});
+                    } else {
+                      getYahooPrice(req.params.stock_symbol, currentStockCache, function(info) {
+                        res.json({
+                          success: true,
+                          message: "GET Success",
+                          quantity: req.params.quantity,
+                          revenuePerShare: info.lastPrice,
+                          totalRevenue: (info.lastPrice * req.params.quantity).toFixed(2)
+                        });
                       });
-                    });
-                  }
-                });
-              }
-            });
+                    }
+                  });
+                }
+              });
+            }
+          } catch (err) {
+
+            res.status(403).json({success: false, message: "Oops! An error occurred"});
           }
         })
 
         //performs the act of buying a stock
         .post(function (req, res) {
-          if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
-            res.status(404).json({success: false, message: "You cannot sell at a non-whole number quantity"});
-          } else {
-            User.findOne({username: req.decoded._doc.username}, function (err, user) {
-              if (err) {
-                res.send(err);
-              } else if (req.params.quantity <= 0) {
-                  res.json({message: "Quantity must be greater than 0"});
-              } else {
-                UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
-                  if (err) {res.send(err);}
-                  else if (asset === null) {
-                    res.json({success: false, message: "You do not own this stock, so you cannot sell it"});
-                  } else if (asset.quantity < req.params.quantity) {
-                    res.json({success: false, message: "You do not own as many of this stock as you are attempting to sell"});
-                  } else {
-                    getYahooPrice(req.params.stock_symbol, currentStockCache, function(info) {
-                      var prevQuantity = asset.quantity;
-                      var prevPrice = asset.buyPrice;
-                      if (asset.quantity === parseInt(req.params.quantity)) {
-                        asset.remove(function(err) {
-                          sellHelper(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction);
-                        });
-                      } else {
-                        asset.quantity -= parseInt(req.params.quantity);
-                        asset.save(function (err) {
-                          sellHelper(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction);
-                        });
-                      }
-                    });
-                  }
-                });
-              }
-            });
+          try {
+            if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
+              res.status(404).json({success: false, message: "You cannot sell at a non-whole number quantity"});
+            } else {
+              User.findOne({username: req.decoded._doc.username}, function (err, user) {
+                if (err) {
+                  res.send(err);
+                } else if (req.params.quantity <= 0) {
+                    res.json({message: "Quantity must be greater than 0"});
+                } else {
+                  UserAsset.findOne({username: req.decoded._doc.username, ticker: req.params.stock_symbol.toUpperCase()}, function(err, asset) {
+                    if (err) {res.send(err);}
+                    else if (asset === null) {
+                      res.json({success: false, message: "You do not own this stock, so you cannot sell it"});
+                    } else if (asset.quantity < req.params.quantity) {
+                      res.json({success: false, message: "You do not own as many of this stock as you are attempting to sell"});
+                    } else {
+                      getYahooPrice(req.params.stock_symbol, currentStockCache, function(info) {
+                        var prevQuantity = asset.quantity;
+                        var prevPrice = asset.buyPrice;
+                        if (asset.quantity === parseInt(req.params.quantity)) {
+                          asset.remove(function(err) {
+                            sellHelper(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction);
+                          });
+                        } else {
+                          asset.quantity -= parseInt(req.params.quantity);
+                          asset.save(function (err) {
+                            sellHelper(err, user, info, res, req, prevQuantity, prevPrice, TransactionList, Transaction);
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          } catch (err) {
+
+            res.status(403).json({success: false, message: "Oops! An error occurred"});
           }
         });
 

@@ -2,9 +2,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading">{{ search.stock.data.current.name }} ({{ search.stock.data.current.symbol }})</h4>
-        <h4 class="modal-title" id="myModalLabel" ng-if="!search.stock.data.success && !search.stock.loading">Stock Not Available</h4>
-        <h4 class="modal-title" id="myModalLabel" ng-if="search.stock.loading">Fetching Stock Information...</h4>
+        <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading">{{ search.stock.data.current.name }} ({{ search.stock.data.current.symbol }})</h4>
+        <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="!search.stock.data.success && !search.stock.loading">Stock Not Available</h4>
+        <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.loading">Fetching Stock Information...</h4>
       </div>
       <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
         <p>Stock: {{ search.stock.data.current.name }}<p>

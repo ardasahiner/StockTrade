@@ -191,10 +191,6 @@ body.footer {
     padding-bottom: 15px;
 }
 
-.modal-title {
-  color: white;
-}
-
 .stockModal .modal-dialog {
     width: 90%;
     color: #737373;
@@ -208,8 +204,16 @@ body.footer {
     background-color: white;
 }
 
-.stockModal h1, h2, h3, h4, h5, h6, p {
+.transactionModal {
     color: white;
+}
+
+.stockModal {
+  color: #737373;
+}
+
+.stockModalTitle {
+  color: #737373;
 }
 
 .stockAssetRow a {
@@ -268,4 +272,8 @@ hr.footer-border {
 
 .change-neutral {
     background-color: #cccccc;
+}
+
+.search-companies {
+  margin-left: 8.3333%;
 }

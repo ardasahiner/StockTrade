@@ -40,6 +40,12 @@ angular.module('app.routes', ['ui.router'])
     authenticated: false
   })
 
+  .state('appUnavailable', {
+    url: '/error',
+    templateUrl: 'app/views/pages/applicationUnavailable.html',
+    authenticated: false
+  })
+
   .state('portfolio', {
     url: '/portfolio',
     templateUrl: 'app/views/pages/authenticated/portfolio.html',

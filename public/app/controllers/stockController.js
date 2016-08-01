@@ -32,9 +32,8 @@ angular.module('stockController', ['ui.bootstrap'])
       }
     })
     .catch(function(err) {
-      Auth.logout();
-      $location.path('/');
-      console.log("logged out");
+      console.log("Application Unavaliable");
+      $location.path('/error');
     })
   };
 

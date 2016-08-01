@@ -148,6 +148,10 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                   async.forEach(infoList, function(currentInfo, callback) {
                     if (currentInfo !== "Error" && currentInfo.lastPrice != null) {
                       UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
+                        if (currentInfo.netChange == null) {
+                          currentInfo.netChange = 0;
+                          currentInfo.percentChange = 0;
+                        }
                         portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
                         response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
                           name: currentInfo.name,
@@ -179,7 +183,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                       callback();
                       });
                     } else {
-                      console.log("barchart can't handle " + currentInfo.symbol + " rn; using yahoo");
+                      console.log("barchart can't handle " + currentInfo.symbol + " right now--using yahoo");
                       UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
                         getYahooPrice(currentInfo.symbol, currentStockCache, function(yahooResponse) {
                           portfolioValue += parseFloat((asset[0].quantity * yahooResponse.lastPrice).toFixed(2));

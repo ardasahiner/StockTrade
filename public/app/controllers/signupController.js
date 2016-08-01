@@ -1,6 +1,6 @@
 angular.module('signupController', [])
 
-.controller('signupController', function(User, Auth, $location) {
+.controller('signupController', function(User, Auth, $location, $anchorScroll) {
 
   var vm = this;
   vm.titleMessage = 'Signup Page';
@@ -27,6 +27,7 @@ angular.module('signupController', [])
               if (data.success) {
                 $location.path('/portfolio');
                 $("#signupModal").modal('hide');
+                $anchorScroll();
               } else {
                 vm.error = data.message;
               }

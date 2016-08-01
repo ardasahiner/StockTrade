@@ -7,8 +7,9 @@ imports.push('mainController', 'signupController', 'stockController', "searchCon
 angular.module('vStockApp', imports)
 
 // Custom configuration to get rid of # prefix on URLs
-.config(function($httpProvider) {
+.config(function($httpProvider, $uiViewScrollProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
+  $uiViewScrollProvider.useAnchorScroll();
 })
 
 // This function listens for all state changes

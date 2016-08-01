@@ -148,7 +148,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 async.forEach(infoList, function(currentInfo, callback) {
                   if (currentInfo !== "Error") {
                     UserAsset.find({username: user.username, ticker: currentInfo.symbol.toUpperCase()}, function(err, asset) {
-                      console.log(asset);
                       portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
                       response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
                         name: currentInfo.name,
@@ -183,7 +182,6 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     callback();
                   }
                 }, function(err){
-                  console.log(response);
                   response.portfolioValue = portfolioValue.toFixed(2);
                   response.grossProfit = (portfolioValue - 100000).toFixed(2);
                   response.percentProfit = ((portfolioValue / 100000 - 1) * 100).toFixed(2);
@@ -256,7 +254,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
         .get(function (req, res) {
           //stock does not exist
           if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
-            res.json({success: false, message: "The stock you attempted to buy does not exist"});
+            res.status(404).json({success: false, message: "The stock you attempted to buy does not exist"});
+          } else if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
+            res.status(404).json({success: false, message: "You cannot buy at a non-whole number quantity"});
           } else {
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
                 if (err) res.send(err);
@@ -286,6 +286,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
         .post(function (req, res) {
           if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) < 0) {
             res.json({sucess: false, message: "The stock you attempted to buy does not exist"});
+          } else if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
+            res.status(404).json({success: false, message: "You cannot buy at a non-whole number quantity"});
           } else {
               User.findOne({username: req.decoded._doc.username}, function (err, user) {
                   if (err) res.send(err);
@@ -370,6 +372,9 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
         //sends info on the transaction, but does not process it
         .get(function (req, res) {
+          if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
+            res.status(404).json({success: false, message: "You cannot sell at a non-whole number quantity"});
+          } else {
             User.findOne({username: req.decoded._doc.username}, function(err, user) {
               if (err) {
                 res.send(err);
@@ -396,10 +401,14 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 });
               }
             });
+          }
         })
 
         //performs the act of buying a stock
         .post(function (req, res) {
+          if (isNaN(parseInt(req.params.quantity)) || parseInt(req.params.quantity) <= 0){
+            res.status(404).json({success: false, message: "You cannot sell at a non-whole number quantity"});
+          } else {
             User.findOne({username: req.decoded._doc.username}, function (err, user) {
               if (err) {
                 res.send(err);
@@ -431,6 +440,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                 });
               }
             });
+          }
         });
 
     //for handling requests to /users/transactions (listing transactions)
@@ -509,10 +519,4 @@ var getYahooPrice = function(symbol, stockCache, callback) {
         callback(value);
       }
     });
-};
-
-var iterateThroughAssets = function(username, cachedList, rest, portfolioValue, UserAsset, stockCache, callback) {
-
-
-
 };

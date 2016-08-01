@@ -143,23 +143,45 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
           currentStockCacheInaccurate.get(req.params.stock_symbol.toUpperCase(), function(err, value) {
 
             //if not in inaccurate cache
+            if(req.params.stock_symbol.toUpperCase())
+
             if (err) {
-              mrtScraper(req.params.stock_symbol, function(info) {
-                value = {
-                  symbol: info.Symbol.toUpperCase(),
-                  name: stockDictionary[info.Symbol.toUpperCase()],
-                  exchange: stockDictionaryExchange[info.Symbol.toUpperCase()],
-                  lastPrice: info.LastPrice.toFixed(2),
-                  netChange: info.Change.toFixed(2),
-                  percentChange: info.ChangePercent.toFixed(2),
-                  volume: info.Volume,
-                  high: info.High,
-                  low: info.Low,
-                  open: info.Open
-                };
-                currentStockCacheInaccurate.set(info.Symbol.toUpperCase(), value);
-                res.status(200).json({success: true, message: "success", current: value});
-              });
+              if ((req.params.stock_symbol.toUpperCase()) == "GOOG") {
+                yrtScraper(req.params.stock_symbol, function(info) {
+                  value = {
+                    symbol: req.params.stock_symbol.toUpperCase(),
+                    name: stockDictionary[req.params.stock_symbol.toUpperCase()],
+                    exchange: stockDictionaryExchange[req.params.stock_symbol.toUpperCase()],
+                    lastPrice: info[0][0],
+                    netChange: info[0][1],
+                    percentChange: info[0][2].substring(0, info[0][2].length - 1), // strips % sign
+                    volume: parseInt(info[0][7]),
+                    high: parseFloat(info[0][5]),
+                    low: parseFloat(info[0][6]),
+                    open: parseFloat(info[0][3])
+                  };
+                  currentStockCacheInaccurate.set(info.Symbol.toUpperCase(), value);
+                  res.status(200).json({success: true, message: "success", current: value});
+                });
+              }
+              else {
+                mrtScraper(req.params.stock_symbol, function(info) {
+                  value = {
+                    symbol: info.Symbol.toUpperCase(),
+                    name: stockDictionary[info.Symbol.toUpperCase()],
+                    exchange: stockDictionaryExchange[info.Symbol.toUpperCase()],
+                    lastPrice: info.LastPrice.toFixed(2),
+                    netChange: info.Change.toFixed(2),
+                    percentChange: info.ChangePercent.toFixed(2),
+                    volume: info.Volume,
+                    high: info.High,
+                    low: info.Low,
+                    open: info.Open
+                  };
+                  currentStockCacheInaccurate.set(info.Symbol.toUpperCase(), value);
+                  res.status(200).json({success: true, message: "success", current: value});
+                });
+              }
             } else {
               res.status(200).json({success: true, message: "success", current: value});
             }

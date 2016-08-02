@@ -25,6 +25,13 @@ angular.module('searchController', ['ui.bootstrap'])
           vm.stock.data = data.data;
           vm.stock.data.success = true;
           vm.stock.loading = false;
+          if (vm.stock.data.current.percentChange > 0) {
+            vm.stock.data.change = "positive";
+          } else if (vm.stock.data.current.percentChange < 0) {
+            vm.stock.data.change = "negative";
+          } else {
+            vm.stock.data.change = "neutral";
+          }
         })
         .catch(function(err) {
           console.log(err);
@@ -48,6 +55,13 @@ angular.module('searchController', ['ui.bootstrap'])
         vm.stock.data = data.data;
         vm.stock.data.success = true;
         vm.stock.loading = false;
+        if (vm.stock.data.current.percentChange > 0) {
+          vm.stock.data.change = "positive";
+        } else if (vm.stock.data.current.percentChange < 0) {
+          vm.stock.data.change = "negative";
+        } else {
+          vm.stock.data.change = "neutral";
+        }
       })
       .catch(function(err) {
         console.log(err);

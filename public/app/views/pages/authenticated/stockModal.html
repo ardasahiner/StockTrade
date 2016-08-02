@@ -23,12 +23,12 @@
               <p>${{ search.stock.data.current.netChange }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.percentChange }}%)<p>
             </div>
             <div class="col-sm-8">
-              <p ng-if="search.stock.data.current.volume != 0 && search.stock.data.current.high != 0">High:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.high }}<p>
+              <p ng-if="search.stock.data.current.volume != 0">High:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.high }}<p>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-8 col-md-offset-4">
-              <p ng-if="search.stock.data.current.volume != 0 && search.stock.data.current.low != 0">Low:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.low }}<p>
+              <p ng-if="search.stock.data.current.volume != 0">Low:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.low }}<p>
             </div>
           </div>
           <div class="row">

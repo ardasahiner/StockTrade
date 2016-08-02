@@ -5,3 +5,13 @@
 .teamMember {
   padding-top: 20px;
 }
+
+.teamMember h2 {
+  margin-bottom: 0px;
+}
+
+.role {
+  font-size: large;
+  text-align: center;
+  color: black;
+}

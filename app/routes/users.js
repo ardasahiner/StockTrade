@@ -158,19 +158,19 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                           exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
                           quantity: asset[0].quantity,
                           currentPricePerShare: currentInfo.lastPrice,
-                          purchasePricePerShare: (asset[0].buyPrice).toFixed(2),
-                          amountSpent: (asset[0].buyPrice * asset[0].quantity).toFixed(2),
-                          currentValue: (asset[0].quantity * currentInfo.lastPrice).toFixed(2),
+                          purchasePricePerShare: parseFloat(asset[0].buyPrice).toFixed(2),
+                          amountSpent: parseFloat(asset[0].buyPrice * asset[0].quantity).toFixed(2),
+                          currentValue: parseFloat(asset[0].quantity * currentInfo.lastPrice).toFixed(2),
                           todayChangeNet: currentInfo.netChange,
-                          todayTotalChangeNet: (currentInfo.netChange * asset[0].quantity).toFixed(2),
+                          todayTotalChangeNet: parseFloat(currentInfo.netChange * asset[0].quantity).toFixed(2),
                           todayChangePercent: currentInfo.percentChange,
-                          totalNetProfit: (asset[0].quantity * (currentInfo.lastPrice - asset[0].buyPrice)).toFixed(2),
-                          totalPercentProfit: ((currentInfo.lastPrice / asset[0].buyPrice - 1) * 100).toFixed(2)});
+                          totalNetProfit: parseFloat(asset[0].quantity * (currentInfo.lastPrice - asset[0].buyPrice)).toFixed(2),
+                          totalPercentProfit: parseFloat((currentInfo.lastPrice / asset[0].buyPrice - 1) * 100).toFixed(2)});
                       value = {
                         symbol: currentInfo.symbol.toUpperCase(),
                         name: stockDictionary[currentInfo.symbol.toUpperCase()],
                         exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
-                        lastPrice: currentInfo.lastPrice.toFixed(2),
+                        lastPrice: parseFloat(currentInfo.lastPrice).toFixed(2),
                         netChange: parseFloat(currentInfo.netChange).toFixed(2),
                         percentChange: parseFloat(currentInfo.percentChange).toFixed(2),
                         volume: currentInfo.volume,
@@ -192,22 +192,22 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                             exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
                             quantity: asset[0].quantity,
                             currentPricePerShare: yahooResponse.lastPrice,
-                            purchasePricePerShare: (asset[0].buyPrice).toFixed(2),
-                            amountSpent: (asset[0].buyPrice * asset[0].quantity).toFixed(2),
-                            currentValue: (asset[0].quantity * yahooResponse.lastPrice).toFixed(2),
+                            purchasePricePerShare: parseFloat(asset[0].buyPrice).toFixed(2),
+                            amountSpent: parseFloat(asset[0].buyPrice * asset[0].quantity).toFixed(2),
+                            currentValue: parseFloat(asset[0].quantity * yahooResponse.lastPrice).toFixed(2),
                             todayChangeNet: yahooResponse.netChange,
-                            todayTotalChangeNet: (yahooResponse.netChange * asset[0].quantity).toFixed(2),
+                            todayTotalChangeNet: parseFloat(yahooResponse.netChange * asset[0].quantity).toFixed(2),
                             todayChangePercent: yahooResponse.percentChange,
-                            totalNetProfit: (asset[0].quantity * (yahooResponse.lastPrice - asset[0].buyPrice)).toFixed(2),
-                            totalPercentProfit: ((yahooResponse.lastPrice / asset[0].buyPrice - 1) * 100).toFixed(2)});
+                            totalNetProfit: parseFloat(asset[0].quantity * (yahooResponse.lastPrice - asset[0].buyPrice)).toFixed(2),
+                            totalPercentProfit: parseFloat((yahooResponse.lastPrice / asset[0].buyPrice - 1) * 100).toFixed(2)});
                             callback();
                         });
                       });
                     }
                   }, function(err){
-                    response.portfolioValue = portfolioValue.toFixed(2);
-                    response.grossProfit = (portfolioValue - 100000).toFixed(2);
-                    response.percentProfit = ((portfolioValue / 100000 - 1) * 100).toFixed(2);
+                    response.portfolioValue = parseFloat(portfolioValue).toFixed(2);
+                    response.grossProfit = parseFloat(portfolioValue - 100000).toFixed(2);
+                    response.percentProfit = parseFloat((portfolioValue / 100000 - 1) * 100).toFixed(2);
                     res.status(200).send(response);
                   });
                 });
@@ -299,7 +299,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                           message: "GET Success",
                           amount: req.params.quantity,
                           costPerShare: info.lastPrice,
-                          totalCost: (info.lastPrice * req.params.quantity).toFixed(2),
+                          totalCost: parseFloat(info.lastPrice * req.params.quantity).toFixed(2),
                           success: true
                         });
                       }
@@ -384,7 +384,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                                               message: "POST Success",
                                               quantity: req.params.quantity,
                                               costPerShare: info.lastPrice,
-                                              totalCost: (info.lastPrice * req.params.quantity).toFixed(2)
+                                              totalCost: parseFloat(info.lastPrice * req.params.quantity).toFixed(2)
                                             });
                                           }
                                         });
@@ -432,7 +432,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                           message: "GET Success",
                           quantity: req.params.quantity,
                           revenuePerShare: info.lastPrice,
-                          totalRevenue: (info.lastPrice * req.params.quantity).toFixed(2)
+                          totalRevenue: parseFloat(info.lastPrice * req.params.quantity).toFixed(2)
                         });
                       });
                     }
@@ -525,7 +525,7 @@ var sellHelper = function(err, user, info, res, req, prevQuantity, prevPrice, Tr
                 message: "POST Success",
                 quantity: req.params.quantity,
                 revenuePerShare: info.lastPrice ,
-                totalRevenue: (info.lastPrice  * req.params.quantity).toFixed(2)
+                totalRevenue: parseFloat(info.lastPrice  * req.params.quantity).toFixed(2)
               });
             }
           });

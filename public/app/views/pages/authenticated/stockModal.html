@@ -12,8 +12,8 @@
         <p>Stock Price: ${{ search.stock.data.current.lastPrice }}<p>
         <p ng-if="search.stock.data.current.volume != 0">Percent Change: {{ search.stock.data.current.percentChange }}%<p>
         <p ng-if="search.stock.data.current.volume != 0">Net Change: ${{ search.stock.data.current.netChange }}<p>
-        <p ng-if="search.stock.data.current.volume != 0">High: ${{ search.stock.data.current.high }}<p>
-        <p ng-if="search.stock.data.current.volume != 0">Low: ${{ search.stock.data.current.low }}<p>
+        <p ng-if="search.stock.data.current.volume != 0 && search.stock.data.current.high != 0">High: ${{ search.stock.data.current.high }}<p>
+        <p ng-if="search.stock.data.current.volume != 0 && search.stock.data.current.low != 0">Low: ${{ search.stock.data.current.low }}<p>
         <p ng-if="search.stock.data.current.volume != 0">Volume: {{ search.stock.data.current.volume }}<p>
         <p>Exchange: {{ search.stock.data.current.exchange }}<p>
 

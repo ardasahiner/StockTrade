@@ -214,6 +214,7 @@ body.footer {
 
 .stockModalTitle {
   color: #737373;
+  text-align: center;
 }
 
 .stockAssetRow a {
@@ -280,4 +281,30 @@ hr.footer-border {
 
 .buysellModals {
   background-color: #485a55;
+}
+
+.currentStockPrice {
+
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.todayStockInfo {
+
+  line-height: 5px;
+  text-align: center;
+}
+
+.todayTradingInfo {
+  font-size: large;
+  font-weight:bold;
+}
+
+.rightAlign {
+
+  text-align: right;
+}
+.leftAlign {
+
+  text-align: left;
 }

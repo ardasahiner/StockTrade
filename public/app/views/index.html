@@ -27,27 +27,27 @@
 </head>
 
 <body class="container" ng-app="vStockApp" ng-controller="mainController as main">
+  <div class="pageContainer" ng-controller="searchController as search">
+  <!-- Begin Webpage here -->
+    <!-- HEADER AND NAVBAR -->
+    <div ng-include src="'/app/views/pages/unauthenticated/navbar.html'"></div>
 
-<!-- Begin Webpage here -->
-  <!-- HEADER AND NAVBAR -->
-  <div ng-include src="'/app/views/pages/unauthenticated/navbar.html'"></div>
+    <a id="top"></a>
 
-  <a id="top"></a>
+    <!-- Import Modals -->
+    <div ng-include src="'/app/views/pages/unauthenticated/loginModal.html'"></div>
+    <div ng-include src="'/app/views/pages/unauthenticated/signupModal.html'"></div>
 
-  <!-- Import Modals -->
-  <div ng-include src="'/app/views/pages/unauthenticated/loginModal.html'"></div>
-  <div ng-include src="'/app/views/pages/unauthenticated/signupModal.html'"></div>
+    <!-- Views injected into here -->
+    <main>
+      <div ui-view></div>
+    </main>
 
-  <!-- Views injected into here -->
-  <main>
-    <div ui-view></div>
-  </main>
-
-  <!-- FOOTER Section imported here -->
-  <footer>
-    <div class="footer-container" ng-include src="'/app/views/pages/unauthenticated/footer.html'"></div>
-  </footer>
-
+    <!-- FOOTER Section imported here -->
+    <footer>
+      <div class="footer-container" ng-include src="'/app/views/pages/unauthenticated/footer.html'"></div>
+    </footer>
+  </div>
 <!-- End Webpage here -->
 
   <!-- Import AngularJS Components -->

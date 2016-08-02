@@ -7,6 +7,9 @@
           <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="!search.stock.data.success && !search.stock.loading">Stock Not Available</h4>
           <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.loading">Fetching Stock Information...</h4>
         </div>
+        <div class=modal-body ng-if="search.stock.loading">
+          <center><img style="opacity: 0.5; margin-top: 15px;" src="/assets/img/39.gif"><center>
+        </div>
         <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
           <!-- <p>Stock: {{ search.stock.data.current.name }}<p>
           <p>Stock Ticker: {{ search.stock.data.current.symbol }}<p> -->

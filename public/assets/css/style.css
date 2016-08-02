@@ -285,6 +285,18 @@ hr.footer-border {
     background-color: #e6e6e6;
 }
 
+.stockModalchange-positive {
+    background-color: #79d2a6;
+}
+
+.stockModalchange-negative {
+    background-color: #e6b3b3;
+}
+
+.stockModalchange-neutral {
+    background-color: #cccccc;
+}
+
 .search-companies {
   margin-left: 8.3333%;
 }

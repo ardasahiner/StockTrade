@@ -11,6 +11,7 @@ angular.module('stockController', ['ui.bootstrap'])
   vm.ownedTickers = [];
 
   vm.getPortfolio = function() {
+    vm.loading = true;
     Stocks.getPortfolio()
     .then(function(data) {
       vm.portfolio = data.data;
@@ -30,8 +31,10 @@ angular.module('stockController', ['ui.bootstrap'])
         vm.ownedStocks[stock.ticker] = stock.quantity;
         vm.ownedTickers.push(stock.ticker);
       }
+      vm.loading = false;
     })
     .catch(function(err) {
+      vm.loading = false;
       console.log("Application Unavaliable");
       $location.path('/error');
     })

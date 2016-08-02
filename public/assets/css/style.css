@@ -245,11 +245,6 @@ hr.footer-border {
     box-shadow: 0 20px 20px -20px white inset;
 }
 
-.stock:hover {
-    text-shadow: 0 0 8px #8aa8a0;
-    background-color: #d2d2d2;
-}
-
 .row {
     width: 100%;
 }
@@ -267,12 +262,27 @@ hr.footer-border {
     background-color: #79d2a6;
 }
 
+.change-positive:hover {
+    text-shadow: 0 0 8px #8aa8a0;
+    background-color: #c6ecd9;
+}
+
 .change-negative {
     background-color: #e6b3b3;
 }
 
+.change-negative:hover {
+    text-shadow: 0 0 8px #8aa8a0;
+    background-color: #f2d9d9;
+}
+
 .change-neutral {
     background-color: #cccccc;
+}
+
+.change-neutral:hover {
+    text-shadow: 0 0 8px #8aa8a0;
+    background-color: #e6e6e6;
 }
 
 .search-companies {
@@ -315,7 +325,7 @@ hr.footer-border {
 
 .aboutPage {
   height: 100%;
-  background-color: white;
+  background-color: #8aa8a0;
 }
 
 .aboutPageText {
@@ -330,8 +340,6 @@ hr.footer-border {
     background-size: cover;
     -o-background-size: cover;
 }
-
-/* Customize the text color and shadow color and to optimize text legibility. */
 
 .tagline {
     text-shadow: 0 0 10px #000;

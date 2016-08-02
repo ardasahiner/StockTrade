@@ -27,12 +27,41 @@
 			${{ 0.00 | number : 2 }} ({{ 0.00 | number : 2 }}%)
 		</div>
 
-		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-			${{ info.totalNetProfit / info.quantity | number : 2 }} ({{ info.totalPercentProfit | number : 2 }}%)
+		<!-- If total Net Profit is positive, display this -->
+		<div ng-if="info.totalNetProfit > 0" style="color: darkgreen">
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				${{ info.totalNetProfit / info.quantity | number : 2 }} ({{ info.totalPercentProfit | number : 2 }}%)
+				<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+			</div>
+
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				${{ info.totalNetProfit }}
+				<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+			</div>
 		</div>
 
-		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-			${{ info.totalNetProfit }}
+		<!-- If total Net Profit is neutral, display this -->
+		<div ng-if="info.totalNetProfit == 0" style="color: darkgrey">
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				${{ info.totalNetProfit / info.quantity | number : 2 }} ({{ info.totalPercentProfit | number : 2 }}%)
+			</div>
+
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				${{ info.totalNetProfit }}
+			</div>
+		</div>
+
+		<!-- If total Net Profit is negative, display this -->
+		<div ng-if="info.totalNetProfit < 0" style="color: darkred">
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				${{ info.totalNetProfit / info.quantity | number : 2 }} ({{ info.totalPercentProfit | number : 2 }}%)
+				<i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+			</div>
+
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				${{ info.totalNetProfit }}
+				<i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+			</div>
 		</div>
 	</div>
 </div>

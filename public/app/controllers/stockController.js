@@ -18,9 +18,9 @@ angular.module('stockController', ['ui.bootstrap'])
       console.log(vm.portfolio);
       $scope.portfolioAssets = vm.portfolio.assets;
       for (stock of $scope.portfolioAssets) {
-        if (parseFloat(stock.totalNetProfit) > 0) {
+        if (parseFloat(stock.todayChangePercent) > 0) {
           stock.change = "change-positive";
-        } else if (parseFloat(stock.totalNetProfit) < 0) {
+        } else if (parseFloat(stock.todayChangePercent) < 0) {
           stock.change = "change-negative";
         } else {
           stock.change = "change-neutral";

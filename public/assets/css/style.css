@@ -208,6 +208,12 @@ body.footer {
     color: white;
 }
 
+.transactionModal h5 {
+
+    font-size: large;
+    font-style: bold;
+}
+
 .stockModal {
   color: #737373;
 }

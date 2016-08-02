@@ -1,66 +1,68 @@
 <div class="modal fade stockModal" id="stockModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading"> <b>{{search.stock.data.current.name}}</b>&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.exchange }}:{{ search.stock.data.current.symbol }})</h4>
-        <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="!search.stock.data.success && !search.stock.loading">Stock Not Available</h4>
-        <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.loading">Fetching Stock Information...</h4>
-      </div>
-      <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
-        <!-- <p>Stock: {{ search.stock.data.current.name }}<p>
-        <p>Stock Ticker: {{ search.stock.data.current.symbol }}<p> -->
-        <div class="container todayStockInfo">
-          <div class="row">
-            <div class="col-sm-4">
-              <p class="currentStockPrice">${{ search.stock.data.current.lastPrice }}<p>
-            </div>
-            <div class="col-sm-8">
-              <p ng-if="search.stock.data.current.volume != 0" class = "todayTradingInfo">Today's Trading Info: </h4> <br></br>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-4">
-              <p>${{ search.stock.data.current.netChange }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.percentChange }}%)<p>
-            </div>
-            <div class="col-sm-8">
-              <p ng-if="search.stock.data.current.volume != 0">High:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.high }}<p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-8 col-md-offset-4">
-              <p ng-if="search.stock.data.current.volume != 0">Low:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.low }}<p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-8 col-md-offset-4">
-              <p ng-if="search.stock.data.current.volume != 0">Volume:&nbsp;&nbsp;&nbsp;&nbsp; {{ search.stock.data.current.volume }}<p>
-            </div>
-          </div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="{{search.stock.data.change}}">
+        <div class="modal-header">
+          <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading"> <b>{{search.stock.data.current.name}}</b>&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.exchange }}:{{ search.stock.data.current.symbol }})</h4>
+          <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="!search.stock.data.success && !search.stock.loading">Stock Not Available</h4>
+          <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.loading">Fetching Stock Information...</h4>
         </div>
-        <!-- <p ng-if="search.stock.data.current.volume != 0">Percent Change: {{ search.stock.data.current.percentChange }}%<p>
-        <p ng-if="search.stock.data.current.volume != 0">Net Change: ${{ search.stock.data.current.netChange }}<p> -->
-        <!-- <p>Exchange: {{ search.stock.data.current.exchange }}<p> -->
+        <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
+          <!-- <p>Stock: {{ search.stock.data.current.name }}<p>
+          <p>Stock Ticker: {{ search.stock.data.current.symbol }}<p> -->
+          <div class="container todayStockInfo">
+            <div class="row">
+              <div class="col-sm-4">
+                <p class="currentStockPrice">${{ search.stock.data.current.lastPrice }}<p>
+              </div>
+              <div class="col-sm-8">
+                <p ng-if="search.stock.data.current.volume != 0" class = "todayTradingInfo">Today's Trading Info: </h4> <br></br>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <p>${{ search.stock.data.current.netChange }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.percentChange }}%)<p>
+              </div>
+              <div class="col-sm-8">
+                <p ng-if="search.stock.data.current.volume != 0">High:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.high }}<p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-md-offset-4">
+                <p ng-if="search.stock.data.current.volume != 0">Low:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.low }}<p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-md-offset-4">
+                <p ng-if="search.stock.data.current.volume != 0">Volume:&nbsp;&nbsp;&nbsp;&nbsp; {{ search.stock.data.current.volume }}<p>
+              </div>
+            </div>
+          </div>
+          <!-- <p ng-if="search.stock.data.current.volume != 0">Percent Change: {{ search.stock.data.current.percentChange }}%<p>
+          <p ng-if="search.stock.data.current.volume != 0">Net Change: ${{ search.stock.data.current.netChange }}<p> -->
+          <!-- <p>Exchange: {{ search.stock.data.current.exchange }}<p> -->
 
-        <br>
+          <br>
 
-        <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) != 1">You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} shares</p>
-        <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) == 1">You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} share</p>
-        <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] != 1">
-          You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} shares
-        </p>
-        <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] == 1">
-          You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} share
-        </p>
-      </div>
+          <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) != 1">You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} shares</p>
+          <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) == 1">You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} share</p>
+          <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] != 1">
+            You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} shares
+          </p>
+          <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] == 1">
+            You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} share
+          </p>
+        </div>
 
-      <div class="modal-body" ng-if="!search.stock.data.success && !search.stock.loading">
-        Stock Not Available
-      </div>
+        <div class="modal-body" ng-if="!search.stock.data.success && !search.stock.loading">
+          Stock Not Available
+        </div>
 
-      <div class="modal-footer">
-        <button class="btn btn-block button-style1" ng-click="search.closeStockModal()">
-          <span>Close</span>
-        </button>
+        <div class="modal-footer">
+          <button class="btn btn-block button-style1" ng-click="search.closeStockModal()">
+            <span>Close</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

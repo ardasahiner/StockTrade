@@ -26,11 +26,11 @@ angular.module('searchController', ['ui.bootstrap'])
           vm.stock.data.success = true;
           vm.stock.loading = false;
           if (vm.stock.data.current.percentChange > 0) {
-            vm.stock.data.change = "positive";
+            vm.stock.data.change = "change-positive";
           } else if (vm.stock.data.current.percentChange < 0) {
-            vm.stock.data.change = "negative";
+            vm.stock.data.change = "change-negative";
           } else {
-            vm.stock.data.change = "neutral";
+            vm.stock.data.change = "change-neutral";
           }
         })
         .catch(function(err) {
@@ -56,11 +56,11 @@ angular.module('searchController', ['ui.bootstrap'])
         vm.stock.data.success = true;
         vm.stock.loading = false;
         if (vm.stock.data.current.percentChange > 0) {
-          vm.stock.data.change = "positive";
+          vm.stock.data.change = "change-positive";
         } else if (vm.stock.data.current.percentChange < 0) {
-          vm.stock.data.change = "negative";
+          vm.stock.data.change = "change-negative";
         } else {
-          vm.stock.data.change = "neutral";
+          vm.stock.data.change = "change-neutral";
         }
       })
       .catch(function(err) {

@@ -61,9 +61,9 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
                           netChange: info[0][1],
                           percentChange: info[0][2].substring(0, info[0][2].length - 1), // strips % sign
                           volume: parseInt(info[0][7]),
-                          high: parseFloat(info[0][5]),
-                          low: parseFloat(info[0][6]),
-                          open: parseFloat(info[0][3])
+                          high: parseFloat(parseFloat(info[0][5]).toFixed(2)),
+                          low: parseFloat(parseFloat(info[0][6]).toFixed(2)),
+                          open: parseFloat(parseFloat(info[0][3]).toFixed(2))
                         };
                         currentStockCacheAccurate.set(req.params.stock_symbol.toUpperCase(), value);
                         res.status(200).json({success: true, message: "success", current: value, past: historyResult});
@@ -156,9 +156,9 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
                     netChange: info[0][1],
                     percentChange: info[0][2].substring(0, info[0][2].length - 1), // strips % sign
                     volume: parseInt(info[0][7]),
-                    high: parseFloat(info[0][5]),
-                    low: parseFloat(info[0][6]),
-                    open: parseFloat(info[0][3])
+                    high: parseFloat(parseFloat(info[0][5]).toFixed(2)),
+                    low: parseFloat(parseFloat(info[0][6]).toFixed(2)),
+                    open: parseFloat(parseFloat(info[0][3]).toFixed(2))
                   };
                   currentStockCacheInaccurate.set(info.Symbol.toUpperCase(), value);
                   res.status(200).json({success: true, message: "success", current: value});

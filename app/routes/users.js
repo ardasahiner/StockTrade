@@ -152,9 +152,14 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                           currentInfo.netChange = 0;
                           currentInfo.percentChange = 0;
                         }
+                        //in case not already in dictionary, adds it
+                        if (typeof stockDictionary[currentInfo.symbol.toUpperCase()] == 'undefined') {
+                          stockDictionary[currentInfo.symbol.toUpperCase()] = currentInfo.name;
+                          stockDictionaryExchange[currentInfo.symbol.toUpperCase()] = currentInfo.exchange;
+                        }
                         portfolioValue += parseFloat((asset[0].quantity * currentInfo.lastPrice).toFixed(2));
                         response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
-                          name: currentInfo.name,
+                          name: stockDictionary[currentInfo.symbol.toUpperCase()],
                           exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
                           quantity: asset[0].quantity,
                           currentPricePerShare: currentInfo.lastPrice,
@@ -188,7 +193,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                         getYahooPrice(currentInfo.symbol, currentStockCache, function(yahooResponse) {
                           portfolioValue += parseFloat((asset[0].quantity * yahooResponse.lastPrice).toFixed(2));
                           response.assets.push({ticker: currentInfo.symbol.toUpperCase(),
-                            name: currentInfo.name,
+                            name: stockDictionary[currentInfo.symbol.toUpperCase()],
                             exchange: stockDictionaryExchange[currentInfo.symbol.toUpperCase()],
                             quantity: asset[0].quantity,
                             currentPricePerShare: yahooResponse.lastPrice,

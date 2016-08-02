@@ -15,5 +15,4 @@ module.exports = function (app, express) {
     require('./authentication')(app, express, User, jwt);
     require('./users')(app, express, User, jwt, TransactionList, Transaction, UserAsset, currentStockCacheAccurate);
     require('./stocks')(app, express, User, jwt, currentStockCacheAccurate, currentStockCacheInaccurate);
-  
 };

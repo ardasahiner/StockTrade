@@ -550,9 +550,9 @@ var getYahooPrice = function(symbol, stockCache, callback) {
             netChange: info[0][1],
             percentChange: info[0][2].substring(0, info[0][2].length - 1), // strips % sign
             volume: parseInt(info[0][7]),
-            high: parseFloat(info[0][5]),
-            low: parseFloat(info[0][6]),
-            open: parseFloat(info[0][3])
+            high: parseFloat(parseFloat(info[0][5]).toFixed(2)),
+            low: parseFloat(parseFloat(info[0][6]).toFixed(2)),
+            open: parseFloat(parseFloat(info[0][3]).toFixed(2))
           };
           //save in cache
           stockCache.set(symbol.toUpperCase(), value);

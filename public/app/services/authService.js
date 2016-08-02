@@ -4,10 +4,11 @@ angular.module('authService', [])
   var authFactory = {};
 
   // Login and set Token
-  authFactory.login = function(username, password) {
+  authFactory.login = function(username, password, rememberMe) {
     return $http.post('/authenticate', {
       username: username,
-      password: password
+      password: password,
+      rememberMe: rememberMe
     })
     .success(function(data) {
       AuthToken.setToken(data.token);

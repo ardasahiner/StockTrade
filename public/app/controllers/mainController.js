@@ -24,7 +24,7 @@ angular.module('mainController', [])
     vm.processing = true;
     vm.error = '';
 
-    Auth.login(vm.loginData.username, vm.loginData.password)
+    Auth.login(vm.loginData.username, vm.loginData.password, vm.loginData.rememberMe)
     .success(function(data) {
       vm.processing = false;
 

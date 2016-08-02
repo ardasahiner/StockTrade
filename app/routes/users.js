@@ -551,9 +551,9 @@ var getYahooPrice = function(symbol, stockCache, callback) {
             symbol: symbol.toUpperCase(),
             name: stockDictionary[symbol.toUpperCase()],
             exchange: stockDictionaryExchange[symbol.toUpperCase()],
-            lastPrice: info[0][0],
-            netChange: info[0][1],
-            percentChange: info[0][2].substring(0, info[0][2].length - 1), // strips % sign
+            lastPrice: parseFloat(info[0][0]).toFixed(2),
+            netChange: parseFloat(info[0][1]).toFixed(2),
+            percentChange: parseFloat(info[0][2].substring(0, info[0][2].length - 1)).toFixed(2), // strips % sign
             volume: parseInt(info[0][7]),
             high: parseFloat(parseFloat(info[0][5]).toFixed(2)),
             low: parseFloat(parseFloat(info[0][6]).toFixed(2)),

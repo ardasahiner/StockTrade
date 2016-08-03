@@ -8,6 +8,7 @@
 
 .teamMember h2 {
   margin-bottom: 0px;
+  padding-bottom: 15px;
 }
 
 .role {
@@ -18,4 +19,21 @@
 
 .home-footer {
   background-color: #6d9285;
+}
+
+/* Styles for the stock graphs */
+rect {
+  fill: transparent;
+}
+
+svg.main-svg {
+  background: inherit;
+}
+
+.stockChart {
+  margin-left: 0;
+  margin-right: 0;
+  height: 100%;
+  width: 100%;
+  /*border: 1px solid black;*/
 }

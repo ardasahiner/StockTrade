@@ -1,7 +1,7 @@
 // Make a controller here to handle search and deal with individual stock pages
 angular.module('searchController', ['ui.bootstrap'])
 
-.controller('searchController', function(Stocks, $scope) {
+.controller('searchController', function(Stocks, $scope, $window) {
 
   var vm = this;
 
@@ -17,15 +17,41 @@ angular.module('searchController', ['ui.bootstrap'])
       vm.stock.data.x.push(point.tradingDay + " 12:00:00");
       vm.stock.data.y.push(((point.open + point.close) / 2).toFixed(2));
     }
+
     plotData = [
       {
         x: vm.stock.data.x,
         y: vm.stock.data.y,
-        type: 'scatter'
+        type: 'scatter',
+        line: {
+          color: 'rgb(0, 0, 0)',
+          width: 1
+        }
       }
     ];
-    plotOptions = {showlink: false, displaylogo: false};
-    plotLayout = {height: 300, width: 500, title: vm.stock.ticker};
+
+    plotOptions = {
+      showlink: false,
+      displaylogo: false,
+      displayModeBar: false
+    };
+
+    plotLayout = {
+      height: $window.innerHeight * 0.3,
+      width: $window.innerWidth * 0.6,
+      // autosize: true,
+      margin: {
+        l: 50,
+        r: 50,
+        b: 50,
+        t: 50,
+        pad: 4
+      },
+      title: "2 Year Stock Graph for " + vm.stock.ticker,
+      plot_bgcolor: vm.stock.data.backgroundColor,
+      paper_bgcolor: vm.stock.data.backgroundColor
+    };
+
     Plotly.newPlot(document.getElementById("stockChart"), plotData, plotLayout, plotOptions);
   };
 
@@ -40,17 +66,20 @@ angular.module('searchController', ['ui.bootstrap'])
       }
       Stocks.getPrice(vm.stock.ticker)
         .then(function(data) {
-          console.log(data);
           vm.stock.data = data.data;
           vm.stock.data.success = true;
           vm.stock.loading = false;
           if (vm.stock.data.current.percentChange > 0) {
             vm.stock.data.change = "stockModalchange-positive";
+            vm.stock.data.backgroundColor = "rgb(121,210,166)";
           } else if (vm.stock.data.current.percentChange < 0) {
             vm.stock.data.change = "stockModalchange-negative";
+            vm.stock.data.backgroundColor = "rgb(230,179,179)";
           } else {
             vm.stock.data.change = "stockModalchange-neutral";
+            vm.stock.data.backgroundColor = "rgb(204,204,204)";
           }
+          console.log(vm.stock.data);
         })
         .catch(function(err) {
           console.log(err);
@@ -76,10 +105,13 @@ angular.module('searchController', ['ui.bootstrap'])
         vm.stock.loading = false;
         if (vm.stock.data.current.percentChange > 0) {
           vm.stock.data.change = "stockModalchange-positive";
+          vm.stock.data.backgroundColor = "rgb(121,210,166)";
         } else if (vm.stock.data.current.percentChange < 0) {
           vm.stock.data.change = "stockModalchange-negative";
+          vm.stock.data.backgroundColor = "rgb(230,179,179)";
         } else {
           vm.stock.data.change = "stockModalchange-neutral";
+          vm.stock.data.backgroundColor = "rgb(204,204,204)";
         }
       })
       .catch(function(err) {

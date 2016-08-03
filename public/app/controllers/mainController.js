@@ -1,11 +1,12 @@
 angular.module('mainController', [])
 
-.controller('mainController', function($rootScope, $location, $state, Auth, $anchorScroll) {
+.controller('mainController', function($rootScope, $scope, $location, $state, Auth, $anchorScroll) {
 
   var vm = this;
 
   // Get info about whether user is logged in
   vm.loggedIn = Auth.isLoggedIn();
+  $scope.state = $state;
 
   // Check every request to see if user is logged in
   // This function runs everytime there is a state change

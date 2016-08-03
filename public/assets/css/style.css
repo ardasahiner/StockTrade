@@ -12,6 +12,11 @@ main {
 
 p.titledescription, p.lead, p.description, h2.section-heading {
     color: white;
+    text-shadow:
+     -0.5px -0.5px 0 #000,
+     0.5px -0.5px 0 #000,
+     -0.5px 0.5px 0 #000,
+     0.5px 0.5px 0 #000;
 }
 
 .ui-view {
@@ -85,14 +90,14 @@ body h1, h2 {
 
 .features {
     background: inherit;
-    background: -webkit-linear-gradient(#19342b, #8aa8a0);
-    background: -o-linear-gradient(#19342b, #8aa8a0);
-    background: -moz-linear-gradient(#19342b, #8aa8a0);
-    background: linear-gradient(#19342b, #8aa8a0);
+    background: -webkit-linear-gradient(#19342b, #6d9285);
+    background: -o-linear-gradient(#19342b, #6d9285);
+    background: -moz-linear-gradient(#19342b, #6d9285);
+    background: linear-gradient(#19342b, #6d9285);
 }
 
 .banner {
-    background-color: #8aa8a0;
+    background-color: #e4e7e7;
 }
 
 .buysell {
@@ -106,7 +111,7 @@ body h1, h2 {
     background: -o-linear-gradient(white, #19342b);
     background: -moz-linear-gradient(white, #19342b);
     background: linear-gradient(white, #19342b);*/
-    background-color: #8aa8a0;
+    background-color: #e4e7e7;
 }
 
 .buysell h1, h2 {
@@ -129,7 +134,7 @@ body h1, h2 {
 
 .footer-container {
     height: 100%;
-    background-color: #8aa8a0;
+    background-color: #e4e7e7;
 }
 
 footer {
@@ -146,6 +151,10 @@ p.text-muted {
 
 body.footer {
     vertical-align: bottom;
+}
+
+.footer-spacer {
+  border-top: 1px solid #000;
 }
 
 #portfolio-container {
@@ -253,7 +262,7 @@ body.footer {
 hr.footer-border {
     height: 10px;
     border: 0;
-    box-shadow: 0 5px 5px -5px white inset;
+    box-shadow: 0 5px 5px -5px black inset;
 }
 
 .row {
@@ -274,7 +283,7 @@ hr.footer-border {
 }
 
 .change-positive:hover {
-    text-shadow: 0 0 8px #8aa8a0;
+    text-shadow: 0 0 8px #e4e7e7;
     background-color: #c6ecd9;
 }
 
@@ -283,7 +292,7 @@ hr.footer-border {
 }
 
 .change-negative:hover {
-    text-shadow: 0 0 8px #8aa8a0;
+    text-shadow: 0 0 8px #e4e7e7;
     background-color: #f2d9d9;
 }
 
@@ -292,7 +301,7 @@ hr.footer-border {
 }
 
 .change-neutral:hover {
-    text-shadow: 0 0 8px #8aa8a0;
+    text-shadow: 0 0 8px #e4e7e7;
     background-color: #e6e6e6;
 }
 
@@ -348,7 +357,7 @@ hr.footer-border {
 
 .aboutPage {
   height: 100%;
-  background-color: #8aa8a0;
+  background-color: #e4e7e7;
 }
 
 .aboutPageText {

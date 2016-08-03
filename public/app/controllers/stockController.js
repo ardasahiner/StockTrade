@@ -11,7 +11,7 @@ angular.module('stockController', ['ui.bootstrap'])
   vm.ownedTickers = [];
   vm.sortList = {"ticker": 0, "name": 0, "currentPricePerShare": 0, "quantity": 0, "todayChangePercent": 0, "totalPercentProfit": 0, "totalNetProfit": 0};
 
-  vm.getPortfolio = function() {
+  vm.getPortfolio = function(fCallback) {
     vm.loading = true;
     Stocks.getPortfolio()
     .then(function(data) {
@@ -33,6 +33,7 @@ angular.module('stockController', ['ui.bootstrap'])
         vm.ownedTickers.push(stock.ticker);
       }
       vm.loading = false;
+      fCallback();
     })
     .catch(function(err) {
       vm.loading = false;
@@ -40,8 +41,6 @@ angular.module('stockController', ['ui.bootstrap'])
       $location.path('/error');
     })
   };
-
-  vm.getPortfolio();
 
   vm.sortByField = function(field) {
 
@@ -70,14 +69,12 @@ angular.module('stockController', ['ui.bootstrap'])
   };
 
   vm.upSorted = function(field) {
-
     return vm.sortList[field] == -1;
-  }
+  };
 
   vm.downSorted = function(field) {
-
     return vm.sortList[field] == 1;
-  }
+  };
 
   vm.canBuy = function(ticker) {
     return (ticker in vm.ownedStocks);
@@ -116,7 +113,9 @@ angular.module('stockController', ['ui.bootstrap'])
     Stocks.confirmBuyStock(vm.buydata.ticker, vm.buydata.amount)
     .success(function(data) {
       vm.processing = false;
-      vm.getPortfolio();
+      vm.getPortfolio(function() {
+        // Do nothing
+      });
       $("#confirmBuyModal").modal('hide');
     });
 
@@ -162,7 +161,9 @@ angular.module('stockController', ['ui.bootstrap'])
     Stocks.confirmSellStock(vm.selldata.ticker, vm.selldata.quantity)
     .success(function(data) {
       vm.processing = false;
-      vm.getPortfolio();
+      vm.getPortfolio(function() {
+        // Do Nothing
+      });
       $("#confirmSellModal").modal('hide');
     });
 
@@ -174,6 +175,10 @@ angular.module('stockController', ['ui.bootstrap'])
     $("#sellModal").modal('hide');
     $("#confirmSellModal").modal('hide');
   };
+
+  vm.getPortfolio(function() {
+    vm.sortByField("ticker");
+  });
 
 })
 

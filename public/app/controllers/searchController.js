@@ -50,15 +50,20 @@ angular.module('searchController', ['ui.bootstrap'])
   vm.genPlot = function(historicData) {
     vm.stock.data.x = [];
     vm.stock.data.y = []
+    startGet = new Date();
     Stocks.historicData(vm.stock.ticker)
       .then(function(quandlData) {
-        console.log(quandlData);
         console.log('found quandl historic data');
+        doneGet = new Date();
         for (point of quandlData.data.dataset.data) {
           vm.stock.data.x.push(point[0] + " 12:00:00");
           vm.stock.data.y.push(((point[1] + point[4])/2).toFixed(2));
         }
+        startPlot = new Date();
         vm.makePlot();
+        donePlot = new Date();
+        console.log("Time to get Historic Data: " + (doneGet - startGet) + "ms");
+        console.log("Time to plot the graph: " + (donePlot - startPlot) + "ms");
       })
       .catch(function(err) {
         console.log('not found quandl historic data');

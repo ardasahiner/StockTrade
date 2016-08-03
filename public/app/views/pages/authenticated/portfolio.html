@@ -65,33 +65,33 @@
 
   <center>
     <div class="row table-header">
-
-      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-        Ticker
+      <!--  -->
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="stocks.sortByField('ticker')">
+        <a href="">Ticker</a>
       </div>
 
-      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        Equity Name
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ng-click="stocks.sortByField('name')">
+        <a href="">Equity Name</a>
       </div>
 
-      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-        Price
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="stocks.sortByField('currentPricePerShare')">
+        <a href="">Price</a>
       </div>
 
-      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-        Quantity
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="stocks.sortByField('quantity')">
+        <a href="">Quantity</a>
       </div>
 
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        Change Today
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-click="stocks.sortByField('todayChangePercent')">
+        <a href="">Change Today</a>
       </div>
 
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        Profit Per Stock
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-click="stocks.sortByField('totalPercentProfit')">
+        <a href="">Profit Per Stock</a>
       </div>
 
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        Total Profit
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-click="stocks.sortByField('totalNetProfit')">
+        <a href="">Total Profit</a>
       </div>
 
     </div>

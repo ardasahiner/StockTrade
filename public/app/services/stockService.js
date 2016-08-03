@@ -9,6 +9,10 @@ angular.module('stockService', [])
     return $http.get('/stocks/' + stock_symbol);
   };
 
+  stockFactory.historicData = function(stock_symbol) {
+    return $http.get('https://www.quandl.com/api/v3/datasets/WIKI/' + stock_symbol + '.json'); 
+  };
+
   stockFactory.buyStock = function(stock_symbol, quantity) {
     return $http.get('/users/buy/' + stock_symbol + '/' + quantity);
   };

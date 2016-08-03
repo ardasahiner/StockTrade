@@ -14,10 +14,17 @@ angular.module('mainController', [])
     vm.loggedIn = Auth.isLoggedIn();
 
     Auth.getUser()
-    .then(function(data) {
-      vm.user = data.data;
-    });
-    $anchorScroll();
+      .then(function(data) {
+        vm.user = data.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+        if (err.message == "You need a token to cross the bridge" || err.data.message == "Failed to authenticate token.") {
+          Auth.logout();
+          $("#loginModal").modal('show');
+        }
+      });
+      $anchorScroll();
   });
 
   // Function to handle login requests

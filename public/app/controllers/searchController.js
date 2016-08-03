@@ -1,7 +1,7 @@
 // Make a controller here to handle search and deal with individual stock pages
 angular.module('searchController', ['ui.bootstrap'])
 
-.controller('searchController', function(Stocks, $scope, $window) {
+.controller('searchController', function(Stocks, $scope, $window, Auth) {
 
   var vm = this;
 
@@ -104,11 +104,19 @@ angular.module('searchController', ['ui.bootstrap'])
           }
         })
         .catch(function(err) {
-          console.log(err);
-          vm.stock.data = {};
-          vm.stock.data.success = false;
-          vm.stock.data.name = "Stock Not Available";
-          vm.stock.loading = false;
+          if (err.message == "You need a token to cross the bridge" ||
+              err.data.message == "Failed to authenticate token." ||
+              err.data.message == "No token provided.") {
+            Auth.logout();
+            $("#stockModal").modal('hide');
+            $("#loginModal").modal('show');
+          } else {
+            console.log(err);
+            vm.stock.data = {};
+            vm.stock.data.success = false;
+            vm.stock.data.name = "Stock Not Available";
+            vm.stock.loading = false;
+          }
         });
     }
   };
@@ -136,10 +144,18 @@ angular.module('searchController', ['ui.bootstrap'])
       })
       .catch(function(err) {
         console.log(err);
-        vm.stock.data = {};
-        vm.stock.data.success = false;
-        vm.stock.data.name = "Stock Not Available";
-        vm.stock.loading = false;
+        if (err.message == "You need a token to cross the bridge" ||
+            err.data.message == "Failed to authenticate token." ||
+            err.data.message == "No token provided.") {
+          Auth.logout();
+          $("#stockModal").modal('hide');
+          $("#loginModal").modal('show');
+        } else {
+          vm.stock.data = {};
+          vm.stock.data.success = false;
+          vm.stock.data.name = "Stock Not Available";
+          vm.stock.loading = false;
+        }
       });
   };
 

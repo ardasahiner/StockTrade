@@ -30,7 +30,7 @@ module.exports = function (app, express, User, jwt) {
             });
           } else {
             var token = jwt.sign(user, app.get('secretKey'), {
-              expiresIn: 60*60 // expires in one hour
+              expiresIn: 60*60*24 // expires in one day
             });
           }
 

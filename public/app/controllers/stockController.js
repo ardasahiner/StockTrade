@@ -18,7 +18,7 @@ angular.module('stockController', ['ui.bootstrap'])
     Stocks.getPortfolio()
     .then(function(data) {
       vm.portfolio = data.data;
-      console.log(vm.portfolio);
+      // console.log(vm.portfolio);
       $scope.portfolioAssets = vm.portfolio.assets;
       for (stock of $scope.portfolioAssets) {
         if (parseFloat(stock.todayChangePercent) > 0) {
@@ -39,8 +39,17 @@ angular.module('stockController', ['ui.bootstrap'])
     })
     .catch(function(err) {
       vm.loading = false;
+      console.log(err);
       console.log("Application Unavaliable");
-      $location.path('/error');
+      if (err.message == "You need a token to cross the bridge" ||
+          err.data.message == "Failed to authenticate token." ||
+          err.data.message == "No token provided.") {
+        Auth.logout();
+        $("#loginModal").modal('show');
+      } else {
+        console.log('Sending Application Error Page');
+        $location.path('/error');
+      }
     })
   };
 

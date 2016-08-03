@@ -55,6 +55,8 @@
           <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] == 1">
             You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} share
           </p>
+
+          <div id="stockChart" ng-init="search.genPlot(search.stock.data.past)" style="width:100%;height:100%;"></div>
         </div>
 
         <div class="modal-body" ng-if="!search.stock.data.success && !search.stock.loading">

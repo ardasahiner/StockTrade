@@ -11,8 +11,7 @@
           <center><img style="opacity: 0.5; margin-top: 15px;" src="/assets/img/39.gif"><center>
         </div>
         <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
-          <!-- <p>Stock: {{ search.stock.data.current.name }}<p>
-          <p>Stock Ticker: {{ search.stock.data.current.symbol }}<p> -->
+          
           <div class="container todayStockInfo">
             <div class="row">
               <div class="col-sm-4">
@@ -55,6 +54,13 @@
           <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] == 1">
             You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} share
           </p>
+
+          <div class="loadingChart">
+            <center>
+              <h5 style="color: #737373; margin-top: 60px;" ng-if="search.loadingChart">Loading the Stock Chart...</h5>
+              <img ng-if="search.loadingChart" style="opacity: 0.5; margin-top: 10px;" src="/assets/img/39.gif">
+            <center>
+          </div>
 
           <center><div class="stockChart" id="stockChart" ng-init="search.genPlot(search.stock.data.past)"></div></center>
         </div>

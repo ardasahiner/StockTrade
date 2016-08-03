@@ -233,8 +233,14 @@ body.footer {
 }
 
 .stockModalTitle {
-  color: #737373;
+  color: #252525;
   text-align: center;
+  font-size: 22px;
+}
+
+.stockModalName {
+  font-size: 26px;
+  margin-right: 25px;
 }
 
 .stockAssetRow a {

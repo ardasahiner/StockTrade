@@ -10,7 +10,7 @@ angular.module('stockService', [])
   };
 
   stockFactory.historicData = function(stock_symbol) {
-    return $http.get('https://www.quandl.com/api/v3/datasets/WIKI/' + stock_symbol + '.json'); 
+    return $http.get('https://www.quandl.com/api/v3/datasets/WIKI/' + stock_symbol + '.json?api_key=YxZtiPjFd-mjcJbaTUvd');
   };
 
   stockFactory.buyStock = function(stock_symbol, quantity) {

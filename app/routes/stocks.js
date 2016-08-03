@@ -6,7 +6,7 @@ var reverseStockDictionary = require('../../vendor/stockdictionary');
 var mrtScraper = require('../../scrapers/markitrealtimescraper');
 var hScraper = require('../../scrapers/historyscraper');
 var batslist = require('../../vendor/batslist');
-var yearMinusOne = require('../helpers/yearminusone');
+var yearMinusTwo = require('../helpers/yearminustwo');
 var yrtScraper = require('../../scrapers/yahoorealtimescraper');
 
 
@@ -42,7 +42,8 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
 
     // Check to ensure valid stock symbol
     if (batslist.indexOf(req.params.stock_symbol.toUpperCase()) > -1) {
-      yearMinusOne(function(date) {
+      yearMinusTwo(function(date) {
+        console.log(date);
         hScraper(req.params.stock_symbol, 'daily', date, function(historyResult) {
           currentStockCacheAccurate.get(req.params.stock_symbol.toUpperCase(), function(err, value) {
             //if not in accurate cache (see design docs for a description of caching mechanism)

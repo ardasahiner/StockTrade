@@ -17,13 +17,6 @@ angular.module('mainController', [])
       .then(function(data) {
         vm.user = data.data;
       })
-      .catch(function(err) {
-        console.log(err);
-        if (err.message == "You need a token to cross the bridge" || err.data.message == "Failed to authenticate token.") {
-          Auth.logout();
-          $("#loginModal").modal('show');
-        }
-      });
       $anchorScroll();
   });
 
@@ -32,10 +25,10 @@ angular.module('mainController', [])
     vm.processing = true;
     vm.error = '';
 
-    Auth.login(vm.loginData.username, vm.loginData.password, vm.loginData.rememberMe)
+    Auth.login(vm.loginData.username, vm.loginData.password)
     .success(function(data) {
       vm.processing = false;
-
+      delete vm.loginData;
       // If successful authentication, user is redirected to their portfolio
       if (data.success) {
         $location.path('/portfolio');

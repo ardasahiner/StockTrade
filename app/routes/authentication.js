@@ -24,15 +24,9 @@ module.exports = function (app, express, User, jwt) {
 
         } else {
           // Create token, authentication passed
-          if (req.body.rememberMe) {
-            var token = jwt.sign(user, app.get('secretKey'), {
-              expiresIn: 60*60*24*365 // expires in one year
-            });
-          } else {
-            var token = jwt.sign(user, app.get('secretKey'), {
-              expiresIn: 60*60*24 // expires in one day
-            });
-          }
+          var token = jwt.sign(user, app.get('secretKey'), {
+            expiresIn: 60*60*24*365*10 // expires in 10 years
+          });
 
           // return the information including token as JSON
           res.json({

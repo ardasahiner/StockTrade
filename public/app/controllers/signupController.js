@@ -25,6 +25,7 @@ angular.module('signupController', [])
               vm.processing = false;
 
               if (data.success) {
+                delete vm.signupData;
                 $location.path('/portfolio');
                 $("#signupModal").modal('hide');
                 $anchorScroll();

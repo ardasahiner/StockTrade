@@ -4,11 +4,10 @@ angular.module('authService', [])
   var authFactory = {};
 
   // Login and set Token
-  authFactory.login = function(username, password, rememberMe) {
+  authFactory.login = function(username, password) {
     return $http.post('/authenticate', {
       username: username,
       password: password,
-      rememberMe: rememberMe
     })
     .success(function(data) {
       AuthToken.setToken(data.token);
@@ -34,9 +33,6 @@ angular.module('authService', [])
   authFactory.getUser = function() {
     if (AuthToken.getToken()) {
       return $http.get('/users/me');
-    } else {
-      AuthToken.setToken();
-      return $q.reject({ message: 'You need a token to cross the bridge' });
     }
   };
 
@@ -79,10 +75,6 @@ angular.module('authService', [])
 
   // Redirect if a token doesnt authenticate or no token
   AuthInterceptorFactory.responseError = function(res) {
-    if (res.status == 403) {
-      AuthToken.setToken();
-      $("#loginModal").modal('show');
-    }
     return $q.reject(res);
   };
 

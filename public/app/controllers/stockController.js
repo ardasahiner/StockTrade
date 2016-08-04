@@ -38,18 +38,8 @@ angular.module('stockController', ['ui.bootstrap'])
       fCallback();
     })
     .catch(function(err) {
-      vm.loading = false;
-      console.log(err);
-      console.log("Application Unavaliable");
-      if (err.message == "You need a token to cross the bridge" ||
-          err.data.message == "Failed to authenticate token." ||
-          err.data.message == "No token provided.") {
-        Auth.logout();
-        $("#loginModal").modal('show');
-      } else {
-        console.log('Sending Application Error Page');
-        $location.path('/error');
-      }
+      console.log('Sending Application Error Page');
+      $location.path('/error');
     })
   };
 

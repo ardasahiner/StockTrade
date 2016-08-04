@@ -28,7 +28,7 @@ angular.module('mainController', [])
     Auth.login(vm.loginData.username, vm.loginData.password)
     .success(function(data) {
       vm.processing = false;
-
+      delete vm.loginData;
       // If successful authentication, user is redirected to their portfolio
       if (data.success) {
         $location.path('/portfolio');

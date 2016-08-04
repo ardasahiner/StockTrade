@@ -161,9 +161,9 @@ body.footer {
     background-color: white;
     font-size: 14px;
     color: #737373;
-    border: #737373 solid;
     padding-bottom: 20px;
     height: inherit;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
 }
 
 .table-header {
@@ -171,6 +171,9 @@ body.footer {
     padding-top: 11px;
     font-size: 19px;
     border-bottom: #737373 1px solid;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
     /*    border-top: #737373 1px solid;*/
 
 }
@@ -181,9 +184,17 @@ body.footer {
 }
 
 .button-style1 {
+    padding: 10px 30px;
     border-radius: 0px !important;
     background-color: #595959;
     color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.button-style1:hover,
+.button-style1:focus {
+   color: white;
+   background: #444;
 }
 
 .table-column {
@@ -195,6 +206,9 @@ body.footer {
     border-bottom: #737373 1px solid;
     padding-top: 9px !important;
     padding-bottom: 9px !important;
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
 }
 
 .information-header {
@@ -244,7 +258,7 @@ body.footer {
 }
 
 .stockAssetRow a {
-    color: #737373;
+    color: inherit;
 }
 
 .fa-github {
@@ -256,13 +270,13 @@ body.footer {
 }
 
 .portfolio-header {
-    border: 2px solid black;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: auto;
     width: 80%;
     padding-bottom: 10px;
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 hr.footer-border {
@@ -285,30 +299,30 @@ hr.footer-border {
 }
 
 .change-positive {
-    background-color: #79d2a6;
-}
-
-.change-positive:hover {
-    text-shadow: 0 0 8px #e4e7e7;
     background-color: #c6ecd9;
 }
 
-.change-negative {
-    background-color: #e6b3b3;
+.change-positive:hover {
+    color: #333;
+    background-color: #6ace9c;
 }
 
-.change-negative:hover {
-    text-shadow: 0 0 8px #e4e7e7;
+.change-negative {
     background-color: #f2d9d9;
 }
 
+.change-negative:hover {
+    color: #333;
+    background-color: #ef8f8f;
+}
+
 .change-neutral {
-    background-color: #cccccc;
+    background-color: #e8e8e8;
 }
 
 .change-neutral:hover {
-    text-shadow: 0 0 8px #e4e7e7;
-    background-color: #e6e6e6;
+    color: #333;
+    background-color: #bbb;
 }
 
 .stockModalchange-positive {
@@ -325,6 +339,18 @@ hr.footer-border {
 
 .search-companies {
   margin-left: 8.3333%;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.navbar-search {
+  margin-left: 30px;
+  margin-top: 12px;
+}
+
+.buysellButtons {
+  margin-bottom: 25px;
 }
 
 .buysellModals {
@@ -359,29 +385,6 @@ hr.footer-border {
 
 .homePageTitle {
   text-align: left;
-}
-
-.aboutPage {
-  height: 100%;
-  background-color: #e4e7e7;
-}
-
-.aboutPageText {
-  color: black;
-}
-
-.whatWeDoText {
-
-  font-size: 16px;
-}
-
-.about-header {
-    height: 400px;
-    background: url('http://digitalresult.com/wp-content/uploads/2016/06/simple-gradient-green-wallpaper-5.jpeg') center center no-repeat scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
 }
 
 .tagline {

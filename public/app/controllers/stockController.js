@@ -41,7 +41,6 @@ angular.module('stockController', ['ui.bootstrap'])
       vm.loading = false;
       console.log(err);
       console.log("Application Unavaliable");
-      console.log('Sending Application Error Page');
       $location.path('/error');
     })
   };

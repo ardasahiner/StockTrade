@@ -12,17 +12,13 @@
     </h2>
   </div>
 
-  <br><br>
-
   <div class="search search-companies">
     <label>Search Companies: </label>
     <input name="company" type="form-control" style="color:black" ng-model="search.value" autocomplete="off"
     uib-typeahead="term for term in search.searchTerms | filter:$viewValue:startsWith | limitTo:8" typeahead-editable="false" typeahead-on-select="search.goToStock()"/>
   </div>
 
-  <br>
-
-  <div class="row">
+  <div class="row buysellButtons">
     <div class="col-lg-1 col-md-1 col-sm-1"></div>
 
     <div class="col-lg-4 col-md-4 col-sm-4">
@@ -40,15 +36,11 @@
     </div>
   </div>
 
-  <br>
-
   <div class="container-fluid asset-list" id="portfolio-container">
     <div class="row">
-      <!-- <div class="col-xs-12">
-      <h3 style="color:#737373">Stock Portfolio</h3>
-    </div> -->
+
   </div>
-  <br>
+
   <div class="row information-header">
     <div class="col-xs-4">
       Account Value: ${{ stocks.portfolio.portfolioValue | number : 2 }}
@@ -63,9 +55,8 @@
     </div>
   </div>
 
-  <center>
     <div class="row table-header">
-      <!--  -->
+
       <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="stocks.sortByField('ticker')">
         <a href="">Ticker</a>
         <i ng-if="stocks.downSorted('ticker')" class="fa fa-caret-down" aria-hidden="true"></i>

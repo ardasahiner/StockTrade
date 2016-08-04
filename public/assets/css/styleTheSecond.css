@@ -1,3 +1,33 @@
+.aboutPage {
+  height: 100%;
+  background-color: #e4e7e7;
+}
+
+.aboutPageText {
+  color: black;
+}
+
+.aboutPage h1{
+
+  color: black;
+  font-size: 40px;
+  padding-bottom: 20px;
+}
+
+.whatWeDoText {
+
+  font-size: 16px;
+}
+
+.about-header {
+    height: 400px;
+    background: url('http://digitalresult.com/wp-content/uploads/2016/06/simple-gradient-green-wallpaper-5.jpeg') center center no-repeat scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
 .ourTeam {
   padding-top: 15px;
 }
@@ -8,6 +38,15 @@
 
 .teamMember h2 {
   margin-bottom: 0px;
+  padding-bottom: 15px;
+}
+
+.whatWeDo {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.whatWeDo h2 {
   padding-bottom: 15px;
 }
 

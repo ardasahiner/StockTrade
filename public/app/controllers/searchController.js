@@ -55,27 +55,27 @@ angular.module('searchController', ['ui.bootstrap'])
     vm.stock.data.y = []
     startGet = new Date();
     Stocks.historicData(vm.stock.ticker)
-      .then(function(quandlData) {
-        console.log('found quandl historic data');
-        doneGet = new Date();
-        startPlot = new Date();
-        for (point of quandlData.data.dataset.data) {
-          vm.stock.data.x.push(point[0] + " 12:00:00");
-          vm.stock.data.y.push(((point[1] + point[4])/2).toFixed(2));
-        }
-        vm.makePlot();
-        donePlot = new Date();
-        console.log("Time to get Historic Data: " + (doneGet - startGet) + "ms");
-        console.log("Time to plot the graph: " + (donePlot - startPlot) + "ms");
-      })
-      .catch(function(err) {
-        console.log('not found quandl historic data');
-        for (point of historicData) {
-          vm.stock.data.x.push(point.tradingDay + " 12:00:00");
-          vm.stock.data.y.push(((point.open + point.close) / 2).toFixed(2));
-        }
-        vm.makePlot();
-      });
+    .then(function(quandlData) {
+      console.log('found quandl historic data');
+      doneGet = new Date();
+      startPlot = new Date();
+      for (point of quandlData.data.dataset.data) {
+        vm.stock.data.x.push(point[0] + " 12:00:00");
+        vm.stock.data.y.push(((point[1] + point[4])/2).toFixed(2));
+      }
+      vm.makePlot();
+      donePlot = new Date();
+      console.log("Time to get Historic Data: " + (doneGet - startGet) + "ms");
+      console.log("Time to plot the graph: " + (donePlot - startPlot) + "ms");
+    })
+    .catch(function(err) {
+      console.log('not found quandl historic data');
+      for (point of historicData) {
+        vm.stock.data.x.push(point.tradingDay + " 12:00:00");
+        vm.stock.data.y.push(((point.open + point.close) / 2).toFixed(2));
+      }
+      vm.makePlot();
+    });
   };
 
   vm.goToStock = function() {
@@ -142,6 +142,7 @@ angular.module('searchController', ['ui.bootstrap'])
         vm.stock.data.name = "Stock Not Available";
         vm.stock.loading = false;
       });
+    }
   };
 
   vm.closeStockModal = function() {

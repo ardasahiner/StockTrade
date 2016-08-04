@@ -4,6 +4,33 @@ var batslist = require('../../vendor/batslist');
 var yrtScraper = require('../../scrapers/yahoorealtimescraper');
 var stockDictionaryExchange = require('../../vendor/stockdictionaryexchange');
 var stockDictionary = require('../../vendor/stockdictionary');
+var emailCheck = require('email-check');
+
+var saveUser = function(user, firstName, lastName, password, email, username, bot, TransactionList, res) {
+  user.firstName = firstName;
+  user.lastName = lastName;
+  user.username = username;
+  user.password = password;
+  user.email = email;
+  user.botAccount = bot;
+
+  // callback
+  user.save(function (err) {
+        if (err) {
+          return res.status(400).json({success: false, message : "Username or email not unique"});
+        } else {
+          var tl = new TransactionList();
+          tl.username = username;
+          tl.save(function (err) {
+            if (err) {
+              return res.status(400).json({success: false, message : "Username or email not unique"});
+            } else {
+                return res.status(200).json({message: 'User created! Welcome ' + username + '!', success: true});
+            }
+          });
+        }
+  });
+}
 
 // User Router will handle creating, deleting and accessing user data
 module.exports = function (app, express, User, jwt, TransactionList, Transaction, UserAsset, currentStockCache) {
@@ -14,34 +41,31 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
     userRouter.route('/')
         // Handle new User POST request - creates new User
         .post(function (req, res) {
-
+            console.log("post request");
             var user = new User();
             //@TODO: ensure password strength and email validity (might also do this in the user model)
-            user.firstName = req.body.firstName;
-            user.lastName = req.body.lastName;
-            user.username = req.body.username;
-            user.password = req.body.password;
-            user.email = req.body.email;
-            user.botAccount = req.body.bot;
-
-            // callback
-            user.save(function (err) {
-                  if (err) {
-                    res.json({success: false, message : err});
+            if (req.body.password.length < 6) {
+              console.log("invalid password length");
+              res.status(400).json({success:false, message: "Password must contain at least six characters"});
+            } else {
+              emailCheck(req.body.email)
+                .then(function (r) {
+                  if (r == false) {
+                    console.log("invalid email!!");
+                    // res.json({success:false, message: "Invalid email address"});
+                    return res.status(400).json({success:false, message: "Invalid email address"});
                   } else {
-                    var tl = new TransactionList();
-                    tl.username = req.body.username;
-                    tl.save(function (err) {
-                      if (err) {
-                        res.status(400).json({success: false, message : "Username or email not unique"});
-                      } else {
-                          res.status(200).json({message: 'User created! Welcome ' + req.body.username + '!', success: true});
-                      }
-                    });
+                      console.log("valid email");
+                      saveUser(user, req.body.firstName, req.body.lastName, req.body.password, req.body.email, req.body.username, req.body.bot, TransactionList, res);
                   }
-            });
+                })
+                .catch(function (err) {
+                  console.log(err);
+                  //do nothing and just pretend everything is okay
+                  saveUser(user, req.body.firstName, req.body.lastName, req.body.password, req.body.email, req.body.username, req.body.bot, TransactionList, res);
+                })
+              }
           });
-
 
     // Verify Token and perform authenticated check
     userRouter.use(function (req, res, next) {

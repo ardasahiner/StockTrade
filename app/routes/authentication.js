@@ -28,7 +28,6 @@ module.exports = function (app, express, User, jwt) {
             expiresIn: 60*60*24*365*10 // expires in ten years
           });
 
-
           // return the information including token as JSON
           res.json({
             success: true,

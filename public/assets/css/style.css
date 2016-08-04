@@ -373,7 +373,8 @@ hr.footer-border {
 .aboutPage h1{
 
   color: black;
-  font-size: xxx-large;
+  font-size: 40px;
+  padding-bottom: 20px;
 }
 
 .whatWeDoText {

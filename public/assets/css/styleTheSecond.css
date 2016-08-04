@@ -11,6 +11,16 @@
   padding-bottom: 15px;
 }
 
+.whatWeDo {
+
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.whatWeDo h2 {
+  padding-bottom: 15px;
+}
+
 .role {
   font-size: large;
   text-align: center;

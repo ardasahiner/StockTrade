@@ -35,6 +35,7 @@ angular.module('authService', [])
     if (AuthToken.getToken()) {
       return $http.get('/users/me');
     } else {
+      AuthToken.setToken();
       return $q.reject({ message: 'You need a token to cross the bridge' });
     }
   };
@@ -80,7 +81,7 @@ angular.module('authService', [])
   AuthInterceptorFactory.responseError = function(res) {
     if (res.status == 403) {
       AuthToken.setToken();
-      $location.path('/');
+      $("#loginModal").modal('show');
     }
     return $q.reject(res);
   };

@@ -171,6 +171,9 @@ body.footer {
     padding-top: 11px;
     font-size: 19px;
     border-bottom: #737373 1px solid;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
     /*    border-top: #737373 1px solid;*/
 
 }
@@ -203,6 +206,9 @@ body.footer {
     border-bottom: #737373 1px solid;
     padding-top: 9px !important;
     padding-bottom: 9px !important;
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
 }
 
 .information-header {
@@ -270,6 +276,7 @@ body.footer {
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 hr.footer-border {
@@ -332,6 +339,18 @@ hr.footer-border {
 
 .search-companies {
   margin-left: 8.3333%;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.navbar-search {
+  margin-left: 30px;
+  margin-top: 12px;
+}
+
+.buysellButtons {
+  margin-bottom: 25px;
 }
 
 .buysellModals {

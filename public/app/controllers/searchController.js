@@ -110,7 +110,8 @@ angular.module('searchController', ['ui.bootstrap'])
         vm.stock.data.name = "Stock Not Available";
         vm.stock.loading = false;
       });
-    };
+    }
+  };
 
   vm.linkToStock = function(stock) {
     vm.stock = {};

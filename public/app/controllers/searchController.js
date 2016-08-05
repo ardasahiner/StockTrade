@@ -88,38 +88,6 @@ angular.module('searchController', ['ui.bootstrap'])
         vm.stock.ticker = vm.nameToTicker[vm.stock.ticker];
       }
       Stocks.getPrice(vm.stock.ticker)
-        .then(function(data) {
-          vm.stock.data = data.data;
-          vm.stock.data.success = true;
-          vm.stock.loading = false;
-          if (vm.stock.data.current.percentChange > 0) {
-            vm.stock.data.change = "stockModalchange-positive";
-            vm.stock.data.backgroundColor = "rgb(121,210,166)";
-          } else if (vm.stock.data.current.percentChange < 0) {
-            vm.stock.data.change = "stockModalchange-negative";
-            vm.stock.data.backgroundColor = "rgb(230,179,179)";
-          } else {
-            vm.stock.data.change = "stockModalchange-neutral";
-            vm.stock.data.backgroundColor = "rgb(204,204,204)";
-          }
-        })
-        .catch(function(err) {
-          console.log(err);
-          vm.stock.data = {};
-          vm.stock.data.success = false;
-          vm.stock.data.name = "Stock Not Available";
-          vm.stock.loading = false;
-
-        });
-    }
-  };
-
-  vm.linkToStock = function(stock) {
-    vm.stock = {};
-    vm.stock.loading = true;
-    vm.stock.ticker = stock;
-    $("#stockModal").modal('show');
-    Stocks.getPrice(vm.stock.ticker)
       .then(function(data) {
         vm.stock.data = data.data;
         vm.stock.data.success = true;
@@ -143,6 +111,36 @@ angular.module('searchController', ['ui.bootstrap'])
         vm.stock.loading = false;
       });
     }
+  };
+
+  vm.linkToStock = function(stock) {
+    vm.stock = {};
+    vm.stock.loading = true;
+    vm.stock.ticker = stock;
+    $("#stockModal").modal('show');
+    Stocks.getPrice(vm.stock.ticker)
+    .then(function(data) {
+      vm.stock.data = data.data;
+      vm.stock.data.success = true;
+      vm.stock.loading = false;
+      if (vm.stock.data.current.percentChange > 0) {
+        vm.stock.data.change = "stockModalchange-positive";
+        vm.stock.data.backgroundColor = "rgb(121,210,166)";
+      } else if (vm.stock.data.current.percentChange < 0) {
+        vm.stock.data.change = "stockModalchange-negative";
+        vm.stock.data.backgroundColor = "rgb(230,179,179)";
+      } else {
+        vm.stock.data.change = "stockModalchange-neutral";
+        vm.stock.data.backgroundColor = "rgb(204,204,204)";
+      }
+    })
+    .catch(function(err) {
+      console.log(err);
+      vm.stock.data = {};
+      vm.stock.data.success = false;
+      vm.stock.data.name = "Stock Not Available";
+      vm.stock.loading = false;
+    });
   };
 
   vm.closeStockModal = function() {

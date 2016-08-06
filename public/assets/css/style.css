@@ -215,6 +215,7 @@ body.footer {
     font-style: italic;
     font-size: 18px;
     text-align: center;
+    margin-top: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
@@ -277,6 +278,11 @@ body.footer {
     margin-right: 10%;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.portfolio-table-header {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 hr.footer-border {

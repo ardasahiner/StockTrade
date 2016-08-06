@@ -171,8 +171,6 @@ body.footer {
     padding-top: 11px;
     font-size: 19px;
     border-bottom: #737373 1px solid;
-    margin-left: 0;
-    margin-right: 0;
     text-align: center;
     /*    border-top: #737373 1px solid;*/
 
@@ -283,19 +281,6 @@ hr.footer-border {
     height: 10px;
     border: 0;
     box-shadow: 0 5px 5px -5px black inset;
-}
-
-.row {
-    width: 100%;
-}
-
-.asset-list {
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-.stock {
-    width: 100%;
 }
 
 .change-positive {

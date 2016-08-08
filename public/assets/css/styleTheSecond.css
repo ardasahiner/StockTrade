@@ -1,10 +1,23 @@
 .aboutPage {
   height: 100%;
-  background-color: #e4e7e7;
+  background: inherit;
+  background: -webkit-linear-gradient(#19342b, #6d9285);
+  background: -o-linear-gradient(#19342b, #6d9285);
+  background: -moz-linear-gradient(#19342b, #6d9285);
+  background: linear-gradient(#19342b, #6d9285);
 }
 
 .aboutPageText {
   color: black;
+}
+
+.about-footer {
+  background-color: #6d9285;
+}
+
+.fa-linkedin-square {
+
+  color:black;
 }
 
 .aboutPage h1{
@@ -58,6 +71,18 @@
 
 .home-footer {
   background-color: #6d9285;
+}
+
+.founder .img-circle {
+
+  height: 54%;
+  width: 54%
+}
+
+.rest .img-circle {
+
+  height: 41.7%;
+  width: 41.7%;
 }
 
 /* Styles for the stock graphs */

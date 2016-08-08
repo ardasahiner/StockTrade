@@ -427,7 +427,7 @@ hr.footer-border {
 
 .aboutPage h3 {
   color: black;
-  font-size: 22px;
+  font-size: 26px;
   text-align: center;
 }
 
@@ -450,7 +450,7 @@ hr.footer-border {
 
 .teamMember h3 {
   margin-bottom: 0px;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 
 .whatWeDo {
@@ -463,7 +463,7 @@ hr.footer-border {
 }
 
 .role {
-  font-size: large;
+  font-size: 22px;
   text-align: center;
   padding-bottom: 20px;
   color: black;

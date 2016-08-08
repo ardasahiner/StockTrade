@@ -237,6 +237,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     response.portfolioValue = parseFloat(portfolioValue).toFixed(2);
                     response.grossProfit = parseFloat(portfolioValue - 100000).toFixed(2);
                     response.percentProfit = parseFloat((portfolioValue / 100000 - 1) * 100).toFixed(2);
+                    response.success = true;
+                    response.mesage = "Operation successful";
                     res.status(200).send(response);
                   });
                 });
@@ -274,6 +276,8 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
 
                     if (req.body.password) user.password = req.body.password;
                     if (req.body.botAccount) user.botAccount = req.body.botAccount;
+                    if (req.body.firstName) user.firstName = req.body.firstName;
+                    if (req.body.lastName) user.lastName = req.body.lastName;
 
                     user.save(function (err) {
                         if (err) res.send(err);

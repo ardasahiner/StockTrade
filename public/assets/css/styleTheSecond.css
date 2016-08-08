@@ -1,5 +1,6 @@
 .aboutPage {
   height: 100%;
+  text-align: center;
   background: inherit;
   background: -webkit-linear-gradient(#19342b, #6d9285);
   background: -o-linear-gradient(#19342b, #6d9285);

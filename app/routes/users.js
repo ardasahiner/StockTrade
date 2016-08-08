@@ -238,7 +238,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     response.grossProfit = parseFloat(portfolioValue - 100000).toFixed(2);
                     response.percentProfit = parseFloat((portfolioValue / 100000 - 1) * 100).toFixed(2);
                     response.success = true;
-                    response.mesage = "Operation successful";
+                    response.message = "Operation successful";
                     res.status(200).send(response);
                   });
                 });

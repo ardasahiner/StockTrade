@@ -46,14 +46,14 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             //@TODO: ensure password strength and email validity (might also do this in the user model)
             if (req.body.password.length < 6) {
               console.log("invalid password length");
-              res.status(400).json({success:false, message: "Password must contain at least six characters"});
+              res.json({success:false, message: "Password must contain at least six characters"});
             } else {
               emailCheck(req.body.email)
                 .then(function (r) {
                   if (r == false) {
                     console.log("invalid email!!");
                     // res.json({success:false, message: "Invalid email address"});
-                    return res.status(400).json({success:false, message: "Invalid email address"});
+                    return res.json({success:false, message: "Invalid email address"});
                   } else {
                       console.log("valid email");
                       saveUser(user, req.body.firstName, req.body.lastName, req.body.password, req.body.email, req.body.username, req.body.bot, TransactionList, res);

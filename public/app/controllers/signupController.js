@@ -18,6 +18,8 @@ angular.module('signupController', [])
 
         .success(function(data) {
 
+          console.log(data);
+
           if (data.success) {
 
             Auth.login(vm.signupData.username, vm.signupData.password)

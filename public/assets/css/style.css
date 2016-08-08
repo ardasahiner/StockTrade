@@ -173,7 +173,10 @@ body.footer {
     border-bottom: #737373 1px solid;
     text-align: center;
     /*    border-top: #737373 1px solid;*/
+}
 
+.table-header img {
+  padding-bottom: 0px;
 }
 
 .table-header a {

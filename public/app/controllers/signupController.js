@@ -11,6 +11,10 @@ angular.module('signupController', [])
 
     if (vm.signupData.password != vm.signupData.confirmpassword) {
       vm.error = "Passwords don't match!";
+    } else if (vm.signupData.password.length < 6) {
+      vm.error = "Password must be longer than 6 characters";
+    } else if (vm.signupData.password.match(/.*@.*\..*/g == null)) {
+      vm.error = "Email is invalid";
     } else {
 
       User.createUser(vm.signupData.username, vm.signupData.password,

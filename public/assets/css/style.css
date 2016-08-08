@@ -390,14 +390,16 @@ hr.footer-border {
 .aboutPage {
   height: 100%;
   background: inherit;
-  background: -webkit-linear-gradient(#19342b, #6d9285);
-  background: -o-linear-gradient(#19342b, #6d9285);
-  background: -moz-linear-gradient(#19342b, #6d9285);
-  background: linear-gradient(#19342b, #6d9285);
+  background: -webkit-linear-gradient(#9bad9b, #6d9285);
+  background: -o-linear-gradient(#9bad9b, #6d9285);
+  background: -moz-linear-gradient(#9bad9b, #6d9285);
+  background: linear-gradient(#9bad9b, #6d9285);
 }
 
 .aboutPageText {
   color: black;
+  text-align: center;
+  font-size: 15px;
 }
 
 .about-footer {
@@ -412,10 +414,21 @@ hr.footer-border {
   color:black;
 }
 
-.aboutPage h1{
+.aboutPage h1 {
   color: black;
-  font-size: 40px;
+  font-size: 42px;
+}
+
+.aboutPage h2 {
+  color: black;
+  font-size: 32px;
   padding-bottom: 20px;
+}
+
+.aboutPage h3 {
+  color: black;
+  font-size: 22px;
+  text-align: center;
 }
 
 .whatWeDoText {
@@ -423,12 +436,8 @@ hr.footer-border {
 }
 
 .about-header {
-    height: 400px;
-    background: url('http://digitalresult.com/wp-content/uploads/2016/06/simple-gradient-green-wallpaper-5.jpeg') center center no-repeat scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+    height: auto;
+    background-color: #9bad9b;
 }
 
 .ourTeam {
@@ -439,7 +448,7 @@ hr.footer-border {
   padding-top: 20px;
 }
 
-.teamMember h2 {
+.teamMember h3 {
   margin-bottom: 0px;
   padding-bottom: 15px;
 }
@@ -456,6 +465,7 @@ hr.footer-border {
 .role {
   font-size: large;
   text-align: center;
+  padding-bottom: 20px;
   color: black;
 }
 

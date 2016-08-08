@@ -389,22 +389,32 @@ hr.footer-border {
 
 .aboutPage {
   height: 100%;
-  background-color: #e4e7e7;
+  background: inherit;
+  background: -webkit-linear-gradient(#19342b, #6d9285);
+  background: -o-linear-gradient(#19342b, #6d9285);
+  background: -moz-linear-gradient(#19342b, #6d9285);
+  background: linear-gradient(#19342b, #6d9285);
 }
 
 .aboutPageText {
   color: black;
 }
 
-.aboutPage h1{
+.about-footer {
+  background-color: #6d9285;
+}
 
+.fa-linkedin-square {
+  color:black;
+}
+
+.aboutPage h1{
   color: black;
   font-size: 40px;
   padding-bottom: 20px;
 }
 
 .whatWeDoText {
-
   font-size: 16px;
 }
 
@@ -449,6 +459,16 @@ hr.footer-border {
   background-color: #6d9285;
 }
 
+.founder .img-circle {
+  height: 54%;
+  width: 54%
+}
+
+.rest .img-circle {
+  height: 41.7%;
+  width: 41.7%;
+}
+
 /* Styles for the stock graphs */
 rect {
   fill: transparent;
@@ -464,4 +484,17 @@ svg.main-svg {
   height: 100%;
   width: 100%;
   /*border: 1px solid black;*/
+}
+
+.footer-email {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.notFoundError {
+  background-color: #e4e7e7;
+  height: calc(100% - 377px);
+  height: -moz-calc(100% - 377px);
+  height: -webkit-calc(100% - 377px);
+  height: -o-calc(100% - 377px);
 }

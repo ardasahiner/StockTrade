@@ -5,6 +5,7 @@ var yrtScraper = require('../../scrapers/yahoorealtimescraper');
 var stockDictionaryExchange = require('../../vendor/stockdictionaryexchange');
 var stockDictionary = require('../../vendor/stockdictionary');
 var emailCheck = require('email-check');
+var bcrypt = require('bcrypt-nodejs');
 
 var saveUser = function(user, firstName, lastName, password, email, username, bot, TransactionList, res) {
   user.firstName = firstName;
@@ -273,7 +274,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
                 User.findOne({username: req.params.query_username}, function (err, user) {
                     if (err) res.send(err);
-
+                    
                     if (req.body.password) user.password = req.body.password;
                     if (req.body.botAccount) user.botAccount = req.body.botAccount;
                     if (req.body.firstName) user.firstName = req.body.firstName;

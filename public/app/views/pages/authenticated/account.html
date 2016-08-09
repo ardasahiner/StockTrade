@@ -1,1 +1,83 @@
+<div class="accountSettings">
+  <br><br>
+  <img src="assets/img/vstock logo/vstock-black.png">
+  <h2 style="color:black;"> Still being made~</h2>
+  <br><br><br><br><br>
 
+  <h1> {{account.user.username}}'s Account </h1>
+  <div class = "container">
+    <form ng-submit="account.updateInfo()">
+      <div class = "row">
+        <div class = "col-sm-6">
+          <h3>Username:</h3>
+        </div>
+        <div class = "col-sm-6">
+          <h3>{{account.user.username}}</h3>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-sm-6">
+          <h3>Email:</h3>
+        </div>
+        <div class = "col-sm-6">
+          <h3>{{account.user.email}}</h3>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-sm-6">
+          <h3>First Name:</h3>
+        </div>
+        <div class = "col-sm-6">
+          <div class="form-group">
+            <input type="text" value="{{account.user.firstName}}" class="form-control" ng-model="account.updateData.firstName">
+          </div>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-sm-6">
+          <h3>Last Name:</h3>
+        </div>
+        <div class = "col-sm-6">
+          <div class="form-group">
+            <input type="text" value="{{account.user.lastName}}" class="form-control" ng-model="account.updateData.lastName">
+          </div>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-sm-6">
+          <h3>Bot Account</h3>
+        </div>
+        <div class = "col-sm-6">
+          <input type="checkbox" ng-init="checked=account.user.botAccount" ng-model="account.updateData.botAccount">
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-sm-6">
+          <h3>New Password:</h3>
+        </div>
+        <div class = "col-sm-6">
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="account.updateData.password">
+          </div>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-sm-6">
+          <h3>Confirm Password:</h3>
+        </div>
+        <div class = "col-sm-6">
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="account.updateData.confirmPassword">
+          </div>
+        </div>
+      </div>
+      <br><br>
+      <div class = "row">
+        <button type="submit" class="btn btn-block btn-primary">
+          <span ng-if="!account.loading">Update Info</span>
+          <span ng-if="account.loading" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -57,7 +57,7 @@
         </div>
         <div class = "col-sm-6">
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="account.updateData.password">
+            <input class="form-control" type="password" ng-model="account.updateData.password">
           </div>
         </div>
       </div>
@@ -67,17 +67,18 @@
         </div>
         <div class = "col-sm-6">
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="account.updateData.confirmPassword">
+            <input class="form-control" type="password" ng-model="account.updateData.confirmPassword">
           </div>
         </div>
       </div>
       <br><br>
-      <div class = "row">
-        <button type="submit" class="btn btn-block btn-primary">
-          <span ng-if="!account.loading">Update Info</span>
-          <span ng-if="account.loading" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
-        </button>
+      <div class="alert alert-danger" ng-if="account.error">
+        {{ account.error }}
       </div>
+      <button type="submit" class="btn btn-block btn-primary">
+        <span ng-if="!account.loading">Update Info</span>
+        <span ng-if="account.loading" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+      </button>
     </form>
   </div>
 </div>

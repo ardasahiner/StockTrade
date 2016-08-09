@@ -1,5 +1,5 @@
 angular.module('accountController', ['ui.bootstrap'])
-  .controller('accountController', function(User, Auth) {
+  .controller('accountController', function($location, User, Auth) {
     var vm = this;
     vm.loading = false;
 
@@ -39,15 +39,23 @@ angular.module('accountController', ['ui.bootstrap'])
         if (vm.updateData.password !=  vm.updateData.confirmPassword) {
           vm.error = "Passwords do not match!";
         } else {
-          if (typeof vm.updateData.password != "undefined") {
-            userData["password"] = vm.updateData.password;
-          }
-          if (vm.updateData.password.length < 6) {
-            vm.error = "Password must be at least 6 characters";
+          if (typeof vm.updateData.password != "undefined" && vm.updateData.password.length < 6) {
+              vm.error = "Password must be at least 6 characters";
           } else {
+            if (typeof vm.updateData.password != "undefined") {
+
+              userData["password"] = vm.updateData.password;
+            }
             // request
             console.log(userData);
-
+            // User.updateUser(vm.user.username, userData)
+            //   .success(function(data) {
+            //     vm.loading = false;
+            //     if (data.success) {
+            //       $location.path('/account');
+            //     } else {
+            //       vm.error = data.message;
+            //   });
           }
         }
       }

@@ -19,17 +19,17 @@
   </div>
 
   <div class="row buysellButtons">
-    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+    <div class="col-lg-1 col-md-1 col-sm-1 hidden-xs"></div>
 
-    <div class="col-lg-4 col-md-4 col-sm-4">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
       <button class="btn btn-block button-style1" data-toggle="modal" data-target="#buyModal">
         <span>Buy a Stock</span>
       </button>
     </div>
 
-    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+    <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs"></div>
 
-    <div class="col-lg-4 col-md-4 col-sm-4">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
       <button class="btn btn-block button-style1" data-toggle="modal" data-target="#sellModal">
         <span>Sell a Stock</span>
       </button>
@@ -38,15 +38,15 @@
 
   <div class="container-fluid asset-list" id="portfolio-container">
     <div class="row information-header">
-      <div class="col-xs-4">
+      <div class="col-xs-6 col-sm-4">
         Account Value: ${{ stocks.portfolio.portfolioValue | number : 2 }}
       </div>
 
-      <div class="col-xs-4">
+      <div class="col-xs-6 col-sm-4">
         Cash Remaining: ${{ stocks.portfolio.cash | number : 2 }}
       </div>
 
-      <div class="col-xs-4">
+      <div class="hidden-xs col-sm-4">
         Your Profit: ${{ stocks.portfolio.grossProfit | number : 2 }} ({{ stocks.portfolio.percentProfit | number : 2 }}%)
       </div>
     </div>

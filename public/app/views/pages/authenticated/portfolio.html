@@ -53,43 +53,43 @@
 
     <div class="row table-header">
 
-      <div class="col-md-1 col-lg-1 hidden-sm-down portfolio-table-header" ng-click="stocks.sortByField('ticker')">
+      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm portfolio-table-header" ng-click="stocks.sortByField('ticker')">
         <a href="">Ticker</a><img ng-if="!stocks.upSorted('ticker') && !stocks.downSorted('ticker')" class="double-caret-symbol" src="assets/img/double-caret.svg">
         <i ng-if="stocks.downSorted('ticker')" class="fa fa-caret-down" aria-hidden="true"></i>
         <i ng-if="stocks.upSorted('ticker')" class="fa fa-caret-up" aria-hidden="true"></i>
       </div>
 
-      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 portfolio-table-header" ng-click="stocks.sortByField('name')">
+      <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 portfolio-table-header" ng-click="stocks.sortByField('name')">
         <a href="">Equity Name</a><img ng-if="!stocks.upSorted('name') && !stocks.downSorted('name')" class="double-caret-symbol" src="assets/img/double-caret.svg">
         <i ng-if="stocks.downSorted('name')" class="fa fa-caret-down" aria-hidden="true"></i>
         <i ng-if="stocks.upSorted('name')" class="fa fa-caret-up" aria-hidden="true"></i>
       </div>
 
-      <div class="col-md-1 col-lg-1 hidden-sm-down portfolio-table-header" ng-click="stocks.sortByField('currentPricePerShare')">
+      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm portfolio-table-header" ng-click="stocks.sortByField('currentPricePerShare')">
         <a href="">Price</a><img ng-if="!stocks.upSorted('currentPricePerShare') && !stocks.downSorted('currentPricePerShare')" class="double-caret-symbol" src="assets/img/double-caret.svg">
         <i ng-if="stocks.downSorted('currentPricePerShare')" class="fa fa-caret-up" aria-hidden="true"></i>
         <i ng-if="stocks.upSorted('currentPricePerShare')" class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
 
-      <div class="col-sm-1 col-md-1 col-lg-1 hidden-xs-down portfolio-table-header" ng-click="stocks.sortByField('quantity')">
+      <div class="col-sm-3 col-md-1 col-lg-1 hidden-xs portfolio-table-header" ng-click="stocks.sortByField('quantity')">
         <a href="">Quantity</a><img ng-if="!stocks.upSorted('quantity') && !stocks.downSorted('quantity')" class="double-caret-symbol" src="assets/img/double-caret.svg">
         <i ng-if="stocks.downSorted('quantity')" class="fa fa-caret-up" aria-hidden="true"></i>
         <i ng-if="stocks.upSorted('quantity')" class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
 
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 portfolio-table-header" ng-click="stocks.sortByField('todayChangePercent')">
+      <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 portfolio-table-header" ng-click="stocks.sortByField('todayChangePercent')">
         <a href="">Change Today</a><img ng-if="!stocks.upSorted('todayChangePercent') && !stocks.downSorted('todayChangePercent')" class="double-caret-symbol" src="assets/img/double-caret.svg">
         <i ng-if="stocks.downSorted('todayChangePercent')" class="fa fa-caret-up" aria-hidden="true"></i>
         <i ng-if="stocks.upSorted('todayChangePercent')" class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
 
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 portfolio-table-header" ng-click="stocks.sortByField('totalPercentProfit')">
+      <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs portfolio-table-header" ng-click="stocks.sortByField('totalPercentProfit')">
         <a href="">Profit Per Stock</a><img ng-if="!stocks.upSorted('totalPercentProfit') && !stocks.downSorted('totalPercentProfit')" class="double-caret-symbol" src="assets/img/double-caret.svg">
         <i ng-if="stocks.downSorted('totalPercentProfit')" class="fa fa-caret-up" aria-hidden="true"></i>
         <i ng-if="stocks.upSorted('totalPercentProfit')" class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
 
-      <div class="col-md-2 col-lg-2 hidden-sm-down portfolio-table-header" ng-click="stocks.sortByField('totalNetProfit')">
+      <div class="col-md-2 col-lg-2 hidden-xs hidden-sm portfolio-table-header" ng-click="stocks.sortByField('totalNetProfit')">
         <a href="">Total Profit</a><img ng-if="!stocks.upSorted('totalNetProfit') && !stocks.downSorted('totalNetProfit')" class="double-caret-symbol" src="assets/img/double-caret.svg">
         <i ng-if="stocks.downSorted('totalNetProfit')" class="fa fa-caret-up" aria-hidden="true"></i>
         <i ng-if="stocks.upSorted('totalNetProfit')" class="fa fa-caret-down" aria-hidden="true"></i>

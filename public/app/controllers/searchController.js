@@ -123,9 +123,6 @@ angular.module('searchController', ['ui.bootstrap'])
       vm.stock.data.twoyear_y.push(((point.open + point.close) / 2).toFixed(2));
     }
 
-    vm.makeTwoYearPlot();
-    console.log("Plotted Two Year Graph");
-
     var oneMonth = 2678400000;
     var sixMonths = 15811200000;
     var oneYear = 31536000000;
@@ -158,6 +155,7 @@ angular.module('searchController', ['ui.bootstrap'])
 
     }
     vm.dateRangeSorted = true;
+    vm.makeSixMonthPlot();
 
     Stocks.historicData(vm.stock.ticker)
     .then(function(quandlData) {
@@ -172,7 +170,6 @@ angular.module('searchController', ['ui.bootstrap'])
     })
     .catch(function(err) {
       console.log('not found quandl historic data');
-      vm.makeTwoYearPlot();
     });
   };
 

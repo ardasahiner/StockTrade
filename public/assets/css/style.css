@@ -352,13 +352,12 @@ hr.footer-border {
 }
 
 .currentStockPrice {
-
-  font-size: x-large;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: normal;
+  margin-bottom: 5px;
 }
-
+/*
 .todayStockInfo {
-
   line-height: 7px;
   text-align: center;
 }
@@ -366,14 +365,23 @@ hr.footer-border {
 .todayTradingInfo {
   font-size: large;
   font-weight:bold;
+}*/
+
+.stockModalchange-positive-text {
+  color: darkgreen;
+  font-weight:bold;
+}
+
+.stockModalchange-negative-text {
+  color: darkred;
+  font-weight:bold;
 }
 
 .rightAlign {
-
   text-align: right;
 }
-.leftAlign {
 
+.leftAlign {
   text-align: left;
 }
 

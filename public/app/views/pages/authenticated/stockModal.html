@@ -12,7 +12,12 @@
         </div>
         <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
 
-          <div class="container todayStockInfo">
+          <center>
+            <h1 class="currentStockPrice">${{ search.stock.data.current.lastPrice }}</h1>
+            <p class="{{ search.stock.data.change }}-text">${{ search.stock.data.current.netChange }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.percentChange }}%)<p>
+          <center>
+
+          <!-- <div class="container todayStockInfo">
             <div class="row">
               <div class="col-sm-4">
                 <p class="currentStockPrice">${{ search.stock.data.current.lastPrice }}<p>
@@ -40,20 +45,21 @@
               </div>
             </div>
           </div>
-          <!-- <p ng-if="search.stock.data.current.volume != 0">Percent Change: {{ search.stock.data.current.percentChange }}%<p>
-          <p ng-if="search.stock.data.current.volume != 0">Net Change: ${{ search.stock.data.current.netChange }}<p> -->
-          <!-- <p>Exchange: {{ search.stock.data.current.exchange }}<p> -->
 
           <br>
 
-          <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) != 1">You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} shares</p>
-          <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) == 1">You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} share</p>
+          <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) != 1">
+            You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} shares
+          </p>
+          <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) == 1">
+            You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} share
+          </p>
           <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] != 1">
             You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} shares
           </p>
           <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] == 1">
             You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} share
-          </p>
+          </p> -->
 
           <div class="loadingChart">
             <center>
@@ -64,13 +70,37 @@
 
           <center>
             <div class="stockChart" id="stockChart" ng-init="search.genPlot(search.stock.data.past)"></div>
-            <p ng-if="!search.pulledFullHistoricData">Pulling full historic data...</p>
-            <a href="" ng-if="search.pulledFullHistoricData && search.graphRange != 'Full'" ng-click="search.makeFullPlot()">Make Full Historic Graph</a>
-            <a href="" ng-if="search.graphRange != 'Two Years'" ng-click="search.makeTwoYearPlot()">Make Two Year Historic Graph</a>
-            <a href="" ng-if="search.graphRange != 'One Year' && search.dateRangeSorted" ng-click="search.makeOneYearPlot()">Make One Year Historic Graph</a>
-            <a href="" ng-if="search.graphRange != 'Six Months' && search.dateRangeSorted" ng-click="search.makeSixMonthPlot()">Make Six Month Historic Graph</a>
-            <a href="" ng-if="search.graphRange != 'One Month' && search.dateRangeSorted" ng-click="search.makeOneMonthPlot()">Make One Month Historic Graph</a>
+            Choose Date Range:
+            <p style="display:inline" ng-if="search.graphRange == 'One Month' || !search.dateRangeSorted">One Month</p>
+            <a href="" ng-if="search.graphRange != 'One Month' && search.dateRangeSorted" ng-click="search.makeOneMonthPlot()">One Month</a>&nbsp;|&nbsp;
+            <p style="display:inline" ng-if="search.graphRange == 'Six Months' || !search.dateRangeSorted">Six Months</p>
+            <a href="" ng-if="search.graphRange != 'Six Months' && search.dateRangeSorted" ng-click="search.makeSixMonthPlot()">Six Months</a>&nbsp;|&nbsp;
+            <p style="display:inline" ng-if="search.graphRange == 'One Year' || !search.dateRangeSorted">One Year</p>
+            <a href="" ng-if="search.graphRange != 'One Year' && search.dateRangeSorted" ng-click="search.makeOneYearPlot()">One Year</a>&nbsp;|&nbsp;
+            <p style="display:inline" ng-if="search.graphRange == 'Two Years' || !search.dateRangeSorted">Two Years</p>
+            <a href="" ng-if="search.graphRange != 'Two Years'" ng-click="search.makeTwoYearPlot()">Two Years</a>&nbsp;|&nbsp;
+            <p style="display:inline" ng-if="!search.pulledFullHistoricData || search.graphRange == 'Full'">Full History</p>
+            <a href="" ng-if="search.pulledFullHistoricData && search.graphRange != 'Full'" ng-click="search.makeFullPlot()">Full History</a>
           </center>
+          <div class="row">
+            <div class="col-xs-6">
+              <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) != 1">
+                You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} shares
+              </p>
+              <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) == 1">
+                You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} share
+              </p>
+            </div>
+            <div class="col-xs-6">
+              <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] != 1">
+                You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} shares
+              </p>
+              <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] == 1">
+                You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} share
+              </p>
+            </div>
+        </div>
+
         </div>
 
         <div class="modal-body" ng-if="!search.stock.data.success && !search.stock.loading">

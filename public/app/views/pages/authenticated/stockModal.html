@@ -11,7 +11,7 @@
           <center><img style="opacity: 0.5; margin-top: 15px;" src="/assets/img/39.gif"><center>
         </div>
         <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
-          
+
           <div class="container todayStockInfo">
             <div class="row">
               <div class="col-sm-4">
@@ -62,7 +62,12 @@
             <center>
           </div>
 
-          <center><div class="stockChart" id="stockChart" ng-init="search.genPlot(search.stock.data.past)"></div></center>
+          <center>
+            <div class="stockChart" id="stockChart" ng-init="search.genPlot(search.stock.data.past)"></div>
+            <p ng-if="!search.pulledFullHistoricData">Pulling full historic data...</p>
+            <a href="" ng-if="search.pulledFullHistoricData && search.graphRange != 'Full'" ng-click="search.makeFullPlot()">Make Full Historic Graph</a>
+            <a href="" ng-if="search.graphRange != 'Two Years'" ng-click="search.makeTwoYearPlot()">Make Two Year Historic Graph</a>
+          </center>
         </div>
 
         <div class="modal-body" ng-if="!search.stock.data.success && !search.stock.loading">

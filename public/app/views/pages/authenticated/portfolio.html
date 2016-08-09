@@ -1,6 +1,7 @@
 <div class="container buysell">
 
-  <div class="portfolio-header">
+  <!-- Non-Mobile Portfolio Header -->
+  <div class="portfolio-header hidden-xs">
     <h1>{{ main.user.firstName }}'s Stock Portfolio</h1>
     <h2 ng-if="stocks.portfolio.percentProfit >= 0" style="color: #1a521b">
       Portfolio Value: ${{ stocks.portfolio.portfolioValue | number : 2 }} | {{ stocks.portfolio.percentProfit | number : 2 }}%
@@ -9,6 +10,17 @@
     <h2 ng-if="stocks.portfolio.percentProfit < 0" style="color: #80312f">
       Portfolio Value: ${{ stocks.portfolio.portfolioValue | number : 2 }} | {{ stocks.portfolio.percentProfit | number : 2 }}%
       <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+    </h2>
+  </div>
+
+  <!-- Mobile Specific Portfolio Header -->
+  <div class="portfolio-header mobile visible-xs">
+    <h1>{{ main.user.firstName }}'s Portfolio</h1>
+    <h2 ng-if="stocks.portfolio.percentProfit >= 0" style="color: #1a521b">
+      ${{ stocks.portfolio.portfolioValue | number : 2 }} | {{ stocks.portfolio.percentProfit | number : 2 }}%
+    </h2>
+    <h2 ng-if="stocks.portfolio.percentProfit < 0" style="color: #80312f">
+      ${{ stocks.portfolio.portfolioValue | number : 2 }} | {{ stocks.portfolio.percentProfit | number : 2 }}%
     </h2>
   </div>
 

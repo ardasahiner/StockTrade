@@ -32,7 +32,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <!-- Content links all go here -->
-        <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.firstName }}!</li>
+        <li ng-if="main.loggedIn" class="navbar-text hidden-xs">Hello {{ main.user.firstName }}!</li>
         <li ng-if="main.loggedIn"><a href="/portfolio">Portfolio</a></li>
         <li ng-if="main.loggedIn"><a href="/" ng-click="main.doLogout()">Logout</a></li>
         <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#loginModal">Login</a></li>

@@ -67,6 +67,9 @@
             <p ng-if="!search.pulledFullHistoricData">Pulling full historic data...</p>
             <a href="" ng-if="search.pulledFullHistoricData && search.graphRange != 'Full'" ng-click="search.makeFullPlot()">Make Full Historic Graph</a>
             <a href="" ng-if="search.graphRange != 'Two Years'" ng-click="search.makeTwoYearPlot()">Make Two Year Historic Graph</a>
+            <a href="" ng-if="search.graphRange != 'One Year' && search.dateRangeSorted" ng-click="search.makeOneYearPlot()">Make One Year Historic Graph</a>
+            <a href="" ng-if="search.graphRange != 'Six Months' && search.dateRangeSorted" ng-click="search.makeSixMonthPlot()">Make Six Month Historic Graph</a>
+            <a href="" ng-if="search.graphRange != 'One Month' && search.dateRangeSorted" ng-click="search.makeOneMonthPlot()">Make One Month Historic Graph</a>
           </center>
         </div>
 

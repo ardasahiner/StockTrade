@@ -2,7 +2,7 @@
 var imports = [];
 imports.push('app.routes');
 imports.push('userService', 'stockService', 'adminService', 'authService');
-imports.push('mainController', 'signupController', 'stockController', "searchController");
+imports.push('mainController', 'signupController', 'stockController', "searchController", "accountController");
 
 angular.module('vStockApp', imports)
 

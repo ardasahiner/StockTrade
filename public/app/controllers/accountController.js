@@ -1,7 +1,6 @@
 angular.module('accountController', ['ui.bootstrap'])
   .controller('accountController', function($location, User, Auth) {
     var vm = this;
-    vm.updateData = {};
     vm.loading = false;
 
     vm.getInfo = function() {
@@ -9,9 +8,6 @@ angular.module('accountController', ['ui.bootstrap'])
       Auth.getUser()
         .then(function(data) {
           vm.user = data.data;
-          console.log(vm.user);
-          vm.updateData.firstName = vm.user.firstName;
-          vm.updateData.lastName = vm.user.lastName;
           vm.loading = false;
         })
         .catch(function(err) {

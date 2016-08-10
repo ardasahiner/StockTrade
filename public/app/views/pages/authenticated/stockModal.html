@@ -46,7 +46,7 @@
                           <div class="col-xs-6 span6">
 
                             <div ng-if="stocks.canBuy(search.stock.data.current.lastPrice)" data-role="rangeslider">
-                              <input type="range" class="span2" ng-model="search.buyQuantity" ng-init="search.buyQuantity = 0" min="0" max="{{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }}">
+                              <input type="range" class="span2" ng-model="search.buyQuantity" ng-init="search.buyQuantity = 0" min="0" max="{{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) }}">
                               <div class="noselect" style="font-size: 16px;">
                                 <a style="color: #737373;"><i class="fa fa-minus-square" aria-hidden="true" ng-click="search.buyQuantity = search.decrease(search.buyQuantity, 0)"></i></a>
                                 <label>Buy Quantity: {{ search.buyQuantity }}</label>
@@ -63,7 +63,7 @@
                           <div class="col-xs-6 span6">
 
                             <div ng-if="stocks.canSell(search.stock.data.current.symbol)" data-role="rangeslider">
-                              <input type="range" class="span2" ng-model="search.sellQuantity" ng-init="search.sellQuantity = 0" min="0" max="{{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }}">
+                              <input type="range" class="span2" ng-model="search.sellQuantity" ng-init="search.sellQuantity = 0" min="0" max="{{ stocks.ownedStocks[search.stock.data.current.symbol]}}">
                               <div class="noselect" style="font-size: 16px;">
                                 <a style="color: #737373;"><i class="fa fa-minus-square" aria-hidden="true" ng-click="search.sellQuantity = search.decrease(search.sellQuantity, 0)"></i></a>
                                 <label>Sell Quantity: {{ search.sellQuantity }}</label>

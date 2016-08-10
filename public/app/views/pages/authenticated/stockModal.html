@@ -41,12 +41,17 @@
 
 
                       <!-- Styling for sliders: http://www.cssportal.com/style-input-range/ -->
+                      <!-- These range sliders will only allow you to go up to a maximum of 100, need to increase step size to go higher -->
                         <div class="row modalBuySellButtons">
                           <div class="col-xs-6 span6">
 
                             <div ng-if="stocks.canBuy(search.stock.data.current.lastPrice)" data-role="rangeslider">
                               <input type="range" class="span2" ng-model="search.buyQuantity" ng-init="search.buyQuantity = 0" min="0" max="{{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }}">
-                              <label>Buy Quantity: {{ search.buyQuantity }}</label>
+                              <div class="noselect" style="font-size: 16px;">
+                                <a style="color: #737373;"><i class="fa fa-minus-square" aria-hidden="true" ng-click="search.buyQuantity = search.decrease(search.buyQuantity, 0)"></i></a>
+                                <label>Buy Quantity: {{ search.buyQuantity }}</label>
+                                <a style="color: #737373;"><i class="fa fa-plus-square" aria-hidden="true" ng-click="search.buyQuantity = search.increase(search.buyQuantity, Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice))"></i></a>
+                              </div>
                               <p>Cost per share: {{ search.stock.data.current.lastPrice }} | Total Cost: {{ search.stock.data.current.lastPrice * search.buyQuantity | number : 2 }}</p>
                             </div>
                             <button class="btn btn-block button-style1" ng-click="stocks.buyFromModal(search.stock.data.current.symbol, search.buyQuantity)">
@@ -59,7 +64,11 @@
 
                             <div ng-if="stocks.canSell(search.stock.data.current.symbol)" data-role="rangeslider">
                               <input type="range" class="span2" ng-model="search.sellQuantity" ng-init="search.sellQuantity = 0" min="0" max="{{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }}">
-                              <label>Sell Quantity: {{ search.sellQuantity }}</label>
+                              <div class="noselect" style="font-size: 16px;">
+                                <a style="color: #737373;"><i class="fa fa-minus-square" aria-hidden="true" ng-click="search.sellQuantity = search.decrease(search.sellQuantity, 0)"></i></a>
+                                <label>Sell Quantity: {{ search.sellQuantity }}</label>
+                                <a style="color: #737373;"><i class="fa fa-plus-square" aria-hidden="true" ng-click="search.sellQuantity = search.increase(search.sellQuantity, stocks.ownedStocks[search.stock.data.current.symbol])"></i></a>
+                              </div>
                               <p>Value per share: {{ search.stock.data.current.lastPrice }} | Total Value: {{ search.stock.data.current.lastPrice * search.sellQuantity | number : 2}}</p>
                             </div>
                             <button class="btn btn-block button-style1" ng-click="stocks.sellFromModal(search.stock.data.current.symbol, search.sellQuantity)">
@@ -69,7 +78,7 @@
 
                           </div>
                         </div>
-                        <center><h3>{{ stocks.modalMessage }}</h3></center>
+                        <center><h3 style="color:#737373;">{{ stocks.modalMessage }}</h3></center>
 
                     </div>
 

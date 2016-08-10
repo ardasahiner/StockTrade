@@ -262,6 +262,22 @@ angular.module('searchController', ['ui.bootstrap'])
     });
   };
 
+  vm.decrease = function(v, min) {
+    v --;
+    if (v < min) {
+      v = min;
+    }
+    return v;
+  }
+
+  vm.increase = function(v, max) {
+    v ++;
+    if (v > max) {
+      v = max;
+    }
+    return v;
+  }
+
   vm.closeStockModal = function() {
     vm.stock = {};
     vm.value = '';

@@ -1,4 +1,4 @@
-angular.module('accountController', ['ui.bootstrap'])
+angular.module('accountController', [])
   .controller('accountController', function($location, User, Auth) {
     var vm = this;
     vm.updateData = {};
@@ -61,6 +61,7 @@ angular.module('accountController', ['ui.bootstrap'])
                   vm.loading = false;
                   if (data.success) {
                     console.log(data.success);
+
                     $location.path('/account');
                   } else {
                     vm.error = data.message;
@@ -68,7 +69,6 @@ angular.module('accountController', ['ui.bootstrap'])
                });
 
             } else {
-
               vm.error = "You must enter at least one field";
             }
           }

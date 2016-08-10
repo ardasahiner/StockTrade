@@ -1,7 +1,7 @@
 <div class="modal fade stockModal" id="stockModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="{{search.stock.data.change}}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="{{search.stock.data.change}}">
         <div class="modal-header">
           <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading"> <b>{{search.stock.data.current.name}}</b>&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.exchange }}:{{ search.stock.data.current.symbol }})</h4>
           <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="!search.stock.data.success && !search.stock.loading">Stock Not Available</h4>
@@ -9,110 +9,80 @@
         </div>
         <div class=modal-body ng-if="search.stock.loading">
           <center><img style="opacity: 0.5; margin-top: 15px;" src="/assets/img/39.gif"><center>
-        </div>
-        <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
-
-          <center>
-            <h1 class="currentStockPrice">${{ search.stock.data.current.lastPrice }}</h1>
-            <p class="{{ search.stock.data.change }}-text">${{ search.stock.data.current.netChange }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.percentChange }}%)<p>
-          <center>
-
-          <!-- <div class="container todayStockInfo">
-            <div class="row">
-              <div class="col-sm-4">
-                <p class="currentStockPrice">${{ search.stock.data.current.lastPrice }}<p>
-              </div>
-              <div class="col-sm-8">
-                <p ng-if="search.stock.data.current.volume != 0" class = "todayTradingInfo">Today's Trading Info: </h4> <br></br>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-4">
-                <p>${{ search.stock.data.current.netChange }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.percentChange }}%)<p>
-              </div>
-              <div class="col-sm-8">
-                <p ng-if="search.stock.data.current.volume != 0">High:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.high }}<p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-8 col-md-offset-4">
-                <p ng-if="search.stock.data.current.volume != 0">Low:&nbsp;&nbsp;&nbsp;&nbsp; ${{ search.stock.data.current.low }}<p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-8 col-md-offset-4">
-                <p ng-if="search.stock.data.current.volume != 0">Volume:&nbsp;&nbsp;&nbsp;&nbsp; {{ search.stock.data.current.volume }}<p>
-              </div>
-            </div>
           </div>
+          <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
 
-          <br>
-
-          <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) != 1">
-            You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} shares
-          </p>
-          <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) == 1">
-            You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} share
-          </p>
-          <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] != 1">
-            You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} shares
-          </p>
-          <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] == 1">
-            You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} share
-          </p> -->
-
-          <div class="loadingChart">
             <center>
-              <h5 style="color: #737373; margin-top: 60px;" ng-if="search.loadingChart">Loading the Stock Chart...</h5>
-              <img ng-if="search.loadingChart" style="opacity: 0.5; margin-top: 10px;" src="/assets/img/39.gif">
-            <center>
-          </div>
+              <h1 class="currentStockPrice">${{ search.stock.data.current.lastPrice }}</h1>
+              <p class="{{ search.stock.data.change }}-text">${{ search.stock.data.current.netChange }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.percentChange }}%)<p>
+                <center>
 
-          <center>
-            <div class="stockChart" id="stockChart" ng-init="search.genPlot(search.stock.data.past)"></div>
-            Choose Date Range:
-            <p style="display:inline" ng-if="search.graphRange == 'One Month' || !search.dateRangeSorted">One Month</p>
-            <a href="" ng-if="search.graphRange != 'One Month' && search.dateRangeSorted" ng-click="search.makeOneMonthPlot()">One Month</a>&nbsp;|&nbsp;
-            <p style="display:inline" ng-if="search.graphRange == 'Six Months' || !search.dateRangeSorted">Six Months</p>
-            <a href="" ng-if="search.graphRange != 'Six Months' && search.dateRangeSorted" ng-click="search.makeSixMonthPlot()">Six Months</a>&nbsp;|&nbsp;
-            <p style="display:inline" ng-if="search.graphRange == 'One Year' || !search.dateRangeSorted">One Year</p>
-            <a href="" ng-if="search.graphRange != 'One Year' && search.dateRangeSorted" ng-click="search.makeOneYearPlot()">One Year</a>&nbsp;|&nbsp;
-            <p style="display:inline" ng-if="search.graphRange == 'Two Years' || !search.dateRangeSorted">Two Years</p>
-            <a href="" ng-if="search.graphRange != 'Two Years'" ng-click="search.makeTwoYearPlot()">Two Years</a>&nbsp;|&nbsp;
-            <p style="display:inline" ng-if="!search.pulledFullHistoricData || search.graphRange == 'Full'">Full History</p>
-            <a href="" ng-if="search.pulledFullHistoricData && search.graphRange != 'Full'" ng-click="search.makeFullPlot()">Full History</a>
-          </center>
-          <div class="row">
-            <div class="col-xs-6">
-              <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) != 1">
-                You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} shares
-              </p>
-              <p ng-if = "Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) == 1">
-                You can buy {{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }} share
-              </p>
+                  <div class="loadingChart">
+                    <center>
+                      <h5 style="color: #737373; margin-top: 60px;" ng-if="search.loadingChart">Loading the Stock Chart...</h5>
+                      <img ng-if="search.loadingChart" style="opacity: 0.5; margin-top: 10px;" src="/assets/img/39.gif">
+                      <center>
+                      </div>
+
+                      <center>
+                        <div class="stockChart" id="stockChart" ng-init="search.genPlot(search.stock.data.past)"></div>
+                        Choose Date Range:
+                        <p style="display:inline" ng-if="search.graphRange == 'One Month' || !search.dateRangeSorted">One Month</p>
+                        <a href="" ng-if="search.graphRange != 'One Month' && search.dateRangeSorted" ng-click="search.makeOneMonthPlot()">One Month</a>&nbsp;|&nbsp;
+                        <p style="display:inline" ng-if="search.graphRange == 'Six Months' || !search.dateRangeSorted">Six Months</p>
+                        <a href="" ng-if="search.graphRange != 'Six Months' && search.dateRangeSorted" ng-click="search.makeSixMonthPlot()">Six Months</a>&nbsp;|&nbsp;
+                        <p style="display:inline" ng-if="search.graphRange == 'One Year' || !search.dateRangeSorted">One Year</p>
+                        <a href="" ng-if="search.graphRange != 'One Year' && search.dateRangeSorted" ng-click="search.makeOneYearPlot()">One Year</a>&nbsp;|&nbsp;
+                        <p style="display:inline" ng-if="search.graphRange == 'Two Years' || !search.dateRangeSorted">Two Years</p>
+                        <a href="" ng-if="search.graphRange != 'Two Years'" ng-click="search.makeTwoYearPlot()">Two Years</a>&nbsp;|&nbsp;
+                        <p style="display:inline" ng-if="!search.pulledFullHistoricData || search.graphRange == 'Full'">Full History</p>
+                        <a href="" ng-if="search.pulledFullHistoricData && search.graphRange != 'Full'" ng-click="search.makeFullPlot()">Full History</a>
+                      </center>
+
+
+                      <!-- Styling for sliders: http://www.cssportal.com/style-input-range/ -->
+                        <div class="row modalBuySellButtons">
+                          <div class="col-xs-6 span6">
+
+                            <div ng-if="stocks.canBuy(search.stock.data.current.lastPrice)" data-role="rangeslider">
+                              <input type="range" class="span2" ng-model="search.buyQuantity" ng-init="search.buyQuantity = 0" min="0" max="{{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) | number : 0 }}">
+                              <label>Buy Quantity: {{ search.buyQuantity }}</label>
+                              <p>Cost per share: {{ search.stock.data.current.lastPrice }} | Total Cost: {{ search.stock.data.current.lastPrice * search.buyQuantity | number : 2 }}</p>
+                            </div>
+                            <button class="btn btn-block button-style1" ng-click="stocks.buyFromModal(search.stock.data.current.symbol, search.buyQuantity)">
+                              <span ng-if="stocks.canBuy(search.stock.data.current.lastPrice)">Buy {{ search.stock.data.current.symbol }}</span>
+                              <span style="margin-top: 61px;" ng-if="!stocks.canBuy(search.stock.data.current.lastPrice)">Cannot Buy {{ search.stock.data.current.symbol }}</span>
+                            </button>
+                          </div>
+
+                          <div class="col-xs-6 span6">
+
+                            <div ng-if="stocks.canSell(search.stock.data.current.symbol)" data-role="rangeslider">
+                              <input type="range" class="span2" ng-model="search.sellQuantity" ng-init="search.sellQuantity = 0" min="0" max="{{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }}">
+                              <label>Sell Quantity: {{ search.sellQuantity }}</label>
+                              <p>Value per share: {{ search.stock.data.current.lastPrice }} | Total Value: {{ search.stock.data.current.lastPrice * search.sellQuantity | number : 2}}</p>
+                            </div>
+                            <button class="btn btn-block button-style1" ng-click="stocks.sellFromModal(search.stock.data.current.symbol, search.sellQuantity)">
+                              <span ng-if="stocks.canSell(search.stock.data.current.symbol)">Sell {{ search.stock.data.current.symbol }}</span>
+                              <span ng-if="!stocks.canSell(search.stock.data.current.symbol)">Cannot Sell {{ search.stock.data.current.symbol }}</span>
+                            </button>
+
+                          </div>
+                        </div>
+                        <center><h3>{{ stocks.modalMessage }}</h3></center>
+
+                    </div>
+
+                    <div class="modal-body" ng-if="!search.stock.data.success && !search.stock.loading">
+                      Stock Not Available
+                    </div>
+
+                    <div class="modal-footer">
+                      <button class="btn btn-block button-style1" ng-click="search.closeStockModal()">
+                        <span>Close</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-xs-6">
-              <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] != 1">
-                You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} shares
-              </p>
-              <p ng-if="stocks.canBuy(search.stock.data.current.symbol) && stocks.ownedStocks[search.stock.data.current.symbol] == 1">
-                You can sell {{ stocks.ownedStocks[search.stock.data.current.symbol] | number : 0 }} share
-              </p>
-            </div>
-        </div>
-
-        </div>
-
-        <div class="modal-body" ng-if="!search.stock.data.success && !search.stock.loading">
-          Stock Not Available
-        </div>
-
-        <div class="modal-footer">
-          <button class="btn btn-block button-style1" ng-click="search.closeStockModal()">
-            <span>Close</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

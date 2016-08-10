@@ -12,6 +12,8 @@ angular.module('stockController', ['ui.bootstrap'])
   vm.sortList = {"ticker": 0, "name": 0, "currentPricePerShare": 0, "quantity": 0, "todayChangePercent": 0, "totalPercentProfit": 0, "totalNetProfit": 0};
   vm.currentActiveSort = "ticker";
 
+  vm.modalMessage = "";
+
 
   vm.getPortfolio = function(fCallback) {
     vm.loading = true;
@@ -74,8 +76,12 @@ angular.module('stockController', ['ui.bootstrap'])
     return vm.sortList[field] == 1;
   };
 
-  vm.canBuy = function(ticker) {
+  vm.canSell = function(ticker) {
     return (ticker in vm.ownedStocks);
+  };
+
+  vm.canBuy = function(cost) {
+    return (parseFloat(cost) < parseFloat(vm.portfolio.cash));
   };
 
   vm.buyStock = function() {
@@ -179,6 +185,43 @@ angular.module('stockController', ['ui.bootstrap'])
   vm.getPortfolio(function() {
     vm.sortByField("ticker");
   });
+
+  vm.buyFromModal = function(ticker, quantity) {
+    console.log(ticker);
+    Stocks.buyStock(ticker, quantity)
+      .then(function(data) {
+        Stocks.confirmBuyStock(ticker, quantity)
+          .success(function(data) {
+            console.log(data);
+            vm.modalMessage = "Buy of " + quantity + " shares of " + ticker + " was successful."
+            vm.getPortfolio(function() {
+              vm.sortList[vm.currentActiveSort] = 0;
+              vm.sortByField(vm.currentActiveSort);
+            });
+          });
+      });
+  };
+
+  vm.sellFromModal = function(ticker, quantity) {
+    console.log(ticker);
+    if (!vm.canSell(ticker)) {
+      console.log("You do not own this stock");
+    } else {
+      Stocks.sellStock(ticker, quantity)
+        .then(function(data) {
+          console.log(ticker);
+          Stocks.confirmSellStock(ticker, quantity)
+          .success(function(data) {
+            console.log(data);
+            vm.modalMessage = "Sell of " + quantity + " shares of " + ticker + " was successful."
+            vm.getPortfolio(function() {
+              vm.sortList[vm.currentActiveSort] = 0;
+              vm.sortByField(vm.currentActiveSort);
+            });
+          });
+        });
+    }
+  };
 
 })
 

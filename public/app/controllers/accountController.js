@@ -1,5 +1,5 @@
 angular.module('accountController', [])
-  .controller('accountController', function($location, User, Auth) {
+  .controller('accountController', function($location, $window, User, Auth) {
     var vm = this;
     vm.loading = false;
 
@@ -26,7 +26,11 @@ angular.module('accountController', [])
 
       if (typeof vm.updateData == "undefined") {
         vm.error = "You must enter at least one field";
+      } else if (typeof vm.updateData.password == "undefined"){
+        vm.error = "You must enter your current password to make any changes.";
       } else {
+
+        userData["password"] = vm.updateData.password;
         if (typeof vm.updateData.firstName != "undefined" && vm.updateData.firstName != vm.user.firstName) {
           console.log(vm.user.firstName);
           userData["firstName"] = vm.updateData.firstName;
@@ -37,16 +41,15 @@ angular.module('accountController', [])
         if (typeof vm.updateData.botAccount != "undefined" && vm.updateData.botAccount != vm.user.botAccount) {
           userData["botAccount"] = vm.updateData.botAccount;
         }
-        if (vm.updateData.password !=  vm.updateData.confirmPassword) {
+        if (vm.updateData.newPassword !=  vm.updateData.confirmPassword) {
           vm.error = "Passwords do not match!";
         } else {
-          if ((typeof vm.updateData.password != "undefined" && vm.updateData.password.length < 6) && vm.updateData.password != "") {
-              console.log(vm.updateData.password);
+          if ((typeof vm.updateData.newPassword != "undefined" && vm.updateData.newPassword.length < 6) && vm.updateData.newPassword != "") {
               vm.error = "Password must be at least 6 characters";
           } else {
-            if (typeof vm.updateData.password != "undefined" && vm.updateData.password != '' ) {
+            if (typeof vm.updateData.newPassword != "undefined" && vm.updateData.newPassword != '' ) {
 
-              userData["password"] = vm.updateData.password;
+              userData["newPassword"] = vm.updateData.newPassword;
             }
 
             if (Object.keys(userData).length != 0) {
@@ -56,14 +59,11 @@ angular.module('accountController', [])
                 .success(function(data) {
                   vm.loading = false;
                   if (data.success) {
-                    console.log(data.success);
-
-                    $location.path('/account');
+                    $window.location.reload();
                   } else {
                     vm.error = data.message;
                   }
                });
-
             } else {
               vm.error = "You must enter at least one field";
             }

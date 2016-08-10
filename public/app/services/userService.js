@@ -1,6 +1,6 @@
 angular.module('userService', [])
 
-.factory('User', function($http) {
+.factory('User', function($http, AuthToken) {
 
   var userFactory = {};
 
@@ -29,7 +29,11 @@ angular.module('userService', [])
 
     // Update an existing user's data
     userFactory.updateUser = function(username, userData) {
-      return $http.put('/users/' + username, userData);
+      return $http.put('/users/' + username, userData)
+      .success(function(data) {
+        AuthToken.setToken(data.token);
+        return data;
+      });
     };
 
     // Delete an existing user

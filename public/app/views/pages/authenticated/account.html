@@ -4,7 +4,7 @@
   <h2 style="color:black;"> Still being made~</h2>
   <br><br><br><br><br>
 
-  <h1> {{account.user.username}}'s Account </h1>
+  <h1> {{account.user.firstName}}'s Account </h1>
   <div class = "container">
     <form ng-submit="account.updateInfo()">
       <div class = "row">
@@ -48,7 +48,7 @@
           <h3>Bot Account</h3>
         </div>
         <div class = "col-sm-6">
-          <input type="checkbox" ng-init="checked=account.user.botAccount" ng-model="account.updateData.botAccount">
+          <input type="checkbox" ng-model="account.updateData.botAccount">
         </div>
       </div>
       <div class = "row">
@@ -57,7 +57,7 @@
         </div>
         <div class = "col-sm-6">
           <div class="form-group">
-            <input class="form-control" type="password" ng-model="account.updateData.password">
+            <input class="form-control" type="password" ng-model="account.updateData.newPassword">
           </div>
         </div>
       </div>
@@ -68,6 +68,16 @@
         <div class = "col-sm-6">
           <div class="form-group">
             <input class="form-control" type="password" ng-model="account.updateData.confirmPassword">
+          </div>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-sm-6">
+          <h3>Current Password:</h3>
+        </div>
+        <div class = "col-sm-6">
+          <div class="form-group">
+            <input class="form-control" type="password" ng-model="account.updateData.password">
           </div>
         </div>
       </div>

@@ -274,17 +274,28 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
             if (req.decoded._doc.admin || req.decoded._doc.username == req.params.query_username) {
                 User.findOne({username: req.params.query_username}, function (err, user) {
                     if (err) res.send(err);
-                    
-                    if (req.body.password) user.password = req.body.password;
-                    if (req.body.botAccount) user.botAccount = req.body.botAccount;
-                    if (req.body.firstName) user.firstName = req.body.firstName;
-                    if (req.body.lastName) user.lastName = req.body.lastName;
 
-                    user.save(function (err) {
-                        if (err) res.send(err);
-                        res.status(200).json({success: true, message: 'User updated!'});
-                    });
+                    if (!user.comparePassword(req.body.password)) {
+                      res.status(401).json({success: false, message: 'Password incorrect.'});
 
+                    } else {
+
+                      if (req.body.newPassword) user.password = req.body.newPassword;
+                      if (req.body.botAccount) user.botAccount = req.body.botAccount;
+                      if (req.body.firstName) user.firstName = req.body.firstName;
+                      if (req.body.lastName) user.lastName = req.body.lastName;
+                      user.save(function (err) {
+                          if (err) {
+                            res.send(err);
+                          } else {
+
+                            var token = jwt.sign(user, app.get('secretKey'), {
+                              expiresIn: 60*60*24*365*10 // expires in ten years
+                            });
+                            res.status(200).json({success: true, message: 'User updated!', token: token});
+                          }
+                      });
+                    }
                 });
             } else {
                 res.status(404).json({success: false, message: "You cannot change this user's information"});

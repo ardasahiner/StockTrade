@@ -165,7 +165,7 @@ angular.module('searchController', ['ui.bootstrap'])
         vm.stock.data.full_x.push(point[0] + " 12:00:00");
         vm.stock.data.full_y.push(((point[1] + point[4])/2).toFixed(2));
       }
-      vm.pulledFullHistoricData = true;
+      vm.pulledFullHistoricData = vm.stock.ticker;
       console.log("Time to get Historic Data: " + (doneGet - startGet) + "ms");
     })
     .catch(function(err) {
@@ -202,6 +202,7 @@ angular.module('searchController', ['ui.bootstrap'])
       vm.stock = {};
       vm.stock.loading = true;
       vm.stock.ticker = vm.value;
+      $scope.modalMessage = "";
       $("#stockModal").modal('show');
       if (vm.stock.ticker in vm.nameToTicker) {
         vm.stock.ticker = vm.nameToTicker[vm.stock.ticker];
@@ -236,6 +237,7 @@ angular.module('searchController', ['ui.bootstrap'])
     vm.stock = {};
     vm.stock.loading = true;
     vm.stock.ticker = stock;
+    $scope.modalMessage = "";
     $("#stockModal").modal('show');
     Stocks.getPrice(vm.stock.ticker)
     .then(function(data) {

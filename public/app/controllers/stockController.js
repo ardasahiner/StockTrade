@@ -12,7 +12,7 @@ angular.module('stockController', ['ui.bootstrap'])
   vm.sortList = {"ticker": 0, "name": 0, "currentPricePerShare": 0, "quantity": 0, "todayChangePercent": 0, "totalPercentProfit": 0, "totalNetProfit": 0};
   vm.currentActiveSort = "ticker";
 
-  vm.modalMessage = "";
+  $scope.modalMessage = "";
 
 
   vm.getPortfolio = function(fCallback) {
@@ -193,7 +193,7 @@ angular.module('stockController', ['ui.bootstrap'])
         Stocks.confirmBuyStock(ticker, quantity)
           .success(function(data) {
             console.log(data);
-            vm.modalMessage = "Buy of " + quantity + " shares of " + ticker + " was successful."
+            $scope.modalMessage = "Buy of " + quantity + " shares of " + ticker + " was successful."
             vm.getPortfolio(function() {
               vm.sortList[vm.currentActiveSort] = 0;
               vm.sortByField(vm.currentActiveSort);
@@ -213,7 +213,7 @@ angular.module('stockController', ['ui.bootstrap'])
           Stocks.confirmSellStock(ticker, quantity)
           .success(function(data) {
             console.log(data);
-            vm.modalMessage = "Sell of " + quantity + " shares of " + ticker + " was successful."
+            $scope.modalMessage = "Sell of " + quantity + " shares of " + ticker + " was successful."
             vm.getPortfolio(function() {
               vm.sortList[vm.currentActiveSort] = 0;
               vm.sortByField(vm.currentActiveSort);

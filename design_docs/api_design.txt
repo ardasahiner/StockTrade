@@ -158,15 +158,17 @@ USERS
     Headers:
       x-access-token -- JWT -- acquired from the authentication route
     Body:
+      password -- String -- the user's current password
       firstName -- String -- new first name (optional)
       lastName -- String -- new last name (optional)
-      password -- String -- new password (optional)
+      newPassword -- String -- new password (optional)
       botAccount -- boolean -- new botAccount value (optional)
     Params:
       query_username -- String -- user's username
     Response:
       success -- boolean -- True if request successful, false if otherwise
       message -- String -- Message pertaining to success or failure of request
+      token -- JWT -- New token to use when sending requests
 
   DELETE http://vstock.io/users/:query_username
     Summary:

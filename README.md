@@ -1,5 +1,5 @@
 ## vStock App
 
-[Visit us online at vstockanalytics.herokuapp.com!](https://vstockanalytics.herokuapp.com/)
+[Visit us online at vstock.io!](http://vstock.io/)
 
-![alt text](http://vstockanalytics.herokuapp.com/assets/img/vstock%20logo/vstock-black.png "vStock Logo")
+![alt text](http://vstock.io/assets/img/vstock%20logo/vstock-black.png "vStock Logo")

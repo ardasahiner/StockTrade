@@ -1,5 +1,5 @@
 # Ensure directory vStockAnalytics is in the same root directory
-# Ensure directory vStock_Analytics is set up with git uplink url
+# Ensure directory vStockAnalytics is set up with git uplink url
 
 # Use this shell script to automatically deploy to heroku
 

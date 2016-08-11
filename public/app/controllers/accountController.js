@@ -15,7 +15,7 @@ angular.module('accountController', [])
           vm.user = data.data;
           User.getTransactions(vm.user.username)
             .then(function(tData) {
-              vm.transactionList = tData.data;
+              vm.transactionList = tData.data.list;
               console.log(vm.transactionList);
               vm.loading = false;
             })
@@ -33,6 +33,35 @@ angular.module('accountController', [])
           $location.path('/error');
         });
     }
+
+    vm.sortByField = function(field) {
+
+      var isFloat = (field !== "transactionDate" && field !== "stockTicker" && field != "type");
+      reverse = !(vm.currentActiveSort === field && vm.currentSortOrientation == 1) ? 1 : -1;
+
+      vm.currentSortOrientation = 0;
+
+      if (isFloat) {
+        vm.transactionList.sort(function(a, b) {
+          return reverse * (parseFloat(b[field]) - parseFloat(a[field]));
+        });
+      } else {
+        vm.transactionList.sort(function(a, b) {
+          return reverse * (a[field].localeCompare(b[field]));
+        });
+      }
+
+      vm.currentSortOrientation = reverse;
+      vm.currentActiveSort = field;
+    };
+
+    vm.upSorted = function(field) {
+      return vm.currentActiveSort === field && vm.currentSortOrientation  == -1;
+    };
+
+    vm.downSorted = function(field) {
+      return vm.currentActiveSort === field && vm.currentSortOrientation  == 1;
+    };
 
     vm.getInfo = function() {
       vm.loading = true;
@@ -92,7 +121,7 @@ angular.module('accountController', [])
                 .success(function(data) {
                   vm.loading = false;
                   if (data.success) {
-                    $window.location.reload();
+                    $location.path('/account');;
                   } else {
                     vm.error = data.message;
                   }

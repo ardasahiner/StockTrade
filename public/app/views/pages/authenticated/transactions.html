@@ -6,7 +6,7 @@
                   <a href="/account">Account Info</a>
               </li>
               <li>
-                  <a href="/transactions">Tranasactions History</a>
+                  <a href="/transactions">Transactions History</a>
               </li>
               <li>
                   <a href="/update">Update Account</a>
@@ -20,50 +20,50 @@
     <br><br><br><br><br>
     <h1> {{account.user.firstName}}'s Transactions </h1>
 
-    <!-- <div class="row table-header">
-      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm" ng-click="stocks.sortByField('ticker')">
-        <a href="">Ticker</a><img ng-if="!stocks.upSorted('ticker') && !stocks.downSorted('ticker')" class="double-caret-symbol" src="assets/img/double-caret.svg">
-        <i ng-if="stocks.downSorted('ticker')" class="fa fa-caret-down" aria-hidden="true"></i>
-        <i ng-if="stocks.upSorted('ticker')" class="fa fa-caret-up" aria-hidden="true"></i>
+    <div class="row table-header">
+      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm" ng-click="transactions.sortByField('stockTicker')">
+        <a href="">Ticker</a><img ng-if="!transactions.upSorted('stockTicker') && !downSorted('stockTicker')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="transactions.downSorted('stockTicker')" class="fa fa-caret-down" aria-hidden="true"></i>
+        <i ng-if="transactions.upSorted('stockTicker')" class="fa fa-caret-up" aria-hidden="true"></i>
       </div>
 
-      <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" ng-click="stocks.sortByField('name')">
-        <a href="">Date</a><img ng-if="!stocks.upSorted('name') && !stocks.downSorted('name')" class="double-caret-symbol" src="assets/img/double-caret.svg">
-        <i ng-if="stocks.downSorted('name')" class="fa fa-caret-down" aria-hidden="true"></i>
-        <i ng-if="stocks.upSorted('name')" class="fa fa-caret-up" aria-hidden="true"></i>
+      <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" ng-click="transactions.sortByField('transactionDate')">
+        <a href="">Date</a><img ng-if="!transactions.upSorted('transactionDate') && !transactions.downSorted('transactionDate')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="transactions.downSorted('transactionDate')" class="fa fa-caret-down" aria-hidden="true"></i>
+        <i ng-if="transactions.upSorted('transactionDate')" class="fa fa-caret-up" aria-hidden="true"></i>
       </div>
 
-      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm" ng-click="stocks.sortByField('currentPricePerShare')">
-        <a href="">Type</a><img ng-if="!stocks.upSorted('currentPricePerShare') && !stocks.downSorted('currentPricePerShare')" class="double-caret-symbol" src="assets/img/double-caret.svg">
-        <i ng-if="stocks.downSorted('currentPricePerShare')" class="fa fa-caret-up" aria-hidden="true"></i>
-        <i ng-if="stocks.upSorted('currentPricePerShare')" class="fa fa-caret-down" aria-hidden="true"></i>
+      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm" ng-click="transactions.sortByField('type')">
+        <a href="">Type</a><img ng-if="!transactions.upSorted('type') && !transactions.downSorted('type')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="transactions.downSorted('type')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="transactions.upSorted('type')" class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
 
-      <div class="col-sm-3 col-md-1 col-lg-1 hidden-xs" ng-click="stocks.sortByField('quantity')">
-        <a href="">Quantity</a><img ng-if="!stocks.upSorted('quantity') && !stocks.downSorted('quantity')" class="double-caret-symbol" src="assets/img/double-caret.svg">
-        <i ng-if="stocks.downSorted('quantity')" class="fa fa-caret-up" aria-hidden="true"></i>
-        <i ng-if="stocks.upSorted('quantity')" class="fa fa-caret-down" aria-hidden="true"></i>
+      <div class="col-sm-3 col-md-1 col-lg-1 hidden-xs" ng-click="transactions.sortByField('num_shares')">
+        <a href="">Quantity</a><img ng-if="!transactions.upSorted('num_shares') && !transactions.downSorted('num_shares')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="transactions.downSorted('num_shares')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="transactions.upSorted('num_shares')" class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
 
-      <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2" ng-click="stocks.sortByField('todayChangePercent')">
-        <a href="">Price per Share</a><img ng-if="!stocks.upSorted('todayChangePercent') && !stocks.downSorted('todayChangePercent')" class="double-caret-symbol" src="assets/img/double-caret.svg">
-        <i ng-if="stocks.downSorted('todayChangePercent')" class="fa fa-caret-up" aria-hidden="true"></i>
-        <i ng-if="stocks.upSorted('todayChangePercent')" class="fa fa-caret-down" aria-hidden="true"></i>
+      <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2" ng-click="transactions.sortByField('pricePerShare')">
+        <a href="">Price per Share</a><img ng-if="!transactions.upSorted('pricePerShare') && !transactions.downSorted('pricePerShare')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="transactions.downSorted('pricePerShare')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="transactions.upSorted('pricePerShare')" class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
 
-      <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs" ng-click="stocks.sortByField('totalPercentProfit')">
-        <a href="">Total Price</a><img ng-if="!stocks.upSorted('totalPercentProfit') && !stocks.downSorted('totalPercentProfit')" class="double-caret-symbol" src="assets/img/double-caret.svg">
-        <i ng-if="stocks.downSorted('totalPercentProfit')" class="fa fa-caret-up" aria-hidden="true"></i>
-        <i ng-if="stocks.upSorted('totalPercentProfit')" class="fa fa-caret-down" aria-hidden="true"></i>
+      <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs" ng-click="transactions.sortByField('totalPrice')">
+        <a href="">Total Price</a><img ng-if="!transactions.upSorted('totalPrice') && !transactions.downSorted('totalPrice')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="transactions.downSorted('totalPrice')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="transactions.upSorted('totalPrice')" class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
 
-      <div class="col-md-2 col-lg-2 hidden-xs hidden-sm" ng-click="stocks.sortByField('totalNetProfit')">
-        <a href="">Percent Profit (if applicable)</a><img ng-if="!stocks.upSorted('totalNetProfit') && !stocks.downSorted('totalNetProfit')" class="double-caret-symbol" src="assets/img/double-caret.svg">
-        <i ng-if="stocks.downSorted('totalNetProfit')" class="fa fa-caret-up" aria-hidden="true"></i>
-        <i ng-if="stocks.upSorted('totalNetProfit')" class="fa fa-caret-down" aria-hidden="true"></i>
+      <div class="col-md-2 col-lg-2 hidden-xs hidden-sm" ng-click="transactions.sortByField('percentProfit')">
+        <a href="">Percent Profit (if applicable)</a><img ng-if="!transactions.upSorted('percentProfit') && !transactions.downSorted('percentProfit')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="transactions.downSorted('percentProfit')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="transactions.upSorted('percentProfit')" class="fa fa-caret-down" aria-hidden="true"></i>
       </div>
 
-    </div> -->
+    </div>
 
     <center>
       <h3 style="color: #737373" ng-if="account.loading">Loading Transactions Data...</h3>

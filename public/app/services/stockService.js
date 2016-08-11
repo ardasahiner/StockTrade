@@ -4,6 +4,16 @@ angular.module('stockService', [])
 
   var stockFactory = {};
 
+  var stockModalMessage = "";
+
+  stockFactory.setModalMessage = function(message) {
+    stockModalMessage = message;
+  }
+
+  stockFactory.getModalMessage = function() {
+    return stockModalMessage;
+  }
+
   // Use this service to get a stock's price for a given ticker
   stockFactory.getPrice = function(stock_symbol) {
     return $http.get('/stocks/' + stock_symbol);

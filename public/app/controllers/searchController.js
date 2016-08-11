@@ -202,7 +202,7 @@ angular.module('searchController', ['ui.bootstrap'])
       vm.stock = {};
       vm.stock.loading = true;
       vm.stock.ticker = vm.value;
-      $scope.modalMessage = "";
+      Stocks.setModalMessage("");
       $("#stockModal").modal('show');
       if (vm.stock.ticker in vm.nameToTicker) {
         vm.stock.ticker = vm.nameToTicker[vm.stock.ticker];
@@ -237,7 +237,7 @@ angular.module('searchController', ['ui.bootstrap'])
     vm.stock = {};
     vm.stock.loading = true;
     vm.stock.ticker = stock;
-    $scope.modalMessage = "";
+    Stocks.setModalMessage("");
     $("#stockModal").modal('show');
     Stocks.getPrice(vm.stock.ticker)
     .then(function(data) {
@@ -263,6 +263,10 @@ angular.module('searchController', ['ui.bootstrap'])
       vm.stock.loading = false;
     });
   };
+
+  vm.getModalMessage = function() {
+    return Stocks.getModalMessage();
+  }
 
   vm.decrease = function(v, min) {
     v --;

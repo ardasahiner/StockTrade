@@ -202,3 +202,13 @@
         border-bottom: 1px solid #262626;
     }
 }
+
+.transactions-footer {
+  background-color: #6d9285;
+  padding-top: 30px;
+}
+
+.updateAccount-footer {
+  background-color: #6d9285;
+  padding-top: 30px;
+}

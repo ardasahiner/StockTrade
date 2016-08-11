@@ -14,10 +14,64 @@
             </ul>
         </div>
   </div>
-  <div class = "account-wrapper" style="min-height: 1048 px;">
+  <div class = "account-wrapper">
     <img src="assets/img/vstock logo/vstock-black.png">
     <h2 style="color:black;"> Still being made~</h2>
     <br><br><br><br><br>
-    <h1> _____'s Transactions </h1>
+    <h1> {{account.user.firstName}}'s Transactions </h1>
+
+    <!-- <div class="row table-header">
+      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm" ng-click="stocks.sortByField('ticker')">
+        <a href="">Ticker</a><img ng-if="!stocks.upSorted('ticker') && !stocks.downSorted('ticker')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="stocks.downSorted('ticker')" class="fa fa-caret-down" aria-hidden="true"></i>
+        <i ng-if="stocks.upSorted('ticker')" class="fa fa-caret-up" aria-hidden="true"></i>
+      </div>
+
+      <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" ng-click="stocks.sortByField('name')">
+        <a href="">Date</a><img ng-if="!stocks.upSorted('name') && !stocks.downSorted('name')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="stocks.downSorted('name')" class="fa fa-caret-down" aria-hidden="true"></i>
+        <i ng-if="stocks.upSorted('name')" class="fa fa-caret-up" aria-hidden="true"></i>
+      </div>
+
+      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm" ng-click="stocks.sortByField('currentPricePerShare')">
+        <a href="">Type</a><img ng-if="!stocks.upSorted('currentPricePerShare') && !stocks.downSorted('currentPricePerShare')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="stocks.downSorted('currentPricePerShare')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="stocks.upSorted('currentPricePerShare')" class="fa fa-caret-down" aria-hidden="true"></i>
+      </div>
+
+      <div class="col-sm-3 col-md-1 col-lg-1 hidden-xs" ng-click="stocks.sortByField('quantity')">
+        <a href="">Quantity</a><img ng-if="!stocks.upSorted('quantity') && !stocks.downSorted('quantity')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="stocks.downSorted('quantity')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="stocks.upSorted('quantity')" class="fa fa-caret-down" aria-hidden="true"></i>
+      </div>
+
+      <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2" ng-click="stocks.sortByField('todayChangePercent')">
+        <a href="">Price per Share</a><img ng-if="!stocks.upSorted('todayChangePercent') && !stocks.downSorted('todayChangePercent')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="stocks.downSorted('todayChangePercent')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="stocks.upSorted('todayChangePercent')" class="fa fa-caret-down" aria-hidden="true"></i>
+      </div>
+
+      <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs" ng-click="stocks.sortByField('totalPercentProfit')">
+        <a href="">Total Price</a><img ng-if="!stocks.upSorted('totalPercentProfit') && !stocks.downSorted('totalPercentProfit')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="stocks.downSorted('totalPercentProfit')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="stocks.upSorted('totalPercentProfit')" class="fa fa-caret-down" aria-hidden="true"></i>
+      </div>
+
+      <div class="col-md-2 col-lg-2 hidden-xs hidden-sm" ng-click="stocks.sortByField('totalNetProfit')">
+        <a href="">Percent Profit (if applicable)</a><img ng-if="!stocks.upSorted('totalNetProfit') && !stocks.downSorted('totalNetProfit')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <i ng-if="stocks.downSorted('totalNetProfit')" class="fa fa-caret-up" aria-hidden="true"></i>
+        <i ng-if="stocks.upSorted('totalNetProfit')" class="fa fa-caret-down" aria-hidden="true"></i>
+      </div>
+
+    </div> -->
+
+    <center>
+      <h3 style="color: #737373" ng-if="account.loading">Loading Transactions Data...</h3>
+      <img style="opacity: 0.5" ng-if="account.loading" src="/assets/img/39.gif">
+    </center>
+
+    <!-- <div class="row stock {{stock.change}}" ng-repeat="stock in portfolioAssets">
+      <stock-asset info="stock" ng-click="search.linkToStock(stock.ticker)"></stock-asset>
+    </div> -->
   </div>
 </div>

@@ -65,8 +65,8 @@ angular.module('app.routes', ['ui.router'])
   .state('transactions', {
     url: '/transactions',
     templateUrl: 'app/views/pages/authenticated/transactions.html',
-    controller: 'transactionController',
-    controllerAs: 'transactions',
+    controller: 'accountController',
+    controllerAs: 'account',
     authenticated: true
   })
 

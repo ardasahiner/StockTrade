@@ -2,6 +2,37 @@ angular.module('accountController', [])
   .controller('accountController', function($location, $window, User, Auth) {
     var vm = this;
     vm.loading = false;
+    vm.currentActiveSort = "transactionDate";
+    vm.currentSortOrientation = 1;
+    // transactions controllers
+
+    vm.getTransactions = function() {
+      vm.loading = true;
+      vm.currentActiveSort = "transactionDate";
+      vm.currentSortOrientation = 1;
+      Auth.getUser()
+        .then(function(data) {
+          vm.user = data.data;
+          User.getTransactions(vm.user.username)
+            .then(function(tData) {
+              vm.transactionList = tData.data;
+              console.log(vm.transactionList);
+              vm.loading = false;
+            })
+            .catch(function(err) {
+              vm.loading = false;
+              console.log(err);
+              console.log("Application Unavaliable");
+              $location.path('/error');
+            });
+        })
+        .catch(function(err) {
+          vm.loading = false;
+          console.log(err);
+          console.log("Application Unavaliable");
+          $location.path('/error');
+        });
+    }
 
     vm.getInfo = function() {
       vm.loading = true;
@@ -17,7 +48,9 @@ angular.module('accountController', [])
           $location.path('/error');
         });
     };
+
     vm.getInfo();
+    vm.getTransactions();
 
     vm.updateInfo = function() {
       vm.loading = true;

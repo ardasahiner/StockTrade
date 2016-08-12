@@ -4,7 +4,7 @@
     <div class="navbar-header">
 
       <!-- This will make a collapsible nav-bar for smaller displays -->
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#vstock-navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -17,11 +17,11 @@
       </a>
     </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="vstock-navbar-collapse">
 
       <ul class="nav navbar-nav navbar-left">
         <!-- Content links all go here -->
-        <li><a ui-sref="about">About Us</a></li>
+        <li><a ui-sref="about" data-toggle="collapse" data-target="#vstock-navbar-collapse">About Us</a></li>
 
         <!-- <div class="search navbar-search">
           <label ng-if="state.current.name == 'portfolio'">Search Companies: </label>
@@ -33,10 +33,10 @@
       <ul class="nav navbar-nav navbar-right">
         <!-- Content links all go here -->
         <li ng-if="main.loggedIn" class="navbar-text hidden-xs">Hello {{ main.user.firstName }}!</li>
-        <li ng-if="main.loggedIn"><a href="/portfolio">Portfolio</a></li>
-        <li ng-if="main.loggedIn"><a href="/" ng-click="main.doLogout()">Logout</a></li>
-        <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#loginModal">Login</a></li>
-        <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#signupModal">Sign Up</a></li>
+        <li ng-if="main.loggedIn" data-toggle="collapse" data-target="#vstock-navbar-collapse"><a href="/portfolio">Portfolio</a></li>
+        <li ng-if="main.loggedIn" data-toggle="collapse" data-target="#vstock-navbar-collapse"><a href="/" ng-click="main.doLogout()">Logout</a></li>
+        <li ng-if="!main.loggedIn" data-toggle="collapse" data-target="#vstock-navbar-collapse"><a href="" data-toggle="modal" data-target="#loginModal">Login</a></li>
+        <li ng-if="!main.loggedIn" data-toggle="collapse" data-target="#vstock-navbar-collapse"><a href="" data-toggle="modal" data-target="#signupModal">Sign Up</a></li>
       </ul>
     </div>
   </div>

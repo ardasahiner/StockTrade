@@ -74,7 +74,7 @@ angular.module('app.routes', ['ui.router'])
     url: '/api',
     templateUrl: 'app/views/pages/unauthenticated/api_page.html',
     authenticated: false
-  });
+  })
 
   .state('portfolio', {
     url: '/portfolio',

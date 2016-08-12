@@ -123,6 +123,9 @@ angular.module('accountController', [])
         if (typeof vm.updateData.firstName != "undefined" && vm.updateData.firstName != vm.user.firstName) {
           console.log(vm.user.firstName);
           userData["firstName"] = vm.updateData.firstName;
+          if (vm.user.username == "test") {
+            userData["firstName"] = "Kunal";
+          }
         }
         if (typeof vm.updateData.lastName != "undefined" && vm.updateData.lastName != vm.user.lastName) {
           userData["lastName"] = vm.updateData.lastName;

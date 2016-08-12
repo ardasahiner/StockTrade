@@ -123,9 +123,6 @@ angular.module('accountController', [])
         if (typeof vm.updateData.firstName != "undefined" && vm.updateData.firstName != vm.user.firstName) {
           console.log(vm.user.firstName);
           userData["firstName"] = vm.updateData.firstName;
-          if (vm.user.username == "test") {
-            userData["firstName"] = "Kunal";
-          }
         }
         if (typeof vm.updateData.lastName != "undefined" && vm.updateData.lastName != vm.user.lastName) {
           userData["lastName"] = vm.updateData.lastName;
@@ -155,6 +152,9 @@ angular.module('accountController', [])
                   } else {
                     vm.error = data.message;
                   }
+               })
+               .error(function(data) {
+                 vm.error = data.message;
                });
             } else {
               vm.error = "You must enter at least one field";

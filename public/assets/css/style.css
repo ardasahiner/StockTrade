@@ -1,8 +1,7 @@
-body,
-html {
+body,html {
     background-color: #19342b;
     position: relative;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto',sans-serif;
     font-weight: 400;
 }
 
@@ -10,13 +9,186 @@ main {
     padding-top: 50px;
 }
 
-p.titledescription, p.lead, p.description, h2.section-heading {
-    color: white;
-    text-shadow:
-     -0.5px -0.5px 0 #000,
-     0.5px -0.5px 0 #000,
-     -0.5px 0.5px 0 #000,
-     0.5px 0.5px 0 #000;
+.signupform {
+    padding-top: 100px;
+    width: 40%;
+    position: relative;
+    left: 30%;
+    padding-bottom: 70px;
+}
+
+.modal-content {
+    background-color: #19342b;
+}
+
+.checkbox label {
+    color: #fff;
+}
+
+.topnav {
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.titledescription {
+    font-weight: 700;
+    text-shadow: -1px -1px 0 black,1px -1px 0 black,-1px 1px 0 black,1px 1px 0 #000;
+}
+
+.headings {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.intro-header {
+    padding-top: 50px;
+/* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 10%;
+    padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+}
+
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.content-section-a {
+    padding: 50px 0;
+/*background-color: #326755;*/
+}
+
+.content-section-b {
+    padding: 50px 0;
+/*background-color: #326755;*/
+    border-top: 1px solid inherit;
+    border-bottom: 1px solid inherit;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading-spacer {
+    float: left;
+    width: 200px;
+    border-top: 3px solid #e7e7e7;
+}
+
+.banner {
+    padding: 100px 0;
+    color: #f8f8f8;
+    background-size: cover;
+}
+
+.banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 3em;
+}
+
+.banner ul {
+    margin-bottom: 0;
+}
+
+.banner-social-buttons {
+    float: right;
+    margin-top: 0;
+}
+
+@media(max-width:1199px) {
+    ul.banner-social-buttons {
+        float: left;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width:767px) {
+    .banner h2 {
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+        font-size: 3em;
+    }
+
+    ul.banner-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.banner-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+footer {
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+p.titledescription,p.lead,p.description,h2.section-heading {
+    color: #fff;
+    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
 }
 
 .ui-view {
@@ -35,17 +207,17 @@ p.titledescription, p.lead, p.description, h2.section-heading {
 
 /* Links in the navbar, set text color using color tag */
 .navbar-default .navbar-nav > li > a {
-    color: white;
+    color: #fff;
 }
 
 /* Title in the navbar, set text color using color tag */
 .navbar-default .navbar-brand {
-    color: white;
+    color: #fff;
 }
 
 .navbar-custom .navbar-nav > .active > a {
     border-radius: 2px;
-    border-color: white;
+    border-color: #fff;
 }
 
 .navbar-custom .navbar-nav > .active > a {
@@ -71,13 +243,13 @@ body.container {
     padding-right: 0;
 }
 
-body h1, h2 {
+body h1,h2 {
     text-align: center;
 }
 
 .aboutus {
     padding-top: 5%;
-    padding-bottom: 0%;
+    padding-bottom: 0;
 }
 
 .description {
@@ -90,10 +262,10 @@ body h1, h2 {
 
 .features {
     background: inherit;
-    background: -webkit-linear-gradient(#19342b, #6d9285);
-    background: -o-linear-gradient(#19342b, #6d9285);
-    background: -moz-linear-gradient(#19342b, #6d9285);
-    background: linear-gradient(#19342b, #6d9285);
+    background: -webkit-linear-gradient(#19342b,#6d9285);
+    background: -o-linear-gradient(#19342b,#6d9285);
+    background: -moz-linear-gradient(#19342b,#6d9285);
+    background: linear-gradient(#19342b,#6d9285);
 }
 
 .banner {
@@ -101,12 +273,12 @@ body h1, h2 {
 }
 
 .buysell {
-    padding-top: 0px;
+    padding-top: 0;
     padding-bottom: 100px;
-    /*background-color:white;*/
+/*background-color:white;*/
     width: 100%;
-    color: black;
-    /*background: inherit;
+    color: #000;
+/*background: inherit;
     background: -webkit-linear-gradient(white, #19342b);
     background: -o-linear-gradient(white, #19342b);
     background: -moz-linear-gradient(white, #19342b);
@@ -114,8 +286,8 @@ body h1, h2 {
     background-color: #e4e7e7;
 }
 
-.buysell h1, h2 {
-    color: black;
+.buysell h1,h2 {
+    color: #000;
 }
 
 .buysell img {
@@ -124,8 +296,8 @@ body h1, h2 {
 
 .alert-danger {
     color: #BA2828;
-    background-color: black;
-    border-color: white;
+    background-color: #000;
+    border-color: #fff;
 }
 
 .footer img {
@@ -142,11 +314,11 @@ footer {
 }
 
 footer h5 {
-    color: black;
+    color: #000;
 }
 
 p.text-muted {
-    color: black;
+    color: #000;
 }
 
 body.footer {
@@ -154,11 +326,11 @@ body.footer {
 }
 
 .footer-spacer {
-  border-top: 1px solid #000;
+    border-top: 1px solid #000;
 }
 
 #portfolio-container {
-    background-color: white;
+    background-color: #fff;
     font-size: 14px;
     color: #737373;
     padding-bottom: 20px;
@@ -172,30 +344,28 @@ body.footer {
     font-size: 19px;
     border-bottom: #737373 1px solid;
     text-align: center;
-    /*    border-top: #737373 1px solid;*/
+/*    border-top: #737373 1px solid;*/
 }
 
 .table-header img {
-  padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 .table-header a {
-
-  color: #737373;
+    color: #737373;
 }
 
 .button-style1 {
     padding: 10px 30px;
-    border-radius: 0px !important;
+    border-radius: 0 !important;
     background-color: #595959;
-    color: white;
+    color: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.button-style1:hover,
-.button-style1:focus {
-   color: white;
-   background: #444;
+.button-style1:hover,.button-style1:focus {
+    color: #fff;
+    background: #444;
 }
 
 .table-column {
@@ -207,8 +377,8 @@ body.footer {
     border-bottom: #737373 1px solid;
     padding-top: 9px !important;
     padding-bottom: 9px !important;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
     text-align: center;
 }
 
@@ -230,33 +400,32 @@ body.footer {
     height: auto;
     min-height: 100%;
     border-radius: 0;
-    /* TODO: Change background color for the stock modal here */
-    background-color: white;
+/* TODO: Change background color for the stock modal here */
+    background-color: #fff;
 }
 
 .transactionModal {
-    color: white;
+    color: #fff;
 }
 
 .transactionModal h5 {
-
     font-size: large;
     font-style: bold;
 }
 
 .stockModal {
-  color: #737373;
+    color: #737373;
 }
 
 .stockModalTitle {
-  color: #252525;
-  text-align: center;
-  font-size: 22px;
+    color: #252525;
+    text-align: center;
+    font-size: 22px;
 }
 
 .stockModalName {
-  font-size: 26px;
-  margin-right: 25px;
+    font-size: 26px;
+    margin-right: 25px;
 }
 
 .stockAssetRow a {
@@ -264,11 +433,11 @@ body.footer {
 }
 
 .fa-github {
-    color: black;
+    color: #000;
 }
 
 .portfolio-header h2 {
-    color: black;
+    color: #000;
 }
 
 .portfolio-header {
@@ -282,14 +451,14 @@ body.footer {
 }
 
 .portfolio-table-header {
-  padding-left: 0;
-  padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 hr.footer-border {
     height: 10px;
     border: 0;
-    box-shadow: 0 5px 5px -5px black inset;
+    box-shadow: 0 5px 5px -5px #000 inset;
 }
 
 .change-positive {
@@ -328,34 +497,35 @@ hr.footer-border {
 }
 
 .stockModalchange-neutral {
-    background-color: #cccccc;
+    background-color: #ccc;
 }
 
 .search-companies {
-  margin-left: 8.3333%;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: 20px;
+    margin-left: 8.3333%;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: 20px;
 }
 
 .navbar-search {
-  margin-left: 30px;
-  margin-top: 12px;
+    margin-left: 30px;
+    margin-top: 12px;
 }
 
 .buysellButtons {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .buysellModals {
-  background-color: #485a55;
+    background-color: #485a55;
 }
 
 .currentStockPrice {
-  font-size: 40px;
-  font-weight: normal;
-  margin-bottom: 5px;
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 5px;
 }
+
 /*
 .todayStockInfo {
   line-height: 7px;
@@ -365,28 +535,27 @@ hr.footer-border {
 .todayTradingInfo {
   font-size: large;
   font-weight:bold;
-}*/
-
+} */
 .stockModalchange-positive-text {
-  color: darkgreen;
-  font-weight:bold;
+    color: #006400;
+    font-weight: 700;
 }
 
 .stockModalchange-negative-text {
-  color: darkred;
-  font-weight:bold;
+    color: #8b0000;
+    font-weight: 700;
 }
 
 .rightAlign {
-  text-align: right;
+    text-align: right;
 }
 
 .leftAlign {
-  text-align: left;
+    text-align: left;
 }
 
 .homePageTitle {
-  text-align: left;
+    text-align: left;
 }
 
 .tagline {
@@ -399,51 +568,51 @@ hr.footer-border {
 }
 
 .aboutPage {
-  height: 100%;
-  background: inherit;
-  background: -webkit-linear-gradient(#9bad9b, #6d9285);
-  background: -o-linear-gradient(#9bad9b, #6d9285);
-  background: -moz-linear-gradient(#9bad9b, #6d9285);
-  background: linear-gradient(#9bad9b, #6d9285);
+    height: 100%;
+    background: inherit;
+    background: -webkit-linear-gradient(#9bad9b,#6d9285);
+    background: -o-linear-gradient(#9bad9b,#6d9285);
+    background: -moz-linear-gradient(#9bad9b,#6d9285);
+    background: linear-gradient(#9bad9b,#6d9285);
 }
 
 .aboutPageText {
-  color: black;
-  text-align: center;
-  font-size: 15px;
+    color: #000;
+    text-align: center;
+    font-size: 15px;
 }
 
 .about-footer {
-  background-color: #6d9285;
+    background-color: #6d9285;
 }
 
 .fa-envelope-square {
-  color:black;
+    color: #000;
 }
 
 .fa-linkedin-square {
-  color:black;
+    color: #000;
 }
 
 .aboutPage h1 {
-  color: black;
-  font-size: 42px;
+    color: #000;
+    font-size: 42px;
 }
 
 .aboutPage h2 {
-  color: black;
-  font-size: 32px;
-  padding-bottom: 20px;
+    color: #000;
+    font-size: 32px;
+    padding-bottom: 20px;
 }
 
 .aboutPage h3 {
-  color: black;
-  font-size: 26px;
-  text-align: center;
+    color: #000;
+    font-size: 26px;
+    text-align: center;
 }
 
 .whatWeDoText {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .about-header {
@@ -452,74 +621,295 @@ hr.footer-border {
 }
 
 .ourTeam {
-  padding-top: 15px;
+    padding-top: 15px;
 }
 
 .teamMember {
-  padding-top: 20px;
+    padding-top: 20px;
 }
 
 .teamMember h3 {
-  margin-bottom: 0px;
-  padding-bottom: 5px;
+    margin-bottom: 0;
+    padding-bottom: 5px;
 }
 
 .whatWeDo {
-  padding-top: 50px;
-  padding-bottom: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .whatWeDo h2 {
-  padding-bottom: 15px;
+    padding-bottom: 15px;
 }
 
 .role {
-  font-size: 22px;
-  text-align: center;
-  padding-bottom: 20px;
-  color: black;
+    font-size: 22px;
+    text-align: center;
+    padding-bottom: 20px;
+    color: #000;
 }
 
 .home-footer {
-  background-color: #6d9285;
+    background-color: #6d9285;
 }
 
 .founder .img-circle {
-  height: 54%;
-  width: 54%
+    height: 54%;
+    width: 54%;
 }
 
 .rest .img-circle {
-  height: 41.7%;
-  width: 41.7%;
+    height: 41.7%;
+    width: 41.7%;
 }
 
 /* Styles for the stock graphs */
 rect {
-  fill: transparent;
+    fill: transparent;
 }
 
 svg.main-svg {
-  background: inherit;
+    background: inherit;
 }
 
 .stockChart {
-  margin-left: 0;
-  margin-right: 0;
-  height: 100%;
-  width: 100%;
-  /*border: 1px solid black;*/
+    margin-left: 0;
+    margin-right: 0;
+    height: 100%;
+    width: 100%;
+/*border: 1px solid black;*/
+}
+
+.buysellRange {
+    margin-bottom: 40px;
 }
 
 .footer-email {
-  margin-top: 20px;
-  margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .notFoundError {
-  background-color: #e4e7e7;
-  height: calc(100% - 377px);
-  height: -moz-calc(100% - 377px);
-  height: -webkit-calc(100% - 377px);
-  height: -o-calc(100% - 377px);
+    background-color: #e4e7e7;
+    height: calc(100% - 377px);
+    height: -moz-calc(100% - 377px);
+    height: -webkit-calc(100% - 377px);
+    height: -o-calc(100% - 377px);
+}
+
+.modalBuySellButtons {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.modalBuySellButtons button {
+    width: inherit;
+}
+
+.modalBuySellButtons input[type=range] {
+    -webkit-appearance: none;
+    background-color: inherit;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.modalBuySellButtons input[type=range]:focus {
+    outline: none;
+}
+
+.modalBuySellButtons input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    animate: .2s;
+    box-shadow: 0 0 0 #000;
+    background: #C4C1C0;
+    border-radius: 50px;
+    border: 1px solid #000;
+}
+
+.modalBuySellButtons input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0 0 0 #000;
+    border: 2px solid #000;
+    height: 27px;
+    width: 13px;
+    border-radius: 27px;
+    background: #FFF;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -12px;
+}
+
+.modalBuySellButtons input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #C4C1C0;
+}
+
+.modalBuySellButtons input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    animate: .2s;
+    box-shadow: 0 0 0 #000;
+    background: #C4C1C0;
+    border-radius: 50px;
+    border: 1px solid #000;
+}
+
+.modalBuySellButtons input[type=range]::-moz-range-thumb {
+    box-shadow: 0 0 0 #000;
+    border: 2px solid #000;
+    height: 27px;
+    width: 13px;
+    border-radius: 27px;
+    background: #FFF;
+    cursor: pointer;
+}
+
+.modalBuySellButtons input[type=range]::-ms-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    animate: .2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+.modalBuySellButtons input[type=range]::-ms-fill-lower {
+    background: #C4C1C0;
+    border: 1px solid #000;
+    border-radius: 100px;
+    box-shadow: 0 0 0 #000;
+}
+
+.modalBuySellButtons input[type=range]::-ms-fill-upper {
+    background: #C4C1C0;
+    border: 1px solid #000;
+    border-radius: 100px;
+    box-shadow: 0 0 0 #000;
+}
+
+.modalBuySellButtons input[type=range]::-ms-thumb {
+    box-shadow: 0 0 0 #000;
+    border: 2px solid #000;
+    height: 27px;
+    width: 13px;
+    border-radius: 27px;
+    background: #FFF;
+    cursor: pointer;
+}
+
+.modalBuySellButtons input[type=range]:focus::-ms-fill-lower {
+    background: #C4C1C0;
+}
+
+.modalBuySellButtons input[type=range]:focus::-ms-fill-upper {
+    background: #C4C1C0;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+/* iOS Safari */
+    -webkit-user-select: none;
+/* Chrome/Safari/Opera */
+    -khtml-user-select: none;
+/* Konqueror */
+    -moz-user-select: none;
+/* Firefox */
+    -ms-user-select: none;
+/* Internet Explorer/Edge */
+    user-select: none;
+/* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+.accountSettings {
+    text-align: center;
+    background: inherit;
+    background: -webkit-linear-gradient(#9bad9b,#6d9285);
+    background: -o-linear-gradient(#9bad9b,#6d9285);
+    background: -moz-linear-gradient(#9bad9b,#6d9285);
+    background: linear-gradient(#9bad9b,#6d9285);
+}
+
+.account-footer {
+    background-color: #6d9285;
+    padding-top: 30px;
+}
+
+.accountSettings .sidebar .sidebar-nav.navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+    background: #9bad9b;
+}
+
+.accountSettings .sidebar ul li {
+    border-bottom: 1px solid #262626;
+}
+
+.accountSettings .sidebar ul li a.active {
+    background-color: #6ace9c;
+}
+
+.accountSettings .sidebar ul li a:target {
+    background-color: #6ace9c;
+}
+
+.accountSettings .sidebar ul li a:hover {
+    background-color: #6ace9c;
+}
+
+.accountSettings .sidebar .arrow {
+    float: right;
+}
+
+.accountSettings .sidebar .nav-second-level li,.accountSettings .sidebar .nav-third-level li {
+    border-bottom: 0 !important;
+}
+
+.accountSettings .sidebar .nav-second-level li a {
+    padding-left: 37px;
+}
+
+.accountSettings .sidebar .nav-third-level li a {
+    padding-left: 52px;
+}
+
+@media(min-width:768px) {
+    .accountSettings .sidebar {
+        z-index: 1;
+        position: absolute;
+        width: 250px;
+    }
+
+    .accountSettings .navbar-top-links .dropdown-messages,.accountSettings .navbar-top-links .dropdown-tasks,.accountSettings .navbar-top-links .dropdown-alerts {
+        margin-left: auto;
+    }
+}
+
+.account-wrapper {
+    padding: 0 15px;
+    min-height: 568px;
+}
+
+@media(min-width:768px) {
+    .account-wrapper {
+        position: inherit;
+        margin: 0 0 0 250px;
+        padding: 0 0 30px 30px;
+        border-left: 1px solid #262626;
+        border-bottom: 1px solid #262626;
+    }
+}
+
+.transactions-footer {
+    background-color: #6d9285;
+    padding-top: 30px;
+}
+
+.updateAccount-footer {
+    background-color: #6d9285;
+    padding-top: 30px;
 }

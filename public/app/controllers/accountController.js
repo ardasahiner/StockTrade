@@ -36,6 +36,7 @@ angular.module('accountController', [])
 
     vm.sortByField = function(field) {
 
+      console.log("sortByField has been called");
       var isFloat = (field !== "transactionDate" && field !== "stockTicker" && field != "type");
       reverse = !(vm.currentActiveSort === field && vm.currentSortOrientation == 1) ? 1 : -1;
 
@@ -51,6 +52,7 @@ angular.module('accountController', [])
         });
       }
 
+      console.log(field + "is sorted");
       vm.currentSortOrientation = reverse;
       vm.currentActiveSort = field;
     };

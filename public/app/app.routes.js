@@ -70,6 +70,12 @@ angular.module('app.routes', ['ui.router'])
     authenticated: true
   })
 
+  .state('api', {
+    url: '/api',
+    templateUrl: 'app/views/pages/unauthenticated/api_page.html',
+    authenticated: false
+  });
+
   .state('portfolio', {
     url: '/portfolio',
     templateUrl: 'app/views/pages/authenticated/portfolio.html',

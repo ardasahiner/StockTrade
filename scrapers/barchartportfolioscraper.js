@@ -6,53 +6,55 @@ var keyIndex = 0;
 // Uses barchart free api
 function eodScraper(symbols, fCallback, keyNumber) {
 
-    //optional args
-    if (typeof keyNumber === 'undefined') {
+    if (symbols.length > 200) {
+      fCallback({message: "Error, we cannot support you owning greater than 200 stocks"});
+    } else {
+      //optional args
+      if (typeof keyNumber === 'undefined') {
 
-      keyNumber = keyIndex;
-    }
-
-    // ~~~ s p o o k y r e c u r s i o n ~~~ //
-    if (symbols.length > 100) {
-      console.log("here we go");
-      eodScraper(symbols.slice(0, 100), function(firstResult) {
-        console.log("next call: ");
-        eodScraper(symbols.slice(100), function(secondResult) {
-          fCallback(firstResult.concat(secondResult));
-        });
-      });
-    }
-
-    // callback function passed in to createString
-    function innerCallback(symbolsList, kn) {
-      if (typeof kn === 'undefined') {
-        kn = keyNumber;
+        keyNumber = keyIndex;
       }
-      var url = "http://marketdata.websol.barchart.com/getQuote.json?key=" + keys[kn] + "&symbols=" + symbolsList;
-      request(url, function(error, response, body) {
 
-        if(!error && response.statusCode == 200){
-          try{
-            fCallback(JSON.parse(body)['results']);
-          } catch(err) {
-            //try again with other api key
-            console.log("Key " + kn +  " ran out");
-            if (kn < keys.length - 1) {
-              keyIndex += 1;
-              innerCallback(symbolsList, kn + 1);
-            } else{
-              fCallback({message: "Error"});
-            }
-          }
-        } else if (error) {
-          console.log(error);
-        } else {
-          fCallback({message: "Error"});
+      // ~~~ s p o o k y r e c u r s i o n ~~~ //
+      if (symbols.length > 100) {
+        eodScraper(symbols.slice(0, 100), function(firstResult) {
+          eodScraper(symbols.slice(100), function(secondResult) {
+            fCallback(firstResult.concat(secondResult));
+          });
+        });
+      }
+
+      // callback function passed in to createString
+      function innerCallback(symbolsList, kn) {
+        if (typeof kn === 'undefined') {
+          kn = keyNumber;
         }
-      });
-    }
+        var url = "http://marketdata.websol.barchart.com/getQuote.json?key=" + keys[kn] + "&symbols=" + symbolsList;
+        request(url, function(error, response, body) {
 
-    createString(symbols, 0, "", innerCallback);
+          if(!error && response.statusCode == 200){
+            try{
+              fCallback(JSON.parse(body)['results']);
+            } catch(err) {
+              //try again with other api key
+              console.log("Key " + kn +  " ran out");
+              if (kn < keys.length - 1) {
+                keyIndex += 1;
+                innerCallback(symbolsList, kn + 1);
+              } else{
+                fCallback({message: "Error; try again tomorrow"});
+              }
+            }
+          } else if (error) {
+            console.log(error);
+          } else {
+            fCallback({message: "Error"});
+          }
+        });
+      }
+
+      createString(symbols, 0, "", innerCallback);
+    }
 }
 
 // Recursive function to append all stocks in list into a string asynchronously

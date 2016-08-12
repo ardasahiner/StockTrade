@@ -40,6 +40,11 @@ angular.module('accountController', [])
       var isFloat = (field !== "transactionDate" && field !== "stockTicker" && field != "type");
       reverse = !(vm.currentActiveSort === field && vm.currentSortOrientation == 1) ? 1 : -1;
 
+      if (field === "transactionDate" && vm.currentActiveSort !== field) {
+
+        reverse = -1;
+      }
+
       vm.currentSortOrientation = 0;
 
       if (isFloat) {
@@ -65,17 +70,9 @@ angular.module('accountController', [])
           });
         }
       } else {
-        //
-        // if (field === "transactionDate") {
-        //   vm.transactionList.sort(function(a, b) {
-        //     return -1 * reverse * (a[field].localeCompare(b[field]));
-        //   });
-        // }
-        // else {
-          vm.transactionList.sort(function(a, b) {
-            return reverse * (a[field].localeCompare(b[field]));
-          });
-        // }
+        vm.transactionList.sort(function(a, b) {
+          return reverse * (a[field].localeCompare(b[field]));
+        });
       }
 
       vm.currentSortOrientation = reverse;

@@ -849,20 +849,8 @@ svg.main-svg {
     border-bottom: 1px solid #262626;
 }
 
-.accountSettings .sidebar ul li a.active {
-    background-color: #6ace9c;
-}
-
-.accountSettings .sidebar ul li a:target {
-    background-color: #6ace9c;
-}
-
 .accountSettings .sidebar ul li a:hover {
-    background-color: #6ace9c;
-}
-
-.accountSettings .sidebar .arrow {
-    float: right;
+    background-color: #6d9285;
 }
 
 .accountSettings .sidebar .nav-second-level li,.accountSettings .sidebar .nav-third-level li {
@@ -889,19 +877,26 @@ svg.main-svg {
     }
 }
 
-.account-wrapper {
-    padding: 0 15px;
-    min-height: 568px;
+@media(min-width:768px) {
+  .account-wrapper {
+      padding: 0 15px;
+      min-height: 568px;
+  }
 }
 
 @media(min-width:768px) {
     .account-wrapper {
         position: inherit;
         margin: 0 0 0 250px;
-        padding: 0 0 30px 30px;
+        padding: 0 30px 30px 30px;
         border-left: 1px solid #262626;
         border-bottom: 1px solid #262626;
     }
+}
+
+.account-wrapper .form-group {
+  margin-bottom: 0px;
+  margin-top: 15px;
 }
 
 .transactions-footer {
@@ -935,6 +930,10 @@ svg.main-svg {
     padding-top: 30px;
 }
 
+.accountSettings .botAccount {
+
+  margin-top: 25px;
+}
 
 .api-page {
   background-color:white;

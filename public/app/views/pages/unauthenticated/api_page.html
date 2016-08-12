@@ -1,6 +1,6 @@
-<div class="container fluid">
+<div class="container fluid api-page">
   <h1>API DOCUMENTATION</h1>
-
+<br><br><br>
 
     <h2>AUTHENTICATION</h2>
       <h3>POST http://vstock.io/authenticate</h3>
@@ -17,7 +17,6 @@
 
         <h4>Params:</h4>
           <p>None</p>
-      
 
         <h4>Response:</h4>
           <ul>
@@ -26,6 +25,7 @@
             <li>token -- JSON Web Token (JWT) --  required for all protected routes. Expires in one year.</li>
           </ul> 
 
+          <br><br><br>
     <h2>STOCKS</h2>
       <h3>GET http://vstock.io/stocks/:stock_symbol</h3>
         <h4>Summary:</h4> 
@@ -142,7 +142,7 @@
 
         <h4>Params:</h4>
           <li>stock_symbol -- String -- The company's ticker symbol</li>
-          <li>type -- String -- Describes interval between data points (possible values are 'minutes','nearbyMinutes','formTMinutes','daily','dailyNearest','dailyContinue','weekly','weeklyNearest','weeklyContinue','monthly','monthlyNearest','monthlyContinue','quarterly','quarterlyNearest','quarterlyContinue','yearly','yearlyNearest', and 'yearlyContinue'). </li>
+          <li>type -- String -- Describes interval between data points (possible values are 'minutes', 'nearbyMinutes', 'formTMinutes', 'daily', 'dailyNearest', 'dailyContinue', 'weekly', 'weeklyNearest', 'weeklyContinue', 'monthly', 'monthlyNearest', 'monthlyContinue', 'quarterly', 'quarterlyNearest', 'quarterlyContinue', 'yearly', 'yearlyNearest', and 'yearlyContinue'). </li>
           <li>start_date -- String -- Beginning date of request, formatted as "yyyymmddhhmmss" 
           </li>
           <li>end_date -- String -- Ending date of request, formatted as "yyyymmddhhmmss", "null" if end date is the present</li>
@@ -201,7 +201,7 @@
         </ul>
 
 
-
+        <br><br><br>
     <h2>USERS</h2>
       <h3>GET http://vstock.io/users/me</h3>
 

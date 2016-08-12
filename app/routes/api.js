@@ -7,5 +7,5 @@ module.exports = function (app, express, User, jwt) {
         res.send('API Dashboard');
     });
 
-    app.use('/api', apiRouter);
+    app.use('/api_dashboard', apiRouter);
 };

@@ -16,6 +16,7 @@ angular.module('accountController', [])
           User.getTransactions(vm.user.username)
             .then(function(tData) {
               vm.transactionList = tData.data.list;
+              vm.sortByField(vm.currentActiveSort);
               console.log(vm.transactionList);
               vm.loading = false;
             })
@@ -36,23 +37,47 @@ angular.module('accountController', [])
 
     vm.sortByField = function(field) {
 
-      console.log("sortByField has been called");
       var isFloat = (field !== "transactionDate" && field !== "stockTicker" && field != "type");
       reverse = !(vm.currentActiveSort === field && vm.currentSortOrientation == 1) ? 1 : -1;
 
       vm.currentSortOrientation = 0;
 
       if (isFloat) {
-        vm.transactionList.sort(function(a, b) {
-          return reverse * (parseFloat(b[field]) - parseFloat(a[field]));
-        });
+        if (field == "percentProfit") {
+          vm.transactionList.sort(function(a, b) {
+
+            if (b["type"] === 'Buy') {
+
+              return reverse * -10000000000000000000000000000000;
+            } else if (a["type"] === 'Buy') {
+
+              return reverse * 100000000000000000000000000000000;
+            } else {
+
+              return reverse * (parseFloat(b[field]) - parseFloat(a[field]));
+            }
+
+          });
+        }
+        else {
+          vm.transactionList.sort(function(a, b) {
+            return reverse * (parseFloat(b[field]) - parseFloat(a[field]));
+          });
+        }
       } else {
-        vm.transactionList.sort(function(a, b) {
-          return reverse * (a[field].localeCompare(b[field]));
-        });
+        //
+        // if (field === "transactionDate") {
+        //   vm.transactionList.sort(function(a, b) {
+        //     return -1 * reverse * (a[field].localeCompare(b[field]));
+        //   });
+        // }
+        // else {
+          vm.transactionList.sort(function(a, b) {
+            return reverse * (a[field].localeCompare(b[field]));
+          });
+        // }
       }
 
-      console.log(field + "is sorted");
       vm.currentSortOrientation = reverse;
       vm.currentActiveSort = field;
     };

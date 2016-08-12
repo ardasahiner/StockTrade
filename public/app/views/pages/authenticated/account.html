@@ -6,10 +6,10 @@
                   <a href="/account">Account Info</a>
               </li>
               <li>
-                  <a href="#">Tranasactions History</a>
+                  <a href="/transactions">Transactions History</a>
               </li>
               <li>
-                  <a href="#">Update Account</a>
+                  <a href="/update">Update Account</a>
               </li>
             </ul>
         </div>
@@ -19,9 +19,8 @@
     <h2 style="color:black;"> Still being made~</h2>
     <br><br><br><br><br>
     <h1> {{account.user.firstName}}'s Account </h1>
+    <hr>
     <div class = "container">
-      <br><br><h2>Current Info</h2>
-      <hr>
       <div class = "row">
         <div class = "col-sm-6">
           <h3>Username:</h3>
@@ -64,77 +63,6 @@
           <h3>{{account.user.botAccount}}</h3>
         </div>
       </div>
-      <hr>
-      <br><br><h2>Update Your Information</h2>
-      <hr>
-      <form ng-submit="account.updateInfo()">
-        <div class = "row">
-          <div class = "col-sm-6">
-            <h3>First Name:</h3>
-          </div>
-          <div class = "col-sm-6">
-            <div class="form-group">
-              <input type="text" class="form-control" ng-model="account.updateData.firstName">
-            </div>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-sm-6">
-            <h3>Last Name:</h3>
-          </div>
-          <div class = "col-sm-6">
-            <div class="form-group">
-              <input type="text" class="form-control" ng-model="account.updateData.lastName">
-            </div>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-sm-6">
-            <h3>Bot Account</h3>
-          </div>
-          <div class = "col-sm-6">
-            <input type="checkbox" ng-model="account.updateData.botAccount">
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-sm-6">
-            <h3>New Password:</h3>
-          </div>
-          <div class = "col-sm-6">
-            <div class="form-group">
-              <input class="form-control" type="password" ng-model="account.updateData.newPassword">
-            </div>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-sm-6">
-            <h3>Confirm Password:</h3>
-          </div>
-          <div class = "col-sm-6">
-            <div class="form-group">
-              <input class="form-control" type="password" ng-model="account.updateData.confirmPassword">
-            </div>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-sm-6">
-            <h3>Current Password:</h3>
-          </div>
-          <div class = "col-sm-6">
-            <div class="form-group">
-              <input class="form-control" type="password" ng-model="account.updateData.password">
-            </div>
-          </div>
-        </div>
-        <br><br>
-        <div class="alert alert-danger" ng-if="account.error">
-          {{ account.error }}
-        </div>
-        <button type="submit" class="btn btn-block btn-primary">
-          <span ng-if="!account.loading">Update Info</span>
-          <span ng-if="account.loading" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
-        </button>
-      </form>
     </div>
   </div>
 </div>

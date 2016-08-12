@@ -2,6 +2,93 @@ angular.module('accountController', [])
   .controller('accountController', function($location, $window, User, Auth) {
     var vm = this;
     vm.loading = false;
+    vm.currentActiveSort = "transactionDate";
+    vm.currentSortOrientation = 1;
+    // transactions controllers
+
+    vm.getTransactions = function() {
+      vm.loading = true;
+      vm.currentActiveSort = "transactionDate";
+      vm.currentSortOrientation = 1;
+      Auth.getUser()
+        .then(function(data) {
+          vm.user = data.data;
+          User.getTransactions(vm.user.username)
+            .then(function(tData) {
+              vm.transactionList = tData.data.list;
+              vm.sortByField(vm.currentActiveSort);
+              console.log(vm.transactionList);
+              vm.loading = false;
+            })
+            .catch(function(err) {
+              vm.loading = false;
+              console.log(err);
+              console.log("Application Unavaliable");
+              $location.path('/error');
+            });
+        })
+        .catch(function(err) {
+          vm.loading = false;
+          console.log(err);
+          console.log("Application Unavaliable");
+          $location.path('/error');
+        });
+    }
+
+    vm.sortByField = function(field) {
+
+      var isFloat = (field !== "transactionDate" && field !== "stockTicker" && field != "type");
+      reverse = !(vm.currentActiveSort === field && vm.currentSortOrientation == 1) ? 1 : -1;
+
+      vm.currentSortOrientation = 0;
+
+      if (isFloat) {
+        if (field == "percentProfit") {
+          vm.transactionList.sort(function(a, b) {
+
+            if (b["type"] === 'Buy') {
+
+              return reverse * -10000000000000000000000000000000;
+            } else if (a["type"] === 'Buy') {
+
+              return reverse * 100000000000000000000000000000000;
+            } else {
+
+              return reverse * (parseFloat(b[field]) - parseFloat(a[field]));
+            }
+
+          });
+        }
+        else {
+          vm.transactionList.sort(function(a, b) {
+            return reverse * (parseFloat(b[field]) - parseFloat(a[field]));
+          });
+        }
+      } else {
+        //
+        // if (field === "transactionDate") {
+        //   vm.transactionList.sort(function(a, b) {
+        //     return -1 * reverse * (a[field].localeCompare(b[field]));
+        //   });
+        // }
+        // else {
+          vm.transactionList.sort(function(a, b) {
+            return reverse * (a[field].localeCompare(b[field]));
+          });
+        // }
+      }
+
+      vm.currentSortOrientation = reverse;
+      vm.currentActiveSort = field;
+    };
+
+    vm.upSorted = function(field) {
+      return vm.currentActiveSort === field && vm.currentSortOrientation  == -1;
+    };
+
+    vm.downSorted = function(field) {
+      return vm.currentActiveSort === field && vm.currentSortOrientation  == 1;
+    };
 
     vm.getInfo = function() {
       vm.loading = true;
@@ -17,7 +104,9 @@ angular.module('accountController', [])
           $location.path('/error');
         });
     };
+
     vm.getInfo();
+    vm.getTransactions();
 
     vm.updateInfo = function() {
       vm.loading = true;
@@ -59,10 +148,13 @@ angular.module('accountController', [])
                 .success(function(data) {
                   vm.loading = false;
                   if (data.success) {
-                    $window.location.reload();
+                    $location.path('/account');;
                   } else {
                     vm.error = data.message;
                   }
+               })
+               .error(function(data) {
+                 vm.error = data.message;
                });
             } else {
               vm.error = "You must enter at least one field";

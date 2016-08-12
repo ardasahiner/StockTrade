@@ -41,6 +41,11 @@ angular.module('userService', [])
       return $http.delete('/users/' + username);
     };
 
+    // Get a user's list of transactions
+    userFactory.getTransactions = function(username) {
+      return $http.get('/users/transactions/' + username);
+    };
+
     return userFactory;
 
   });

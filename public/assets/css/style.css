@@ -909,6 +909,27 @@ svg.main-svg {
     padding-top: 30px;
 }
 
+.transactions-list {
+
+  color: black;
+  padding: 20px 20px 20px 20px;
+  border: thin solid black;
+  margin: 20px 20px 20px 20px;
+}
+
+.transactions-headers a {
+    color: black;
+}
+
+.transactions-headers {
+  padding-bottom: 5px;
+  border-bottom: thin solid black;
+}
+
+.individual-transactions {
+  padding-top: 5px;
+}
+
 .updateAccount-footer {
     background-color: #6d9285;
     padding-top: 30px;

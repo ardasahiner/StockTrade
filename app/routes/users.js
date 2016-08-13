@@ -290,7 +290,7 @@ module.exports = function (app, express, User, jwt, TransactionList, Transaction
                     } else {
 
                       if (req.body.newPassword) user.password = req.body.newPassword;
-                      if (req.body.botAccount) user.botAccount = req.body.botAccount;
+                      if (typeof req.body.botAccount !== "undefined") user.botAccount = req.body.botAccount;
                       if (req.body.firstName) user.firstName = req.body.firstName;
                       if (req.body.lastName) user.lastName = req.body.lastName;
                       user.save(function (err) {

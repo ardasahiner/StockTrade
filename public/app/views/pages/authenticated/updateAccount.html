@@ -55,7 +55,8 @@
           <h3>Bot Account</h3>
         </div>
         <div class = "col-sm-6">
-          <input type="checkbox" class = "botAccount" ng-model="account.updateData.botAccount">
+          <label>Yes:   <input type="checkbox" class = "botAccount" ng-model="account.updateData.botAccount" ng-change = "account.updateTrueValue()"></label>
+          <label>No:   <input type="checkbox" class = "botAccount" ng-model="account.updateData.notBotAccount" ng-change = "account.updateFalseValue()"></label>
         </div>
       </div>
       <div class = "row" style = "margin-right: 0px; margin-left: 0px;">

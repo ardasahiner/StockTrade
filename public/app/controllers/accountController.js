@@ -4,6 +4,7 @@ angular.module('accountController', [])
     vm.loading = false;
     vm.currentActiveSort = "transactionDate";
     vm.currentSortOrientation = 1;
+    vm.updateData = {};
     // transactions controllers
 
     vm.getTransactions = function() {
@@ -124,9 +125,15 @@ angular.module('accountController', [])
         if (typeof vm.updateData.lastName != "undefined" && vm.updateData.lastName != vm.user.lastName) {
           userData["lastName"] = vm.updateData.lastName;
         }
-        if (typeof vm.updateData.botAccount != "undefined" && vm.updateData.botAccount != vm.user.botAccount) {
-          userData["botAccount"] = vm.updateData.botAccount;
+
+        if (typeof vm.updateData.botAccount != "undefined" && vm.updateData.botAccount == true  && vm.user.botAccount == false) {
+          userData["botAccount"] = true;
         }
+
+        if (typeof vm.updateData.notBotAccount != "undefined" && vm.updateData.notBotAccount == true && vm.user.botAccount == true) {
+          userData["botAccount"] = false;
+        }
+
         if (vm.updateData.newPassword !=  vm.updateData.confirmPassword) {
           vm.error = "Passwords do not match!";
         } else {
@@ -138,7 +145,7 @@ angular.module('accountController', [])
               userData["newPassword"] = vm.updateData.newPassword;
             }
 
-            if (Object.keys(userData).length != 0) {
+            if (Object.keys(userData).length > 1) {
               // request
               console.log(userData);
               User.updateUser(vm.user.username, userData)
@@ -154,11 +161,26 @@ angular.module('accountController', [])
                  vm.error = data.message;
                });
             } else {
-              vm.error = "You must enter at least one field";
+              vm.error = "You must enact at least one change to your account";
             }
           }
         }
       }
       vm.loading = false;
+      userData = {};
     };
+
+    vm.updateTrueValue = function() {
+
+      if (vm.updateData.notBotAccount && vm.updateData.botAccount) {
+        vm.updateData.notBotAccount = false;
+      }
+    }
+
+    vm.updateFalseValue = function() {
+
+      if (vm.updateData.notBotAccount && vm.updateData.botAccount) {
+        vm.updateData.botAccount = false;
+      }
+    }
   });

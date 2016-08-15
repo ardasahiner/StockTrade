@@ -1,3 +1,4 @@
+/* Standard Page Layout */
 body,html {
     background-color: #19342b;
     position: relative;
@@ -8,6 +9,40 @@ body,html {
 main {
     padding-top: 50px;
 }
+
+.topnav {
+    font-size: 14px;
+    background-color: #fff;
+}
+
+footer {
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+p.titledescription,p.lead,p.description,h2.section-heading {
+    color: #fff;
+    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
+}
+    
+header {
+    height: 100vh;
+}
+
+body.container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+body h1,h2 {
+    text-align: center;
+}
+
 
 .signupform {
     padding-top: 100px;
@@ -25,11 +60,6 @@ main {
     color: #fff;
 }
 
-.topnav {
-    font-size: 14px;
-    background-color: #fff;
-}
-
 .titledescription {
     font-weight: 700;
     text-shadow: -1px -1px 0 black,1px -1px 0 black,-1px 1px 0 black,1px 1px 0 #000;
@@ -45,6 +75,8 @@ main {
     font-weight: 400;
 }
 
+
+/* ----- Intro Page ----- */
 .intro-header {
     padding-top: 50px;
 /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
@@ -177,19 +209,6 @@ main {
     }
 }
 
-footer {
-    padding: 50px 0;
-    background-color: #fff;
-}
-
-p.copyright {
-    margin: 15px 0 0;
-}
-
-p.titledescription,p.lead,p.description,h2.section-heading {
-    color: #fff;
-    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
-}
 
 .ui-view {
     align-content: center;
@@ -233,19 +252,7 @@ p.titledescription,p.lead,p.description,h2.section-heading {
     background: inherit;
 }
 
-header {
-    height: 100vh;
-}
 
-body.container {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-body h1,h2 {
-    text-align: center;
-}
 
 .aboutus {
     padding-top: 5%;
@@ -567,6 +574,8 @@ hr.footer-border {
     margin: 0 auto;
 }
 
+
+/* ----- About Page ----- */
 .aboutPage {
     height: 100%;
     background: inherit;
@@ -585,6 +594,7 @@ hr.footer-border {
 .about-footer {
     background-color: #6d9285;
 }
+
 
 .fa-envelope-square {
     color: #000;
@@ -663,7 +673,8 @@ hr.footer-border {
     width: 41.7%;
 }
 
-/* Styles for the stock graphs */
+
+/* ----- Styles for the stock graphs ----- */
 rect {
     fill: transparent;
 }
@@ -825,6 +836,8 @@ svg.main-svg {
                                   not supported by any browser */
 }
 
+
+/* ----- Account Settings ----- */
 .accountSettings {
     text-align: center;
     background: inherit;
@@ -915,6 +928,7 @@ svg.main-svg {
 }
 
 
+/* -----Styles for API Page----- */
 .api-page {
   background-color:white;
   margin-top: 20px;

@@ -18,6 +18,12 @@ angular.module('app.routes', ['ui.router'])
     authenticated: false
   })
 
+  .state('contact', {
+    url: '/contact',
+    templateUrl: 'app/views/pages/unauthenticated/contact.html',
+    authenticated: false
+  })
+
   // .state('login', {
   //   url: '/login',
   //   templateUrl: 'app/views/pages/unauthenticated/login.html',

@@ -21,84 +21,83 @@
     <h1> {{account.user.firstName}}'s Transactions </h1>
     <div class = "transactions-list">
       <div class="row transactions-headers">
-        <div class="col-md-1 col-lg-1 hidden-xs hidden-sm" ng-click="account.sortByField('stockTicker')">
-          <a href="">Ticker</a><img ng-if="!account.upSorted('stockTicker') && !account.downSorted('stockTicker')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <div class="col-md-2 col-lg-1 col-sm-3 col-xs-3" ng-click="account.sortByField('stockTicker')">
+          <a href="">Stock</a><img ng-if="!account.upSorted('stockTicker') && !account.downSorted('stockTicker')" class="double-caret-symbol" src="assets/img/double-caret-black.svg">
           <i ng-if="account.downSorted('stockTicker')" class="fa fa-caret-down" aria-hidden="true"></i>
           <i ng-if="account.upSorted('stockTicker')" class="fa fa-caret-up" aria-hidden="true"></i>
         </div>
 
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" ng-click="account.sortByField('transactionDate')">
-          <a href="">Date</a><img ng-if="!account.upSorted('transactionDate') && !account.downSorted('transactionDate')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <div class="col-xs-3 col-sm-3 col-md-2 col-lg-1" ng-click="account.sortByField('transactionDate')">
+          <a href="">Date</a><img ng-if="!account.upSorted('transactionDate') && !account.downSorted('transactionDate')" class="double-caret-symbol" src="assets/img/double-caret-black.svg">
           <i ng-if="account.downSorted('transactionDate')" class="fa fa-caret-down" aria-hidden="true"></i>
           <i ng-if="account.upSorted('transactionDate')" class="fa fa-caret-up" aria-hidden="true"></i>
         </div>
 
-        <div class="col-md-1 col-lg-1 hidden-xs hidden-sm" ng-click="account.sortByField('type')">
-          <a href="">Type</a><img ng-if="!account.upSorted('type') && !account.downSorted('type')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <div class="col-md-2 col-lg-1 col-xs-3 col-sm-3" ng-click="account.sortByField('type')">
+          <a href="">Type</a><img ng-if="!account.upSorted('type') && !account.downSorted('type')" class="double-caret-symbol" src="assets/img/double-caret-black.svg">
           <i ng-if="account.downSorted('type')" class="fa fa-caret-up" aria-hidden="true"></i>
           <i ng-if="account.upSorted('type')" class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
 
-        <div class="col-sm-3 col-md-1 col-lg-1 hidden-xs" ng-click="account.sortByField('num_shares')">
-          <a href="">Quantity</a><img ng-if="!account.upSorted('num_shares') && !account.downSorted('num_shares')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <!-- long form says quantity -->
+        <div class="col-sm-3 col-md-2 col-lg-2 col-xs-3" ng-click="account.sortByField('num_shares')">
+          <a href="">Quantity</a><img ng-if="!account.upSorted('num_shares') && !account.downSorted('num_shares')" class="double-caret-symbol" src="assets/img/double-caret-black.svg">
           <i ng-if="account.downSorted('num_shares')" class="fa fa-caret-up" aria-hidden="true"></i>
           <i ng-if="account.upSorted('num_shares')" class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
 
-        <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2" ng-click="account.sortByField('pricePerShare')">
-          <a href="">Price per Share</a><img ng-if="!account.upSorted('pricePerShare') && !account.downSorted('pricePerShare')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <div class="hidden-xs hidden-sm col-md-3 col-lg-2" ng-click="account.sortByField('pricePerShare')">
+          <a href="">Price per Share</a><img ng-if="!account.upSorted('pricePerShare') && !account.downSorted('pricePerShare')" class="double-caret-symbol" src="assets/img/double-caret-black.svg">
           <i ng-if="account.downSorted('pricePerShare')" class="fa fa-caret-up" aria-hidden="true"></i>
           <i ng-if="account.upSorted('pricePerShare')" class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
 
-        <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs" ng-click="account.sortByField('totalPrice')">
-          <a href="">Total Price</a><img ng-if="!account.upSorted('totalPrice') && !account.downSorted('totalPrice')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <div class="hidden-sm hidden-md col-lg-2 hidden-xs" ng-click="account.sortByField('totalPrice')">
+          <a href="">Total Price</a><img ng-if="!account.upSorted('totalPrice') && !account.downSorted('totalPrice')" class="double-caret-symbol" src="assets/img/double-caret-black.svg">
           <i ng-if="account.downSorted('totalPrice')" class="fa fa-caret-up" aria-hidden="true"></i>
           <i ng-if="account.upSorted('totalPrice')" class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
 
-        <div class="col-md-2 col-lg-2 hidden-xs hidden-sm" ng-click="account.sortByField('percentProfit')">
-          <a href="">Percent Profit (if applicable)</a><img ng-if="!account.upSorted('percentProfit') && !account.downSorted('percentProfit')" class="double-caret-symbol" src="assets/img/double-caret.svg">
+        <div class="hidden-md col-lg-3 hidden-xs hidden-sm" ng-click="account.sortByField('percentProfit')">
+          <a href="">Percent Profit (if applicable)</a><img ng-if="!account.upSorted('percentProfit') && !account.downSorted('percentProfit')" class="double-caret-symbol" src="assets/img/double-caret-black.svg">
           <i ng-if="account.downSorted('percentProfit')" class="fa fa-caret-up" aria-hidden="true"></i>
           <i ng-if="account.upSorted('percentProfit')" class="fa fa-caret-down" aria-hidden="true"></i>
         </div>
-
       </div>
-    </div>
+        <center>
+          <h3 style="color: #737373" ng-if="account.loading">Loading Transactions Data...</h3>
+          <img style="opacity: 0.5" ng-if="account.loading" src="/assets/img/39.gif">
+        </center>
 
-    <center>
-      <h3 style="color: #737373" ng-if="account.loading">Loading Transactions Data...</h3>
-      <img style="opacity: 0.5" ng-if="account.loading" src="/assets/img/39.gif">
-    </center>
+        <div class="row individual-transactions" ng-repeat="transaction in account.transactionList">
+          <div class="col-md-2 col-lg-1 col-sm-3 col-xs-3">
+            {{transaction.stockTicker}}
+          </div>
 
-    <div class="row" ng-repeat="transaction in account.transactionList">
-      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm">
-        {{transaction.stockTicker}}
-      </div>
+          <div class="col-xs-3 col-sm-3 col-md-2 col-lg-1">
+            {{transaction.transactionDate | date:'MM/dd/yyyy'}}
+          </div>
 
-      <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-        {{transaction.transactionDate | date:'MM/dd/yyyy'}}
-      </div>
+          <div class="col-md-2 col-lg-1 col-xs-3 col-sm-3">
+            {{transaction.type}}
+          </div>
 
-      <div class="col-md-1 col-lg-1 hidden-xs hidden-sm">
-        {{transaction.type}}
-      </div>
+          <div class="col-sm-3 col-md-2 col-lg-2 col-xs-3">
+            {{transaction.num_shares | number: 0}}
+          </div>
 
-      <div class="col-sm-3 col-md-1 col-lg-1 hidden-xs">
-        {{transaction.num_shares | number: 0}}
-      </div>
+          <div class="hidden-xs hidden-sm col-md-3 col-lg-2">
+            ${{transaction.pricePerShare | number: 2}}
+          </div>
 
-      <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
-        ${{transaction.pricePerShare | number: 2}}
-      </div>
+          <div class="hidden-sm hidden-md col-lg-2 hidden-xs">
+            ${{transaction.totalPrice | number: 2}}
+          </div>
 
-      <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs">
-        ${{transaction.totalPrice | number: 2}}
-      </div>
-
-      <div class="col-md-2 col-lg-2 hidden-xs hidden-sm" ng-if="transaction.percentProfit || transaction.percentProfit == 0")>
-        {{transaction.percentProfit | number: 2}}%
-      </div>
+          <div class="hidden-md col-lg-3 hidden-xs hidden-sm" ng-if="transaction.percentProfit || transaction.percentProfit == 0")>
+            {{transaction.percentProfit | number: 2}}%
+          </div>
+        </div>
     </div>
   </div>
 </div>

@@ -958,7 +958,7 @@ svg.main-svg {
   padding-right: 70px;
 }
 
-.api-page h1, h2, h3, h4, p {
+.api-page h1, .api-page h2, .api-page h3, .api-page h4, .api-page p {
   color: #333;
 }
 .api-page h2 {

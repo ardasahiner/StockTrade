@@ -46,7 +46,11 @@ main {
 
 .section-heading {
     font-family: 'Titillium Web', sans-serif;
+}
 
+.home-icon {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .lead {
@@ -61,7 +65,7 @@ main {
 .intro-header {
     /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-top: 50px;
-    padding-bottom: 50px;
+    /*padding-bottom: 50px;*/
     text-align: center;
     color: #f8f8f8;
     height: 100%;
@@ -121,12 +125,19 @@ main {
 
 .content-section-a {
     padding: 50px 0;
+    height: 400px;
 }
 
 .content-section-b {
     padding: 50px 0;
     border-top: 1px solid inherit;
     border-bottom: 1px solid inherit;
+    height: 400px;
+}
+
+.content-section-c {
+  padding: 50px 0;
+  height: 400px;
 }
 
 .section-heading {
@@ -284,7 +295,7 @@ h1, h2 {
 }
 
 #portfolio-wrapper {
-    background-color: #e4e7e7;
+    background-color: #f2f2f2;
 }
 
 #portfolio {
@@ -309,7 +320,7 @@ h1, h2 {
 
 .footer-container {
     height: 100%;
-    background-color: #e4e7e7;
+    background-color: #f2f2f2;
 }
 
 footer {
@@ -591,7 +602,7 @@ body.footer {
 }
 
 .about-footer {
-    background-color: #6d9285;
+    background-color: #f2f2f2;
 }
 
 .fa-envelope-square {

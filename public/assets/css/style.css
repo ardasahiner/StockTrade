@@ -1,7 +1,7 @@
 body,html {
-    background-color: #19342b;
+    background-color: #2B2B2B;
     position: relative;
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Open Sans',sans-serif;
     font-weight: 400;
 }
 
@@ -18,7 +18,7 @@ main {
 }
 
 .modal-content {
-    background-color: #19342b;
+    background-color: gray;
 }
 
 .checkbox label {
@@ -30,9 +30,12 @@ main {
     background-color: #fff;
 }
 
+.home-title-logo {
+    width: 400px;
+}
+
 .titledescription {
     font-weight: 700;
-    text-shadow: -1px -1px 0 black,1px -1px 0 black,-1px 1px 0 black,1px 1px 0 #000;
 }
 
 .headings {
@@ -40,9 +43,18 @@ main {
     font-weight: 400;
 }
 
+.section-heading {
+    font-family: 'Titillium Web', sans-serif;
+
+}
+
 .lead {
     font-size: 18px;
     font-weight: 400;
+}
+
+.img-responsive {
+    width: 60%;
 }
 
 .intro-header {
@@ -51,8 +63,6 @@ main {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;
-    background-size: cover;
     height: 100%;
 }
 
@@ -64,7 +74,6 @@ main {
 
 .intro-message > h1 {
     margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 5em;
 }
 
@@ -75,7 +84,7 @@ main {
 }
 
 .intro-message > h3 {
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+
 }
 
 @media(max-width:767px) {
@@ -139,7 +148,6 @@ main {
 
 .banner h2 {
     margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 3em;
 }
 
@@ -162,7 +170,6 @@ main {
 @media(max-width:767px) {
     .banner h2 {
         margin: 0;
-        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
         font-size: 3em;
     }
 
@@ -186,9 +193,23 @@ p.copyright {
     margin: 15px 0 0;
 }
 
-p.titledescription,p.lead,p.description,h2.section-heading {
-    color: #fff;
-    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
+p.titledescription, p.description {
+    color: #F2F2F2;
+}
+
+p.lead, h2.section-heading {
+    color: #2B2B2B;
+}
+
+
+.content-section-b, .content-section-b .section-heading{
+    text-align: right;
+    background-color: #E0C95A;
+
+}
+
+.content-section-c{
+    background-color: #F2F2F2;
 }
 
 .ui-view {
@@ -197,7 +218,8 @@ p.titledescription,p.lead,p.description,h2.section-heading {
 
 /* Set color of the navbar */
 .topnav {
-    background: #262626;
+    background: #2B2B2B;
+    opacity: .9;
 }
 
 .topnav img {
@@ -261,11 +283,10 @@ body h1,h2 {
 }
 
 .features {
-    background: inherit;
     background: -webkit-linear-gradient(#19342b,#6d9285);
     background: -o-linear-gradient(#19342b,#6d9285);
     background: -moz-linear-gradient(#19342b,#6d9285);
-    background: linear-gradient(#19342b,#6d9285);
+    background: #F2F2F2;
 }
 
 .banner {
@@ -283,7 +304,7 @@ body h1,h2 {
     background: -o-linear-gradient(white, #19342b);
     background: -moz-linear-gradient(white, #19342b);
     background: linear-gradient(white, #19342b);*/
-    background-color: #e4e7e7;
+    background-color: #F2F2F2;
 }
 
 .buysell h1,h2 {
@@ -531,7 +552,6 @@ hr.footer-border {
   line-height: 7px;
   text-align: center;
 }
-
 .todayTradingInfo {
   font-size: large;
   font-weight:bold;
@@ -559,7 +579,6 @@ hr.footer-border {
 }
 
 .tagline {
-    text-shadow: 0 0 10px #000;
     color: #fff;
 }
 
@@ -573,8 +592,9 @@ hr.footer-border {
     background: -webkit-linear-gradient(#9bad9b,#6d9285);
     background: -o-linear-gradient(#9bad9b,#6d9285);
     background: -moz-linear-gradient(#9bad9b,#6d9285);
-    background: linear-gradient(#9bad9b,#6d9285);
+    background: #F2F2F2;
 }
+
 
 .aboutPageText {
     color: #000;
@@ -650,7 +670,7 @@ hr.footer-border {
 }
 
 .home-footer {
-    background-color: #6d9285;
+    background-color: #F2F2F2;
 }
 
 .founder .img-circle {

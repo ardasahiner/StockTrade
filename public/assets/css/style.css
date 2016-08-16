@@ -450,6 +450,7 @@ body.footer {
     border-radius: 0;
 /* TODO: Change background color for the stock modal here */
     background-color: #fff;
+    color: black;
 }
 
 .transactionModal {
@@ -498,7 +499,7 @@ body.footer {
     margin-bottom: 20px;
 }
 
-hr.footer-border {
+.footer-border hr {
     height: 10px;
     border: 0;
     box-shadow: 0 5px 5px -5px #000 inset;
@@ -530,16 +531,6 @@ hr.footer-border {
     margin-bottom: 5px;
 }
 
-/*
-.todayStockInfo {
-  line-height: 7px;
-  text-align: center;
-}
-
-.todayTradingInfo {
-  font-size: large;
-  font-weight:bold;
-} */
 .stockModalchange-positive-text {
     color: #006400;
     font-weight: 700;
@@ -939,7 +930,7 @@ svg.main-svg {
     padding-right: 70px;
 }
 
-.api-page h1, h2, h3, h4, p {
+.api-page h1, .api-page h2, .api-page h3, .api-page h4, .api-page p {
     color: #333;
 }
 .api-page h2 {

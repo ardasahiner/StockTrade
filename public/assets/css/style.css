@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 /* Standard Page Layout */
 body,html {
+=======
+body, html {
+>>>>>>> 383f5255cd2b90cd0f3d911bb3c62aa8f4e63efa
     background-color: #19342b;
     position: relative;
     font-family: 'Roboto',sans-serif;
@@ -62,7 +66,7 @@ body h1,h2 {
 
 .titledescription {
     font-weight: 700;
-    text-shadow: -1px -1px 0 black,1px -1px 0 black,-1px 1px 0 black,1px 1px 0 #000;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .headings {
@@ -78,8 +82,8 @@ body h1,h2 {
 
 /* ----- Intro Page ----- */
 .intro-header {
+    /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-top: 50px;
-/* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
@@ -143,12 +147,10 @@ body h1,h2 {
 
 .content-section-a {
     padding: 50px 0;
-/*background-color: #326755;*/
 }
 
 .content-section-b {
     padding: 50px 0;
-/*background-color: #326755;*/
     border-top: 1px solid inherit;
     border-bottom: 1px solid inherit;
 }
@@ -209,6 +211,22 @@ body h1,h2 {
     }
 }
 
+<<<<<<< HEAD
+=======
+footer {
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+p.titledescription, p.lead, p.description, h2.section-heading {
+    color: #fff;
+    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
+}
+>>>>>>> 383f5255cd2b90cd0f3d911bb3c62aa8f4e63efa
 
 .ui-view {
     align-content: center;
@@ -253,6 +271,18 @@ body h1,h2 {
 }
 
 
+<<<<<<< HEAD
+=======
+body.container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+h1, h2 {
+    text-align: center;
+}
+>>>>>>> 383f5255cd2b90cd0f3d911bb3c62aa8f4e63efa
 
 .aboutus {
     padding-top: 5%;
@@ -279,26 +309,18 @@ body h1,h2 {
     background-color: #e4e7e7;
 }
 
-.buysell {
-    padding-top: 0;
-    padding-bottom: 100px;
-/*background-color:white;*/
-    width: 100%;
-    color: #000;
-/*background: inherit;
-    background: -webkit-linear-gradient(white, #19342b);
-    background: -o-linear-gradient(white, #19342b);
-    background: -moz-linear-gradient(white, #19342b);
-    background: linear-gradient(white, #19342b);*/
+#portfolio-wrapper {
     background-color: #e4e7e7;
 }
 
-.buysell h1,h2 {
+#portfolio {
+    padding-top: 0px;
+    padding-bottom: 100px;
     color: #000;
 }
 
-.buysell img {
-    padding-bottom: 50px;
+#porfolio h1, #portfolio h2 {
+    color: #000;
 }
 
 .alert-danger {
@@ -336,36 +358,17 @@ body.footer {
     border-top: 1px solid #000;
 }
 
-#portfolio-container {
-    background-color: #fff;
-    font-size: 14px;
-    color: #737373;
-    padding-bottom: 20px;
-    height: inherit;
+.panel {
+    margin: 30px 0;
+    border: none;
+    border-radius: 0;
     box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-}
-
-.table-header {
-    padding-bottom: 11px;
-    padding-top: 11px;
-    font-size: 19px;
-    border-bottom: #737373 1px solid;
-    text-align: center;
-/*    border-top: #737373 1px solid;*/
-}
-
-.table-header img {
-    padding-bottom: 0;
-}
-
-.table-header a {
-    color: #737373;
 }
 
 .button-style1 {
     padding: 10px 30px;
     border-radius: 0 !important;
-    background-color: #595959;
+    background-color: #666;
     color: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
@@ -375,27 +378,104 @@ body.footer {
     background: #444;
 }
 
-.table-column {
-    border-width: 3px;
-    border: #737373 medium solid;
+#information-header {
+    padding: 30px;
+}
+
+#information-header .text-label {
+    color: grey;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+#information-header .amount {
+    font-size: 30px;
+}
+
+@media (max-width: 991px) {
+    #information-header .amount {
+        font-size: 25px;
+    }
+}
+
+#information-header .amount small {
+    font-size: 0.66em;
+}
+
+#portfolio-table .loading {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.table-header {
+    padding-left: 6px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    text-align: center;
+    color: white;
+    background: #666;
+}
+
+.table-header > [class*='col-'] {
+    padding: 0;
+}
+
+.table-header img {
+    padding-bottom: 0;
+}
+
+.table-header a {
+    color: inherit;
 }
 
 .table-row {
-    border-bottom: #737373 1px solid;
+    border-bottom: 1px solid #ccc;
     padding-top: 9px !important;
     padding-bottom: 9px !important;
     margin-left: 0;
     margin-right: 0;
+    color: #555;
     text-align: center;
 }
 
-.information-header {
-    font-style: italic;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 15px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+.table-row:hover {
+    color: #000;
+}
+
+.change-positive {
+    border-left: 6px solid #34b23e;
+}
+
+.change-positive:hover {
+    background-color: #c6ecd9;
+}
+
+.change-negative {
+    border-left: 6px solid #eb4747;
+}
+
+.change-negative:hover {
+    background-color: #f2d9d9;
+}
+
+.change-neutral {
+    border-left: 6px solid #999;
+}
+
+.change-neutral:hover {
+    background-color: #e8e8e8;
+}
+
+.stockModalchange-positive {
+    background-color: #79d2a6;
+}
+
+.stockModalchange-negative {
+    background-color: #e6b3b3;
+}
+
+.stockModalchange-neutral {
+    background-color: #ccc;
 }
 
 .stockModal .modal-dialog {
@@ -457,54 +537,10 @@ body.footer {
     margin-bottom: 20px;
 }
 
-.portfolio-table-header {
-    padding-left: 0;
-    padding-right: 0;
-}
-
 hr.footer-border {
     height: 10px;
     border: 0;
     box-shadow: 0 5px 5px -5px #000 inset;
-}
-
-.change-positive {
-    background-color: #c6ecd9;
-}
-
-.change-positive:hover {
-    color: #333;
-    background-color: #6ace9c;
-}
-
-.change-negative {
-    background-color: #f2d9d9;
-}
-
-.change-negative:hover {
-    color: #333;
-    background-color: #ef8f8f;
-}
-
-.change-neutral {
-    background-color: #e8e8e8;
-}
-
-.change-neutral:hover {
-    color: #333;
-    background-color: #bbb;
-}
-
-.stockModalchange-positive {
-    background-color: #79d2a6;
-}
-
-.stockModalchange-negative {
-    background-color: #e6b3b3;
-}
-
-.stockModalchange-neutral {
-    background-color: #ccc;
 }
 
 .search-companies {
@@ -688,7 +724,6 @@ svg.main-svg {
     margin-right: 0;
     height: 100%;
     width: 100%;
-/*border: 1px solid black;*/
 }
 
 .buysellRange {
@@ -821,19 +856,13 @@ svg.main-svg {
 }
 
 .noselect {
-    -webkit-touch-callout: none;
-/* iOS Safari */
-    -webkit-user-select: none;
-/* Chrome/Safari/Opera */
-    -khtml-user-select: none;
-/* Konqueror */
-    -moz-user-select: none;
-/* Firefox */
-    -ms-user-select: none;
-/* Internet Explorer/Edge */
-    user-select: none;
-/* Non-prefixed version, currently
-                                  not supported by any browser */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                    not supported by any browser */
 }
 
 
@@ -866,7 +895,7 @@ svg.main-svg {
     background-color: #6d9285;
 }
 
-.accountSettings .sidebar .nav-second-level li,.accountSettings .sidebar .nav-third-level li {
+.accountSettings .sidebar .nav-second-level li, .accountSettings .sidebar .nav-third-level li {
     border-bottom: 0 !important;
 }
 
@@ -885,7 +914,7 @@ svg.main-svg {
         width: 250px;
     }
 
-    .accountSettings .navbar-top-links .dropdown-messages,.accountSettings .navbar-top-links .dropdown-tasks,.accountSettings .navbar-top-links .dropdown-alerts {
+    .accountSettings .navbar-top-links .dropdown-messages, .accountSettings .navbar-top-links .dropdown-tasks, .accountSettings .navbar-top-links .dropdown-alerts {
         margin-left: auto;
     }
 }
@@ -908,8 +937,8 @@ svg.main-svg {
 }
 
 .account-wrapper .form-group {
-  margin-bottom: 0px;
-  margin-top: 15px;
+    margin-bottom: 0px;
+    margin-top: 15px;
 }
 
 .transactions-footer {
@@ -918,24 +947,23 @@ svg.main-svg {
 }
 
 .transactions-list {
-
-  color: black;
-  padding: 20px 20px 20px 20px;
-  border: thin solid black;
-  margin: 20px 20px 20px 20px;
+    color: #000;
+    padding: 20px 20px 20px 20px;
+    border: thin solid #000;
+    margin: 20px 20px 20px 20px;
 }
 
 .transactions-headers a {
-    color: black;
+    color: #000;
 }
 
 .transactions-headers {
-  padding-bottom: 5px;
-  border-bottom: thin solid black;
+    padding-bottom: 5px;
+    border-bottom: thin solid #000;
 }
 
 .individual-transactions {
-  padding-top: 5px;
+    padding-top: 5px;
 }
 
 .updateAccount-footer {
@@ -944,30 +972,34 @@ svg.main-svg {
 }
 
 .accountSettings .botAccount {
-
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 /* -----Styles for API Page----- */
 .api-page {
-  background-color:white;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding-bottom: 40px;
-  padding-left: 70px;
-  padding-right: 70px;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 40px;
+    padding-left: 70px;
+    padding-right: 70px;
 }
 
+<<<<<<< HEAD
 .api-page h1, .api-page h2, .api-page h3, .api-page h4, .api-page p {
   color: #333;
+=======
+.api-page h1, h2, h3, h4, p {
+    color: #333;
+>>>>>>> 383f5255cd2b90cd0f3d911bb3c62aa8f4e63efa
 }
 .api-page h2 {
-  font-size: 30px;
+    font-size: 30px;
 }
 .api-page h3{
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .api-page h4 {
-  text-decoration: bold;
+    text-decoration: bold;
 }

@@ -68,7 +68,6 @@ main {
     /*padding-bottom: 50px;*/
     text-align: center;
     color: #f8f8f8;
-    height: 100%;
 }
 
 .intro-message {
@@ -257,7 +256,8 @@ p.lead, h2.section-heading {
 }
 
 header {
-    height: 100vh;
+  padding-top: 50px;
+  height: 100vh;
 }
 
 body.container {

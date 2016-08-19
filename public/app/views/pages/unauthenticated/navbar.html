@@ -13,7 +13,7 @@
 
 
       <a class="navbar-brand topnav" ui-sref="home">
-        <img src="assets/img/vstock logo/vstock-white-name-transparent.png">
+        <img src="assets/img/vstock logo/vstock white name transparent.svg">
       </a>
     </div>
 
@@ -54,7 +54,7 @@
         <li ng-if="main.loggedIn" class="navbar-text hidden-xs">Hello {{ main.user.firstName }}!</li>
         <li ng-if="main.loggedIn"><a href="/portfolio">Portfolio</a></li>
         <li ng-if="main.loggedIn"><a href="/" ng-click="main.doLogout()">Logout</a></li>
-        <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#loginModal">Login</a></li>
+        <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#loginModal">Log In</a></li>
         <li ng-if="!main.loggedIn"><a href="" data-toggle="modal" data-target="#signupModal">Sign Up</a></li>
       </ul>
     </div>

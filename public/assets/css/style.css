@@ -1,3 +1,7 @@
+
+/* Standard Page Layout */
+
+
 body,html {
     background-color: #2B2B2B;
     position: relative;
@@ -9,6 +13,41 @@ body,html {
 main {
     padding-top: 50px;
 }
+
+.topnav {
+    font-size: 14px;
+    background-color: #fff;
+}
+
+footer {
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+
+p.titledescription, p.description {
+    color: #F2F2F2;
+    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
+}
+    
+header {
+  height: 100vh;
+}
+
+body.container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
 
 .signupform {
     padding-top: 100px;
@@ -25,6 +64,7 @@ main {
 .checkbox label {
     color: #fff;
 }
+
 
 .topnav {
     font-size: 14px;
@@ -60,16 +100,18 @@ main {
     font-weight: 400;
 }
 
-.img-responsive {
-    width: 60%;
-}
 
+
+/* ----- Intro Page ----- */
 .intro-header {
     /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-top: 50px;
     /*padding-bottom: 50px;*/
+    background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;
+    background-size:cover;
     text-align: center;
     color: #f8f8f8;
+    height: 100%;
 }
 
 .intro-message {
@@ -195,20 +237,6 @@ main {
     }
 }
 
-footer {
-    padding: 50px 0;
-    background-color: #fff;
-}
-
-p.copyright {
-    margin: 15px 0 0;
-}
-
-
-p.titledescription, p.description {
-    color: #F2F2F2;
-    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
-}
 
 p.lead, h2.section-heading {
     color: #2B2B2B;
@@ -257,20 +285,9 @@ p.lead, h2.section-heading {
     background: inherit;
 }
 
-header {
-  padding-top: 50px;
-  height: 100vh;
-}
 
-body.container {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-}
 
-h1, h2 {
-    text-align: center;
-}
+
 
 .aboutus {
     padding-top: 5%;
@@ -370,7 +387,7 @@ body.footer {
 }
 
 #information-header .text-label {
-    color: grey;
+    color: gray;
     font-size: 16px;
     text-transform: uppercase;
 }
@@ -587,6 +604,8 @@ body.footer {
     margin: 0 auto;
 }
 
+
+/* ----- About Page ----- */
 .aboutPage {
     height: 100%;
     background: inherit;
@@ -606,6 +625,7 @@ body.footer {
 .about-footer {
     background-color: #f2f2f2;
 }
+
 
 .fa-envelope-square {
     color: #000;
@@ -684,7 +704,8 @@ body.footer {
     width: 41.7%;
 }
 
-/* Styles for the stock graphs */
+
+/* ----- Styles for the stock graphs ----- */
 rect {
     fill: transparent;
 }
@@ -839,6 +860,8 @@ svg.main-svg {
                                     not supported by any browser */
 }
 
+
+/* ----- Account Settings ----- */
 .accountSettings {
     text-align: center;
     background: inherit;
@@ -947,6 +970,7 @@ svg.main-svg {
     margin-top: 25px;
 }
 
+/* -----Styles for API Page----- */
 .api-page {
     background-color: #fff;
     margin-top: 20px;
@@ -956,16 +980,62 @@ svg.main-svg {
     padding-right: 70px;
 }
 
+
+#title {
+    margin: 50px 0px 30px 0px;
+}
+
 .api-page h1, .api-page h2, .api-page h3, .api-page h4, .api-page p {
-    color: #333;
+  color: #333;
+  text-align:left;
 }
 .api-page h2 {
     font-size: 30px;
 }
 .api-page h3{
     text-decoration: underline;
+    font-size: 18px;
 }
 
 .api-page h4 {
     text-decoration: bold;
+}
+
+.api-page a:hover {
+    text-decoration: none;
+}
+.api-page nav > li > a{
+    background-color: #d9d9d9;
+    border-radius: 0px 5px 5px 0px;
+    margin: 5px 0px 5px 0px;
+    padding: 4px 0px 4px 8px;
+    border:0px;
+    width:150px;
+    text-align: left;
+}
+#sidebar-item:hover{
+    background-color: white;
+    cursor:pointer;
+}
+
+li > a {
+    position:relative;
+    display:block;
+}
+
+.api-page a {
+    color: black;
+}
+#sidebar {
+    padding-top: 20px;
+    position:fixed;
+}
+
+#sidebar-nav {
+    list-style: none;
+    padding: 0px;
+}
+
+@media (min-width 992px) {
+    
 }

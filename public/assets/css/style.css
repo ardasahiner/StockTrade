@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+/* Standard Page Layout */
+>>>>>>> f92adad9672eb7ff1c545377fe38af395e57951b
 
 body,html {
     background-color: #2B2B2B;
@@ -60,6 +64,11 @@ body h1,h2 {
     color: #fff;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f92adad9672eb7ff1c545377fe38af395e57951b
 .topnav {
     font-size: 14px;
     background-color: #fff;
@@ -69,6 +78,10 @@ body h1,h2 {
     width: 400px;
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> 35d988c824c4262c71711d746375173b6741daab
+>>>>>>> f92adad9672eb7ff1c545377fe38af395e57951b
 .titledescription {
     font-weight: 700;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -93,11 +106,23 @@ body h1,h2 {
     font-weight: 400;
 }
 
+<<<<<<< HEAD
 
 /* ----- Intro Page ----- */
 .img-responsive {
     width: 60%;
 }
+=======
+<<<<<<< HEAD
+
+/* ----- Intro Page ----- */
+=======
+.img-responsive {
+    width: 60%;
+}
+
+>>>>>>> 35d988c824c4262c71711d746375173b6741daab
+>>>>>>> f92adad9672eb7ff1c545377fe38af395e57951b
 .intro-header {
     /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-top: 50px;
@@ -229,6 +254,27 @@ body h1,h2 {
     }
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+footer {
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+
+p.titledescription, p.description {
+    color: #F2F2F2;
+    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
+}
+>>>>>>> 35d988c824c4262c71711d746375173b6741daab
+
+>>>>>>> f92adad9672eb7ff1c545377fe38af395e57951b
 p.lead, h2.section-heading {
     color: #2B2B2B;
 }
@@ -276,6 +322,27 @@ p.lead, h2.section-heading {
     background: inherit;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+header {
+  padding-top: 50px;
+  height: 100vh;
+}
+
+body.container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+>>>>>>> 35d988c824c4262c71711d746375173b6741daab
+>>>>>>> f92adad9672eb7ff1c545377fe38af395e57951b
 .aboutus {
     padding-top: 5%;
     padding-bottom: 0;
@@ -967,7 +1034,10 @@ svg.main-svg {
     padding-right: 70px;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f92adad9672eb7ff1c545377fe38af395e57951b
 #title {
     margin: 50px 0px 30px 0px;
 }

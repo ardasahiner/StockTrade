@@ -1,4 +1,6 @@
+
 /* Standard Page Layout */
+
 
 body,html {
     background-color: #2B2B2B;
@@ -25,13 +27,14 @@ p.copyright {
     margin: 15px 0 0;
 }
 
-p.titledescription,p.lead,p.description,h2.section-heading {
-    color: #fff;
+
+p.titledescription, p.description {
+    color: #F2F2F2;
     text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
 }
     
 header {
-    height: 100vh;
+  height: 100vh;
 }
 
 body.container {
@@ -40,7 +43,7 @@ body.container {
     padding-right: 0;
 }
 
-body h1,h2 {
+h1, h2 {
     text-align: center;
 }
 
@@ -61,8 +64,7 @@ body h1,h2 {
     color: #fff;
 }
 
-<<<<<<< HEAD
-=======
+
 .topnav {
     font-size: 14px;
     background-color: #fff;
@@ -72,7 +74,6 @@ body h1,h2 {
     width: 400px;
 }
 
->>>>>>> 35d988c824c4262c71711d746375173b6741daab
 .titledescription {
     font-weight: 700;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -97,21 +98,18 @@ body h1,h2 {
     font-weight: 400;
 }
 
-<<<<<<< HEAD
+
 
 /* ----- Intro Page ----- */
-=======
-.img-responsive {
-    width: 60%;
-}
-
->>>>>>> 35d988c824c4262c71711d746375173b6741daab
 .intro-header {
     /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-top: 50px;
     /*padding-bottom: 50px;*/
+    background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;
+    background-size:cover;
     text-align: center;
     color: #f8f8f8;
+    height: 100%;
 }
 
 .intro-message {
@@ -237,23 +235,6 @@ body h1,h2 {
     }
 }
 
-<<<<<<< HEAD
-=======
-footer {
-    padding: 50px 0;
-    background-color: #fff;
-}
-
-p.copyright {
-    margin: 15px 0 0;
-}
-
-
-p.titledescription, p.description {
-    color: #F2F2F2;
-    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
-}
->>>>>>> 35d988c824c4262c71711d746375173b6741daab
 
 p.lead, h2.section-heading {
     color: #2B2B2B;
@@ -302,24 +283,10 @@ p.lead, h2.section-heading {
     background: inherit;
 }
 
-<<<<<<< HEAD
-=======
-header {
-  padding-top: 50px;
-  height: 100vh;
-}
 
-body.container {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-}
 
-h1, h2 {
-    text-align: center;
-}
 
->>>>>>> 35d988c824c4262c71711d746375173b6741daab
+
 .aboutus {
     padding-top: 5%;
     padding-bottom: 0;
@@ -1010,6 +977,7 @@ svg.main-svg {
     padding-left: 70px;
     padding-right: 70px;
 }
+
 
 #title {
     margin: 50px 0px 30px 0px;

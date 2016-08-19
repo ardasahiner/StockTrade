@@ -1,9 +1,6 @@
-<<<<<<< HEAD
+
 /* Standard Page Layout */
 body,html {
-=======
-body, html {
->>>>>>> 383f5255cd2b90cd0f3d911bb3c62aa8f4e63efa
     background-color: #19342b;
     position: relative;
     font-family: 'Roboto',sans-serif;
@@ -211,22 +208,6 @@ body h1,h2 {
     }
 }
 
-<<<<<<< HEAD
-=======
-footer {
-    padding: 50px 0;
-    background-color: #fff;
-}
-
-p.copyright {
-    margin: 15px 0 0;
-}
-
-p.titledescription, p.lead, p.description, h2.section-heading {
-    color: #fff;
-    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
-}
->>>>>>> 383f5255cd2b90cd0f3d911bb3c62aa8f4e63efa
 
 .ui-view {
     align-content: center;
@@ -269,20 +250,6 @@ p.titledescription, p.lead, p.description, h2.section-heading {
     padding-top: 50px;
     background: inherit;
 }
-
-
-<<<<<<< HEAD
-=======
-body.container {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-h1, h2 {
-    text-align: center;
-}
->>>>>>> 383f5255cd2b90cd0f3d911bb3c62aa8f4e63efa
 
 .aboutus {
     padding-top: 5%;
@@ -383,7 +350,7 @@ body.footer {
 }
 
 #information-header .text-label {
-    color: grey;
+    color: gray;
     font-size: 16px;
     text-transform: uppercase;
 }
@@ -985,21 +952,36 @@ svg.main-svg {
     padding-right: 70px;
 }
 
-<<<<<<< HEAD
+#title {
+    margin: 50px 0px 30px 0px;
+}
+
 .api-page h1, .api-page h2, .api-page h3, .api-page h4, .api-page p {
   color: #333;
-=======
-.api-page h1, h2, h3, h4, p {
-    color: #333;
->>>>>>> 383f5255cd2b90cd0f3d911bb3c62aa8f4e63efa
+  text-align:left;
 }
 .api-page h2 {
     font-size: 30px;
 }
 .api-page h3{
     text-decoration: underline;
+    font-size: 18px;
 }
 
 .api-page h4 {
     text-decoration: bold;
+}
+
+
+#sidebar {
+    padding-top: 20px;
+}
+
+#sidebar-nav {
+    list-style: none;
+    padding: 0px;
+}
+
+@media (min-width 992px) {
+    
 }

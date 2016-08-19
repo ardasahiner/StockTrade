@@ -1,20 +1,18 @@
 <div class="container fluid api-page">
   <h1 id="title">API DOCUMENTATION</h1>
   <div class="row">
-    <div class="col-md-3" style="mar">
-      <nav id="sidebar">
-        <ul id="sidebar-nav">
-          <li>
-            <a href="#auth">Authentication</a>
+    <div class="col-md-3" >
+        <ul class="nav"id="sidebar-nav">
+          <li class="sidebar-item">
+            <a href="#title">Authentication</a>
           </li>
-          <li>
+          <li class="sidebar-item">
             <a href="#stocks">Stocks</a>
           </li>
-          <li>
+          <li class="sidebar-item">
             <a href="#users-id">Users</a>
-          </li>
+          </li> 
         </ul>
-      </nav>
     </div>
     <div class="col-md-9">
     <hr>
@@ -28,8 +26,8 @@
 
           <h4>Body:</h4> 
             <ul>
-              <li>username -- String -- The user's username</li>
-              <li>password -- String -- The user's password</li>
+              <li><code>username</code> -- String -- The user's username</li>
+              <li><code>password</code> -- String -- The user's password</li>
             </ul>
 
           <h4>Params:</h4>
@@ -37,8 +35,8 @@
 
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- true if authentication successful, false otherwise</li>
-              <li>message -- String  -- relevant message regarding success or failure of request</li>
+              <li><code>success</code>-- boolean -- true if authentication successful, false otherwise</li>
+              <li><code>message</code> -- String  -- relevant message regarding success or failure of request</li>
               <li id="stocks">token -- JSON Web Token (JWT) --  required for all protected routes. Expires in one year.</li>
             </ul> 
 
@@ -52,7 +50,7 @@
 
           <h4>Headers:</h4> 
             <ul>
-              <li>x-access-token -- JWT -- acquired from the authentication route</li>
+              <li><code>x-access-token</code> -- JWT -- acquired from the authentication route</li>
             </ul>
 
 
@@ -61,39 +59,39 @@
 
           <h4>Params:</h4>
             <ul>
-              <li>stock_symbol -- String -- The company's ticker symbol</li>
+              <li><code>stock_symbol</code> -- String -- The company's ticker symbol</li>
             </ul>
 
 
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- true if successful, false otherwise</li>
-              <li>message -- String  -- relevant message regarding success or failure of request</li>
-              <li>current -- JSON Object:
+              <li><code>success</code> -- boolean -- true if successful, false otherwise</li>
+              <li><code>message</code> -- String  -- relevant message regarding success or failure of request</li>
+              <li><code>current</code> -- JSON Object:
                   <ul>
-                      <li>symbol -- String -- symbol of stock</li> 
-                      <li>name -- String -- name of stock </li> 
-                      <li>exchange -- String -- exchange in which stock is traded </li> 
-                      <li>lastPrice -- String -- last price of stock </li> 
-                      <li>netChange -- String -- net change of stock price since session opened </li> 
-                      <li>percentChange -- String -- percent change of stock price since session opened </li> 
+                      <li><code>symbol</code> -- String -- symbol of stock</li> 
+                      <li><code>name</code> -- String -- name of stock </li> 
+                      <li><code>exchange</code> -- String -- exchange in which stock is traded </li> 
+                      <li><code>lastPrice</code> -- String -- last price of stock </li> 
+                      <li><code>netChange</code> -- String -- net change of stock price since session opened </li> 
+                      <li><code>percentChange</code> -- String -- percent change of stock price since session opened </li> 
                       
-                      <li>volume -- Int -- volume of trading </li> 
-                      <li>high -- Double -- high price during trading session  </li> 
-                      <li>low -- Double -- low price during trading session </li> 
-                      <li>open -- Double -- price of stock when trading session opened </li> 
+                      <li><code>volume</code> -- Int -- volume of trading </li> 
+                      <li><code>high</code> -- Double -- high price during trading session  </li> 
+                      <li><code>low</code> -- Double -- low price during trading session </li> 
+                      <li><code>open</code> -- Double -- price of stock when trading session opened </li> 
                   </ul>
               </li>
-              <li>history -- Array, each element is a JSON Object, representing one trading session, with the following attributes:
+              <li><code>history</code> -- Array, each element is a JSON Object, representing one trading session, with the following attributes:
                   <ul>
-                      <li>symbol -- String -- The company's ticker symbol </li>
-                      <li>timestamp -- String -- Date and time of market close of the trading session </li>
-                      <li>open -- Double -- Opening price in the trading session </li>
-                      <li>high -- Double -- The high price of the company's stock in the trading session </li>
-                      <li>low -- Double -- The low price of the company's stock in the trading session </li>
-                      <li>close -- Double -- Closing price in the trading session </li>
-                      <li>volume -- Int -- The trade volume of the company's stock in the trading session </li>
-                      <li>openInterest -- who knows -- always null for some reason</li>
+                      <li><code>symbol</code> -- String -- The company's ticker symbol </li>
+                      <li><code>timestamp</code> -- String -- Date and time of market close of the trading session </li>
+                      <li><code>open</code> -- Double -- Opening price in the trading session </li>
+                      <li><code>high</code> -- Double -- The high price of the company's stock in the trading session </li>
+                      <li><code>low</code> -- Double -- The low price of the company's stock in the trading session </li>
+                      <li><code>close</code> -- Double -- Closing price in the trading session </li>
+                      <li><code>volume</code> -- Int -- The trade volume of the company's stock in the trading session </li>
+                      <li><code>openInterest</code> -- who knows -- always null for some reason</li>
                   </ul>
             </ul>
 
@@ -112,13 +110,13 @@
 
           <h4>Params:</h4> 
             <ul>
-              <li>stock_symbol -- String -- The company's ticker symbol</li>
+              <li><code>stock_symbol</code> -- String -- The company's ticker symbol</li>
             </ul>
 
           <h4>Response:</h4> 
             <ul>
-              <li>success -- boolean -- true if successful, false otherwise</li>
-              <li>result -- String -- Full company name, equals "stock not available" if stock is not in BATS</li>
+              <li><code>success</code>--</code> boolean -- true if successful, false otherwise</li>
+              <li><code>result</code> -- String -- Full company name, equals "stock not available" if stock is not in BATS</li>
             </ul>
 
         <h3>GET http://vstock.io/stocks/exchanges/:stock_symbol</h3>
@@ -140,7 +138,7 @@
 
 
           <h4>Response:</h4>
-            success -- boolean -- true if successful, false otherwise
+            <code>success</code>-- boolean -- true if successful, false otherwise
             result -- String -- Exchange name, equals "stock not available" if stock is not in BATS
 
         <h3>
@@ -158,28 +156,28 @@
             <p>None</p>
 
           <h4>Params:</h4>
-            <li>stock_symbol -- String -- The company's ticker symbol</li>
-            <li>type -- String -- Describes interval between data points (possible values are 'minutes', 'nearbyMinutes', 'formTMinutes', 'daily', 'dailyNearest', 'dailyContinue', 'weekly', 'weeklyNearest', 'weeklyContinue', 'monthly', 'monthlyNearest', 'monthlyContinue', 'quarterly', 'quarterlyNearest', 'quarterlyContinue', 'yearly', 'yearlyNearest', and 'yearlyContinue'). </li>
-            <li>start_date -- String -- Beginning date of request, formatted as "yyyymmddhhmmss" 
+            <li><code>stock_symbol</code> -- String -- The company's ticker symbol</li>
+            <li><code>type</code> -- String -- Describes interval between data points (possible values are 'minutes', 'nearbyMinutes', 'formTMinutes', 'daily', 'dailyNearest', 'dailyContinue', 'weekly', 'weeklyNearest', 'weeklyContinue', 'monthly', 'monthlyNearest', 'monthlyContinue', 'quarterly', 'quarterlyNearest', 'quarterlyContinue', 'yearly', 'yearlyNearest', and 'yearlyContinue'). </li>
+            <li><code>start_date</code> -- String -- Beginning date of request, formatted as "yyyymmddhhmmss" 
             </li>
-            <li>end_date -- String -- Ending date of request, formatted as "yyyymmddhhmmss", "null" if end date is the present</li>
+            <li><code>end_date</code> -- String -- Ending date of request, formatted as "yyyymmddhhmmss", "null" if end date is the present</li>
 
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- true if successful, false otherwise
-              <li>message -- String  -- relevant message regarding success or failure of request
-              <li>past -- Array of JSON objects at the interval given by type:
+              <li><code>success</code>--</code> boolean -- true if successful, false otherwise
+              <li><code>message</code> -- String  -- relevant message regarding success or failure of request
+              <li><code>past</code> -- Array of JSON objects at the interval given by type:
                   <ul>
-                     <li>symbol -- String -- The company's ticker symbol </li>
-                     <li>timestamp -- String -- Date and time of market close of the trading session
+                     <li><code>symbol</code> -- String -- The company's ticker symbol </li>
+                     <li><code>timestamp</code> -- String -- Date and time of market close of the trading session
                      </li>
-                     <li>open -- Double -- Opening price in the trading session</li>
-                     <li>high -- Double -- The high price of the company's stock in the trading session</li>
-                     <li>low -- Double -- The low price of the company's stock in the trading session
+                     <li><code>open</code> -- Double -- Opening price in the trading session</li>
+                     <li><code>high</code> -- Double -- The high price of the company's stock in the trading session</li>
+                     <li><code>low</code> -- Double -- The low price of the company's stock in the trading session
                       </li>
-                     <li>close -- Double -- Closing price in the trading session</li>
-                     <li>volume -- Int -- The trade volume of the company's stock in the trading session   </li>
-                     <li>openInterest -- who knows -- always null for some reason</li>
+                     <li><code>close</code> -- Double -- Closing price in the trading session</li>
+                     <li><code>volume</code> -- Int -- The trade volume of the company's stock in the trading session   </li>
+                     <li><code>openInterest</code> -- who knows -- always null for some reason</li>
                   </ul>
                 </li>
             </ul>
@@ -199,20 +197,20 @@
 
           <h4>Response:</h4>
           <ul>
-            <li>success -- boolean -- true if successful, false otherwise
-            <li>message -- String  -- relevant message regarding success or failure of request
-            <li>current -- JSON Object:
+            <li><code>success</code>--</code> boolean -- true if successful, false otherwise
+            <li><code>message</code> -- String  -- relevant message regarding success or failure of request
+            <li><code>current</code> -- JSON Object:
                   <ul>
-                    <li>symbol -- String -- symbol of stock</li>
-                    <li>name -- String -- name of stock</li>
-                    <li>exchange -- String -- exchange in which stock is traded</li>
-                    <li>lastPrice -- String -- last price of stock</li>
-                    <li>netChange -- String -- net change of stock price since session opened</li>
-                    <li>percentChange -- String -- percent change of stock price since session opened
+                    <li><code>symbol</code> -- String -- symbol of stock</li>
+                    <li><code>name</code> -- String -- name of stock</li>
+                    <li><code>exchange</code> -- String -- exchange in which stock is traded</li>
+                    <li><code>lastPrice</code> -- String -- last price of stock</li>
+                    <li><code>netChange</code> -- String -- net change of stock price since session opened</li>
+                    <li><code>percentChange</code> -- String -- percent change of stock price since session opened
                     </li>
-                    <li>volume -- Int -- volume of trading</li>
-                    <li>high -- Double -- high price during trading session</li>
-                    <li>low -- Double -- low price during trading session</li>
+                    <li><code>volume</code> -- Int -- volume of trading</li>
+                    <li><code>high</code> -- Double -- high price during trading session</li>
+                    <li><code>low</code> -- Double -- low price during trading session</li>
                     <li id="users-id">open -- Double -- price of stock when trading session opened</li>
                   </ul>
             </li>
@@ -237,15 +235,15 @@
 
           <h4>Response:</h4>
             <ul>
-              <li>admin -- boolean -- whether or not user is an admin</li>
-              <li>botAccount -- boolean -- whether or not the user is a bot account</li>
-              <li>cash -- Double -- user's cash</li>
-              <li>groups -- Array -- list of names of groups of user (not yet implemented)</li>
-              <li>creationDate -- String -- date of user creation</li>
-              <li>history -- Array -- array of historical values of user (not yet implemented)</li>
-              <li>username -- String -- username of user</li>
-              <li>password -- String -- encrypted password of user</li>
-              <li>email -- String -- email of user</li>
+              <li><code>admin</code> -- boolean -- whether or not user is an admin</li>
+              <li><code>botAccount</code> -- boolean -- whether or not the user is a bot account</li>
+              <li><code>cash</code> -- Double -- user's cash</li>
+              <li><code>groups</code> -- Array -- list of names of groups of user (not yet implemented)</li>
+              <li><code>creationDate</code> -- String -- date of user creation</li>
+              <li><code>history</code> -- Array -- array of historical values of user (not yet implemented)</li>
+              <li><code>username</code> -- String -- username of user</li>
+              <li><code>password</code> -- String -- encrypted password of user</li>
+              <li><code>email</code> -- String -- email of user</li>
             </ul>
 
         <h3>PUT http://vstock.io/users/:query_username</h3>
@@ -255,19 +253,19 @@
             x-access-token -- JWT -- acquired from the authentication route
           <h4>Body:</h4>
             <ul>
-              <li>password -- String -- the user's current password</li>
-              <li>firstName -- String -- new first name (optional)</li>
-              <li>lastName -- String -- new last name (optional)</li>
-              <li>newPassword -- String -- new password (optional)</li>
-              <li>botAccount -- boolean -- new botAccount value (optional)</li>
+              <li><code>password</code> -- String -- the user's current password</li>
+              <li><code>firstName</code> -- String -- new first name (optional)</li>
+              <li><code>lastName</code> -- String -- new last name (optional)</li>
+              <li><code>newPassword</code> -- String -- new password (optional)</li>
+              <li><code>botAccount</code> -- boolean -- new botAccount value (optional)</li>
             </ul>
           <h4>Params:</h4>
             query_username -- String -- user's username
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- True if request successful, false if otherwise</li>
-              <li>message -- String -- Message pertaining to success or failure of request</li>
-              <li>token -- JWT -- New token to use when sending requests</li>
+              <li><code>success</code>--</code> boolean -- True if request successful, false if otherwise</li>
+              <li><code>message</code> -- String -- Message pertaining to success or failure of request</li>
+              <li><code>token</code> -- JWT -- New token to use when sending requests</li>
             </ul>
 
         <h3>DELETE http://vstock.io/users/:query_username<h3>
@@ -278,11 +276,11 @@
           <h4>Body:</h4>
             <p>None</p>
           <h4>Params:</h4>
-            <li>query_username -- String -- user's username
+            <li><code>query_username</code> -- String -- user's username
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- True if request successful, false if otherwise</li>
-              <li>message -- String -- Message pertaining to success or failure of request</li>
+              <li><code>success</code>--</code> boolean -- True if request successful, false if otherwise</li>
+              <li><code>message</code> -- String -- Message pertaining to success or failure of request</li>
             </ul>
 
         <h3>GET http://vstock.io/users/portfolio</h3>
@@ -296,27 +294,27 @@
             <p>None</p>
           <h4>Response:</h4>
             <ul>  
-              <li>success -- boolean -- true if request successful, false if otherwise</li>
-              <li>message -- String -- message pertaining to success or failure of request</li>
-              <li>username -- String -- user's username</li>
-              <li>portfolioValue -- String -- total value of user's portfolio, rounded to the nearest cent</li>
-              <li>cash -- String -- user's available cash, rounded to the nearest cent</li>
-              <li>grossProfit -- String -- gross profit for this user since account creation, rounded to the nearest cent</li>
-              <li>percentProfit -- String -- percent profit for this user since account creation</li>
-              <li>assets -- Array of JSON objects, each representing a given asset:
+              <li><code>success</code>--</code> boolean -- true if request successful, false if otherwise</li>
+              <li><code>message</code> -- String -- message pertaining to success or failure of request</li>
+              <li><code>username</code> -- String -- user's username</li>
+              <li><code>portfolioValue</code> -- String -- total value of user's portfolio, rounded to the nearest cent</li>
+              <li><code>cash</code> -- String -- user's available cash, rounded to the nearest cent</li>
+              <li><code>grossProfit</code> -- String -- gross profit for this user since account creation, rounded to the nearest cent</li>
+              <li><code>percentProfit</code> -- String -- percent profit for this user since account creation</li>
+              <li><code>assets</code> -- Array of JSON objects, each representing a given asset:
                   <ul>   
-                     <li>name -- String -- full company name of the given stock</li>
-                     <li>exchange -- String -- exchange in which the stock is primarily traded in</li>
-                     <li>quantity -- String -- number of this stock the user owns</li>
-                     <li>currentPricePerShare -- String -- current price of a single share of the given stock, rounded to the nearest cent</li>
-                     <li>purchasePricePerShare -- String -- average price per share that the user has bought this stock for, rounded to the nearest cent</li>
-                     <li>amountSpent -- String -- total amount spent on all of this user's shares of this stock</li>
-                     <li>currentValue -- String -- total value of all of this user's shares of this stock, as calculated from the current price per share of the stock</li>
-                     <li>todayChangeNet -- String -- net change per share of the price of the given stock since trading session opening</li>
-                     <li>todayTotalChangeNet -- String -- net gross change over all shares this user owns since trading session opening</li>
-                     <li>todayChangePercent -- String -- percentage change of the price of the given stock since trading session opening</li>
-                     <li>totalNetProfit -- String -- total profit the user has made off of their shares of this given stock</li>
-                     <li>totalPercentProfit -- String -- percent profit the user has made off of their shares of this given stock</li>
+                     <li><code>name</code> -- String -- full company name of the given stock</li>
+                     <li><code>exchange</code> -- String -- exchange in which the stock is primarily traded in</li>
+                     <li><code>quantity</code> -- String -- number of this stock the user owns</li>
+                     <li><code>currentPricePerShare</code> -- String -- current price of a single share of the given stock, rounded to the nearest cent</li>
+                     <li><code>purchasePricePerShare</code> -- String -- average price per share that the user has bought this stock for, rounded to the nearest cent</li>
+                     <li><code>amountSpent</code> -- String -- total amount spent on all of this user's shares of this stock</li>
+                     <li><code>currentValue</code> -- String -- total value of all of this user's shares of this stock, as calculated from the current price per share of the stock</li>
+                     <li><code>todayChangeNet</code> -- String -- net change per share of the price of the given stock since trading session opening</li>
+                     <li><code>todayTotalChangeNet</code> -- String -- net gross change over all shares this user owns since trading session opening</li>
+                     <li><code>todayChangePercent</code> -- String -- percentage change of the price of the given stock since trading session opening</li>
+                     <li><code>totalNetProfit</code> -- String -- total profit the user has made off of their shares of this given stock</li>
+                     <li><code>totalPercentProfit</code> -- String -- percent profit the user has made off of their shares of this given stock</li>
                   </ul>
               </li>
             </ul>
@@ -332,11 +330,11 @@
             quantity -- Int -- How many of this stock to buy
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- true if request successful, false if otherwise</li>
-              <li>message -- String -- message pertaining to success or failure of request</li>
-              <li>amount -- Int -- quantity to buy requested</li>
-              <li>costPerShare -- String -- cost per share to buy the given stock</li>
-              <li>totalCost -- String -- total cost to buy the given quantity of the given stock</li>
+              <li><code>success</code>--</code> boolean -- true if request successful, false if otherwise</li>
+              <li><code>message</code> -- String -- message pertaining to success or failure of request</li>
+              <li><code>amount</code> -- Int -- quantity to buy requested</li>
+              <li><code>costPerShare</code> -- String -- cost per share to buy the given stock</li>
+              <li><code>totalCost</code> -- String -- total cost to buy the given quantity of the given stock</li>
             </ul>
 
         <h3>POST http://vstock.io/users/buy/:stock_symbol/:quantity</h3>
@@ -351,11 +349,11 @@
             quantity -- Int -- How many of this stock to buy
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- true if request successful, false if otherwise</li>
-              <li>message -- String -- message pertaining to success or failure of request</li>
-              <li>amount -- Int -- quantity to buy requested</li>
-              <li>costPerShare -- String -- cost per share to buy the given stock</li>
-              <li>totalCost -- String -- total cost to buy the given quantity of the given stock</li>
+              <li><code>success</code>--</code> boolean -- true if request successful, false if otherwise</li>
+              <li><code>message</code> -- String -- message pertaining to success or failure of request</li>
+              <li><code>amount</code> -- Int -- quantity to buy requested</li>
+              <li><code>costPerShare</code> -- String -- cost per share to buy the given stock</li>
+              <li><code>totalCost</code> -- String -- total cost to buy the given quantity of the given stock</li>
             </ul>
 
         <h3>GET http://vstock.io/users/sell/:stock_symbol/:quantity</h3>
@@ -370,12 +368,12 @@
             quantity -- Int -- How many of this stock to sell
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- true if request successful, false if otherwise</li>
-              <li>message -- String -- message pertaining to success or failure of request</li>
-              <li>amount -- Int -- quantity to sell requested</li>
-              <li>revenuePerShare -- String -- revenue per share earned from selling the given stock
+              <li><code>success</code>--</code> boolean -- true if request successful, false if otherwise</li>
+              <li><code>message</code> -- String -- message pertaining to success or failure of request</li>
+              <li><code>amount</code> -- Int -- quantity to sell requested</li>
+              <li><code>revenuePerShare</code> -- String -- revenue per share earned from selling the given stock
               </li>
-              <li>revenueCost -- String -- total revenue to be earned from selling the given </li>quantity of the given stock
+              <li><code>revenueCost</code> -- String -- total revenue to be earned from selling the given </li>quantity of the given stock
             </ul>
 
         <h3>POST http://vstock.io/users/sell/:stock_symbol/:quantity</h3>
@@ -390,12 +388,12 @@
             quantity -- Int -- How many of this stock to buy
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- true if request successful, false if otherwise</li>
-              <li>message -- String -- message pertaining to success or failure of request</li>
-              <li>amount -- Int -- quantity to sell requested</li>
-              <li>revenuePerShare -- String -- revenue per share earned from selling the given stock
+              <li><code>success</code>--</code> boolean -- true if request successful, false if otherwise</li>
+              <li><code>message</code> -- String -- message pertaining to success or failure of request</li>
+              <li><code>amount</code> -- Int -- quantity to sell requested</li>
+              <li><code>revenuePerShare</code> -- String -- revenue per share earned from selling the given stock
               </li>
-              <li>revenueCost -- String -- total revenue to be earned from selling the given </li>quantity of the given stock
+              <li><code>revenueCost</code> -- String -- total revenue to be earned from selling the given </li>quantity of the given stock
             </ul>
 
         <h3>GET http://vstock.io/users/transactions/:query_username</h3>
@@ -409,18 +407,18 @@
             query_username -- String -- user's username
           <h4>Response:</h4>
             <ul>
-              <li>success -- boolean -- true if request successful, false if otherwise</li>
-              <li>message -- String -- message pertaining to success or failure of request</li>
-              <li>list -- JSON Array of transactions:
+              <li><code>success</code>--</code> boolean -- true if request successful, false if otherwise</li>
+              <li><code>message</code> -- String -- message pertaining to success or failure of request</li>
+              <li><code>list</code> -- JSON Array of transactions:
                 <ul> 
-                   <li>totalPrice -- Double -- total price spent or earned from the transaction</li>
-                   <li>pricePerShare -- Double -- price per share spent or earned from the transaction
+                   <li><code>totalPrice</code> -- Double -- total price spent or earned from the transaction</li>
+                   <li><code>pricePerShare</code> -- Double -- price per share spent or earned from the transaction
                     </li>
-                   <li>num_shares -- Int -- number of shares exchanged in the transaction</li>
-                   <li>type -- String -- Type of transaction; either "Buy" or "Sell"</li>
-                   <li>stockTicker -- String -- Ticker of stock exchanged</li>
-                   <li>transactionDate -- String -- Date and time of transaction</li>
-                   <li>percentProfit -- Double -- percent profit made from the transaction (only for sell)</li>
+                   <li><code>num_shares</code> -- Int -- number of shares exchanged in the transaction</li>
+                   <li><code>type</code> -- String -- Type of transaction; either "Buy" or "Sell"</li>
+                   <li><code>stockTicker</code> -- String -- Ticker of stock exchanged</li>
+                   <li><code>transactionDate</code> -- String -- Date and time of transaction</li>
+                   <li><code>percentProfit</code> -- Double -- percent profit made from the transaction (only for sell)</li>
                 </ul>
               </li>
             </ul>

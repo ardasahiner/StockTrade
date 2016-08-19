@@ -3,6 +3,7 @@ body,html {
     position: relative;
     font-family: 'Open Sans',sans-serif;
     font-weight: 400;
+    width: 100vw;
 }
 
 main {
@@ -31,7 +32,8 @@ main {
 }
 
 .home-title-logo {
-    width: 400px;
+    width: 80vw;
+    max-width: 400px;
 }
 
 .titledescription {

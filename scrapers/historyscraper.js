@@ -20,14 +20,21 @@ function historicalStockScraper(symbol, type, startDate, fCallback, endDate, key
     var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + keys[keyNumber] + "&symbol=" + symbol + "&type=" + type + "&startDate=" + startDate + "&endDate=" + endDate;
     request(url, function(error, response, body) {
       if(!error && response.statusCode == 200){
-        fCallback(JSON.parse(body)['results']);
+        try{
+          fCallback(JSON.parse(body)['results']);
+        } catch(err) {
+          //try again with other api key
+          console.log("Key " + kn +  " ran out");
+          if (kn < keys.length - 1) {
+            innerCallback(symbolsList, kn + 1);
+          } else{
+            fCallback({message: "Error"});
+          }
+        }
       } else if (error) {
-
         console.log(error);
       } else {
-
-        //try again with other api key
-        historicalStockScraper(symbol, type, startDate, fCallback, endDate, (keyNumber + 1) % 2);
+        fCallback({message: "Error"});
       }
     });
 }

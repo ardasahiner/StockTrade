@@ -1,21 +1,36 @@
-<div class="jumbotron">
-  <h1>Sign Up</h1>
-
+<div class="signupform jumbotron">
+  <h2>Sign Up</h2>
+  <br>
   <form ng-submit="signup.doSignUp()">
 
     <div class="form-group">
-      <label>Email</label>
-      <input type="text" class="form-control" ng-model="signup.signupData.email">
+      <input type="text" placeholder="First Name" class="form-control" ng-model="signup.signupData.firstname" required="required">
     </div>
 
     <div class="form-group">
-      <label>Username</label>
-      <input type="text" class="form-control" ng-model="signup.signupData.username">
+      <input type="text" placeholder="Last Name" class="form-control" ng-model="signup.signupData.lastname" required="required">
     </div>
 
     <div class="form-group">
-      <label>Password</label>
-      <input type="password" class="form-control" ng-model="signup.signupData.password">
+      <input type="text" placeholder="Email" class="form-control" ng-model="signup.signupData.email" required="required">
+    </div>
+
+    <div class="form-group">
+      <input type="text" placeholder="Username" class="form-control" ng-model="signup.signupData.username" required="required">
+    </div>
+
+    <div class="form-group">
+      <input id="password" type="password" placeholder="Password" class="form-control" ng-model="signup.signupData.password" required="required">
+    </div>
+
+    <div class="form-group">
+      <input id="confirm_password" type="password" placeholder="Confirm Password" class="form-control" ng-model="signup.signupData.confirmpassword" required="required">
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="signup.signupData.bot"> Are you a bot account?
+      </label>
     </div>
 
     <div class="alert alert-danger" ng-if="signup.error">

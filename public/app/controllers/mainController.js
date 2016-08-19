@@ -1,11 +1,12 @@
 angular.module('mainController', [])
 
-.controller('mainController', function($rootScope, $location, $state, Auth) {
+.controller('mainController', function($rootScope, $scope, $location, $state, Auth, $anchorScroll) {
 
   var vm = this;
 
   // Get info about whether user is logged in
   vm.loggedIn = Auth.isLoggedIn();
+  $scope.state = $state;
 
   // Check every request to see if user is logged in
   // This function runs everytime there is a state change
@@ -15,7 +16,8 @@ angular.module('mainController', [])
     Auth.getUser()
       .then(function(data) {
         vm.user = data.data;
-      });
+      })
+      $anchorScroll();
   });
 
   // Function to handle login requests
@@ -24,16 +26,17 @@ angular.module('mainController', [])
     vm.error = '';
 
     Auth.login(vm.loginData.username, vm.loginData.password)
-      .success(function(data) {
-        vm.processing = false;
-
-        // If successful authentication, user is redirected to their portfolio
-        if (data.success) {
-          $location.path('/portfolio');
-        } else {
-          vm.error = data.message;
-        }
-      });
+    .success(function(data) {
+      vm.processing = false;
+      delete vm.loginData;
+      // If successful authentication, user is redirected to their portfolio
+      if (data.success) {
+        $location.path('/portfolio');
+        $("#loginModal").modal('hide');
+      } else {
+        vm.error = data.message;
+      }
+    });
   };
 
   // Function to handle logout requests

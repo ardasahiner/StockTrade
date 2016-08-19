@@ -39,6 +39,11 @@ app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 
+//handling errors?
+app.use(function(err, req, res, next) {
+  res.status(403).send("something broke!");
+});
+
 app.listen(port);
 module.exports = app;
 

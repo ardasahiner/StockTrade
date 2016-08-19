@@ -1,0 +1,429 @@
+<div class="container fluid api-page">
+  <h1 id="title">API DOCUMENTATION</h1>
+  <div class="row">
+    <div class="col-md-3" style="mar">
+      <nav id="sidebar">
+        <ul id="sidebar-nav">
+          <li>
+            <a href="#auth">Authentication</a>
+          </li>
+          <li>
+            <a href="#stocks">Stocks</a>
+          </li>
+          <li>
+            <a href="#users-id">Users</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-md-9">
+    <hr>
+      <h2>AUTHENTICATION</h2>
+        
+        <h3>POST http://vstock.io/authenticate</h3>
+          <h4>Summary</h4>
+             <p>A client POST's to this route in order to obtain a token to be used for protected routes.</p>
+          <h4>Headers:</h4>
+            <p>None</p>
+
+          <h4>Body:</h4> 
+            <ul>
+              <li>username -- String -- The user's username</li>
+              <li>password -- String -- The user's password</li>
+            </ul>
+
+          <h4>Params:</h4>
+            <p>None</p>
+
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- true if authentication successful, false otherwise</li>
+              <li>message -- String  -- relevant message regarding success or failure of request</li>
+              <li id="stocks">token -- JSON Web Token (JWT) --  required for all protected routes. Expires in one year.</li>
+            </ul> 
+
+  <hr>
+      <h2>STOCKS</h2>
+        <h3>GET http://vstock.io/stocks/:stock_symbol</h3>
+          <h4>Summary:</h4> 
+            <p>
+              Given a stock symbol, returns a JSON object with current price of the stock and its daily closing price history for two years. Note that current prices may be within a dollar of actual prices.
+            </p>
+
+          <h4>Headers:</h4> 
+            <ul>
+              <li>x-access-token -- JWT -- acquired from the authentication route</li>
+            </ul>
+
+
+          <h4>Body:</h4>
+            <p>None</p>
+
+          <h4>Params:</h4>
+            <ul>
+              <li>stock_symbol -- String -- The company's ticker symbol</li>
+            </ul>
+
+
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- true if successful, false otherwise</li>
+              <li>message -- String  -- relevant message regarding success or failure of request</li>
+              <li>current -- JSON Object:
+                  <ul>
+                      <li>symbol -- String -- symbol of stock</li> 
+                      <li>name -- String -- name of stock </li> 
+                      <li>exchange -- String -- exchange in which stock is traded </li> 
+                      <li>lastPrice -- String -- last price of stock </li> 
+                      <li>netChange -- String -- net change of stock price since session opened </li> 
+                      <li>percentChange -- String -- percent change of stock price since session opened </li> 
+                      
+                      <li>volume -- Int -- volume of trading </li> 
+                      <li>high -- Double -- high price during trading session  </li> 
+                      <li>low -- Double -- low price during trading session </li> 
+                      <li>open -- Double -- price of stock when trading session opened </li> 
+                  </ul>
+              </li>
+              <li>history -- Array, each element is a JSON Object, representing one trading session, with the following attributes:
+                  <ul>
+                      <li>symbol -- String -- The company's ticker symbol </li>
+                      <li>timestamp -- String -- Date and time of market close of the trading session </li>
+                      <li>open -- Double -- Opening price in the trading session </li>
+                      <li>high -- Double -- The high price of the company's stock in the trading session </li>
+                      <li>low -- Double -- The low price of the company's stock in the trading session </li>
+                      <li>close -- Double -- Closing price in the trading session </li>
+                      <li>volume -- Int -- The trade volume of the company's stock in the trading session </li>
+                      <li>openInterest -- who knows -- always null for some reason</li>
+                  </ul>
+            </ul>
+
+        <h3>
+          GET http://vstock.io/stocks/names/:stock_symbol
+        </h3>
+          <h4>Summary:</h4> 
+            Returns full company name corresponding to a given stock symbol
+          
+
+          <h4>Headers:</h4> 
+            x-access-token -- JWT -- acquired from the authentication route
+
+          <h4>Body:</h4> 
+            <p>None</p>
+
+          <h4>Params:</h4> 
+            <ul>
+              <li>stock_symbol -- String -- The company's ticker symbol</li>
+            </ul>
+
+          <h4>Response:</h4> 
+            <ul>
+              <li>success -- boolean -- true if successful, false otherwise</li>
+              <li>result -- String -- Full company name, equals "stock not available" if stock is not in BATS</li>
+            </ul>
+
+        <h3>GET http://vstock.io/stocks/exchanges/:stock_symbol</h3>
+
+          <h4>Summary:</h4>
+            Returns primary exchange in which the given stock is traded
+
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+
+
+          <h4>Body:</h4>
+            <p>None</p> 
+
+
+
+          <h4>Params:</h4>
+            stock_symbol -- String -- The company's ticker symbol
+
+
+          <h4>Response:</h4>
+            success -- boolean -- true if successful, false otherwise
+            result -- String -- Exchange name, equals "stock not available" if stock is not in BATS
+
+        <h3>
+          GET http://vstock.io/stocks/history/:stock_symbol/:type/:start_date/:end_date
+        </h3>
+
+
+          <h4>Summary:</h4>
+            Returns historical for a given stock of a given type and start and end dates.
+
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route\
+
+          <h4>Body:</h4>
+            <p>None</p>
+
+          <h4>Params:</h4>
+            <li>stock_symbol -- String -- The company's ticker symbol</li>
+            <li>type -- String -- Describes interval between data points (possible values are 'minutes', 'nearbyMinutes', 'formTMinutes', 'daily', 'dailyNearest', 'dailyContinue', 'weekly', 'weeklyNearest', 'weeklyContinue', 'monthly', 'monthlyNearest', 'monthlyContinue', 'quarterly', 'quarterlyNearest', 'quarterlyContinue', 'yearly', 'yearlyNearest', and 'yearlyContinue'). </li>
+            <li>start_date -- String -- Beginning date of request, formatted as "yyyymmddhhmmss" 
+            </li>
+            <li>end_date -- String -- Ending date of request, formatted as "yyyymmddhhmmss", "null" if end date is the present</li>
+
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- true if successful, false otherwise
+              <li>message -- String  -- relevant message regarding success or failure of request
+              <li>past -- Array of JSON objects at the interval given by type:
+                  <ul>
+                     <li>symbol -- String -- The company's ticker symbol </li>
+                     <li>timestamp -- String -- Date and time of market close of the trading session
+                     </li>
+                     <li>open -- Double -- Opening price in the trading session</li>
+                     <li>high -- Double -- The high price of the company's stock in the trading session</li>
+                     <li>low -- Double -- The low price of the company's stock in the trading session
+                      </li>
+                     <li>close -- Double -- Closing price in the trading session</li>
+                     <li>volume -- Int -- The trade volume of the company's stock in the trading session   </li>
+                     <li>openInterest -- who knows -- always null for some reason</li>
+                  </ul>
+                </li>
+            </ul>
+        
+        <h3>GET http://vstock.io/stocks/current/:stock_symbol</h3>
+          <h4>Summary:</h4>
+            Returns real time information about the given stock. Note that current prices may be within a dollar of actual prices.
+
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+
+          <h4>Body:</h4>
+            <p>None</p>
+
+          <h4>Params:</h4>
+            stock_symbol -- String -- The company's ticker symbol
+
+          <h4>Response:</h4>
+          <ul>
+            <li>success -- boolean -- true if successful, false otherwise
+            <li>message -- String  -- relevant message regarding success or failure of request
+            <li>current -- JSON Object:
+                  <ul>
+                    <li>symbol -- String -- symbol of stock</li>
+                    <li>name -- String -- name of stock</li>
+                    <li>exchange -- String -- exchange in which stock is traded</li>
+                    <li>lastPrice -- String -- last price of stock</li>
+                    <li>netChange -- String -- net change of stock price since session opened</li>
+                    <li>percentChange -- String -- percent change of stock price since session opened
+                    </li>
+                    <li>volume -- Int -- volume of trading</li>
+                    <li>high -- Double -- high price during trading session</li>
+                    <li>low -- Double -- low price during trading session</li>
+                    <li id="users-id">open -- Double -- price of stock when trading session opened</li>
+                  </ul>
+            </li>
+          </ul>
+
+
+          <hr>
+      <h2>USERS</h2>
+        <h3>GET http://vstock.io/users/me</h3>
+
+          <h4>Summary:</h4>
+            <p>Gets basic info about a user.</p>
+
+          <h4>Headers:</h4>
+            <p>x-access-token -- JWT -- acquired from the authentication route</p>
+
+          <h4>Body:</h4>
+            <p>None</p>
+
+          <h4>Params:</h4>
+            <p>None</p>
+
+          <h4>Response:</h4>
+            <ul>
+              <li>admin -- boolean -- whether or not user is an admin</li>
+              <li>botAccount -- boolean -- whether or not the user is a bot account</li>
+              <li>cash -- Double -- user's cash</li>
+              <li>groups -- Array -- list of names of groups of user (not yet implemented)</li>
+              <li>creationDate -- String -- date of user creation</li>
+              <li>history -- Array -- array of historical values of user (not yet implemented)</li>
+              <li>username -- String -- username of user</li>
+              <li>password -- String -- encrypted password of user</li>
+              <li>email -- String -- email of user</li>
+            </ul>
+
+        <h3>PUT http://vstock.io/users/:query_username</h3>
+          <h4>Summary:</h4>
+            Modifies a user's name, password, or whether or not they are a bot account.
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+          <h4>Body:</h4>
+            <ul>
+              <li>password -- String -- the user's current password</li>
+              <li>firstName -- String -- new first name (optional)</li>
+              <li>lastName -- String -- new last name (optional)</li>
+              <li>newPassword -- String -- new password (optional)</li>
+              <li>botAccount -- boolean -- new botAccount value (optional)</li>
+            </ul>
+          <h4>Params:</h4>
+            query_username -- String -- user's username
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- True if request successful, false if otherwise</li>
+              <li>message -- String -- Message pertaining to success or failure of request</li>
+              <li>token -- JWT -- New token to use when sending requests</li>
+            </ul>
+
+        <h3>DELETE http://vstock.io/users/:query_username<h3>
+          <h4>Summary:</h4>
+            Deletes a given user.
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+          <h4>Body:</h4>
+            <p>None</p>
+          <h4>Params:</h4>
+            <li>query_username -- String -- user's username
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- True if request successful, false if otherwise</li>
+              <li>message -- String -- Message pertaining to success or failure of request</li>
+            </ul>
+
+        <h3>GET http://vstock.io/users/portfolio</h3>
+          <h4>Summary:</h4>
+            Returns the portfolio of a given user.
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+          <h4>Body:</h4>
+            <p>None</p>
+          <h4>Params:</h4>
+            <p>None</p>
+          <h4>Response:</h4>
+            <ul>  
+              <li>success -- boolean -- true if request successful, false if otherwise</li>
+              <li>message -- String -- message pertaining to success or failure of request</li>
+              <li>username -- String -- user's username</li>
+              <li>portfolioValue -- String -- total value of user's portfolio, rounded to the nearest cent</li>
+              <li>cash -- String -- user's available cash, rounded to the nearest cent</li>
+              <li>grossProfit -- String -- gross profit for this user since account creation, rounded to the nearest cent</li>
+              <li>percentProfit -- String -- percent profit for this user since account creation</li>
+              <li>assets -- Array of JSON objects, each representing a given asset:
+                  <ul>   
+                     <li>name -- String -- full company name of the given stock</li>
+                     <li>exchange -- String -- exchange in which the stock is primarily traded in</li>
+                     <li>quantity -- String -- number of this stock the user owns</li>
+                     <li>currentPricePerShare -- String -- current price of a single share of the given stock, rounded to the nearest cent</li>
+                     <li>purchasePricePerShare -- String -- average price per share that the user has bought this stock for, rounded to the nearest cent</li>
+                     <li>amountSpent -- String -- total amount spent on all of this user's shares of this stock</li>
+                     <li>currentValue -- String -- total value of all of this user's shares of this stock, as calculated from the current price per share of the stock</li>
+                     <li>todayChangeNet -- String -- net change per share of the price of the given stock since trading session opening</li>
+                     <li>todayTotalChangeNet -- String -- net gross change over all shares this user owns since trading session opening</li>
+                     <li>todayChangePercent -- String -- percentage change of the price of the given stock since trading session opening</li>
+                     <li>totalNetProfit -- String -- total profit the user has made off of their shares of this given stock</li>
+                     <li>totalPercentProfit -- String -- percent profit the user has made off of their shares of this given stock</li>
+                  </ul>
+              </li>
+            </ul>
+        <h3>GET http://vstock.io/users/buy/:stock_symbol/:quantity</h3>
+          <h4>Summary:</h4>
+            Returns info about a potential buy transaction.
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+          <h4>Body:</h4>
+            <p>None</p>
+          <h4>Params:</h4>
+            stock_symbol -- String -- The company's ticker symbol
+            quantity -- Int -- How many of this stock to buy
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- true if request successful, false if otherwise</li>
+              <li>message -- String -- message pertaining to success or failure of request</li>
+              <li>amount -- Int -- quantity to buy requested</li>
+              <li>costPerShare -- String -- cost per share to buy the given stock</li>
+              <li>totalCost -- String -- total cost to buy the given quantity of the given stock</li>
+            </ul>
+
+        <h3>POST http://vstock.io/users/buy/:stock_symbol/:quantity</h3>
+          <h4>Summary:</h4>
+            Completes the given buy transaction and returns details about the transaction.
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+          <h4>Body:</h4>
+            <p>None</p>
+          <h4>Params:</h4>
+            stock_symbol -- String -- The company's ticker symbol
+            quantity -- Int -- How many of this stock to buy
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- true if request successful, false if otherwise</li>
+              <li>message -- String -- message pertaining to success or failure of request</li>
+              <li>amount -- Int -- quantity to buy requested</li>
+              <li>costPerShare -- String -- cost per share to buy the given stock</li>
+              <li>totalCost -- String -- total cost to buy the given quantity of the given stock</li>
+            </ul>
+
+        <h3>GET http://vstock.io/users/sell/:stock_symbol/:quantity</h3>
+          <h4>Summary:</h4>
+            Returns info about a potential sell transaction.
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+          <h4>Body:</h4>
+            <p>None</p>
+          <h4>Params:</h4>
+            stock_symbol -- String -- The company's ticker symbol
+            quantity -- Int -- How many of this stock to sell
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- true if request successful, false if otherwise</li>
+              <li>message -- String -- message pertaining to success or failure of request</li>
+              <li>amount -- Int -- quantity to sell requested</li>
+              <li>revenuePerShare -- String -- revenue per share earned from selling the given stock
+              </li>
+              <li>revenueCost -- String -- total revenue to be earned from selling the given </li>quantity of the given stock
+            </ul>
+
+        <h3>POST http://vstock.io/users/sell/:stock_symbol/:quantity</h3>
+          <h4>Summary:</h4>
+            Completes the given sell transaction and returns details about the transaction.
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+          <h4>Body:</h4>
+            <p>None</p>
+          <h4>Params:</h4>
+            stock_symbol -- String -- The company's ticker symbol
+            quantity -- Int -- How many of this stock to buy
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- true if request successful, false if otherwise</li>
+              <li>message -- String -- message pertaining to success or failure of request</li>
+              <li>amount -- Int -- quantity to sell requested</li>
+              <li>revenuePerShare -- String -- revenue per share earned from selling the given stock
+              </li>
+              <li>revenueCost -- String -- total revenue to be earned from selling the given </li>quantity of the given stock
+            </ul>
+
+        <h3>GET http://vstock.io/users/transactions/:query_username</h3>
+          <h4>Summary:</h4>
+            Gives a list of a user's transactions
+          <h4>Headers:</h4>
+            x-access-token -- JWT -- acquired from the authentication route
+          <h4>Body:</h4>
+            <p>None</p>
+          <h4>Params:</h4>
+            query_username -- String -- user's username
+          <h4>Response:</h4>
+            <ul>
+              <li>success -- boolean -- true if request successful, false if otherwise</li>
+              <li>message -- String -- message pertaining to success or failure of request</li>
+              <li>list -- JSON Array of transactions:
+                <ul> 
+                   <li>totalPrice -- Double -- total price spent or earned from the transaction</li>
+                   <li>pricePerShare -- Double -- price per share spent or earned from the transaction
+                    </li>
+                   <li>num_shares -- Int -- number of shares exchanged in the transaction</li>
+                   <li>type -- String -- Type of transaction; either "Buy" or "Sell"</li>
+                   <li>stockTicker -- String -- Ticker of stock exchanged</li>
+                   <li>transactionDate -- String -- Date and time of transaction</li>
+                   <li>percentProfit -- Double -- percent profit made from the transaction (only for sell)</li>
+                </ul>
+              </li>
+            </ul>
+      </div>
+    </div>
+</div>

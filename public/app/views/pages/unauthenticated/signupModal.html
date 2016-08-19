@@ -1,0 +1,57 @@
+<!-- Sign Up Modal, linked to by the nav bar -->
+<div class="modal fade" id="signupModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4  style="color:white;" class="modal-title" id="myModalLabel">Sign Up</h4>
+      </div>
+      <div class="modal-body" ng-controller="signupController as signup">
+        <form ng-submit="signup.doSignUp()">
+
+          <div class="form-group">
+            <input type="text" placeholder="First Name" class="form-control" ng-model="signup.signupData.firstname" required="required">
+          </div>
+
+          <div class="form-group">
+            <input type="text" placeholder="Last Name" class="form-control" ng-model="signup.signupData.lastname" required="required">
+          </div>
+
+          <div class="form-group">
+            <input type="text" placeholder="Email" class="form-control" ng-model="signup.signupData.email" required="required">
+          </div>
+
+          <div class="form-group">
+            <input type="text" placeholder="Username" class="form-control" ng-model="signup.signupData.username" required="required">
+          </div>
+
+          <div class="form-group">
+            <input id="password" type="password" placeholder="Password" class="form-control" ng-model="signup.signupData.password" required="required">
+          </div>
+
+          <div class="form-group">
+            <input id="confirm_password" type="password" placeholder="Confirm Password" class="form-control" ng-model="signup.signupData.confirmpassword" required="required">
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="signup.signupData.bot"> Are you a bot account?
+            </label>
+          </div>
+
+          <div class="alert alert-danger" ng-if="signup.error">
+            {{ signup.error }}
+          </div>
+
+          <button type="submit" class="btn btn-block btn-primary">
+            <span ng-if="!signup.processing">Sign Up</span>
+            <span ng-if="signup.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+          </button>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

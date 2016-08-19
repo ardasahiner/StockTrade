@@ -1,9 +1,14 @@
 // In this doc, discuss ideas about front end design (website, and eventually Android/iOS)
 
 - Build the front end of the website using angular (maybe react?)
-  - We should definitely look into React, I've heard good things
   - We will use D3 library for data visualizations
 
 Design idea maintenance:
  - https://docs.google.com/document/d/1iR7KIhw5L3A1ocBZbOI5XX5k1l3sDYMlF23ebVuX6ys/edit
  - Julie's feedback: https://docs.google.com/document/d/1AYRmVJ0OjJxcbjLMz40ut8gR-IFuvIhNS8HT_rl6X4o/edit
+
+
+Need to finish home page, login and signup page.
+ - Gather content for home page and put it all in
+ - Create a footer to be present on all pages, make as partial
+ - Signup form needs to contain all relevant parts (password confirmation, etc)

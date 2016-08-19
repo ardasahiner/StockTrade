@@ -1,0 +1,101 @@
+<div class="modal fade stockModal" id="stockModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="{{search.stock.data.change}}">
+        <div class="modal-header">
+          <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.data.success && !search.stock.loading"> <b>{{search.stock.data.current.name}}</b>&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.exchange }}:{{ search.stock.data.current.symbol }})</h4>
+          <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="!search.stock.data.success && !search.stock.loading">Stock Not Available</h4>
+          <h4 class="modal-title stockModalTitle" id="myModalLabel" ng-if="search.stock.loading">Fetching Stock Information...</h4>
+        </div>
+        <div class=modal-body ng-if="search.stock.loading">
+          <center><img style="opacity: 0.5; margin-top: 15px;" src="/assets/img/39.gif"><center>
+          </div>
+          <div class="modal-body" ng-if="search.stock.data.success && !search.stock.loading">
+
+            <center>
+              <h1 class="currentStockPrice">${{ search.stock.data.current.lastPrice }}</h1>
+              <p class="{{ search.stock.data.change }}-text">${{ search.stock.data.current.netChange }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{ search.stock.data.current.percentChange }}%)<p>
+                <center>
+
+                  <div class="loadingChart">
+                    <center>
+                      <h5 style="color: #737373; margin-top: 60px;" ng-if="search.loadingChart">Loading the Stock Chart...</h5>
+                      <img ng-if="search.loadingChart" style="opacity: 0.5; margin-top: 10px;" src="/assets/img/39.gif">
+                      <center>
+                      </div>
+
+                      <center>
+                        <div class="stockChart" id="stockChart" ng-init="search.genPlot(search.stock.data.past)"></div>
+                        Choose Date Range:
+                        <p style="display:inline" ng-if="search.graphRange == 'One Month' || !search.dateRangeSorted">One Month</p>
+                        <a href="" ng-if="search.graphRange != 'One Month' && search.dateRangeSorted" ng-click="search.makeOneMonthPlot()">One Month</a>&nbsp;|&nbsp;
+                        <p style="display:inline" ng-if="search.graphRange == 'Six Months' || !search.dateRangeSorted">Six Months</p>
+                        <a href="" ng-if="search.graphRange != 'Six Months' && search.dateRangeSorted" ng-click="search.makeSixMonthPlot()">Six Months</a>&nbsp;|&nbsp;
+                        <p style="display:inline" ng-if="search.graphRange == 'One Year' || !search.dateRangeSorted">One Year</p>
+                        <a href="" ng-if="search.graphRange != 'One Year' && search.dateRangeSorted" ng-click="search.makeOneYearPlot()">One Year</a>&nbsp;|&nbsp;
+                        <p style="display:inline" ng-if="search.graphRange == 'Two Years' || !search.dateRangeSorted">Two Years</p>
+                        <a href="" ng-if="search.graphRange != 'Two Years'" ng-click="search.makeTwoYearPlot()">Two Years</a>&nbsp;|&nbsp;
+                        <p style="display:inline" ng-if="search.pulledFullHistoricData != search.stock.data.current.symbol || search.graphRange == 'Full'">Full History</p>
+                        <a href="" ng-if="search.pulledFullHistoricData == search.stock.data.current.symbol && search.graphRange != 'Full'" ng-click="search.makeFullPlot()">Full History</a>
+                      </center>
+
+
+                      <!-- Styling for sliders: http://www.cssportal.com/style-input-range/ -->
+                      <!-- These range sliders will only allow you to go up to a maximum of 100, need to increase step size to go higher -->
+                      <div class="row modalBuySellButtons">
+                        <div class="col-xs-12 col-sm-6 buysellRange span6">
+
+                          <div ng-if="stocks.canBuy(search.stock.data.current.lastPrice)" data-role="rangeslider">
+                            <input type="range" class="span2" ng-model="search.buyQuantity" ng-init="search.buyQuantity = 0" min="0" max="{{ Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice) }}">
+                            <div class="noselect" style="font-size: 16px;">
+                              <a style="color: #737373;"><i class="fa fa-minus-square" aria-hidden="true" ng-click="search.buyQuantity = search.decrease(search.buyQuantity, 0)"></i></a>
+                              <label>Buy Quantity: {{ search.buyQuantity }}</label>
+                              <a style="color: #737373;"><i class="fa fa-plus-square" aria-hidden="true" ng-click="search.buyQuantity = search.increase(search.buyQuantity, Math.floor(stocks.portfolio.cash / search.stock.data.current.lastPrice))"></i></a>
+                            </div>
+                            <p>Cost per share: {{ search.stock.data.current.lastPrice }} | Total Cost: {{ search.stock.data.current.lastPrice * search.buyQuantity | number : 2 }}</p>
+                          </div>
+                          <button class="btn btn-block button-style1" ng-click="stocks.buyFromModal(search.stock.data.current.symbol, search.buyQuantity)">
+                            <span ng-if="stocks.canBuy(search.stock.data.current.lastPrice)">Buy {{ search.stock.data.current.symbol }}</span>
+                            <span style="margin-top: 61px;" ng-if="!stocks.canBuy(search.stock.data.current.lastPrice)">Cannot Buy {{ search.stock.data.current.symbol }}</span>
+                          </button>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 buysellRange span6">
+
+                          <div ng-if="stocks.canSell(search.stock.data.current.symbol)" data-role="rangeslider">
+                            <input type="range" class="span2" ng-model="search.sellQuantity" ng-init="search.sellQuantity = 0" min="0" max="{{ stocks.ownedStocks[search.stock.data.current.symbol]}}">
+                            <div class="noselect" style="font-size: 16px;">
+                              <a style="color: #737373;"><i class="fa fa-minus-square" aria-hidden="true" ng-click="search.sellQuantity = search.decrease(search.sellQuantity, 0)"></i></a>
+                              <label>Sell Quantity: {{ search.sellQuantity }}</label>
+                              <a style="color: #737373;"><i class="fa fa-plus-square" aria-hidden="true" ng-click="search.sellQuantity = search.increase(search.sellQuantity, stocks.ownedStocks[search.stock.data.current.symbol])"></i></a>
+                            </div>
+                            <p>Value per share: {{ search.stock.data.current.lastPrice }} | Total Value: {{ search.stock.data.current.lastPrice * search.sellQuantity | number : 2}}</p>
+                          </div>
+                          <button class="btn btn-block button-style1" ng-click="stocks.sellFromModal(search.stock.data.current.symbol, search.sellQuantity)">
+                            <span ng-if="stocks.canSell(search.stock.data.current.symbol)">Sell {{ search.stock.data.current.symbol }}</span>
+                            <span ng-if="!stocks.canSell(search.stock.data.current.symbol)">Cannot Sell {{ search.stock.data.current.symbol }}</span>
+                          </button>
+
+                        </div>
+                      </div>
+                      <center>
+                        <h3 style="color:#737373;">
+                          {{ search.getModalMessage() }}
+                        </h3>
+                      </center>
+
+                    </div>
+
+                    <div class="modal-body" ng-if="!search.stock.data.success && !search.stock.loading">
+                      Stock Not Available
+                    </div>
+
+                    <div class="modal-footer">
+                      <button class="btn btn-block button-style1" ng-click="search.closeStockModal()">
+                        <span>Close</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>

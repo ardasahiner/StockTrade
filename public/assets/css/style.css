@@ -1,10 +1,987 @@
-.jumbotron {
-  padding-top: 50px;
-  background: #6DBA9B;
+
+/* Standard Page Layout */
+body,html {
+    background-color: #19342b;
+    position: relative;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+}
+
+main {
+    padding-top: 50px;
+}
+
+.topnav {
+    font-size: 14px;
+    background-color: #fff;
+}
+
+footer {
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+p.titledescription,p.lead,p.description,h2.section-heading {
+    color: #fff;
+    text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
+}
+    
+header {
+    height: 100vh;
 }
 
 body.container {
-  width: 100%;
-  padding-left: 0;
-  padding-right: 0;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+body h1,h2 {
+    text-align: center;
+}
+
+
+.signupform {
+    padding-top: 100px;
+    width: 40%;
+    position: relative;
+    left: 30%;
+    padding-bottom: 70px;
+}
+
+.modal-content {
+    background-color: #19342b;
+}
+
+.checkbox label {
+    color: #fff;
+}
+
+.titledescription {
+    font-weight: 700;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.headings {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+
+/* ----- Intro Page ----- */
+.intro-header {
+    /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 10%;
+    padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+}
+
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.content-section-a {
+    padding: 50px 0;
+}
+
+.content-section-b {
+    padding: 50px 0;
+    border-top: 1px solid inherit;
+    border-bottom: 1px solid inherit;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading-spacer {
+    float: left;
+    width: 200px;
+    border-top: 3px solid #e7e7e7;
+}
+
+.banner {
+    padding: 100px 0;
+    color: #f8f8f8;
+    background-size: cover;
+}
+
+.banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 3em;
+}
+
+.banner ul {
+    margin-bottom: 0;
+}
+
+.banner-social-buttons {
+    float: right;
+    margin-top: 0;
+}
+
+@media(max-width:1199px) {
+    ul.banner-social-buttons {
+        float: left;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width:767px) {
+    .banner h2 {
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+        font-size: 3em;
+    }
+
+    ul.banner-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.banner-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+
+.ui-view {
+    align-content: center;
+}
+
+/* Set color of the navbar */
+.topnav {
+    background: #262626;
+}
+
+.topnav img {
+    height: inherit;
+    margin-top: -16.5px;
+}
+
+/* Links in the navbar, set text color using color tag */
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+
+/* Title in the navbar, set text color using color tag */
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-custom .navbar-nav > .active > a {
+    border-radius: 2px;
+    border-color: #fff;
+}
+
+.navbar-custom .navbar-nav > .active > a {
+    color: #fff;
+}
+
+.navbar-default {
+    border-color: inherit;
+}
+
+.jumbotron {
+    padding-top: 50px;
+    background: inherit;
+}
+
+.aboutus {
+    padding-top: 5%;
+    padding-bottom: 0;
+}
+
+.description {
+    text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 3%;
+    font-size: 14pt;
+}
+
+.features {
+    background: inherit;
+    background: -webkit-linear-gradient(#19342b,#6d9285);
+    background: -o-linear-gradient(#19342b,#6d9285);
+    background: -moz-linear-gradient(#19342b,#6d9285);
+    background: linear-gradient(#19342b,#6d9285);
+}
+
+.banner {
+    background-color: #e4e7e7;
+}
+
+#portfolio-wrapper {
+    background-color: #e4e7e7;
+}
+
+#portfolio {
+    padding-top: 0px;
+    padding-bottom: 100px;
+    color: #000;
+}
+
+#porfolio h1, #portfolio h2 {
+    color: #000;
+}
+
+.alert-danger {
+    color: #BA2828;
+    background-color: #000;
+    border-color: #fff;
+}
+
+.footer img {
+    height: 140px;
+}
+
+.footer-container {
+    height: 100%;
+    background-color: #e4e7e7;
+}
+
+footer {
+    padding: 0;
+}
+
+footer h5 {
+    color: #000;
+}
+
+p.text-muted {
+    color: #000;
+}
+
+body.footer {
+    vertical-align: bottom;
+}
+
+.footer-spacer {
+    border-top: 1px solid #000;
+}
+
+.panel {
+    margin: 30px 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.button-style1 {
+    padding: 10px 30px;
+    border-radius: 0 !important;
+    background-color: #666;
+    color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.button-style1:hover,.button-style1:focus {
+    color: #fff;
+    background: #444;
+}
+
+#information-header {
+    padding: 30px;
+}
+
+#information-header .text-label {
+    color: gray;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+#information-header .amount {
+    font-size: 30px;
+}
+
+@media (max-width: 991px) {
+    #information-header .amount {
+        font-size: 25px;
+    }
+}
+
+#information-header .amount small {
+    font-size: 0.66em;
+}
+
+#portfolio-table .loading {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.table-header {
+    padding-left: 6px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    text-align: center;
+    color: white;
+    background: #666;
+}
+
+.table-header > [class*='col-'] {
+    padding: 0;
+}
+
+.table-header img {
+    padding-bottom: 0;
+}
+
+.table-header a {
+    color: inherit;
+}
+
+.table-row {
+    border-bottom: 1px solid #ccc;
+    padding-top: 9px !important;
+    padding-bottom: 9px !important;
+    margin-left: 0;
+    margin-right: 0;
+    color: #555;
+    text-align: center;
+}
+
+.table-row:hover {
+    color: #000;
+}
+
+.change-positive {
+    border-left: 6px solid #34b23e;
+}
+
+.change-positive:hover {
+    background-color: #c6ecd9;
+}
+
+.change-negative {
+    border-left: 6px solid #eb4747;
+}
+
+.change-negative:hover {
+    background-color: #f2d9d9;
+}
+
+.change-neutral {
+    border-left: 6px solid #999;
+}
+
+.change-neutral:hover {
+    background-color: #e8e8e8;
+}
+
+.stockModalchange-positive {
+    background-color: #79d2a6;
+}
+
+.stockModalchange-negative {
+    background-color: #e6b3b3;
+}
+
+.stockModalchange-neutral {
+    background-color: #ccc;
+}
+
+.stockModal .modal-dialog {
+    width: 90%;
+    color: #737373;
+}
+
+.stockModal .modal-content {
+    height: auto;
+    min-height: 100%;
+    border-radius: 0;
+/* TODO: Change background color for the stock modal here */
+    background-color: #fff;
+}
+
+.transactionModal {
+    color: #fff;
+}
+
+.transactionModal h5 {
+    font-size: large;
+    font-style: bold;
+}
+
+.stockModal {
+    color: #737373;
+}
+
+.stockModalTitle {
+    color: #252525;
+    text-align: center;
+    font-size: 22px;
+}
+
+.stockModalName {
+    font-size: 26px;
+    margin-right: 25px;
+}
+
+.stockAssetRow a {
+    color: inherit;
+}
+
+.fa-github {
+    color: #000;
+}
+
+.portfolio-header h2 {
+    color: #000;
+}
+
+.portfolio-header {
+    overflow: auto;
+    width: 80%;
+    padding-bottom: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+hr.footer-border {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 5px 5px -5px #000 inset;
+}
+
+.search-companies {
+    margin-left: 8.3333%;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.navbar-search {
+    margin-left: 30px;
+    margin-top: 12px;
+}
+
+.buysellButtons {
+    margin-bottom: 25px;
+}
+
+.buysellModals {
+    background-color: #485a55;
+}
+
+.currentStockPrice {
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+/*
+.todayStockInfo {
+  line-height: 7px;
+  text-align: center;
+}
+
+.todayTradingInfo {
+  font-size: large;
+  font-weight:bold;
+} */
+.stockModalchange-positive-text {
+    color: #006400;
+    font-weight: 700;
+}
+
+.stockModalchange-negative-text {
+    color: #8b0000;
+    font-weight: 700;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.homePageTitle {
+    text-align: left;
+}
+
+.tagline {
+    text-shadow: 0 0 10px #000;
+    color: #fff;
+}
+
+.img-center {
+    margin: 0 auto;
+}
+
+
+/* ----- About Page ----- */
+.aboutPage {
+    height: 100%;
+    background: inherit;
+    background: -webkit-linear-gradient(#9bad9b,#6d9285);
+    background: -o-linear-gradient(#9bad9b,#6d9285);
+    background: -moz-linear-gradient(#9bad9b,#6d9285);
+    background: linear-gradient(#9bad9b,#6d9285);
+}
+
+.aboutPageText {
+    color: #000;
+    text-align: center;
+    font-size: 15px;
+}
+
+.about-footer {
+    background-color: #6d9285;
+}
+
+
+.fa-envelope-square {
+    color: #000;
+}
+
+.fa-linkedin-square {
+    color: #000;
+}
+
+.aboutPage h1 {
+    color: #000;
+    font-size: 42px;
+}
+
+.aboutPage h2 {
+    color: #000;
+    font-size: 32px;
+    padding-bottom: 20px;
+}
+
+.aboutPage h3 {
+    color: #000;
+    font-size: 26px;
+    text-align: center;
+}
+
+.whatWeDoText {
+    font-size: 16px;
+}
+
+.about-header {
+    height: auto;
+    background-color: #9bad9b;
+}
+
+.ourTeam {
+    padding-top: 15px;
+}
+
+.teamMember {
+    padding-top: 20px;
+}
+
+.teamMember h3 {
+    margin-bottom: 0;
+    padding-bottom: 5px;
+}
+
+.whatWeDo {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.whatWeDo h2 {
+    padding-bottom: 15px;
+}
+
+.role {
+    font-size: 22px;
+    text-align: center;
+    padding-bottom: 20px;
+    color: #000;
+}
+
+.home-footer {
+    background-color: #6d9285;
+}
+
+.founder .img-circle {
+    height: 54%;
+    width: 54%;
+}
+
+.rest .img-circle {
+    height: 41.7%;
+    width: 41.7%;
+}
+
+
+/* ----- Styles for the stock graphs ----- */
+rect {
+    fill: transparent;
+}
+
+svg.main-svg {
+    background: inherit;
+}
+
+.stockChart {
+    margin-left: 0;
+    margin-right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.buysellRange {
+    margin-bottom: 40px;
+}
+
+.footer-email {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.notFoundError {
+    background-color: #e4e7e7;
+    height: calc(100% - 377px);
+    height: -moz-calc(100% - 377px);
+    height: -webkit-calc(100% - 377px);
+    height: -o-calc(100% - 377px);
+}
+
+.modalBuySellButtons {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.modalBuySellButtons button {
+    width: inherit;
+}
+
+.modalBuySellButtons input[type=range] {
+    -webkit-appearance: none;
+    background-color: inherit;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.modalBuySellButtons input[type=range]:focus {
+    outline: none;
+}
+
+.modalBuySellButtons input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    animate: .2s;
+    box-shadow: 0 0 0 #000;
+    background: #C4C1C0;
+    border-radius: 50px;
+    border: 1px solid #000;
+}
+
+.modalBuySellButtons input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0 0 0 #000;
+    border: 2px solid #000;
+    height: 27px;
+    width: 13px;
+    border-radius: 27px;
+    background: #FFF;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -12px;
+}
+
+.modalBuySellButtons input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #C4C1C0;
+}
+
+.modalBuySellButtons input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    animate: .2s;
+    box-shadow: 0 0 0 #000;
+    background: #C4C1C0;
+    border-radius: 50px;
+    border: 1px solid #000;
+}
+
+.modalBuySellButtons input[type=range]::-moz-range-thumb {
+    box-shadow: 0 0 0 #000;
+    border: 2px solid #000;
+    height: 27px;
+    width: 13px;
+    border-radius: 27px;
+    background: #FFF;
+    cursor: pointer;
+}
+
+.modalBuySellButtons input[type=range]::-ms-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    animate: .2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+.modalBuySellButtons input[type=range]::-ms-fill-lower {
+    background: #C4C1C0;
+    border: 1px solid #000;
+    border-radius: 100px;
+    box-shadow: 0 0 0 #000;
+}
+
+.modalBuySellButtons input[type=range]::-ms-fill-upper {
+    background: #C4C1C0;
+    border: 1px solid #000;
+    border-radius: 100px;
+    box-shadow: 0 0 0 #000;
+}
+
+.modalBuySellButtons input[type=range]::-ms-thumb {
+    box-shadow: 0 0 0 #000;
+    border: 2px solid #000;
+    height: 27px;
+    width: 13px;
+    border-radius: 27px;
+    background: #FFF;
+    cursor: pointer;
+}
+
+.modalBuySellButtons input[type=range]:focus::-ms-fill-lower {
+    background: #C4C1C0;
+}
+
+.modalBuySellButtons input[type=range]:focus::-ms-fill-upper {
+    background: #C4C1C0;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                    not supported by any browser */
+}
+
+
+/* ----- Account Settings ----- */
+.accountSettings {
+    text-align: center;
+    background: inherit;
+    background: -webkit-linear-gradient(#9bad9b,#6d9285);
+    background: -o-linear-gradient(#9bad9b,#6d9285);
+    background: -moz-linear-gradient(#9bad9b,#6d9285);
+    background: linear-gradient(#9bad9b,#6d9285);
+}
+
+.account-footer {
+    background-color: #6d9285;
+    padding-top: 30px;
+}
+
+.accountSettings .sidebar .sidebar-nav.navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+    background: #9bad9b;
+}
+
+.accountSettings .sidebar ul li {
+    border-bottom: 1px solid #262626;
+}
+
+.accountSettings .sidebar ul li a:hover {
+    background-color: #6d9285;
+}
+
+.accountSettings .sidebar .nav-second-level li, .accountSettings .sidebar .nav-third-level li {
+    border-bottom: 0 !important;
+}
+
+.accountSettings .sidebar .nav-second-level li a {
+    padding-left: 37px;
+}
+
+.accountSettings .sidebar .nav-third-level li a {
+    padding-left: 52px;
+}
+
+@media(min-width:768px) {
+    .accountSettings .sidebar {
+        z-index: 1;
+        position: absolute;
+        width: 250px;
+    }
+
+    .accountSettings .navbar-top-links .dropdown-messages, .accountSettings .navbar-top-links .dropdown-tasks, .accountSettings .navbar-top-links .dropdown-alerts {
+        margin-left: auto;
+    }
+}
+
+@media(min-width:768px) {
+  .account-wrapper {
+      padding: 0 15px;
+      min-height: 568px;
+  }
+}
+
+@media(min-width:768px) {
+    .account-wrapper {
+        position: inherit;
+        margin: 0 0 0 250px;
+        padding: 0 30px 30px 30px;
+        border-left: 1px solid #262626;
+        border-bottom: 1px solid #262626;
+    }
+}
+
+.account-wrapper .form-group {
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
+.transactions-footer {
+    background-color: #6d9285;
+    padding-top: 30px;
+}
+
+.transactions-list {
+    color: #000;
+    padding: 20px 20px 20px 20px;
+    border: thin solid #000;
+    margin: 20px 20px 20px 20px;
+}
+
+.transactions-headers a {
+    color: #000;
+}
+
+.transactions-headers {
+    padding-bottom: 5px;
+    border-bottom: thin solid #000;
+}
+
+.individual-transactions {
+    padding-top: 5px;
+}
+
+.updateAccount-footer {
+    background-color: #6d9285;
+    padding-top: 30px;
+}
+
+.accountSettings .botAccount {
+    margin-top: 25px;
+}
+
+/* -----Styles for API Page----- */
+.api-page {
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 40px;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+#title {
+    margin: 50px 0px 30px 0px;
+}
+
+.api-page h1, .api-page h2, .api-page h3, .api-page h4, .api-page p {
+  color: #333;
+  text-align:left;
+}
+.api-page h2 {
+    font-size: 30px;
+}
+.api-page h3{
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+.api-page h4 {
+    text-decoration: bold;
+}
+
+
+#sidebar {
+    padding-top: 20px;
+}
+
+#sidebar-nav {
+    list-style: none;
+    padding: 0px;
+}
+
+@media (min-width 992px) {
+    
 }

@@ -1,7 +1,6 @@
 var mongoose  = require('mongoose');
 var Schema    = mongoose.Schema;
-var ObjectId = Schema.Types.ObjectId;
-var Transaction = require('./transaction')
+var Transaction = require('./transaction').schema;
 
 var TransactionListSchema = new Schema({
 

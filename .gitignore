@@ -2,7 +2,8 @@
 /.idea
 node_modules/
 design_workflow/
+bower_components/
 
 // Hide online database username/password
-db_connect.js
 config.js
+scrapers/barchartkeys.js

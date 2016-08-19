@@ -9,10 +9,10 @@ angular.module('authService', [])
       username: username,
       password: password
     })
-      .success(function(data) {
-        AuthToken.setToken(data.token);
-        return data;
-      });
+    .success(function(data) {
+      AuthToken.setToken(data.token);
+      return data;
+    });
   };
 
   // Logout and clear the token
@@ -78,9 +78,9 @@ angular.module('authService', [])
   // Redirect if a token doesnt authenticate or no token
   AuthInterceptorFactory.responseError = function(res) {
     if (res.status == 403) {
-      $location.path('/login');
+      AuthToken.setToken();
+      $location.path('/');
     }
-
     return $q.reject(res);
   };
 

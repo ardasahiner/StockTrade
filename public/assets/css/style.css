@@ -999,9 +999,34 @@ svg.main-svg {
     text-decoration: bold;
 }
 
+.api-page a:hover {
+    text-decoration: none;
+}
+.api-page nav > li > a{
+    background-color: #d9d9d9;
+    border-radius: 0px 5px 5px 0px;
+    margin: 5px 0px 5px 0px;
+    padding: 4px 0px 4px 8px;
+    border:0px;
+    width:150px;
+    text-align: left;
+}
+#sidebar-item:hover{
+    background-color: white;
+    cursor:pointer;
+}
 
+li > a {
+    position:relative;
+    display:block;
+}
+
+.api-page a {
+    color: black;
+}
 #sidebar {
     padding-top: 20px;
+    position:fixed;
 }
 
 #sidebar-nav {

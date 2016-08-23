@@ -33,7 +33,7 @@ p.titledescription, p.description {
     color: #F2F2F2;
     text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
 }
-    
+
 header {
   height: 100vh;
 }
@@ -107,8 +107,8 @@ h1, h2 {
     /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-top: 50px;
     /*padding-bottom: 50px;*/
-    background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;
-    background-size:cover;
+    /*background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;*/
+    /*background-size:cover;*/
     text-align: center;
     color: #f8f8f8;
     height: 100%;
@@ -1037,5 +1037,5 @@ li > a {
 }
 
 @media (min-width 992px) {
-    
+
 }

@@ -249,7 +249,6 @@ p.lead, h2.section-heading {
 /* Set color of the navbar */
 .topnav {
     background: #2B2B2B;
-    opacity: .9;
 }
 
 .topnav img {
@@ -285,6 +284,7 @@ p.lead, h2.section-heading {
 
 .navbar-default {
     border-color: inherit;
+    opacity: 0.9;
 }
 
 .jumbotron {

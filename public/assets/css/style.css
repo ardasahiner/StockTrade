@@ -1117,6 +1117,7 @@ li > a {
   width: 120px;
   border: 0px white;
   border-radius: 1.5px;
+  height:35px;
 }
 
 .signup-button:hover, .signup-button:active {

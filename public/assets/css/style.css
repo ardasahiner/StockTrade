@@ -1112,6 +1112,23 @@ li > a {
 	left:0;
 }
 
+.signup-button {
+  background-color: white;
+  border-color: black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 120px;
+}
+
+.signup-button:hover, .signup-button:active {
+  background-color: #C8C8C8;
+  border-color: black;
+}
+
+a.signup-button {
+  color: black;
+}
+
 /* CSS animation */
 
 @-webkit-keyframes fadeIn {

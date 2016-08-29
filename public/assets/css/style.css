@@ -1113,6 +1113,7 @@ li > a {
 }
 
 .signup-button {
+    color:black;
   background-color: white;
   border-color: black;
   margin-top: 10px;

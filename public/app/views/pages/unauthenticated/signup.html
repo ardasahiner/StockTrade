@@ -36,11 +36,11 @@
     <div class="alert alert-danger" ng-if="signup.error">
       {{ signup.error }}
     </div>
-
-    <button type="submit" class="btn btn-block btn-primary">
+    <center>
+    <button type="submit" style="width:400px;" class="btn btn-block btn-primary signup-button">
       <span ng-if="!signup.processing">Sign Up</span>
       <span ng-if="signup.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
     </button>
-
+    </center>
   </form>
 </div>

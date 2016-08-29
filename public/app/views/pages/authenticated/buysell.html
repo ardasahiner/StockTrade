@@ -21,7 +21,7 @@
             {{ stocks.buydata.message }}
           </div>
 
-          <button type="submit" class="btn btn-block btn-primary">
+          <button type="submit" class="btn btn-block buysell-button">
             <span ng-if="!stocks.processing">Buy Stock</span>
             <span ng-if="stocks.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
           </button>
@@ -31,7 +31,7 @@
       </div>
       <div class="modal-footer">
 
-        <button class="btn btn-block btn-primary" ng-click="stocks.cancelBuy()">
+        <button class="btn btn-block buysell-button" ng-click="stocks.cancelBuy()">
           <span>Cancel Buy</span>
         </button>
 
@@ -61,10 +61,10 @@
       </div>
       <div class="modal-footer">
 
-        <button ng-click="stocks.cancelBuy()" class="btn btn-block btn-primary">
+        <button ng-click="stocks.cancelBuy()" class="btn btn-block buysell-button">
           <span>Cancel Stock Purchase</span>
         </button>
-        <button ng-click="stocks.confirmBuy()" class="btn btn-block btn-primary">
+        <button ng-click="stocks.confirmBuy()" class="btn btn-block buysell-button">
           <span ng-if="!stocks.processing">Confirm Stock Purchase</span>
           <span ng-if="stocks.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
         </button>
@@ -97,7 +97,7 @@
             {{ stocks.selldata.message }}
           </div>
 
-          <button type="submit" class="btn btn-block btn-primary">
+          <button type="submit" class="btn btn-block buysell-button">
             <span ng-if="!stocks.processing">Sell Stock</span>
             <span ng-if="stocks.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
           </button>
@@ -107,7 +107,7 @@
       </div>
       <div class="modal-footer">
 
-        <button class="btn btn-block btn-primary" ng-click="stocks.cancelSell()">
+        <button class="btn btn-block buysell-button" ng-click="stocks.cancelSell()">
           <span>Cancel Sell</span>
         </button>
 
@@ -137,10 +137,10 @@
       </div>
       <div class="modal-footer">
 
-        <button ng-click="stocks.cancelSell()" class="btn btn-block btn-primary">
+        <button ng-click="stocks.cancelSell()" class="btn btn-block buysell-button">
           <span>Cancel Stock Sell</span>
         </button>
-        <button ng-click="stocks.confirmSell()" class="btn btn-block btn-primary">
+        <button ng-click="stocks.confirmSell()" class="btn btn-block buysell-button">
           <span ng-if="!stocks.processing">Confirm Stock Sell</span>
           <span ng-if="stocks.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
         </button>

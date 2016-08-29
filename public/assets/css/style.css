@@ -425,7 +425,7 @@ body.footer {
     background: #666;
 }
 
-.table-header > [class*='col-'] {
+.table-header > [class*=col-] {
     padding: 0;
 }
 
@@ -1063,56 +1063,54 @@ li > a {
 }*/
 
 .bot-account-help {
-
-  color: white;
-  float: right;
-  right: -4px;
+    color: white;
+    float: right;
+    right: -4px;
 }
 
 .bot-account-help:hover p{
-	display:block;
-	transform-origin: 100% 0%;
+    display:block;
+    transform-origin: 100% 0%;
 
-	-webkit-animation: fadeIn 0.2s ease-in-out;
-	animation: fadeIn 0.2s ease-in-out;
-
+    -webkit-animation: fadeIn 0.2s ease-in-out;
+    animation: fadeIn 0.2s ease-in-out;
 }
 
-.bot-account-help p {	/* The tooltip */
-  font-family: 'Open Sans',sans-serif;
-  font-weight: 400;
-	display: none;
-	text-align: left;
-	background-color: #1E2021;
-	padding: 20px;
-	width: 315px;
-	position: absolute;
-	border-radius: 3px;
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-	color: #FFF;
-  right: -10px;
-	font-size: 13px;
-	line-height: 1.4;
+.bot-account-help p {    /* The tooltip */
+    font-family: 'Open Sans',sans-serif;
+    font-weight: 400;
+    display: none;
+    text-align: left;
+    background-color: #1E2021;
+    padding: 20px;
+    width: 315px;
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    color: #FFF;
+    right: -10px;
+    font-size: 13px;
+    line-height: 1.4;
 }
 
 .bot-account-help p:before{ /* The pointer of the tooltip */
-	position: absolute;
-	content: '';
-	width:0;
-	height: 0;
-	border:6px solid transparent;
-	border-bottom-color:#1E2021;
-	right:10px;
-	top:-12px;
+    position: absolute;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
 }
 
 .bot-account-help p:after{ /* Prevents the tooltip from being hidden */
-	width:100%;
-	height:40px;
-	content:'';
-	position: absolute;
-	top:-40px;
-	left:0;
+    width:100%;
+    height:40px;
+    content:'';
+    position: absolute;
+    top:-40px;
+    left:0;
 }
 
 .signup-button {
@@ -1139,20 +1137,20 @@ a.signup-button {
 /* CSS animation */
 
 @-webkit-keyframes fadeIn {
-	0% {
-		opacity:0;
-		transform: scale(0.6);
-	}
+    0% {
+        opacity:0;
+        transform: scale(0.6);
+    }
 
-	100% {
-		opacity:100%;
-		transform: scale(1);
-	}
+    100% {
+        opacity:100%;
+        transform: scale(1);
+    }
 }
 
 @keyframes fadeIn {
-	0% { opacity:0; }
-	100% { opacity:100%; }
+    0% { opacity:0; }
+    100% { opacity:100%; }
 }
 
 >>>>>>> 0536eb1c58df7610dcf78e3cd0ca603769d7aa12

@@ -2,12 +2,11 @@
 /* Standard Page Layout */
 
 
-body,html {
+body, html {
     background-color: #2B2B2B;
     position: relative;
     font-family: 'Open Sans',sans-serif;
     font-weight: 400;
-    width: 100vw;
 }
 
 main {

@@ -106,20 +106,25 @@ button:focus {
 
 /* ----- Intro Page ----- */
 .intro-header {
-    /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-top: 50px;
-    /*padding-bottom: 50px;*/
-    /*background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;*/
-    /*background-size:cover;*/
-    text-align: center;
+    display: relative;
+    margin-top: -50px;
+    height: 100vh;
     color: #f8f8f8;
-    height: 100%;
+}
+
+.intro-header .row {
+	height: 100%;
+}
+
+.intro-header .col-lg-12 {
+	display: table;
+	height: 100%;
+    text-align: center;
 }
 
 .intro-message {
-    position: relative;
-    padding-top: 10%;
-    padding-bottom: 20%;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .intro-message > h1 {
@@ -292,15 +297,6 @@ p.lead, h2.section-heading {
 .jumbotron {
     padding-top: 50px;
     background: inherit;
-}
-
-
-
-
-
-.aboutus {
-    padding-top: 5%;
-    padding-bottom: 0;
 }
 
 .description {

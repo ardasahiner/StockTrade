@@ -971,16 +971,20 @@ svg.main-svg {
 /* -----Styles for API Page----- */
 .api-page {
     background-color: #fff;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-bottom: 40px;
+    margin-top: 17px;
+    margin-bottom: 10px;
+    padding-bottom: 0px;
     padding-left: 70px;
     padding-right: 70px;
 }
 
 
 #title {
-    margin: 50px 0px 30px 0px;
+    margin: 30px 0px 30px 0px;
+}
+
+.api-page {
+    height: 8000px;
 }
 
 .api-page h1, .api-page h2, .api-page h3, .api-page h4, .api-page p {
@@ -1024,16 +1028,23 @@ li > a {
 .api-page a {
     color: black;
 }
-#sidebar {
+.sidebar {
     padding-top: 20px;
     position:fixed;
+    margin-bottom: 80px;
 }
 
 #sidebar-nav {
     list-style: none;
-    padding: 0px;
+    padding: 0px 0px 0px 60px;
+    background-color: white;
+    width: 240px;
+    height: 1000px;
+    margin-left: -70px;
 }
 
-@media (min-width 992px) {
-    
+.api-footer {
+    background-color:white;
+    width: 80vh!important;
+    height: 380px;
 }

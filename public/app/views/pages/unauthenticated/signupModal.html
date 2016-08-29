@@ -36,6 +36,9 @@
             <label>
               <input type="checkbox" ng-model="signup.signupData.bot"> Are you a bot account?
             </label>
+            <i class="fa fa-question-circle bot-account-help" aria-hidden="true">
+                <p>Bot accounts are those which primarily use our <a href="/api" target = "_blank">API</a> rather than our web interface to access our application. We ask that you indicate this for our analytic purposes.</p>
+            </i>
           </div>
 
           <div class="alert alert-danger" ng-if="signup.error">

@@ -7,6 +7,7 @@ body,html {
     position: relative;
     font-family: 'Open Sans',sans-serif;
     font-weight: 400;
+    width: 100vw;
 }
 
 main {
@@ -32,7 +33,7 @@ p.titledescription, p.description {
     color: #F2F2F2;
     text-shadow: -.5px -.5px 0 #000,.5px -.5px 0 #000,-.5px .5px 0 #000,.5px .5px 0 #000;
 }
-    
+
 header {
   height: 100vh;
 }
@@ -71,7 +72,8 @@ h1, h2 {
 }
 
 .home-title-logo {
-    width: 400px;
+    width: 80vw;
+    max-width: 400px;
 }
 
 .titledescription {
@@ -105,8 +107,8 @@ h1, h2 {
     /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-top: 50px;
     /*padding-bottom: 50px;*/
-    background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;
-    background-size:cover;
+    /*background: url(/assets/img/homeBackground-new.jpg) no-repeat center center;*/
+    /*background-size:cover;*/
     text-align: center;
     color: #f8f8f8;
     height: 100%;
@@ -166,19 +168,19 @@ h1, h2 {
 
 .content-section-a {
     padding: 50px 0;
-    height: 400px;
+    min-height: 400px;
 }
 
 .content-section-b {
     padding: 50px 0;
     border-top: 1px solid inherit;
     border-bottom: 1px solid inherit;
-    height: 400px;
+    min-height: 400px;
 }
 
 .content-section-c {
   padding: 50px 0;
-  height: 400px;
+  min-height: 400px;
 }
 
 .section-heading {
@@ -247,7 +249,6 @@ p.lead, h2.section-heading {
 /* Set color of the navbar */
 .topnav {
     background: #2B2B2B;
-    opacity: .9;
 }
 
 .topnav img {
@@ -256,8 +257,15 @@ p.lead, h2.section-heading {
 }
 
 /* Links in the navbar, set text color using color tag */
-.navbar-default .navbar-nav > li > a {
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:active,
+.navbar-default .navbar-nav > li > a:visited {
     color: #fff;
+}
+
+/* Links in the navbar, set text color using color tag */
+.navbar-default .navbar-nav > li > a:hover {
+    color: #ccc;
 }
 
 /* Title in the navbar, set text color using color tag */
@@ -276,6 +284,7 @@ p.lead, h2.section-heading {
 
 .navbar-default {
     border-color: inherit;
+    opacity: 0.9;
 }
 
 .jumbotron {
@@ -1043,8 +1052,86 @@ li > a {
     margin-left: -70px;
 }
 
+<<<<<<< HEAD
 .api-footer {
     background-color:white;
     width: 80vh!important;
     height: 380px;
 }
+=======
+.bot-account-help {
+
+  color: white;
+  float: right;
+  right: -4px;
+}
+
+.bot-account-help:hover p{
+	display:block;
+	transform-origin: 100% 0%;
+
+	-webkit-animation: fadeIn 0.2s ease-in-out;
+	animation: fadeIn 0.2s ease-in-out;
+
+}
+
+.bot-account-help p {	/* The tooltip */
+  font-family: 'Open Sans',sans-serif;
+  font-weight: 400;
+	display: none;
+	text-align: left;
+	background-color: #1E2021;
+	padding: 20px;
+	width: 315px;
+	position: absolute;
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	color: #FFF;
+  right: -10px;
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+.bot-account-help p:before{ /* The pointer of the tooltip */
+	position: absolute;
+	content: '';
+	width:0;
+	height: 0;
+	border:6px solid transparent;
+	border-bottom-color:#1E2021;
+	right:10px;
+	top:-12px;
+}
+
+.bot-account-help p:after{ /* Prevents the tooltip from being hidden */
+	width:100%;
+	height:40px;
+	content:'';
+	position: absolute;
+	top:-40px;
+	left:0;
+}
+
+/* CSS animation */
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity:0;
+		transform: scale(0.6);
+	}
+
+	100% {
+		opacity:100%;
+		transform: scale(1);
+	}
+}
+
+@keyframes fadeIn {
+	0% { opacity:0; }
+	100% { opacity:100%; }
+}
+
+@media (min-width 992px) {
+
+}
+>>>>>>> 0536eb1c58df7610dcf78e3cd0ca603769d7aa12

@@ -48,6 +48,9 @@ h1, h2 {
     text-align: center;
 }
 
+button:focus {
+    outline:none;
+}
 
 .signupform {
     padding-top: 100px;

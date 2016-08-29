@@ -572,7 +572,17 @@ body.footer {
 }
 
 .buysellModals {
-    background-color: #485a55;
+    background-color: #a2a2a2;
+}
+
+.buysell-button {
+  background-color: grey;
+  border-color: #737373;
+}
+
+.buysell-button:hover, .buysell-button:active, .buysell-button:focus, .buysell-button:visited {
+  background-color: #616161;
+  border-color: #737373;
 }
 
 .currentStockPrice {

@@ -51,6 +51,10 @@ h1, h2 {
 button:focus {
     outline:none;
 }
+button:active {
+    outline:none;
+}
+
 
 .signupform {
     padding-top: 100px;

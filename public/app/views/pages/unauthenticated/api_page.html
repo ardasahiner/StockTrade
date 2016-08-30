@@ -1,12 +1,13 @@
 <div class="container api-page">
   <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-10">
-      <h1 id="title">API DOCUMENTATION</h1>
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+      <h1 id="title" class="title-standard hidden-xs">API DOCUMENTATION</h1>
+      <h1 class="title-mobile visible-xs">API DOCUMENTATION</h1>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-2" >
+    <div class="col-md-3" >
         <ul class="nav sidebar hidden-sm hidden-xs"id="sidebar-nav">
           <li class="sidebar-item">
             <a href="#title">Authentication</a>
@@ -18,12 +19,12 @@
             <a href="#users-id">Users</a>
           </li>
         </ul>
-    </div>
-    <div class="col-md-10">
+      </div>
+    <div class="col-md-9">
     <hr>
         <h2>AUTHENTICATION</h2>
 
-          <h3>POST http://vstock.io/authenticate</h3>
+          <h3>POST /authenticate</h3>
             <h4>Summary</h4>
                <p>A client POST's to this route in order to obtain a token to be used for protected routes.</p>
             <h4>Headers:</h4>
@@ -47,7 +48,7 @@
 
     <hr>
         <h2>STOCKS</h2>
-          <h3>GET http://vstock.io/stocks/:stock_symbol</h3>
+          <h3>GET /stocks/:stock_symbol</h3>
             <h4>Summary:</h4>
               <p>
                 Given a stock symbol, returns a JSON object with current price of the stock and its daily closing price history for two years. Note that current prices may be within a dollar of actual prices.
@@ -101,7 +102,7 @@
               </ul>
 
           <h3>
-            GET http://vstock.io/stocks/names/:stock_symbol
+            GET /stocks/names/:stock_symbol
           </h3>
             <h4>Summary:</h4>
               Returns full company name corresponding to a given stock symbol
@@ -126,7 +127,7 @@
                 <li><code>result</code> -- String -- Full company name, equals "stock not available" if stock is not in BATS</li>
               </ul>
 
-          <h3>GET http://vstock.io/stocks/exchanges/:stock_symbol</h3>
+          <h3>GET /stocks/exchanges/:stock_symbol</h3>
 
             <h4>Summary:</h4>
               Returns primary exchange in which the given stock is traded
@@ -152,9 +153,14 @@
               <li><code>result</code> -- String -- Exchange name, equals "stock not available" if stock is not in BATS</li>
             </ul>
 
-          <h3>
-            GET http://vstock.io/stocks/history/:stock_symbol/:type/:start_date/:end_date
+          <h3 class="hidden-xs">
+            GET /stocks/history/:stock_symbol/:type/:start_date/:end_date
           </h3>
+          <h3 class="visible-xs">
+            GET /stocks/history/:stock_symbol <br>
+            /:type/:start_date/:end_date
+          </h3>
+
 
 
             <h4>Summary:</h4>
@@ -197,7 +203,7 @@
                   </li>
               </ul>
 
-          <h3>GET http://vstock.io/stocks/current/:stock_symbol</h3>
+          <h3>GET /stocks/current/:stock_symbol</h3>
             <h4>Summary:</h4>
               Returns real time information about the given stock. Note that current prices may be within a dollar of actual prices.
 
@@ -238,7 +244,7 @@
 
             <hr>
         <h2>USERS</h2>
-          <h3>GET http://vstock.io/users/me</h3>
+          <h3>GET /users/me</h3>
 
             <h4>Summary:</h4>
               <p>Gets basic info about a user.</p>
@@ -267,7 +273,7 @@
                 <li><code>email</code> -- String -- email of user</li>
               </ul>
 
-          <h3>PUT http://vstock.io/users/:query_username</h3>
+          <h3>PUT /users/:query_username</h3>
             <h4>Summary:</h4>
               Modifies a user's name, password, or whether or not they are a bot account.
             <h4>Headers:</h4>
@@ -295,7 +301,7 @@
                 <li><code>token</code> -- JWT -- New token to use when sending requests</li>
               </ul>
 
-          <h3>DELETE http://vstock.io/users/:query_username<h3>
+          <h3>DELETE /users/:query_username<h3>
             <h4>Summary:</h4>
               Deletes a given user.
             <h4>Headers:</h4>
@@ -314,7 +320,7 @@
                 <li><code>message</code> -- String -- Message pertaining to success or failure of request</li>
               </ul>
 
-          <h3>GET http://vstock.io/users/portfolio</h3>
+          <h3>GET /users/portfolio</h3>
             <h4>Summary:</h4>
               Returns the portfolio of a given user.
             <h4>Headers:</h4>
@@ -351,7 +357,7 @@
                     </ul>
                 </li>
               </ul>
-          <h3>GET http://vstock.io/users/buy/:stock_symbol/:quantity</h3>
+          <h3>GET /users/buy/:stock_symbol/:quantity</h3>
             <h4>Summary:</h4>
               Returns info about a potential buy transaction.
             <h4>Headers:</h4>
@@ -374,7 +380,7 @@
                 <li><code>totalCost</code> -- String -- total cost to buy the given quantity of the given stock</li>
               </ul>
 
-          <h3>POST http://vstock.io/users/buy/:stock_symbol/:quantity</h3>
+          <h3>POST /users/buy/:stock_symbol/:quantity</h3>
             <h4>Summary:</h4>
               Completes the given buy transaction and returns details about the transaction.
             <h4>Headers:</h4>
@@ -397,7 +403,7 @@
                 <li><code>totalCost</code> -- String -- total cost to buy the given quantity of the given stock</li>
               </ul>
 
-          <h3>GET http://vstock.io/users/sell/:stock_symbol/:quantity</h3>
+          <h3>GET /users/sell/:stock_symbol/:quantity</h3>
             <h4>Summary:</h4>
               Returns info about a potential sell transaction.
             <h4>Headers:</h4>
@@ -421,7 +427,7 @@
                 <li><code>revenueCost</code> -- String -- total revenue to be earned from selling the given </li>quantity of the given stock
               </ul>
 
-          <h3>POST http://vstock.io/users/sell/:stock_symbol/:quantity</h3>
+          <h3>POST /users/sell/:stock_symbol/:quantity</h3>
             <h4>Summary:</h4>
               Completes the given sell transaction and returns details about the transaction.
             <h4>Headers:</h4>
@@ -445,7 +451,7 @@
                 <li><code>revenueCost</code> -- String -- total revenue to be earned from selling the given </li>quantity of the given stock
               </ul>
 
-          <h3>GET http://vstock.io/users/transactions/:query_username</h3>
+          <h3>GET /users/transactions/:query_username</h3>
             <h4>Summary:</h4>
               Gives a list of a user's transactions
             <h4>Headers:</h4>
@@ -477,5 +483,4 @@
               </ul>
         </div>
       </div>
-    </div>
-</div>
+

@@ -997,15 +997,17 @@ svg.main-svg {
 /* -----Styles for API Page----- */
 .api-page {
     background-color: #f2f2f2;
-    margin-top: 17px;
-    margin-bottom: 10px;
-    padding-bottom: 0px;
-    margin: 0px 0px 0px 0px;
+    margin: 17px 0px 0px 0px;
+    width: inherit;
+    padding-left: 30px;
+    padding-bottom: 50px;
 }
 
 
-#title {
-    margin: 30px 0px 30px 25vw;
+#title{
+    margin: 30px 0px 30px 0px;
+    text-align:center;
+    padding-left: -20px;
 }
 
 
@@ -1032,7 +1034,7 @@ svg.main-svg {
     background-color: #d9d9d9;
     border-radius: 0px 5px 5px 0px;
     margin: 5px 0px 5px 0px;
-    padding: 4px 0px 4px 8px;
+    padding: 4px 0px 4px 0px;
     border:0px;
     width:150px;
     text-align: left;
@@ -1054,14 +1056,15 @@ li > a {
     padding-top: 0px;
     position:fixed;
     margin-bottom: 80px;
+    border-right: 1.5px #d9d9d9;
 }
 
 #sidebar-nav {
     list-style: none;
     padding: 0px 0px 0px 0px;
     background-color: #f2f2f2;
-    width: 240px;
-    margin-left: 20px;
+    width: 14vw;
+    margin-left: 0px;
     margin-top: -80px;
 }
 
@@ -1134,6 +1137,7 @@ li > a {
   border: 0px white;
   border-radius: 1.5px;
   height:35px;
+  max-width: 80%;
 }
 
 .signup-button:hover, .signup-button:active {

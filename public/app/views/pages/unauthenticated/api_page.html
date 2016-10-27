@@ -10,7 +10,7 @@
     <div class="col-md-3" >
         <ul class="nav sidebar hidden-sm hidden-xs"id="sidebar-nav">
           <li class="sidebar-item">
-            <a href="#title">Authentication</a>
+            <a href="#authentication">Authentication</a>
           </li>
           <li class="sidebar-item">
             <a href="#stocks">Stocks</a>
@@ -22,7 +22,7 @@
       </div>
     <div class="col-md-9">
     <hr>
-        <h2>AUTHENTICATION</h2>
+        <h2 id= "title">AUTHENTICATION</h2>
 
           <h3>POST /authenticate</h3>
             <h4>Summary</h4>
@@ -45,9 +45,8 @@
                 <li><code>message</code> -- String  -- relevant message regarding success or failure of request</li>
                 <li><code>token</code> -- JWT -- New token to use when sending requests</li>
               </ul>
-
     <hr>
-        <h2>STOCKS</h2>
+        <h2 id="stocks">STOCKS</h2>
           <h3>GET /stocks/:stock_symbol</h3>
             <h4>Summary:</h4>
               <p>
@@ -243,7 +242,7 @@
 
 
             <hr>
-        <h2>USERS</h2>
+        <h2 id = "users-id">USERS</h2>
           <h3>GET /users/me</h3>
 
             <h4>Summary:</h4>
@@ -483,4 +482,3 @@
               </ul>
         </div>
       </div>
-

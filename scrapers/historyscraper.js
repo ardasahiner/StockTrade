@@ -19,6 +19,7 @@ function historicalStockScraper(symbol, type, startDate, fCallback, endDate, key
 
     var url = "http://marketdata.websol.barchart.com/getHistory.json?key=" + keys[keyNumber] + "&symbol=" + symbol + "&type=" + type + "&startDate=" + startDate + "&endDate=" + endDate;
     request(url, function(error, response, body) {
+      console.log(url);
       if(!error && response.statusCode == 200){
         try{
           fCallback(JSON.parse(body)['results']);

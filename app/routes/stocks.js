@@ -45,6 +45,7 @@ module.exports = function (app, express, User, jwt, currentStockCacheAccurate, c
       yearMinusTwo(function(date) {
         console.log(date);
         hScraper(req.params.stock_symbol, 'daily', date, function(historyResult) {
+          console.log(historyResult);
           currentStockCacheAccurate.get(req.params.stock_symbol.toUpperCase(), function(err, value) {
             //if not in accurate cache (see design docs for a description of caching mechanism)
             if (err) {

@@ -35,6 +35,7 @@ p.titledescription, p.description {
 
 header {
   height: 100vh;
+  background-color: #272727;
 }
 
 body.container {
@@ -300,7 +301,7 @@ p.lead, h2.section-heading {
 
 .jumbotron {
     padding-top: 50px;
-    background: inherit;
+    /*background: inherit;*/
 }
 
 .description {
@@ -1000,7 +1001,7 @@ svg.main-svg {
 
 
 #title{
-    
+
 }
 
 .title-standard {
